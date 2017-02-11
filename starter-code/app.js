@@ -32,6 +32,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', authController);
 // app.use('/', users);
 
+//configure the middleware to enable sessions
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

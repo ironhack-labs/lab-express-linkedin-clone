@@ -39,8 +39,11 @@
     <input type="text" name="jobTitle"
       placeholder="wizard for hiring, Kings advisor,fireworks maker">
     <br><br>
-
+    <form id="form" action="/signup" method="POST">
     <button>Create account</button>
   </form>
+  <% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
 </body>
 </html>
