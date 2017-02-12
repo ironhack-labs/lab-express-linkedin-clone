@@ -1,3 +1,4 @@
+/* jshint esversion:6*/
 //will define the routes we need to create the basic authorization
 
 const express = require("express");
@@ -128,19 +129,62 @@ authController.get("/logout", (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/login");
+      res.redirect("login");
     }
   });
 });
+/////////////////////ITERATION2/////////////////////////////////////////
+authController.get("/profile/:userId/edit", (req, res, next) => {
+  const id = req.params.id;
+   User.findById(id, function (err, user) {
+     if (err) return next(err);
+     res.render('profile/edit',{user});
+   }
+ );
+});
+
+authController.get("/profile/:userId", (req, res, next) => {
+  const id = req.params.id;
+  User.findById(id, function (err, user) {
+    if (err) return next(err);
+    res.render('show',{user});
+      }
+    );
+  });
+
+authController.post("/profile/:userId", (req, res, next) => {
+  const id = req.params.id;
+  const body= req.body;
+
+  User.findByIdAndUpdate(id,body, function (err) {
+    if (err) return next(err);
+    res.redirect('profile/edit');
+      }
+  );
+  });
+
+  authController.post("/home", (req, res) => {
+    var userSearch = req.body.userSearch;
+    if(req.session.currentUser === null){
+      res.render("profile/:userId");
+      return;
+    }
+  });
+
+/////////////////////////////////////////////////////////////////////
 
 //////////////////If its Home
 authController.get("/", (req, res) => {
   var usernameFirst = req.body.username;
-  if(req.session.currentUser == null){
+  if(req.session.currentUser === null){
     res.render("authentication/login");
     return;
   }
     else{res.render("./home",{welcomemessage: "Welcome "+usernameFirst});}
   // res.redirect("/login");
 });
+//////////////////If its Home
+
+
+
 module.exports = authController;

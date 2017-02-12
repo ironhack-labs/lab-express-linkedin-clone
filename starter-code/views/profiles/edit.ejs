@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <title>Linkedin Sign Up</title>
+</head>
+<body>
+  <div id="container">
+    <h2>Edit User</h2>
+    <form action="/profile/<%=user._id%/edit/>" method="post">
+     <label for="userName">User name:</label>
+     <input type="text" name="UserName" value="<%=user.UserName%>">
+
+     <label for="summary">Summary:</label>
+     <input type="text" name="summary" value="<%= user.summary %>">
+
+     <label for="company">Users company:</label>
+     <input type="text" name="company" value="<%= user.company %>">
+
+     <label for="jobTitle">User Job:</label>
+     <input type="text" name="jobTitle" value="<%= user.jobTitle %>">
+
+
+     <button type="submit" name="submit">Save</button>
+   </form>
+   
+    <a href="/logout">Logout</a>
+    <a href="/home">Home</a>
+    <% if (typeof(errorMessage) != "undefined") { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+</div>
+</div>
+</body>
+</html>
