@@ -41,6 +41,9 @@
     <br><br>
     <form id="form" action="/signup" method="POST">
     <button>Create account</button>
+    <p class="account-message">
+      You have a user? <a href="/login">Log in</a>
+    </p>
   </form>
   <% if (typeof(errorMessage) != "undefined") { %>
   <div class="error-message"><%= errorMessage %></div>

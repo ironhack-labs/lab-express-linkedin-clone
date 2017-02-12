@@ -1,21 +1,26 @@
+/* jshint esversion:6*/
+const mongoose     = require("mongoose");
+//BDD Conection
+mongoose.connect("mongodb://localhost/linkedin");
+
+//Sesion
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+
 const express      = require('express');
 const path         = require('path');
 const favicon      = require('serve-favicon');
 const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
-const app = express();
+
 const bcrypt       =require('bcrypt');
-const mongoose     = require("mongoose");
-const session    = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+
+
 
 //Routes
 const authController = require('./routes/authController');
-
-
-//BDD Conection
-mongoose.connect("mongodb://localhost/linkedin");
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,8 +34,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authController);
-// app.use('/', users);
 
 //configure the middleware to enable sessions
 app.use(session({
@@ -42,6 +45,8 @@ app.use(session({
   })
 }));
 
+// CONTROLLERS
+app.use('/', authController);
 
 
 // catch 404 and forward to error handler

@@ -3,15 +3,24 @@
 const express = require("express");
 const authController = express.Router();
 
-// User model
-const User           = require("../models/user");
+  // User model
+  const User           = require("../models/user");
 
 // BCrypt to encrypt passwords
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
 
+///////////////////////////////////////////////////////////////
+////////////SIGNUP PAGE//////////////////////////////////
+///////////////////////////////////////////////////////////////
 authController.get("/signup", (req, res, next) => {
-  res.render("authentication/signup");
+  var usernameSingUp = req.body.username;
+  if(req.session.currentUser == null){
+    res.render("authentication/signup");
+    return;
+  }
+    else{res.render("./home",{welcomemessage: "Welcome "+usernameSingUp});}
+
 });
 
 authController.post("/signup", (req, res, next) => {
@@ -42,7 +51,6 @@ authController.post("/signup", (req, res, next) => {
       });
       return;
     }
-
     var salt     = bcrypt.genSaltSync(bcryptSalt);
     var hashPass = bcrypt.hashSync(password, salt);
 
@@ -53,20 +61,86 @@ authController.post("/signup", (req, res, next) => {
       summary,
       imageUrl,
       company,
-      jobTitles
+      jobTitle
     });
 
 //save the new user onto the Database
     newUser.save((err) => {
       if (err) {
-        res.render("auth/signup", {
+        res.render("authentication/signup", {
           errorMessage: "Something went wrong"
           });
         } else {
-            res.redirect("/");
+            res.redirect("/login");
             }
       });
   });
 });
+///////////////////////////////////////////////////////////////
+////////////////////LOGIN PAGE //////////////////////////
+//////////////////////////////////////////////////////////////
+authController.get("/login", (req, res, next) => {
+  var usernameLogin = req.body.username;
+  if(req.session.currentUser == null){
+    res.render("authentication/login");
+    return;
+  }
+    else{res.render("./home",{welcomemessage: "Welcome "+usernameLogin});}
+});
+authController.post("/login", (req, res, next) => {
+  var usernameLog = req.body.username;
+  var passwordLog = req.body.password;
 
+  if (usernameLog === "" || passwordLog === "") {
+    res.render("authentication/login", {
+      errorMessage: "Indicate a username and a password to sign up"
+    });
+    return;
+  }
+
+  User.findOne({ "username": usernameLog },
+    "_id username password following",
+    (err, user) => {
+      if (err || !user) {
+        res.render("authentication/login", {
+          errorMessage: "The username doesn't exist"
+        });
+        return;
+      } else {
+        if (bcrypt.compareSync(passwordLog, user.password)) {
+          req.session.currentUser = user; // WE CREATE THE USER SESSION HERE
+          res.render("./home",{welcomemessage: "Welcome "+usernameLog});//,{welcomemessage: "Welcome "+usernameLog}
+        } else {
+          res.render("authentication/login", {
+            errorMessage: "Incorrect password"
+          });
+        }
+      }
+  });
+});
+
+///////////////////LOG OUT///////////////////////////////////
+
+authController.get("/logout", (req, res, next) => {
+  if (!req.session.currentUser) { res.redirect("/"); return; }
+
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");
+    }
+  });
+});
+
+//////////////////If its Home
+authController.get("/", (req, res) => {
+  var usernameFirst = req.body.username;
+  if(req.session.currentUser == null){
+    res.render("authentication/login");
+    return;
+  }
+    else{res.render("./home",{welcomemessage: "Welcome "+usernameFirst});}
+  // res.redirect("/login");
+});
 module.exports = authController;
