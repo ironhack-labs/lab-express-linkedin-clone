@@ -2,7 +2,7 @@
 'use strict';
 
 const mongoose       = require ('mongoose');
-const Schema         = mongoose.Schema();
+const Schema         = mongoose.Schema;
 
 const userSchema  = new Schema({
   userName: {
@@ -10,12 +10,10 @@ const userSchema  = new Schema({
     required: true
   },
   name: {
-    type: String,
-    required: true
+    type: String
   },
   email: {
-    type: String,
-    required: true
+    type: String
   },
   password: {
     type: String,
@@ -34,3 +32,6 @@ const userSchema  = new Schema({
     type: String
   }
 });
+
+const User = mongoose.model('users', userSchema);
+module.exports = User;

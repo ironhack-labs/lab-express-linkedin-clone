@@ -1,9 +1,12 @@
 <h2>Login</h2>
 <form action="/login" method="post">
-  <label for="email">Email: </label>
-  <input type="text" id="email" name="email" placeholder="">
+  <label for="userName">Username: </label>
+  <input type="text" id="userName" name="userName" placeholder="" required="">
   <label for="password">Password: </label>
-  <input type="text" id="password" name="password" value="" placeholder="">
-  <button type="button" name="button">Log in</button>
+  <input type="password" id="password" name="password" required="" placeholder="">
+  <button>Log in</button>
 </form>
+<% if (typeof(errorMsg) !== 'undefined'){ %>
+  <p id="error-msg">ERROR: <%=errorMsg%></p>
+<% }                                      %>
 <p>Don't have an account? <a href="/signup">Sign up</a></p>
