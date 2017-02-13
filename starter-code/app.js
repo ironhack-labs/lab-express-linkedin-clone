@@ -16,6 +16,7 @@ var app = express();
 
 // Controllers
 const authenticator = require('./routes/authenticator');
+const profileController = require('./routes/profileController');
 
 // connect to database
 mongoose.connect('mongodb://localhost/linkedin');
@@ -42,6 +43,7 @@ app.use(session({
 app.use(expressLayouts);
 app.set('layout', 'layouts/main-layout');
 
+app.use('/profile', profileController);
 app.use('/', authenticator);
 
 // catch 404 and forward to error handler
