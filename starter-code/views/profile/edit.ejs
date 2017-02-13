@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="/stylesheets/style.css">
+	</head>
+	<body>
+		<form id="form" action="/profile/<%= profileName %>" method="POST">
+			<label for="email">Email Address</label><br>
+			<input type="text" id="email" name="email" value="<%= email %>">
+			<br><br>
+			<label for="summary">Summary</label><br>
+			<input type="text" id="summary" name="summary" value="<%= summary %>">
+			<br><br>
+			<label for="imageURL">Image URL</label><br>
+			<input type="text" id="image-url" name="imageURL" value="<%= imageURL %>">
+			<br><br>
+			<label for="company">Company</label><br>
+			<input type="text" id="company" name="company" value="<%= company %>">
+			<br><br>
+			<label for="jobTitle">Job Title</label><br>
+			<input type="text" id="job-title" name="jobTitle" value="<%= jobTitle %>">
+			<br><br>
+
+
+			<% if (typeof(errorMessage) !== "undefined") { %>
+				<div class="error-message"><%= errorMessage %></div>
+			<% } %>
+
+			<button>Edit profile</button>
+		</form>
+	</body>
+</html>
