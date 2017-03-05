@@ -2,7 +2,7 @@
 
 # DE | Express Linkedin Clone
 
-![](https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_1a792d16ee514fa06f53a4befeeffeef.png =400x)
+<img src="images/linkedin-logo.png" width="400px">
 
 ## Requirements
 
@@ -23,7 +23,7 @@ In the Pull request name, add your name and last names separated by a dash "-"
 
 ## Deliverables
 
-Push your entire Express app to the Github.
+Push your entire Express app to the GitHub.
 
 ## Instructions
 
@@ -35,17 +35,18 @@ In this lab, we will be creating a basic version of LinkedIn's authentication fe
 
 As starter code, we have created a project with `express-generator`, so you will start the project from scratch!
 
-:::warning
+<!-- :::warning -->
 :exclamation: **Finish all of the iterations before adding any styles or bonus features.**
-:::
+<!-- ::: -->
 
 ### Iteration 1 | Authentication & User Accounts
 
 Before we do anything, we need to implement basic authentication, and User accounts. Start with a very basic home page, and the authentication features of signing up, logging in, and logging out.
 
-:::info
+<!-- :::info -->
 :bulb: **USBAT** stands for **U**ser **S**hould **B**e **A**ble **T**o
-:::
+<!-- ::: -->
+
 #### Features
 
 - **USBAT** => View the home page.
@@ -60,7 +61,7 @@ Before we do anything, we need to implement basic authentication, and User accou
 - `POST` `/signup`. We save the user information in the database.
 - `GET` `/login`. If the user is already logged in, it should redirect him to the home page.
 - `POST` `/login`. We start user's session.
-- `POST` `/logout`. We finishe user's session.
+- `GET` `/logout`. We end the user's session.
 
 #### Pages
 
@@ -79,9 +80,9 @@ Before we do anything, we need to implement basic authentication, and User accou
   - `company` - User's current company
   - `jobTitle` - User's current Job Title
 
-:::warning
+<!-- :::warning -->
 :exclamation: Make sure the user cannot revisit the login or register pages if they're logged in.
-:::
+<!-- ::: -->
 
 ### Iteration 2 | User Profiles & Authorization
 
@@ -97,7 +98,7 @@ In this iteration, we will build out the User's public and private profiles. In 
 
 - `GET` `/profile/:userId/edit` - This will allow the user to edit their own profile. The user should be redirected to the homepage if they're trying to edit a profile that isn't theirs.
 - `POST` `/profile/:userId`
-- `GET` `/profile/:userId` -
+- `GET` `/profile/:userId`
   -  This will display a user's profile, based on the `userId`. If the user is logged in, and viewing their own profile, the page will display a "Edit Your Profile" button.
   -  If the user is logged in, they will be displayed the **public profile** with limited information. If they are not they will be displayed the **private profile** with all of the information.
 
@@ -112,8 +113,8 @@ Implement a news feed that shows posts from all of the people on LinkedIn. Yes, 
 
 #### Features
 
-- **USBAT** => Create a new post **if he is logged in**.
-- **USBAT** => Edit a post **he has created**.
+- **USBAT** => Create a new post **if they are logged in**.
+- **USBAT** => Edit a post **they has created**.
 - **USBAT** => View a list of all of the user created posts on the home page.
 
 #### Routes
