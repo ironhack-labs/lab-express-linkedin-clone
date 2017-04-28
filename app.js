@@ -2,14 +2,19 @@ const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
+const expressLayouts = require('express-ejs-layouts');
+
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+
 
 mongoose.connect('mongodb://localhost:27017/express-linkedin-clone');
 
-const index = require('./routes/index');
-const users = require('./routes/users');
+const authRoutes = require('./routes/auth-routes');
+const siteRoutes = require('./routes/site-routes');
 
 const app = express();
 
@@ -19,14 +24,25 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(expressLayouts);
+app.set('layout', 'layouts/main-layout');
+app.use(session({
+  secret: 'basic-auth-secret',
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60, // 1 day
+  }),
+}));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/user', users);
+app.use('/', authRoutes);
+app.use('/profile', siteRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
