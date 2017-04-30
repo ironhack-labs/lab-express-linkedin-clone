@@ -8,7 +8,9 @@ const User = require('../models/user');
 
 /* GET Index page. */
 authRoutes.get('/', (req, res, next) => {
-  res.render('home');
+  User.find({}, (err, users) => {
+    res.render('home', { users });
+  });
 });
 
 /* GET signup page. */
@@ -55,7 +57,7 @@ authRoutes.post('/signup', (req, res, next) => {
         res.render('authentication/signup', { errors: newUser.errors });
       }
       req.session.currentUser = newUser;
-      res.redirect('profile');
+      res.redirect(`profiles/${newUser._id}`);
     });
   });
 });
@@ -87,7 +89,9 @@ authRoutes.post('/login', (req, res, next) => {
     if (bcrypt.compareSync(password, user.password)) {
       // Save the login in the session!
       req.session.currentUser = user;
-      res.redirect('profile');
+      const userId = user._id;
+      console.log(user);
+      res.redirect(`profiles/${userId}/edit`);
     } else {
       res.render('authentication/login', {
         errorMessage: 'Incorrect password',

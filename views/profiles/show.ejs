@@ -19,22 +19,21 @@
               <div class="row">
                 <div class="centered-text col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
                   <div itemscope="" itemtype="http://schema.org/Person">
-                    <h2> <span itemprop="name"><strong>Name: </strong><%= user.name %></span></h2>
-                    <p><span itemprop="jobTitle"><strong>Title: </strong><%= user.jobTitle %></span></p>
-                    <p><span itemprop="affiliation"><strong>Company: </strong><%= user.company %></span></p>
+                    <h2> <span><strong></strong><%= user.name %></span></h2>
+                    <p><span><strong>Title: </strong><%= user.jobTitle %></span></p>
+                    <p><span><strong>Company: </strong><%= user.company %></span></p>
                     <p>
-                      <i class="fa fa-map-marker"></i> <span itemprop="addressRegion"><%= user.summary %></span>
+                      <span itemprop="addressRegion"><strong>Summary: </strong><%= user.summary %></span>
                     </p>
-                    <p itemprop="email"> <i class="fa fa-envelope"> </i>
-                      <a href="<%= user.email %>">
-                        <%= user.name %>
-                      </a>
+                    <p><span><strong>Email: </strong>
+                      <a href="mailto:<%= user.email %>">
+                        <%= user.email %>
+                      </a></span>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-12 centered-text">Your Short Bio goes here.</div>
           </div>
         </div>
         <div class="panel-footer">
@@ -42,7 +41,11 @@
             <div id="social-links" class=" col-lg-12">
               <div class="row">
                 <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3 social-btn-holder">
-                  <a title="edit" class="btn btn-social btn-block btn-google" href="#">Edit</a>
+                  <a class="btn btn-warning" href="/profiles/<%= user._id %>/edit">Edit Profile</a>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3 social-btn-holder">
+                  <form action="/profiles/<%= user._id %>/delete" method="post">
+                  <button class="btn btn-danger" type="submit">Delete Profile</button>
                 </div>
               </div>
             </div>

@@ -1,0 +1,24 @@
+
+  <div class="container">
+    <form class="form-signin" action="/profiles/<%= user._id %>/update" method="post">
+      <h2 class="form-signin-heading">Here you can edit your profile</h2>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" name="email" class="form-control" value="<%= user.email %>" placeholder="Email address" autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" name="password" value="<%= user.password %>" class="form-control" placeholder="Password">
+      <label for="inputName" class="sr-only">Name</label>
+      <input type="text" id="inputName" name="name" value="<%= user.name %>" class="form-control" placeholder="Name">
+      <label for="inputSummary" class="sr-only">Summary</label>
+      <input type="text" id="inputSummary" name="summary" value="<%= user.summary %>" class="form-control" placeholder="Summary">
+      <label for="inputimageUrl" class="sr-only">Name</label>
+      <input type="text" id="inputimageUrl" name="imageUrl" value="<%= user.imageUrl %>" class="form-control" placeholder="Image Url">
+      <label for="inputCompany" class="sr-only">Name</label>
+      <input type="text" id="inputCompany" name="company" value="<%= user.company %>" class="form-control" placeholder="Company">
+      <label for="inputJobTitle" class="sr-only">Name</label>
+      <input type="text" id="inputJobTitle" name="jobTitle" value="<%= user.jobTitle %>" class="form-control" placeholder="Job Title">
+      <div class="checkbox">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+    </form>
+    <a href="/profiles/<%= user._id %>" class="btn btn-primary">Back to Profile</a>
+  </div>

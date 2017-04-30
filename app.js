@@ -10,11 +10,15 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
+mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/express-linkedin-clone');
+mongoose.connect('mongodb://localhost:27017/express-linkedin-clone')
+  .then(() => console.log('connection succesful'))
+  .catch(err => console.error(err));
 
 const authRoutes = require('./routes/auth-routes');
-const siteRoutes = require('./routes/site-routes');
+// const siteRoutes = require('./routes/site-routes');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
@@ -44,7 +48,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', authRoutes);
-app.use('/profile', siteRoutes);
+app.use('/profiles/', userRoutes);
+
+// app.use('/profile', siteRoutes);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

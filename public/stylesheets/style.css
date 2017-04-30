@@ -260,3 +260,9 @@ span {
 .panel-body {
   align-content: center;
 }
+
+.img-profile {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+}
