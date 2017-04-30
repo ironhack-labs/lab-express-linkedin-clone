@@ -5,11 +5,12 @@ const authRoutes = express.Router();
 
 const bcryptSalt = 10;
 const User = require('../models/user');
+const Post = require('../models/post.js');
 
 /* GET Index page. */
 authRoutes.get('/', (req, res, next) => {
-  User.find({}, (err, users) => {
-    res.render('home', { users });
+  Post.find({}, (err, posts) => {
+    res.render('home', { posts });
   });
 });
 
@@ -52,7 +53,7 @@ authRoutes.post('/signup', (req, res, next) => {
       return;
     }
 
-    newUser.save((err) => {
+    newUser.save(err => {
       if (err) {
         res.render('authentication/signup', { errors: newUser.errors });
       }
@@ -91,7 +92,7 @@ authRoutes.post('/login', (req, res, next) => {
       req.session.currentUser = user;
       const userId = user._id;
       console.log(user);
-      res.redirect(`profiles/${userId}/edit`);
+      res.redirect(`profiles/${userId}`);
     } else {
       res.render('authentication/login', {
         errorMessage: 'Incorrect password',
@@ -103,6 +104,9 @@ authRoutes.post('/login', (req, res, next) => {
 /* GET logout user and render Login page. */
 authRoutes.get('/logout', (req, res, next) => {
   req.session.destroy((err) => {
+    if (err) {
+      console.log('Error: ', err);
+    }
     // cannot access session here
     res.redirect('login');
   });

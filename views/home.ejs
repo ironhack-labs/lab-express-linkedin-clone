@@ -1,1 +1,18 @@
-<h1>Welcome to the LinkedIn Clone</h1>
+<h1>Here are all the Blog Posts from our users</h1>
+<!--<%= posts %>-->
+  <% if(posts.length>0) { %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-6">User</div>
+    <div class="col-xs-6">Blog Post</div> 
+  </div>
+  <% posts.forEach(post => { %>
+  <div class="row">
+    <div class="col-xs-6"><a href="/profiles/<%= post._creator %>"><%= post.nameOfUser %></a></div>
+    <div class="col-xs-6"><%= post.content %></div>
+  </div>
+  <% }); %>
+    <% } else { %>
+        <div>No profiles found...</div>
+      <% } %>
+</div>

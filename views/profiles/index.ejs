@@ -1,5 +1,6 @@
 <div class="container">
-  <h1><% if(users.length>0) { %></h1>
+  <% if(users.length>0) { %>
+  <h1>Here are all the profiles</h1>
 <div class="row">
   <div class="col-xs-3"><strong>Profile Picture</strong></div>
   <div class="col-xs-3"><strong>Name</strong></div>
@@ -10,7 +11,7 @@
   <% users.forEach(user => { %>
 <div class="row">
   <div class="col-xs-3"><img class="img-profile" src="<%= user.imageUrl %>"></div>
-  <div class="col-xs-3"><a href="/profiles/<%= user.id %>"><%= user.name %></a></div>
+  <div class="col-xs-3"><a href="/profiles/<%= user._id %>"><%= user.name %></a></div>
   <div class="col-xs-3"><%= user.company %></div>
   <div class="col-xs-3"><%= user.jobTitle %></div>
 </div>  

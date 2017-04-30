@@ -47,6 +47,9 @@
                   <form action="/profiles/<%= user._id %>/delete" method="post">
                   <button class="btn btn-danger" type="submit">Delete Profile</button>
                 </div>
+                                <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3 social-btn-holder">
+                  <a class="btn btn-primary" href="/users/<%= user._id %>/posts/new">Create new Post!</a>
+                </div>
               </div>
             </div>
           </div>

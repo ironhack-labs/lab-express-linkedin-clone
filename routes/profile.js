@@ -1,5 +1,7 @@
 const express = require('express');
 
+const authController = require('../controllers/authController.js');
+
 const router = express.Router();
 
 // The required user Controller
@@ -13,19 +15,13 @@ router.get('/', user.list);
 // Get single user profile by id
 router.get('/:id', user.show);
 
-/*// Create user profile
-router.get('/create', user.create);
-
-// Save user profile
-router.post('/save', user.save);*/
-
 // Edit user profile
-router.get('/:id/edit', user.edit);
+router.get('/:id/edit', authController.checkProfileOwnership, user.edit);
 
 // Update user profile
-router.post('/:id/update', user.update);
+router.post('/:id/update', authController.checkProfileOwnership, user.update);
 
 // Delete user profile
-router.post('/:id/delete/', user.delete);
+router.post('/:id/delete/', authController.checkProfileOwnership, user.delete);
 
 module.exports = router;

@@ -4,11 +4,11 @@ const userController = {};
 
 // Show LIST of profiles function
 userController.list = (req, res) => {
-  User.find({}).exec((err, users) => {
+  User.find({}).exec({ new: true }, (err, users) => {
     if (err) {
       console.log('Error:', err);
     } else {
-      res.render('../views/profiles/index', { users });
+      res.render('profiles/index', { users });
     }
   });
 };
@@ -19,14 +19,14 @@ userController.show = (req, res) => {
     if (err) {
       console.log('Error: ', err);
     } else {
-      res.render('../views/profiles/show', { user });
+      res.render('profiles/show', { user });
     }
   });
 };
 
 // CREATE profile function, it just redirects to create the page
 userController.create = (req, res) => {
-  res.render('../views/profiles/create');
+  res.render('profiles/create');
 };
 
 // SAVE new profile function
@@ -36,7 +36,7 @@ userController.save = (req, res) => {
   User.save((err) => {
     if (err) {
       console.log(err);
-      res.render('../views/profiles/create');
+      res.render('profiles/create');
     } else {
       console.log('Successfully created a profile.');
       res.redirect(`/profiles/show/${user._id}`);
