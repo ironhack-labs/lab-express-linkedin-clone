@@ -30,7 +30,7 @@ authController.post("/signup", (req, res, next) => {
     return;
   }
 
-  User.findOne({ "email": email }, "username", (err, user) => {
+  User.findOne({ "email": email }, "email", (err, user) => {
     if (user !== null) {
       res.render("auth/signup", {
         errorMessage: "The user already exists"
@@ -114,14 +114,17 @@ authController.get("/logout", (req, res, next) => {
   });
 });
 
-authController.use((req, res, next) => {
-  if (req.session.currentUser) { next(); }
-  else { res.redirect("/login"); }
-});
+//Commented to make the application more functional
+// authController.use((req, res, next) => {
+//   if (req.session.currentUser) { next(); }
+//   else { res.redirect("/login"); }
+// });
 
 authController.get('/', function(req, res, next) {
   const currentUser = req.session.currentUser;
-  res.render('index', {user: currentUser});
+  User.find({},(err,users)=>{
+    res.render('index', {currentUser: currentUser, users:users});
+  });
 });
 
 authController.get("/logout", (req, res, next) => {

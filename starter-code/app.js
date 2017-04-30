@@ -13,6 +13,7 @@ const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
 const authController = require('./routes/authController');
+const profileController  = require("./routes/profileController");
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use(session({
 }));
 
 app.use('/', authController);
+app.use("/profile", profileController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

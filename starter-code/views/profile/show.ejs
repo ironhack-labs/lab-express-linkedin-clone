@@ -1,0 +1,22 @@
+<% if (typeof(user) !== "undefined") { %>
+  <ul>
+    <li><%=user.name%></li>
+    <li><%=user.company%></li>
+    <li><%=user.jobTitle%></li>
+    <% if (typeof(user.email) !== "undefined") { %>
+      <li><%=user.email%></li>
+      <li><%=user.summary%></li>
+    <% } %>
+  </ul>
+<% } %>
+<% if (typeof(currentUser) !== "undefined") { %>
+  <p>hello</p>
+  <p><%=currentUser._id%></p>
+  <p><%=user._id%></p>
+  <% if(currentUser._id == user._id){ %>
+    <form action="/profile/<%= currentUser._id %>/edit" method="GET">
+      <button>Edit</button>
+    </form>
+  <% } %>
+<% } %>
+<a href="/">Home</a>
