@@ -10,6 +10,7 @@ const bcrypt            =require('bcrypt');
 const bcryptSalt        =10;
 
 authController.get("/signup", (req, res, next) => {
+  if (req.session.currentUser) { res.redirect("/"); return; }
   res.render("auth/signup");
 });
 
@@ -63,6 +64,7 @@ authController.post("/signup", (req, res, next) => {
 });
 
 authController.get("/login", (req, res, next) => {
+  if (req.session.currentUser) { res.redirect("/"); return; }
   res.render("auth/login");
 });
 
@@ -120,6 +122,18 @@ authController.use((req, res, next) => {
 authController.get('/', function(req, res, next) {
   const currentUser = req.session.currentUser;
   res.render('index', {user: currentUser});
+});
+
+authController.get("/logout", (req, res, next) => {
+  if (!req.session.currentUser) { res.redirect("/"); return; }
+
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");
+    }
+  });
 });
 
 

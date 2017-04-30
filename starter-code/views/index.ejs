@@ -2,3 +2,9 @@
 <div id="profile">
   <h2>Welcome <%= user.name %></h2>
 </div>
+
+<% if (typeof(user) !== "undefined") { %>
+  <p class="account-message">
+    <a href="/logout">Log out</a>
+  </p>
+<% } %>
