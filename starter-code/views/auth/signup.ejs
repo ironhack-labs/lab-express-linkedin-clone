@@ -1,0 +1,34 @@
+<h2>Signup</h2>
+
+<form action="/signup" method="POST" id="form-container" class="signup">
+  <label for="name">Name</label>
+  <input type="text" name="name" placeholder="Your name">
+  <br><br>
+  <label for="email">Email</label>
+  <input type="text" name="email" placeholder="youremail@example.com">
+  <br><br>
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Your password">
+  <br><br>
+  <label for='summary'>Sumary</label>
+  <textarea type='text' name='sumary' placeholder="Summary of your profesional career"></textarea>
+  <br><br>
+  <label for="imageUrl">ImageUrl</label>
+  <input type="text" name="imageUrl" placeholder="Profile image's Url">
+  <br><br>
+  <label for="company">Company</label>
+  <input type="text" name="company" placeholder="Your current company">
+  <br><br>
+  <label for="jobTitle">Job Title</label>
+  <input type="text" name="jobTitle" placeholder="Your current job title">
+  <br><br>
+  <% if (typeof(errorMessage) !== "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+
+  <button>Create an account</button>
+
+  <p class="account-message">
+    Don't have an account? <a href="/signup">Sign up</a>
+  </p>
+</form>
