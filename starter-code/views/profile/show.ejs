@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Log in</title>
+  <script src="/javascripts/zxcvbn.js">
+</script> 
+</head>
+
+<body>
+
+<table>
+ 
+  <tr>
+    <td>
+      Name:
+    </td>
+    <td>
+      <%=user.name%>
+    </td>
+  </tr>
+
+    <tr>
+    <td>
+      Profile picture:
+    </td>
+    <td>
+      <%=user.imageUrl%>
+    </td>
+  </tr>
+
+    <tr>
+    <td>
+      Company:
+    </td>
+    <td>
+      <%=user.company%>
+    </td>
+  </tr>
+
+    <tr>
+    <td>
+      Job Titlee:
+    </td>
+    <td>
+      <%=user.jobTitle%>
+    </td>
+  </tr>
+
+
+</table>
+<% if(showOwn) { %>
+  <p>
+  <a href="<%=user._id%>/edit">Edit profile</a>
+<% } %>
+<p>
+  <a href="/">Home</a>
+</body>
+</html>

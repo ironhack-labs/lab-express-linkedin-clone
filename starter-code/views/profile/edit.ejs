@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <title>Sign Up</title>
+  <script src="/javascripts/zxcvbn.js">
+</script> 
+</head>
+
+<body>
+  <form id="form" action="/profile/<%=user._id%>" method="POST">
+<!--    <label for="username">Username</label><br>
+    <input type="text" name="username" 
+      placeholder="AnakinSkywalker" value="<%=user.username%>">
+
+    <br><br>
+    <label for="password">Password</label><br>
+    <input type="password" name="password" id="pwd"
+      placeholder="DeathStar"><div id="password_strength"></div>
+    <br><br>-->
+
+
+
+    <label for="name">Name</label><br>
+    <input type="text" name="name" 
+      placeholder="Anakin Skywalker" value="<%=user.name%>">
+    <br><br>
+
+      <label for="email">Email</label><br>
+    <input type="text" name="email" 
+      placeholder="as@theforce.com" value="<%=user.email%>">
+    <br><br>
+
+      <label for="email">Summary</label><br>
+    <textarea type="textarea" name="summary" 
+      placeholder="as@theforce.com"  ><%=user.summary%></textarea>
+    <br><br>
+
+      <label for="email">Profile picture</label><br>
+    <input type="text" name="imageUrl" 
+      placeholder="as@theforce.com" value="<%=user.imageUrl%>">
+    <br><br>
+    
+      <label for="email">Company</label><br>
+    <input type="text" name="company" 
+      placeholder="as@theforce.com" value="<%=user.company%>">
+    <br><br>
+
+          <label for="email">Job title</label><br>
+    <input type="text" name="jobTitle" 
+      placeholder="as@theforce.com" value="<%=user.jobTitle%>">
+    <br><br>
+
+    <% if (typeof(errorMessage) != "undefined") { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+
+    <button>Save profile</button>
+  </form>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>  
+<script src="/javascripts/password_strength.js"></script>
+</body>
+</html>
