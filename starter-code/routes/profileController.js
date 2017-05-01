@@ -4,6 +4,8 @@ const profileController = express.Router();
 
 // User model
 const User  = require("../models/user");
+// Friendship model
+const Friendship  = require("../models/friendship");
 
 //Bcrypt to encrypt passwords
 const bcrypt            =require('bcrypt');
@@ -16,6 +18,7 @@ profileController.get("/:userId", (req, res, next) => {
     console.log("hi2",req.params.userId);
     User.findOne({ _id: req.params.userId }, "_id name email summary company jobTitle").exec((err, user) => {
         if (!user) { return next(err); }
+
         res.render('profile/show',{user:user, currentUser: req.session.currentUser});
     });
   }
@@ -25,6 +28,38 @@ profileController.get("/:userId", (req, res, next) => {
         res.render('profile/show',{user:user});
     });
   }
+});
+
+profileController.post("/:userId/follow", (req, res, next) => {
+    if (!req.session.currentUser) {
+      return res.redirect('/login');
+    }
+
+    User.findOne({ "_id": req.params.userId}, "_id").exec((err, follow) => {
+    if (err) {
+      res.redirect("/profile/" + req.params.userId);
+      return;
+    }
+
+    var friendshipArray = [];
+
+    friendshipArray.push(req.session.currentUser._id);
+    friendshipArray.push(follow._id);
+
+     var newFriendship = Friendship({
+       friendship : friendshipArray
+     });
+
+    newFriendship.save((err) => {
+      if (err) {
+        next(error);
+      }
+      else
+      {
+        res.redirect("/");
+      }
+    });
+  });
 });
 
 profileController.get("/:userId/edit", (req, res, next) => {

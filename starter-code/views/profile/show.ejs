@@ -16,4 +16,11 @@
     </form>
   <% } %>
 <% } %>
+<% if (typeof(currentUser) !== "undefined") { %>
+  <% if (currentUser._id != user._id){ %>
+    <form action="/profile/<%= user._id %>/follow" method="POST">
+      <button class="button blue">Follow</%%></button>
+    </form>
+  <% } %>
+<% } %>
 <a href="/">Home</a>
