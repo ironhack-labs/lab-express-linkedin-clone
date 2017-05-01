@@ -1,0 +1,19 @@
+<% if (typeof(currentUser) !== "undefined") { %>
+  <% if(currentUser._id == user._id){ %>
+    <form action="/users/<%=user._id%>/posts/new" method="GET">
+      <button>New Post</button>
+    </form>
+  <% } %>
+<% } %>
+<a href="/logout">Logout</a>
+<a href="/">Home</a>
+
+<h2>@<%= user.name %> posts</h2>
+
+<% posts.forEach(function(post) { %>
+  <div class="pos-container">
+    <p><%= post.post %></p>
+    <p class="date"><%= moment(post.created_at).format("LL, LTS") %></p>
+  </div>
+<% }) %>
+</div>
