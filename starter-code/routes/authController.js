@@ -23,17 +23,18 @@ authController.post("/signup", (req, res, next) => {
   var company = req.body.company;
   var jobTitle = req.body.jobTitle;
 
-  if (email === "" || password === "") {
-    res.render("auth/signup", {
-      errorMessage: "Indicate a email and a password to sign up"
-    });
-    return;
-  }
+  // if (email ==="" || password === "") {
+  //   res.render("auth/signup", {
+  //     errorMessage: "Indicate a password to sign up"
+  //   });
+  //   return;
+  // }
+
 
   User.findOne({ "email": email }, "email", (err, user) => {
     if (user !== null) {
       res.render("auth/signup", {
-        errorMessage: "The user already exists"
+        errorMessage: "The email already exists"
       });
       return;
     }
@@ -53,9 +54,19 @@ authController.post("/signup", (req, res, next) => {
 
     newUser.save((err) => {
       if (err) {
-        res.render("auth/signup", {
-          errorMessage: "Something went wrong when signing up"
-        });
+        if(password ==="")
+        {
+          res.render("auth/signup", {
+            errorMessage: "Indicate a password to sign up",
+            requiredErrorMessage: newUser.errors
+          });
+        }
+        else {
+          res.render("auth/signup", {
+            requiredErrorMessage: newUser.errors
+          });
+        }
+
       } else {
        res.redirect("/login");
      }

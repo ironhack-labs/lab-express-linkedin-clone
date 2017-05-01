@@ -14,7 +14,7 @@
   <textarea type='text' name='summary' value=<%=user.summary%>></textarea>
   <br><br>
   <label for="imageUrl">ImageUrl</label>
-  <input type="text" name="imageUrl" value="user.imageUrl">
+  <input type="text" name="imageUrl" value=<%=user.imageUrl%>>
   <br><br>
   <label for="company">Company</label>
   <input type="text" name="company" value=<%=user.company%>>
@@ -23,7 +23,9 @@
   <input type="text" name="jobTitle" value=<%=user.jobTitle%>>
   <br><br>
   <% if (typeof(errorMessage) !== "undefined") { %>
-    <div class="error-message"><%= errorMessage %></div>
+    <% errorMessage.forEach((error)=>{%>
+      <div class="error-message"><%= error %></div>
+    <% }) %>
   <% } %>
 
   <button>Update the account</button>

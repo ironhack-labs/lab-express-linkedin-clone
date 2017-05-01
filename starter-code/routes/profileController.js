@@ -42,7 +42,7 @@ profileController.get("/:userId/edit", (req, res, next) => {
 });
 
 profileController.post('/:id/edit', (req, res, next) => {
-  console.log("hi3");
+
   var name = req.body.name;
   var email = req.body.email;
   var password = req.body.password;
@@ -50,22 +50,8 @@ profileController.post('/:id/edit', (req, res, next) => {
   var imageUrl = req.body.imageUrl;
   var company = req.body.company;
   var jobTitle = req.body.jobTitle;
-  console.log("hi2");
-  // if (req.body.email === "" || req.body.password === "") {
-  //   res.render('profile/edit', {
-  //     errorMessage: "Indicate a email and a password to sign up"
-  //   });
-  //   return;
-  // }
-  //
-  // User.findOne({ "email": email }, "email", (err, user) => {
-  //   if (user !== null &&) {
-  //     res.render('profile/edit', {
-  //       errorMessage: "The user already exists"
-  //     });
-  //     return;
-  // }
-  console.log("hi");
+
+  // console.log("hi");
     var salt     = bcrypt.genSaltSync(bcryptSalt);
     var hashPass = bcrypt.hashSync(password, salt);
 
@@ -80,16 +66,84 @@ profileController.post('/:id/edit', (req, res, next) => {
       _id: req.params.id
     });
 
-  console.log("editUser",editUser);
+  // console.log("editUser",editUser);
 
   let userId = req.params.id;
-  User.findByIdAndUpdate({_id:userId}, editUser, (err)=>{
-    if(err){
+  let erroFound = false;
+  let errorMessage = [];
+
+  if(name==="")
+  {
+    errorMessage.push("Indicate a name to edit");
+    erroFound = true;
+  }
+
+  if(email==="")
+  {
+    errorMessage.push("Indicate an email to edit");
+    erroFound = true;
+  }
+
+  if(password ==="")
+  {
+    errorMessage.push("Indicate a password to edit");
+    erroFound = true;
+  }
+
+  let currentUser;
+  User.findById({_id:userId}, (err, user) => {
+    if (err) {
       next(err);
-    }
-    else {
-      console.log("hi4");
-      res.redirect('/');
+    } else {
+      currentUser = user;
+
+      if(erroFound)
+      {
+        res.render('profile/edit', { user: currentUser,errorMessage: errorMessage});
+      }
+      else
+      {
+
+        User.find({email:email}, (err, user) => {
+          // console.log("user ",user);
+          // console.log("userId ",userId );
+          if (user !== null)
+          {
+            if(user[0]._id != userId)
+            {
+              errorMessage.push("The email already exists");
+              res.render('profile/edit', { user:currentUser,
+                errorMessage: errorMessage
+              });
+              return;
+            }
+            else
+            {
+              User.findByIdAndUpdate({_id:userId}, editUser, (err)=>{
+                if(err){
+                  next(err);
+                }
+                else
+                {
+                  res.redirect('/');
+                }
+              });
+            }
+          }
+          else
+          {
+            User.findByIdAndUpdate({_id:userId}, editUser, (err)=>{
+              if(err){
+                next(err);
+              }
+              else
+              {
+                res.redirect('/');
+              }
+            });
+          }
+        });
+      }
     }
   });
 });

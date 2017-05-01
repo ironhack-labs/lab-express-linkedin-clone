@@ -25,6 +25,14 @@
   <% if (typeof(errorMessage) !== "undefined") { %>
     <div class="error-message"><%= errorMessage %></div>
   <% } %>
+  <% if (typeof(requiredErrorMessage) !== "undefined") { %>
+    <% if (typeof(requiredErrorMessage.email) !== "undefined") { %>
+      <div class="error-message"><%= requiredErrorMessage.email.message %></div>
+    <% } %>
+    <% if (typeof(requiredErrorMessage.name) !== "undefined") { %>
+      <div class="error-message"><%= requiredErrorMessage.name.message %></div>
+    <% } %>
+  <% } %>
 
   <button>Create an account</button>
 </form>

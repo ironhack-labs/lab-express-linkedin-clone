@@ -10,9 +10,6 @@
   </ul>
 <% } %>
 <% if (typeof(currentUser) !== "undefined") { %>
-  <p>hello</p>
-  <p><%=currentUser._id%></p>
-  <p><%=user._id%></p>
   <% if(currentUser._id == user._id){ %>
     <form action="/profile/<%= currentUser._id %>/edit" method="GET">
       <button>Edit</button>
