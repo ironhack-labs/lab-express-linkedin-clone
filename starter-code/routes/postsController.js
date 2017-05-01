@@ -34,35 +34,51 @@ postsController.get("/users/:userId/posts", (req, res, next) => {
 });
 
 postsController.get("/users/:userId/posts/new", (req, res, next) => {
-  res.render("posts/new",
-    { user: req.session.currentUser });
+  if(req.session.currentUser._id != req.params.userId)
+  {
+    return res.redirect('/');
+  }
+  else
+  {
+    res.render("posts/new",
+      { user: req.session.currentUser });
+  }
+
 });
 
 postsController.post("/users/:userId/posts", (req, res, next) => {
-  const user  = req.session.currentUser;
 
-  User.findOne({ email: user.email }).exec((err, user) => {
-    if (err) { return; }
+  if(req.session.currentUser._id != req.params.userId)
+  {
+    return res.redirect('/');
+  }
+  else
+  {
+    const user  = req.session.currentUser;
 
-    const newPost = Post({
-      user_id:   user._id,
-      user_email: user.email,
-      user_name: user.name,
-      post:     req.body.postText
+    User.findOne({ email: user.email }).exec((err, user) => {
+      if (err) { return; }
+
+      const newPost = Post({
+        user_id:   user._id,
+        user_email: user.email,
+        user_name: user.name,
+        post:     req.body.postText
+      });
+
+      newPost.save((err) => {
+        if (err) {
+          res.render("posts/new",
+            {
+              user: user,
+              errorMessage: err.errors.post.message
+            });
+        } else {
+          res.redirect("/");
+        }
+      });
     });
-
-    newPost.save((err) => {
-      if (err) {
-        res.render("posts/new",
-          {
-            user: user,
-            errorMessage: err.errors.post.message
-          });
-      } else {
-        res.redirect("/posts");
-      }
-    });
-  });
+  }
 });
 
 module.exports = postsController;
