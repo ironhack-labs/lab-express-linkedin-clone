@@ -18,9 +18,15 @@
 <% } %>
 <% if (typeof(currentUser) !== "undefined") { %>
   <% if (currentUser._id != user._id){ %>
-    <form action="/profile/<%= user._id %>/follow" method="POST">
-      <button class="button blue">Follow</%%></button>
-    </form>
+    <% if (button_text === 'Follow'){ %>
+      <form action="/profile/<%= user._id %>/follow" method="POST">
+        <button class="button blue"><%=button_text%></%%></button>
+      </form>
+    <% }else if(button_text === 'Unfollow'){ %>
+      <form action="/profile/<%= user._id %>/unfollow" method="POST">
+        <button class="button blue"><%=button_text%></%%></button>
+      </form>
+    <% } %>
   <% } %>
 <% } %>
 <a href="/">Home</a>

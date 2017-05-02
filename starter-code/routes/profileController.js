@@ -14,12 +14,35 @@ const bcryptSalt        =10;
 
 profileController.get("/:userId", (req, res, next) => {
   if (req.session.currentUser) {
-    console.log("hi",req.session.currentUser._id);
-    console.log("hi2",req.params.userId);
     User.findOne({ _id: req.params.userId }, "_id name email summary company jobTitle").exec((err, user) => {
         if (!user) { return next(err); }
+        //look for friendships with both users. Two as maximum. Te result is an array. If length is 0, there isn't a friendship. If the query returns 1 or 2 results , we have to inspect each one in order to see if the friendship[0] ( position 0 of the frienship array ) of one of the results corresponts to the currentUser ( req.session.currentUser._id ), who is the one that is following or unfollowing. If the friendship[0] of one of them coincides with currentUser, then the currentUser is already following the inspected user ( req.params.userId )
+        Friendship.find({ $and: [ { "friendship.id": req.session.currentUser._id},  {"friendship.id": req.params.userId}] }, (err,result)=>{
+          if(err){return next(err);}
 
-        res.render('profile/show',{user:user, currentUser: req.session.currentUser});
+          if(result.length === 0)
+          {
+            res.render('profile/show',{user:user, currentUser: req.session.currentUser, button_text:'Follow'});
+          }
+          else {
+            let friendshipExists = false;
+            result.forEach((element)=>{
+              if(element.friendship[0].id == req.session.currentUser._id)
+              {
+                friendshipExists = true;
+              }
+            });
+
+            if(friendshipExists)
+            {
+              res.render('profile/show',{user:user, currentUser: req.session.currentUser, button_text:'Unfollow'});
+            }
+            else
+            {
+              res.render('profile/show',{user:user, currentUser: req.session.currentUser, button_text:'Follow'});
+            }
+          }
+        });
     });
   }
   else {
@@ -31,7 +54,7 @@ profileController.get("/:userId", (req, res, next) => {
 });
 
 profileController.post("/:userId/follow", (req, res, next) => {
-    if (!req.session.currentUser) {
+    if (!req.session.currentUser || req.session.currentUser._id == req.params.userId) {
       return res.redirect('/login');
     }
 
@@ -41,14 +64,9 @@ profileController.post("/:userId/follow", (req, res, next) => {
       return;
     }
 
-    var friendshipArray = [];
-
-    friendshipArray.push(req.session.currentUser._id);
-    friendshipArray.push(follow._id);
-
-     var newFriendship = Friendship({
-       friendship : friendshipArray
-     });
+    var newFriendship = Friendship({
+      friendship : [{id:req.session.currentUser._id},{id:follow._id}]
+    });
 
     newFriendship.save((err) => {
       if (err) {
@@ -60,6 +78,46 @@ profileController.post("/:userId/follow", (req, res, next) => {
       }
     });
   });
+});
+
+profileController.post("/:userId/unfollow", (req, res, next) => {
+    if (!req.session.currentUser || req.session.currentUser._id == req.params.userId) {
+      return res.redirect('/login');
+    }
+
+    Friendship.find({ $and: [ { "friendship.id": req.session.currentUser._id},  {"friendship.id": req.params.userId}] }, (err,result)=>{
+      if(err){return next(err);}
+
+      if(result.length === 0)
+      {
+        res.render('profile/show',{user:user, currentUser: req.session.currentUser, button_text:'Follow'});
+      }
+      else {
+        let friendshipId;
+        let friendshipExists = false;
+        result.forEach((element)=>{
+          if(element.friendship[0].id == req.session.currentUser._id)
+          {
+            friendshipExists = true;
+            friendshipId = element._id;
+          }
+        });
+
+        if(friendshipExists)
+        {
+          Friendship.deleteOne({_id:friendshipId},(err)=>{
+            if(err){
+              next(error);
+            }
+            res.redirect('/');
+          });
+        }
+        else
+        {
+          return res.redirect('/');
+        }
+      }
+    });
 });
 
 profileController.get("/:userId/edit", (req, res, next) => {
