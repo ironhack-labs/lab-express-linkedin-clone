@@ -4,11 +4,47 @@ const postsController   = express.Router();
 const User              = require("../models/user");
 const Post              = require("../models/post");
 const moment            = require("moment");
+// Friendship model
+const Friendship  = require("../models/friendship");
 
 
 postsController.use((req, res, next) => {
   if (req.session.currentUser) { next(); }
   else { res.redirect("/login"); }
+});
+
+postsController.get("/posts", (req, res, next) => {
+  const currentUser = req.session.currentUser;
+  //an array for all the id that the currentUser has friendship with
+  let friendshipArray=[];
+  //explained in profileController. In this case, seeis friendship[0] of each result, and if it coincides with the currentUser._id, pushes the friendship[1] (the user with who the currentUser has a friendship) into an array of id's that will be used to look for the posts in the posts collection that have been created by a determinated user and marked with its user._id in user_id
+  Friendship.find({ "friendship.id": req.session.currentUser._id},(err,result)=>{
+    if(err){return next(err);}
+
+    if(result.length === 0)
+    {
+      return res.render('posts/post-following');
+    }
+    else {
+
+      result.forEach((element)=>{
+        if(element.friendship[0].id == req.session.currentUser._id)
+        {
+          friendshipArray.push(element.friendship[1].id);
+        }
+      });
+      friendshipArray.push(req.session.currentUser._id);
+      console.log("friendshipArray",friendshipArray);
+      Post.find({ user_id: { $in: friendshipArray } }).sort({ created_at: -1 }).exec((err, timeline) => {
+      res.render("posts/post-following", {
+        username: currentUser.name,
+        timeline,
+        moment
+      });
+  });
+
+    }
+  });
 });
 
 postsController.get("/users/:userId/posts", (req, res, next) => {
