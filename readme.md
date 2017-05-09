@@ -2,7 +2,7 @@
 
 # DE | Express Linkedin Clone
 
-<img src="images/linkedin-logo.png" width="400px">
+<img src="https://s3-eu-west-1.amazonaws.com/ih-materials/uploads/upload_b5ba91b16c4029dd5efa047e1a1246eb.png" width="400px">
 
 ## Requirements
 
