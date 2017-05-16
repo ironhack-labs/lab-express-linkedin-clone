@@ -1,0 +1,61 @@
+<!--<pre><%= JSON.stringify(user, null, 2) %></pre>-->
+
+<div class="container">
+  <div class="row">
+    <div class=" col-lg-offset-3 col-lg-6">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+                  <img class="img-circle img-responsive" src="<%= user.imageUrl %>">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="centered-text col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+                  <div itemscope="" itemtype="http://schema.org/Person">
+                    <h2> <span><strong></strong><%= user.name %></span></h2>
+                    <p><span><strong>Title: </strong><%= user.jobTitle %></span></p>
+                    <p><span><strong>Company: </strong><%= user.company %></span></p>
+                    <p>
+                      <span itemprop="addressRegion"><strong>Summary: </strong><%= user.summary %></span>
+                    </p>
+                    <p><span><strong>Email: </strong>
+                      <a href="mailto:<%= user.email %>">
+                        <%= user.email %>
+                      </a></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="row">
+            <div id="social-links" class=" col-lg-12">
+              <div class="row">
+                <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3 social-btn-holder">
+                  <a class="btn btn-warning" href="/profiles/<%= user._id %>/edit">Edit Profile</a>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3 social-btn-holder">
+                  <form action="/profiles/<%= user._id %>/delete" method="post">
+                  <button class="btn btn-danger" type="submit">Delete Profile</button>
+                </div>
+                                <div class="col-xs-6 col-sm-3 col-md-2 col-lg-3 social-btn-holder">
+                  <a class="btn btn-primary" href="/users/<%= user._id %>/posts/new">Create new Post!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,28 @@
+
+  <div class="container">
+    <form class="form-signin" action="/signup" method="post">
+      <h2 class="form-signin-heading">Please sign up</h2>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" autofocus>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
+      <label for="inputName" class="sr-only">Name</label>
+      <input type="text" id="inputName" name="name" class="form-control" placeholder="Name">
+      <label for="inputSummary" class="sr-only">Summary</label>
+      <input type="text" id="inputSummary" name="summary" class="form-control" placeholder="Summary">
+      <label for="inputimageUrl" class="sr-only">Name</label>
+      <input type="text" id="inputimageUrl" name="imageUrl" class="form-control" placeholder="Image Url">
+      <label for="inputCompany" class="sr-only">Name</label>
+      <input type="text" id="inputCompany" name="company" class="form-control" placeholder="Company">
+      <label for="inputJobTitle" class="sr-only">Name</label>
+      <input type="text" id="inputJobTitle" name="jobTitle" class="form-control" placeholder="Job Title">
+      <div class="checkbox">
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+        <% if (typeof(errorMessage) != 'undefined') { %>
+      <div class="error-message"><%= errorMessage %> <a href="/login">login</a></p></div>
+    <% } %>
+    </form>
+
+
+  </div>
