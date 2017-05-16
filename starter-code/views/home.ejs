@@ -1,0 +1,13 @@
+<h1>Welcome <%=user.name %></h1>
+<p>
+<a href="/profile/<%=user._id%>/edit">Edit profile</a>
+<p>
+<a href="/profile/<%=user._id%>">Show profile</a>
+<p>
+<a href="/authentication/logout">Log out</a>
+<h3>Posts</h3>
+<a href="/users/<%=user._id%>/posts/new">New post</a>
+<p>
+<% posts.forEach((post)=>{ %>
+  <%=post.name%>: <strong><%=post.post%></strong><p>
+<% }) %>
