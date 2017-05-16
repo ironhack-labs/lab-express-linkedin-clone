@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% if (typeof(currentUser) !== "undefined") { %>
+  <div id="profile">
+    <h2>Welcome <%= currentUser.name %></h2>
+  </div>
+  <p class="account-message">
+    <a href="/logout">Log out</a> | <a href="/posts">Posts</a>
+  </p>
+<% } %>
+
+<h2>Registered users</h2>
+<% if (typeof(users) !== "undefined") { %>
+
+<ul>
+  <% users.forEach((user)=>{%>
+    <li><a href="/profile/<%=user._id%>"><%=user.name%> Profile</a> | <a href="/users/<%=user._id%>/posts"><%=user.name%> Posts</a>
+  <%})%>
+</ul>
+<%}else{%>
+  <p>None</p>
+<%}%>
+<% if (typeof(currentUser) === "undefined") { %>
+  <p><a href="/login">Log in</a>  <a href="/signup">Sign up</a></p>
+<% } %>

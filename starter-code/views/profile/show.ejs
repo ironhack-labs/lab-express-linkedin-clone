@@ -1,0 +1,32 @@
+<% if (typeof(user) !== "undefined") { %>
+  <ul>
+    <li><%=user.name%></li>
+    <li><%=user.company%></li>
+    <li><%=user.jobTitle%></li>
+    <% if (typeof(user.email) !== "undefined") { %>
+      <li><%=user.email%></li>
+      <li><%=user.summary%></li>
+    <% } %>
+  </ul>
+<% } %>
+<% if (typeof(currentUser) !== "undefined") { %>
+  <% if(currentUser._id == user._id){ %>
+    <form action="/profile/<%= currentUser._id %>/edit" method="GET">
+      <button>Edit</button>
+    </form>
+  <% } %>
+<% } %>
+<% if (typeof(currentUser) !== "undefined") { %>
+  <% if (currentUser._id != user._id){ %>
+    <% if (button_text === 'Follow'){ %>
+      <form action="/profile/<%= user._id %>/follow" method="POST">
+        <button class="button blue"><%=button_text%></%%></button>
+      </form>
+    <% }else if(button_text === 'Unfollow'){ %>
+      <form action="/profile/<%= user._id %>/unfollow" method="POST">
+        <button class="button blue"><%=button_text%></%%></button>
+      </form>
+    <% } %>
+  <% } %>
+<% } %>
+<a href="/">Home</a>

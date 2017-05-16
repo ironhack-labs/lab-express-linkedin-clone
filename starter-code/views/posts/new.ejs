@@ -1,0 +1,16 @@
+<div id="container">
+  <h2>Hi @<%= user.name %>!</h2>
+
+  <form action="/users/<%=user._id%>/posts" method="POST" id="new-post">
+    <label for="postText">Post</label>
+    <input type="text" name="postText" maxlength="140"
+      placeholder="What's going on?" >
+    <button class="button blue fright">Post!</button>
+  </form>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+</div>
+
+<a href="/">Home</a>

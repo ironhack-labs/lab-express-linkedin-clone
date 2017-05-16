@@ -1,0 +1,23 @@
+<div id="profile">
+  <h2>@<%= username %></h2>
+</div>
+
+<div id="timeline">
+  <% if (timeline.length > 0) { %>
+    <% timeline.forEach(function(post) { %>
+      <div class="post-container">
+        <p><%= post.post %></p>
+        <p class="date">
+          <span><a href="/profile/<%= post.user_name %>">@<%= post.user_name %></a></span><br>
+          <%= moment(post.created_at).format("LL, LTS") %>
+        </p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="post-container no-tweets">
+      <p>The timeline is empty</p>
+    </div>
+  <% } %>
+</div>
+
+<a href="/">Home</a>
