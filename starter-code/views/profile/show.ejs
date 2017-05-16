@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="/stylesheets/style.css">
+	</head>
+	<body>
+		<div id="container">
+			<a href="/home">Home</a>
+			<% if (typeof auth != "undefined") {%>
+			<a href="/profile/<%= auth.username %>/">Profile</a>
+			<% if (auth.username == profileName) {%>
+			<a href="/profile/<%= auth.username %>/edit">Edit Profile</a>
+			<%}%>
+			<a href="/logout">Logout</a>
+			<%} else {%>
+			<a href="/signup/">Sign Up</a>
+			<a href="/login">Log In</a>
+			<%}%>
+
+			<ul>
+				<li><%= profileName %></li>
+				<li><%= email %></li>
+				<% if (typeof auth != "undefined" && auth.username == profileName) {%>
+				<li>Summary: <%= summary %></li>
+				<li><%= imageURL %></li>
+				<li>Company: <%= company %></li>
+				<li>Job Title: <%= jobTitle %></li>
+			</ul>
+
+			<form id="form" action="/posts/<%= profileName %>/new" method="POST">
+				<input type="text" id="status" name="status" placeholder="What're ya thinkin...">
+				<button>Post status update</button>
+			</form>
+
+			<h2>My Posts</h3>
+			<ul class="posts">
+				<% 	posts.forEach((post) => {
+					var datePosted = new Date(post.created_at);
+					var dateString = datePosted.toLocaleString();
+					%>
+					<li><%= dateString%>: <%= post.content %></li>
+				<%});%>
+			</ul>
+			<%}%>
+		</div>
+	</body>
+</html>
