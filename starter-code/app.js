@@ -5,10 +5,19 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 
-var index = require('./routes/index');
+const mongoose       = require("mongoose");
+const session        = require("express-session");
+// const MongoStore     = require("connect-mongo")(session);
+
+const app = express();
+
+
+var authControl = require('./routes/authControl');
 var users = require('./routes/users');
 
-var app = express();
+
+// Mongoose configuration
+mongoose.connect("mongodb://localhost/linked-in");
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +31,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+
+// Routes
+
+app.use('/', authControl);
 app.use('/users', users);
+
+// middleware
+// app.use(session({
+//   secret: "basic-auth-secret",
+//   cookie: { maxAge: 60000 },
+//   store: new MongoStore({
+//     mongooseConnection: mongoose.connection,
+//     ttl: 24 * 60 * 60 // 1 day
+//   })
+// }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
