@@ -1,14 +1,25 @@
+'use strict';
+/* jshint esversion: 6, node: true */
+
 var express      = require('express');
 var path         = require('path');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
+var mongoose     = require('mongoose');
+var session      = require('express-session');
+var MongoStore   = require('connect-mongo')(session);
+var expressLayouts = require('express-ejs-layouts');
 
 var app = express();
+
+// Controllers
+const authenticator = require('./routes/authenticator');
+const profileController = require('./routes/profileController');
+
+// connect to database
+mongoose.connect('mongodb://localhost/linkedin');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,9 +32,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'ant-linkedin',
+  cookie: {maxAge: 1000 * 60 * 5},
+  store:  new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 //one day
+  })
+}));
+app.use(expressLayouts);
+app.set('layout', 'layouts/main-layout');
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/profile', profileController);
+app.use('/', authenticator);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

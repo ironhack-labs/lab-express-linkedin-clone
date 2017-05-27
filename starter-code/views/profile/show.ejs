@@ -1,0 +1,27 @@
+<h2><%=user.userName%>'s Profile</h2>
+<% if ( userIsMe ) { %>
+    <a href="/profile/<%=user._id%>/edit">Edit your profile</a>
+    <% }                        %>
+
+        <ul>
+            <img src="<%=user.imageUrl%>" alt="">
+            <li>Name:
+                <%=user.name%>
+            </li>
+            <li>Job title:
+                <%=user.jobTitle%>
+            </li>
+            <li>Company:
+                <%=user.company%>
+            </li>
+            <% if( private) { %>
+                <li>Email:
+                    <%=user.email%>
+                </li>
+                <li>Summary:
+                    <p>
+                        <%=user.summary%>
+                    </p>
+                </li>
+                <% }                        %>
+        </ul>
