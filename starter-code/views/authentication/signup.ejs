@@ -1,0 +1,31 @@
+<h2>Signup</h2>
+<form action="/signup" method="POST" id="form-container">
+  <label for="username">Username</label><br>
+  <input type="text" name="username" placeholder="Name" require>
+  <br><br>
+  <label for="email">Email</label><br>
+  <input type="email" name="email" placeholder="Your email" require>
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password" placeholder="Your password" require>
+  <br><br>
+  <label for="summary">Summary</label><br>
+  ​<textarea rows="8" cols="40" name="summary" placeholder="Summary" require></textarea>
+  <br><br>
+  <label for="imagUrl">Image</label><br>
+  <input type="url" name="url" placeholder="Your image" require>
+  <br><br>
+  <label for="company">Company</label><br>
+  <input type="text" name="company" placeholder="Company" require>
+  <br><br>
+  <label for="jobTitle">Job title</label><br>
+  <input type="text" name="jobTitle" placeholder="Your job title" require>
+  <br><br>
+  <button>Create account</button>
+</form>
+<% if (typeof(errorMessage) !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+<p class="account-message">
+  Do you already have an account? <a href="/login">Login</a>
+</p>
