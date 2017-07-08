@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="stylesheets/style.css">
+  <title>Sign Up</title>
+</head>
+
+<body>
+  <form id="form" action="/auth/signup" method="POST">
+    <label for="username">Username</label><br>
+    <input type="text" name="username" placeholder="Your user name">
+    <br><br>
+    
+    <label for="password">Password</label><br>
+    <input type="password" name="password" placeholder="Your password">
+    <br><br>
+
+    <label for="email">Email</label>
+    <input type="text" name="email" placeholder="Your email">
+    <br><br>
+
+    <label for="summary">Summary</label>
+    <input type="text" name="summary" placeholder="Your summary">
+    <br><br>
+
+
+    <label for="imageUrl">Image</label>
+    <input type="text" name="imageUrl" placeholder="Your image profile">
+    <br><br>
+
+    <label for="jobTitle">Job</label>
+    <input type="text" name="jobTitle" placeholder="Your current job">
+
+    <% if (typeof(errorMessage) != "undefined") { %>
+      <div class="error-message">
+        <%= errorMessage %>
+      </div>
+      <% } %>
+        <button>Create account</button>
+  </form>
+</body>
+
+</html>
