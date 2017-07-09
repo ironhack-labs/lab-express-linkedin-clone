@@ -15,5 +15,18 @@
     <a href="/posts/<%=session._id%>/show">Mostrar tus posts</a>
     <br>
     <a href="/posts/<%=session._id%>/new">Crear un nuevo post</a>
+
+    <br>
+    <h3>Post de tus amigos</h3>
+    <ul>
+        <% posts.forEach((p) => { %>
+          <li>
+              <h4><%= p.title %></h4>
+            <p><%= p.content %></p>
+
+          </li>
+          <%  }) %>
+      </ul>
+
   </body>
 </html>

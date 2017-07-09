@@ -28,6 +28,15 @@ router.post('/:id/new', (req, res, next) => {
     });
   });
 });
+router.get('/:id/edit', (req, res, next) => {
+
+  Post.findById(req.params.id, (err, post) => {
+    if (err) { next(err); }
+    console.log(post);
+    res.render('posts/edit', { post: post, title: "Editar post" });
+  });
+});
+
 
 router.get('/:id/show', (req, res, next) => {
 
