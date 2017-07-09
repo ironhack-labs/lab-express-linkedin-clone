@@ -1,0 +1,16 @@
+<h1><%= title %></h1>
+  <a href="/">Atras</a>
+<ul>
+  <% user.posts.forEach((p) => { %>
+    <li>
+        <h3><%= p.title %></h3>
+      <p><%= p.content %></p>
+      <br>
+      <a href=""> Edit</a>
+      <form action="#" method="POST">
+      <button type="submit">Delete Post</button>
+      </form>
+
+    </li>
+    <%  }) %>
+</ul>
