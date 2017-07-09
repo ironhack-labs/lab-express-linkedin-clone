@@ -1,0 +1,6 @@
+<h1>Users list</h1>
+<ul>
+  <% for (i=0; i < users.length; i++) { %>
+    <li><a href="/users/profile/<%= users[i]._id %>"><%= users[i].username %></a></li>
+  <%} %>
+</ul>

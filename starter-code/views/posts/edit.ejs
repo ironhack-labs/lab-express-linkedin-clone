@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linkedin Clone</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+<h2>Editing your Post</h2>
+
+<a href="/">Go Back!</a>
+
+<form method="POST" action="/users/<%= post._id %>">
+
+
+  <div>
+    <label for="content">content: </label>
+    <textarea name="content" ><%= post.content %></textarea>
+  </div>
+
+  <input type="submit" name="Save this changes">
+</form>

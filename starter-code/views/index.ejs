@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Linkedin Clone</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <% if (typeof errorMessage !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<a href="/users">user's list</a>
+
+<% if (typeof session == "undefined") { %>
+  <h1>Welcome to Linkedin Clone</h1>
+  <a href="/auth/login">Get in here, log in!</a>
+<% }else{ %>
+  <h1>Welcome <%= session.username %></h1>
+  <p>Welcome to Linkedin Clone</p>
+  <p>You are logged in</p>
+
+  <form id="form" action="/users/<%= session._id%>/posts" method="POST">
+
+    <label for="post">New Post</label><br>
+    <textarea name="post" ></textarea>
+    <br><br>
+
+    <input type="submit" name="Create new post">
+  </form>
+
+  <a href="/users/<%= session._id %>/posts/new">Posts Feed here!!</a>
+
+  <a href="auth/logout">Already leaving :( , come back soon. (logout)</a>
+<% } %>
+
   </body>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Linkedin Clone</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+
+<h2>Editing <%= user.username %> profile</h2>
+
+<a href="/">Go Back!</a>
+
+<form method="POST" action="/users/profile/<%= user._id %>">
+
+
+  <div>
+    <label for="email">email: </label>
+    <input type="text" name="email" value="<%= user.email %>">
+  </div>
+
+  <div>
+    <label for="summary">summary: </label>
+    <textarea type="text" name="summary" ><%= user.summary %></textarea>
+  </div>
+
+  <div>
+    <label for="imageUrl">profile image: </label>
+    <input type="text" name="imageUrl" value="<%= user.imageUrl %>">
+  </div>
+
+  <div>
+    <label for="company">company: </label>
+    <input type="text" name="company" value="<%= user.company %>">
+  </div>
+
+  <div>
+    <label for="jobTitle">job title:</label>
+    <input type="text" name="jobTitle" value="<%= user.jobTitle %>">
+  </div>
+
+  <input type="submit" name="Save this changes">
+</form>
