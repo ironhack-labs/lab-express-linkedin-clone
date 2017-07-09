@@ -8,6 +8,11 @@ const User           = require("../models/user");
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
 
+// ¿hace falta requerir express-session y connect-mongo aquí????
+
+
+//Routes ---------------------
+
 authController.get("/signup", (req, res, next) => {
   res.render("auth/signup"); // borrar comentario cuando la ruta este comprobada
 });
@@ -56,9 +61,52 @@ authController.post("/signup", (req, res, next) => {
         });
       } else {
         // User has been created...now what?
+        res.redirect("/login");
       }
     });
   });
 });
+
+
+
+//login authentication-----------------
+
+authController.get("/login", (req, res, next) => {
+  res.render("auth/login");
+});
+
+authController.post("/login", (req, res, next) => {
+  var email = req.body.email;
+  var password = req.body.password;
+
+  if (email === "" || password === "") {
+    res.render("auth/login", {
+      errorMessage: "Indicate an email and a password to log in"
+    });
+    return;
+  }
+
+  User.findOne({ "email": email },
+    "_id email password following",
+    (err, user) => {
+      if (err || !user) {
+        res.render("auth/login", {
+          errorMessage: "The email doesn't exist"
+        });
+        return;
+      } else {
+        if (bcrypt.compareSync(password, user.password)) {
+          req.session.currentUser = user;
+          res.redirect("home");
+        } else {
+          res.render("auth/login", {
+            errorMessage: "Incorrect password"
+          });
+        }
+      }
+  });
+});
+
+
 
 module.exports = authController;
