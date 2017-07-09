@@ -1,0 +1,46 @@
+<h2>Signup</h2>
+
+<form action="/signup" method="POST" id="form-container">
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="Your username">
+  <br><br>
+
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Your password">
+  <br><br>
+
+  <label for="email">E-mail</label>
+  <input type="text" name="email" placeholder="yourEmail@email.com">
+  <br><br>
+
+  <label for="summary">Summary</label>
+  <input type="text" name="email" placeholder="Your Summary">
+  <br><br>
+
+  <label for="imageUrl">Add Image Url</label>
+  <input type="text" name="imageUrl" placeholder="http://yourimages.com/img.png">
+  <br><br>
+
+  <label for="company">Company</label>
+  <input type="text" name="company" placeholder="Your Company">
+  <br><br>
+
+  <label for="jobTitle">Jobtitle</label>
+  <input type="text" name="jobTitle" placeholder="Your job title">
+  <br><br>
+
+  <button>Create account</button>
+  <br>
+  <br>
+
+  <% if (typeof(errorMessage) !== "undefined") { %>
+
+     <%= errorMessage %>
+   <% } %>
+   <% if (typeof(createdUser) !== "undefined") { %>
+       <%= createdUser %>
+     <% } %>
+     <br>
+     <br>
+     <a href="/"> Return to the homepage</a>
+</form>
