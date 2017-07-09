@@ -1,0 +1,10 @@
+<h1>Post Feed</h1>
+
+<a href="/"> Go back!</a>
+<ul>
+  <% for (i=0; i < posts.length; i++) { %>
+    <span>Creator: <%= posts[i]._creator %></span>
+    <p><%= posts[i].content %></p>
+    <a href="/users/<%= posts[i]._id %>/edit">edit this post!</a>
+  <%} %>
+</ul>

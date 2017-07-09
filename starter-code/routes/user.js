@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 router.get('/', function(req, res, next) {
   User.find({}, (err, users) => {
@@ -70,7 +71,8 @@ console.log(req.session.currentUser._id);
         }
         res.render('profile/show', {
           user: user,
-          profile: true
+          profile: true,
+          session: req.session.currentUser
         });
       });
   } else {
@@ -81,11 +83,80 @@ console.log(req.session.currentUser._id);
         }
         res.render('profile/show', {
           user: user,
-          profile: false
+          profile: false,
+          session: req.session.currentUser
         });
       });
   }
+});
 
+//FEED
+
+router.get('/:userId/posts/new', function(req, res, next) {
+  Post.find({}, (err, posts) => {
+    console.log(posts);
+    if (err) {
+        next();
+        return err;
+      } else {
+        res.render('posts/new', {
+          posts: posts
+        });
+      }
+  });
+});
+
+router.post('/:userId/posts', function(req, res, next) {
+  var username;
+  User.findById(req.params.userId, (err, user) => {
+      if(err){
+        next();
+        return err;
+      }
+      username = user.username;
+      console.log(username);
+
+      const newPost = Post({
+        content: req.body.post,
+        _creator: username
+      });
+
+      newPost.save((err) => {
+        if (err) {
+          res.redirect("/", {
+            errorMessage: "Something went wrong"
+          });
+        } else {
+          console.log(`new post created`);
+          res.redirect(`/users/:${req.params.userId}/posts/new`);
+        }
+      });
+    });
+});
+
+router.get('/:postId/edit', function(req, res, next) {
+  Post.findById(req.params.postId, (err, post) => {
+    console.log(post);
+    if (err) {
+        next();
+        return err;
+      } else {
+        res.render('posts/edit', {
+          post: post
+        });
+      }
+  });
+});
+
+router.post('/:postId', function(req, res, next) {
+    Post.findByIdAndUpdate(req.params.postId, {content: req.body.content}, (err, user) => {
+      console.log(user);
+      if(err){
+        next();
+        return err;
+      }
+      res.redirect(`/users/${req.session.currentUser._id}/posts/new`);
+    });
 });
 
 module.exports = router;

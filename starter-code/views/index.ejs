@@ -16,6 +16,16 @@
   <h1>Welcome <%= session.username %></h1>
   <p>Welcome to Linkedin Clone</p>
   <p>You are logged in</p>
+
+  <form id="form" action="/users/<%= session._id%>/posts" method="POST">
+
+    <label for="post">New Post</label><br>
+    <textarea name="post" ></textarea>
+    <br><br>
+
+    <input type="submit" name="Create new post">
+  </form>
+
   <a href="auth/logout">Already leaving :( , come back soon. (logout)</a>
 <% } %>
 
