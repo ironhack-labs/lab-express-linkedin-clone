@@ -33,44 +33,26 @@ router.get('/:id/edit', function(req, res, next) {
   }
 });
 
-router.post('/:id/edit', function(req, res, next) {
+router.post('/:id', function(req, res, next) {
   console.log("hola");
-  let newPassword = req.body.newPassword;
-  let salt = bcrypt.genSaltSync(bcryptSalt);
-  let hashNewPass = bcrypt.hashSync(newPassword, salt);
-  let oldPassword = req.body.password;
-  let actualPassword;
-  let hashOld = bcrypt.hashSync(oldPassword, salt);
-  User.findById(req.params.id, (err,u) => {
-    actualPassword = u.password;
-  });
-  if (hashOld === actualPassword) {
-    let {
-      name,
-      email,
-      job,
-      company,
-      summary,
-      imageUrl
-    } = req.body;
+
     let updates = {
-      name,
-      email,
-      job,
-      company,
-      summary,
-      imageUrl,
-      password: hashNewPass
+      name: req.body.name,
+      email: req.body.email,
+      job: req.body.job,
+      company: req.body.company,
+      summary: req.body.summary,
+      imageUrl: req.body.imageUrl
     };
-    User.findByIdAndUpdate(req.params.id, updates, (err, u) => {
-      if (err) {
-        console.log(err);
+    let id = req.params.id;
+    console.log(req.params);
+    User.findByIdAndUpdate(req.params.id, updates, (err, p) => {
+      if(err){
+        console.log("fallo");
+
       }
       res.redirect(`/`);
     });
-  } else {
-    res.redirect('/');
-  }
 });
 
 router.get('/:id', function(req, res, next) {

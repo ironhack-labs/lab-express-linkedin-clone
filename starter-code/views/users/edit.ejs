@@ -1,5 +1,5 @@
 <h2> <% title %></h2>
-<form class="" action="/" method="post">
+<form class="" action="/users/<%=user._id%>" method="post">
 
   <label for="name">Name</label><br>
   <input type="text" name="name" value="<%= user.name %>">
@@ -7,14 +7,8 @@
   <br><br>
   <label for="username">Username</label><br>
   <input type="text" name="username" value="<%= user.username%> " readonly>
+  <br>
 
-  <br><br>
-  <label for="password">Old Password</label><br>
-  <input type="password" name="password" value="">
-  <br><br>
-  <label for="password">New Password</label><br>
-  <input type="password" name="newPassword" value="">
-  <br><br>
   <label for="email">Email</label><br>
   <input type="email" name="email" value="<%= user.email%>">
   <br><br>
