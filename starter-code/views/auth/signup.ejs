@@ -1,0 +1,22 @@
+<form id="form" action="/auth/signup" method="POST">
+  <label for="username">Username</label><br>
+  <input type="text" name="username"
+    placeholder="AnakinSkywalker">
+
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password"
+    placeholder="DeathStar">
+  <br><br>
+
+  <label for="email">Email</label><br>
+  <input type="text" name="email"
+    placeholder="imyourfather@example.com">
+
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+
+  <input type="submit" name="Create account">
+</form>

@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Linkedin Clone</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <% if (typeof errorMessage !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<% if (typeof session == "undefined") { %>
+  <h1>Welcome to Linkedin Clone</h1>
+  <a href="/auth/login">Get in here, log in!</a>
+<% }else{ %>
+  <h1>Welcome <%= session.username %></h1>
+  <p>Welcome to Linkedin Clone</p>
+  <p>You are logged in</p>
+  <a href="auth/logout">Already leaving :( , come back soon. (logout)</a>
+<% } %>
   </body>
 </html>
