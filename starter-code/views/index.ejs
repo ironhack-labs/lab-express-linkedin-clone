@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%=  title%></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1>Welcome <%= session.name %></h1>
+    <a class="auth-link" href="/auth/logout">Logout</a>
+    <br>
+    <a class="auth-link" href="/users/">Ver perfiles de usuarios</a>
+    <a class="auth-link" href="/users/<%=session._id%>">Tu perfil</a>
   </body>
 </html>

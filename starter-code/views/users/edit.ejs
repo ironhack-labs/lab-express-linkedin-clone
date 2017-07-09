@@ -1,0 +1,39 @@
+<h2> <% title %></h2>
+<form class="" action="/" method="post">
+
+  <label for="name">Name</label><br>
+  <input type="text" name="name" value="<%= user.name %>">
+
+  <br><br>
+  <label for="username">Username</label><br>
+  <input type="text" name="username" value="<%= user.username%> " readonly>
+
+  <br><br>
+  <label for="password">Old Password</label><br>
+  <input type="password" name="password" value="">
+  <br><br>
+  <label for="password">New Password</label><br>
+  <input type="password" name="newPassword" value="">
+  <br><br>
+  <label for="email">Email</label><br>
+  <input type="email" name="email" value="<%= user.email%>">
+  <br><br>
+  <label for="job">Job</label><br>
+  <input type="text" name="job" value="<%= user.jobTitle%>">
+  <br><br>
+  <label for="job">Company</label><br>
+  <input type="text" name="company" value="<%= user.company%> ">
+  <br><br>
+  <label for="job">Summary</label><br>
+  <input type="text" name="summary" value="<%=user.summary%>">
+  <br><br>
+  <label for="job">Image url</label><br>
+  <input type="text" name="imageUrl" value=" <%=user.imageUrl%>">
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message">
+      <%= errorMessage %>
+    </div>
+    <% } %>
+
+      <button>Edit and Save</button>
+</form>

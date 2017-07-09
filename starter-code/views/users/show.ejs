@@ -1,0 +1,18 @@
+<% if (typeof session == "undefined") { %>
+  <h2><%= user.username %></h2>
+  <img src="<%user.imageUrl %>" alt="user image">
+  <p>name: <%= user.name %></p>
+  <p>Job: <%= user.jobTitle %></p>
+  <p>Company: <%= user.company %></p>
+<% }else{ %>
+  <h2><%= user.username %></h2>
+  <img src="<%user.imageUrl %>" alt="user image">
+  <p>name: <%= user.name %></p>
+  <p>email: <%= user.email %></p>
+  <p>Job: <%= user.jobTitle %></p>
+  <p>Company: <%= user.company %></p>
+  <p>summary: <%= user.summary %></p>
+
+  <a href="/users/<%=user._id%>/edit">Edit your profile</a>
+
+<% } %>
