@@ -8,23 +8,25 @@ const User           = require("../models/user");
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
 
-// ¿hace falta requerir express-session y connect-mongo aquí????
-
 
 //Routes ---------------------
 
 authController.get("/signup", (req, res, next) => {
-  res.render("auth/signup"); // borrar comentario cuando la ruta este comprobada
+  if(req.session.currentUser !== undefined) {
+    res.redirect('/');
+  }else {
+    res.render("auth/signup");
+  }
 });
 
 authController.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
-  const summary = req.body.summary;
-  const company = req.body.company;
-  const jobTittle = req.body.jobTittle;
-  const imageUrl = req.body.imageUrl;
+  // const summary = req.body.summary;
+  // const company = req.body.company;
+  // const jobTittle = req.body.jobTittle;
+  // const imageUrl = req.body.imageUrl;
 
   if (username === "" || password === "") {
     res.render("auth/signup", {
@@ -48,10 +50,10 @@ authController.post("/signup", (req, res, next) => {
       username: username,
       password: hashPass,
       email: email,
-      summary: summary,
-      company: company,
-      jobTittle: jobTittle,
-      imageUrl: imageUrl,
+      summary: "",
+      company: "",
+      jobTittle: "",
+      imageUrl: "",
     });
 
     newUser.save((err) => {
@@ -61,7 +63,7 @@ authController.post("/signup", (req, res, next) => {
         });
       } else {
         // User has been created...now what?
-        res.redirect("/login");
+        res.redirect("/");
       }
     });
   });
@@ -72,12 +74,16 @@ authController.post("/signup", (req, res, next) => {
 //login authentication-----------------
 
 authController.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  if(req.session.currentUser !== undefined) {
+    res.redirect('/');
+  } else {
+    res.render("auth/login");
+  }
 });
 
 authController.post("/login", (req, res, next) => {
-  var email = req.body.email;
-  var password = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
   if (email === "" || password === "") {
     res.render("auth/login", {
@@ -87,7 +93,7 @@ authController.post("/login", (req, res, next) => {
   }
 
   User.findOne({ "email": email },
-    "_id email password following",
+    "_id email password username following",
     (err, user) => {
       if (err || !user) {
         res.render("auth/login", {
@@ -108,13 +114,6 @@ authController.post("/login", (req, res, next) => {
 });
 
 
-//redirect to login from root ----------
-
-authController.get("/", (req, res) => {
-  res.redirect("/login");
-});
-
-
 //logout route -------------------
 
 authController.get("/logout", (req, res, next) => {
@@ -124,7 +123,7 @@ authController.get("/logout", (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/login");
+      res.redirect("auth/login");
     }
   });
 });
