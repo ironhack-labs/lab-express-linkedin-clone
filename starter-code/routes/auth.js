@@ -10,14 +10,12 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.get('/signup', function(req, res, next) {
-  console.log('HOLA, ENTRO EN SIGNUP');
   res.render('auth/signup', {
     title: 'Signup Linkedin'
   });
 });
 
 router.post('/signup', function(req, res, next) {
-  console.log(req.body);
   if (req.body.email === "" || req.body.password === "" || req.body.name === "") {
     return res.render('auth/signup', {
       title: 'Signup Linkedin',
@@ -34,7 +32,6 @@ router.post('/signup', function(req, res, next) {
         errorMessage: "The email already exists"
       });
     }
-    console.log(req.body);
     let email    = req.body.email;
     let name     = req.body.name;
     let password = req.body.password;
@@ -58,7 +55,6 @@ router.post('/signup', function(req, res, next) {
           errorMessage: "Something was wrong"
         });
       } else {
-        console.log("YEAHH USUARIO REGISTRADO");
         res.redirect("/");
       }
     });
@@ -70,10 +66,7 @@ router.get('/login', function(req, res, next) {
   // => Redirect to the home page
   //  Else
   // => Show log in page
-  console.log('HOLA, ENTRO EN LOGIN');
   user = req.session.currentUser;
-
-  console.log(user);
   if (user !== undefined) {
     res.redirect("/");
     } else {
@@ -109,10 +102,7 @@ router.post('/login', function(req, res, next) {
       });
     } else {
       if (bcrypt.compareSync(password, user.password)) {
-        console.log(req.session.currentUser);
         req.session.currentUser = user;
-        console.log("YEAHHH ME LOGUEO");
-        console.log(req.session.currentUser);
         return res.redirect("/auth/login");
       } else {
         return res.render("auth/login", {
@@ -125,10 +115,8 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-  console.log('HOLA, ENTRO EN LOGOUT');
-  // End user session
-  res.render('home', {
-    title: 'Express'
+  req.session.destroy((err) => {
+    res.redirect("/");
   });
 });
 module.exports = router;
