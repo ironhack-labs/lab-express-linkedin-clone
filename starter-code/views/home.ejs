@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <h2>Welcome <%= currentUser.username %></h2>
+
+    <% if (typeof session !== "undefined") { %>
+      <a class="auth-link" href="/auth/login">Login</a>
+    <% }else{ %>
+      <a class="auth-link" href="/auth/logout">Logout</a>
+    <% } %>
+  </body>
+</html>
