@@ -1,0 +1,15 @@
+
+<h1><%= title %></h1>
+
+<% if (typeof errorMessage !== "undefined") { %>
+<div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<% if (typeof session == "undefined") { %>
+<h1>Welcome to Linkedin Clone</h1>
+<a href="/login">Login to Linkedin!</a>
+<% }else{ %>
+<h1>Welcome <%= session.username %></h1>
+<p>You are logged to Linkedin</p>
+<a href="/logout">Log out</a>
+<% } %>
