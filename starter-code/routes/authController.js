@@ -19,6 +19,7 @@ authController.post("/signup", (req, res, next) => {
   const summary = req.body.summary;
   const company = req.body.company;
   const jobTittle = req.body.jobTittle;
+  const imageUrl = req.body.imageUrl;
 
   if (username === "" || password === "") {
     res.render("auth/signup", {
@@ -45,6 +46,7 @@ authController.post("/signup", (req, res, next) => {
       summary: summary,
       company: company,
       jobTittle: jobTittle,
+      imageUrl: imageUrl,
     });
 
     newUser.save((err) => {
