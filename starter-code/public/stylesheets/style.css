@@ -1,17 +1,35 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Verdana;
 }
 
 a {
   color: #00B7FF;
 }
+h2{
+  color: lightBlue;
+  text-align: center;
+}
+.error-message{
+  margin-top: 10px;
+  color: red;
+  font-style: italic;
+}
+#form-container{
+  display: inline-block;
+  text-align: center;
+  align-items: center;
+}
 
-.error-message {
-  background: #F02B63;
-  box-sizing: border-box;
-  color: #fff;
-  margin: 20px auto;
-  padding: 20px;
+#form-container label {
+  color: #666;
+  display: inline;
+  margin-bottom: 10px;
+  text-align: center;
   width: 100%;
+  align-items: center;
+}
+#form-container {
+  margin: 30px auto;
+  width: 380px;
 }
