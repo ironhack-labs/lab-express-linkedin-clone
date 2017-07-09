@@ -1,0 +1,14 @@
+<h1><%= title %></h1>
+<form action="/posts/<%=post._id%>/edit" method="POST">
+  <label for="title">Titulo</label>
+  <input type="text" name="title" id="title" value="<%=post.title%>">
+  <br>
+  <br>
+  <label for="content">Content</label>
+  <textarea name="content" rows="3" cols="80" value="<%=post.content%>"></textarea>
+  <br>
+  <br>
+  <button type="submit">Submit Post</button>
+  <br>
+  <a href="/posts/<%=user._id%>/show">Atras</a>
+</form>
