@@ -1,0 +1,30 @@
+<h1> <%= user.username %> Details</h1>
+
+<a href="/">Go Back!</a>
+
+<% if (session._id == user._id) { %>
+  <img src="<%= user.imageUrl %>" alt="">
+  <h2><%= user.username %></h2>
+  <h2><%= user.jobTitle %></h2>
+  <h2><%= user.company %></h2>
+  <h2><%= user.email %></h2>
+  <p>
+    <%= user.summary %>
+  </p>
+
+  <a href="/users/profile/<%= user._id %>/edit">Edit your profile!</a>
+<% }else if(profile === true){ %>
+  <img src="<%= user.imageUrl %>" alt="">
+  <h2><%= user.username %></h2>
+  <h2><%= user.jobTitle %></h2>
+  <h2><%= user.company %></h2>
+  <h2><%= user.email %></h2>
+  <p>
+    <%= user.summary %>
+  </p>
+<% } else {%>
+  <img src="<%= user.imageUrl %>" alt="">
+  <h2><%= user.username %></h2>
+  <h2><%= user.jobTitle %></h2>
+  <h2><%= user.company %></h2>
+  <% } %>

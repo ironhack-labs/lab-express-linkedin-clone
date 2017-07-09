@@ -5,7 +5,12 @@ const User = require('../models/User');
 const router = express.Router();
 
 router.get('/signup', function(req, res, next) {
-  res.render('auth/signup');
+  if (req.session.currentUser !== undefined) {
+    res.redirect('/');
+  } else {
+    res.render('auth/signup');
+  }
+
 });
 
 router.post('/signup', function(req, res, next) {
@@ -34,7 +39,11 @@ router.post('/signup', function(req, res, next) {
     const newUser = User({
       username: username,
       password: hashPass,
-      email: email
+      email: email,
+      summary: "",
+      imageUrl: "",
+      company: "",
+      jobTitle: ""
     });
 
     newUser.save((err) => {
@@ -48,35 +57,41 @@ router.post('/signup', function(req, res, next) {
       }
     });
   });
-
 });
 
 router.get('/login', function(req, res, next) {
+  console.log(req.session);
+  if (req.session.currentUser !== undefined) {
+    res.redirect('/');
+  } else {
     res.render('auth/login');
+  }
 });
 
 router.post('/login', function(req, res, next) {
   const username = req.body.username;
-    const password = req.body.password;
+  const password = req.body.password;
 
-    if (username === "" || password === "") {
-      return res.render("auth/login", {
-        errorMessage: "Indicate a username and a password to sign up"
-      });
-    }
+  if (username === "" || password === "") {
+    return res.render("auth/login", {
+      errorMessage: "Indicate a username and a password to sign up"
+    });
+  }
 
-    User.findOne({ "username": username }, (err, user) => {
-    if(err){
+  User.findOne({
+    "username": username
+  }, (err, user) => {
+    if (err) {
       return res.render("auth/login", {
         errorMessage: err
       });
-    }else{
+    } else {
       console.log(user);
-      if(bcrypt.compareSync(password,user.password)){
+      if (bcrypt.compareSync(password, user.password)) {
         console.log("correct Password");
         req.session.currentUser = user;
         return res.redirect("/");
-      }else{
+      } else {
         console.log("wrong Password");
         return res.render("auth/login", {
           errorMessage: "wrong password, try again"
