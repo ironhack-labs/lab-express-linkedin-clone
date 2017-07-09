@@ -9,6 +9,8 @@
   <div class="error-message"><%= errorMessage %></div>
 <% } %>
 
+<a href="/users">user's list</a>
+
 <% if (typeof session == "undefined") { %>
   <h1>Welcome to Linkedin Clone</h1>
   <a href="/auth/login">Get in here, log in!</a>
@@ -26,9 +28,10 @@
     <input type="submit" name="Create new post">
   </form>
 
+  <a href="/users/<%= session._id %>/posts/new">Posts Feed here!!</a>
+
   <a href="auth/logout">Already leaving :( , come back soon. (logout)</a>
 <% } %>
 
-<a href="/users">user's list</a>
   </body>
 </html>
