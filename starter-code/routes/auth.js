@@ -8,7 +8,6 @@ const bcryptSalt = 10;
 const router = express.Router();
 
 
-/* GET auth route login form */
 router.get('/signup', function(req, res, next) {
   res.render('signup', withTitle({}, 'SignupFormulario'));
 });
@@ -33,12 +32,12 @@ router.post('/signup', function(req, res, next) {
         errorMessage: "The username already exists"
       }));
     }
-    var username = req.body.username;
-    var password = req.body.password;
-    var salt = bcrypt.genSaltSync(bcryptSalt);
-    var hashPass = bcrypt.hashSync(password, salt);
+    const username = req.body.username;
+    const password = req.body.password;
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
 
-    var newUser = User({
+    let newUser = User({
       username:req.body.username,
       password: hashPass
     });
@@ -90,7 +89,7 @@ router.post('/login', function(req, res, next) {
       }else{
         console.log("Password incorrecto");
         return res.render("login", withTitle({
-          errorMessage: "Oye tio, pon bien el password"
+          errorMessage: "Pon bien el password"
         },'Login Formulario'));
       }
     }
