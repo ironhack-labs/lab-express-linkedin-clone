@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<% if (typeof session == "undefined") { %>
+  <a class="authentication-link" href="/authentication/signup">Sign Up</a>
+  <a class="authentication-link" href="/authentication/login">Log in</a>
+  <% } else { %>
+    <p>Welcome</p>
+    <a class="authentication-link" href="/authentication/logout">Log out</a>
+    <% } %>
+
+
+
+
+
+<!-- <a class="authentication-link" href="/authentication/signup">Sign Up</a>
+
+<% if (typeof session == "undefined") { %>
+  <a class="authentication-link" href="/authentication/login">Log in</a>
+  <% } else { %>
+    <a class="authentication-link" href="/authentication/logout">Log out</a>
+    <% } %>
+      ication/logout">Log out</a>
+      <% } %> -->
