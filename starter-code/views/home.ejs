@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1> Welcome <%= userName %></h1>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+  <div id="container">
+
+    <h1> Welcome <%= username %></h1>
+
+    <div class="viewContacts">
+      <a href="/users">View contacts</a>
+    </div>
+
+    <br>
+
+    <div class="editProfile">
+      <a href="/profile/<%= id %> ">Edit your profile</a>
+    </div>
+
+    <br>
+
+    <div class="logout">
+      <a href="/logout">Logout</a>
+    </div>
+
+
+
+
+  </div>
+</body>
+
 </html>

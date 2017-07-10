@@ -10,12 +10,13 @@ const index = require('./routes/index');
 const session    = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const siteRoutes = require('./routes/site-routes');
+const user = require('./routes/users');
 //const users = require('./routes/users');
 
 // Controllers
 
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/basic-auth");
+mongoose.connect("mongodb://localhost/linkedin-clone");
 
 // Middlewares configuration
 app.use(logger("dev"));
@@ -34,6 +35,7 @@ app.use(session({
   })
 }));
 
+/*
 siteRoutes.use((req, res, next) => {
   if (req.session.currentUser) {
     next();
@@ -42,20 +44,21 @@ siteRoutes.use((req, res, next) => {
   }
 });
 
-siteRoutes.get("/main", (req, res, next) => {
-  res.render("main");
+siteRoutes.get("/", (req, res, next) => {
+  res.render("home");
 });
 
-siteRoutes.get("/private", (req, res, next) => {
-  res.render("private");
-});
+*/
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', authRoutes);
-app.use('/', siteRoutes);
 app.use('/', index);
+app.use('/', authRoutes);
+app.use('/', user);
+app.use('/', siteRoutes);
+
 
 
 // Authentication
