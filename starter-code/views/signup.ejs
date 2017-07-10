@@ -1,0 +1,18 @@
+<form id="form" action="/authentication/signup" method="POST">
+  <label for="username">Name</label><br>
+  <input type="text" name="username" placeholder="Leia Organa">
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password" placeholder="2187">
+  <br><br>
+  <label for="email">E-mail</label><br>
+  <input type="text" name="email" placeholder="generalorgana@resistance.com">
+  <br><br>
+  <button>Create account</button>
+  <br><br>
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message">
+      <%= errorMessage %>
+    </div>
+    <% } %>
+</form>
