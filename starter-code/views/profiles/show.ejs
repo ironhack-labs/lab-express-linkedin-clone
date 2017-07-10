@@ -1,0 +1,13 @@
+<h2>View Profile</h2>
+<p>Name: <%= user.username %></p>
+<p>Full Name: <%= user.name %></p>
+<% if (currentUser !== undefined) { %>
+<p>Summary: <%= user.summary %></p>
+<p>Image: <img src="<%= user.imageUrl %>" /></p>
+<p>Job Title: <%= user.jobTitle %></p>
+<% if (currentUser.username === user.username) { %>
+<button id="editUser" onclick="window.location='/<%= user._id %>/edit'">Edit Information</button>
+<% } %>
+<% } else { %>
+<b>There is more information for logged users.</b>
+<% } %>
