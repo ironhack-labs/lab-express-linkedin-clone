@@ -7,5 +7,13 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <a class="auth-link" href="/auth/signup">Crea tu cuenta aqui</a>
+  <% if (typeof session == "undefined") { %>
+    <a class="auth-link" href="/auth/login">Haz login</a>
+    <% }else{ %>
+    <a class="auth-link" href="/auth/logout">Logout</a>
+ <% } %>
+
   </body>
 </html>

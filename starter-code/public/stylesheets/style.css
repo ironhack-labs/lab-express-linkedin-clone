@@ -5,4 +5,15 @@ body {
 
 a {
   color: #00B7FF;
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+#form {
+  margin: 30px auto;
+  width: 380px;
+}
+label {
+  border: 1px solid red;
 }
