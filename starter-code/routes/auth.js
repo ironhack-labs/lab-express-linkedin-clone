@@ -1,17 +1,12 @@
 /*jshint esversion: 6 */
 
-var express = require('express');
-var User = require('../models/User');
-var bcrypt = require('bcrypt');
+const express = require('express');
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
 
-const bcryptSalt     = 10;
-var router = express.Router();
+const bcryptSalt = 10;
+const router = express.Router();
 
-
-function withTitle(c, title) {
-  c.title = title || 'Titulo no definido';
-  return c;
-}
 
 /* GET auth route login form */
 router.get('/signup', function(req, res, next) {
@@ -87,8 +82,6 @@ router.post('/login', function(req, res, next) {
       },'Login Formulario'));
     }else{
       console.log(user);
-      // Comprobamos que el hash del password del objeto
-      //  user sea igual al hash que recibo en el POST
       if(bcrypt.compareSync(password,user.password)){
         // BIEN! El password es correcto
         console.log("Password correcto");
