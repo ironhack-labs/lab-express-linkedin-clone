@@ -8,7 +8,7 @@ const UserSchema = new Schema({
   summary: String,
   imageUrl: String,
   company: String,
-  jobTittle: String
+  jobTitle: String
 }, {
   timestamps: {
     createdAt: "created_at",

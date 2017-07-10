@@ -14,7 +14,6 @@ const MongoStore = require("connect-mongo")(session); //añadido por marc
 const index = require('./routes/index');
 const users = require('./routes/users');
 const authController = require('./routes/authController');// añadido por marc
-const siteRoutes = require('./routes/siteRoutes');// añadido por marc
 
 // Mongoose configuration (añadido por marc)
 mongoose.connect("mongodb://localhost/linkedin-exercice");
@@ -46,7 +45,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/', authController); // añadido por marc
-app.use('/', siteRoutes); // añadido por marc
 app.use('/users', users);
 
 //descomentar esta seccion y borrar este comentario cuando este funcionando correctament todo!!!!!!!

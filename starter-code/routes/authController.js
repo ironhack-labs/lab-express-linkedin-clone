@@ -2,7 +2,7 @@ const express        = require("express");
 const authController = express.Router();
 
 // User model
-const User           = require("../models/user");
+const User           = require("../models/User");
 
 // Bcrypt to encrypt passwords
 const bcrypt         = require("bcrypt");
@@ -25,7 +25,7 @@ authController.post("/signup", (req, res, next) => {
   const email = req.body.email;
   // const summary = req.body.summary;
   // const company = req.body.company;
-  // const jobTittle = req.body.jobTittle;
+  // const jobTitle = req.body.jobTitle;
   // const imageUrl = req.body.imageUrl;
 
   if (username === "" || password === "") {
@@ -51,9 +51,9 @@ authController.post("/signup", (req, res, next) => {
       password: hashPass,
       email: email,
       summary: "",
-      company: "",
-      jobTittle: "",
       imageUrl: "",
+      company: "",
+      jobTitle: "",
     });
 
     newUser.save((err) => {
@@ -116,17 +116,12 @@ authController.post("/login", (req, res, next) => {
 
 //logout route -------------------
 
-authController.get("/logout", (req, res, next) => {
-  if (!req.session.currentUser) { res.redirect("/"); return; }
-
-  req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("auth/login");
-    }
-  });
-});
+authController.get('/logout', function(req, res, next) {
+ req.session.destroy((err) => {
+ res.render("auth/login");
+ });
+ console.log(req.session);
+ });
 
 
 module.exports = authController;
