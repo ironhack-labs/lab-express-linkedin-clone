@@ -1,2 +1,10 @@
-<h1>Welcome <%= data.username %>!</h1>
-<a href="/profile/<%= data._id%>/edit">Edit your profile</a>
+<h1>Welcome <%= user.username %>!</h1>
+<a href="/profile/<%= user._id %>/edit">Edit your profile</a>
+<a href="/users/<%= user._id %>/posts/new">Create a new post</a>
+<br></br>
+<h2>Your posts:</h2>
+<ul>
+  <% posts.forEach( (post) => { %>
+    <li> <%= post.content %> </li>
+  <% }) %>
+</ul>

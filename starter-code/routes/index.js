@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 function authCheck(req, res, next) {
   if(req.session.currentUser) {
@@ -11,8 +12,13 @@ function authCheck(req, res, next) {
 }
 
 router.get('/', authCheck, (req, res, next) => {
-  const data = req.session.currentUser;
-  res.render('index', { data });
+
+  Post.find({ _creator: req.session.currentUser._id }, (err, posts) => {
+    if (err) { return next(err) }
+
+    res.render('index', { posts, user: req.session.currentUser, });
+  });
+
 });
 
 router.get('/logout', (req, res, next) => {
@@ -36,7 +42,6 @@ router.get('/profile/:userId', (req, res, next) => {
     };
 
     if(!req.session.currentUser || req.params.userId !== req.session.currentUser._id) {
-      console.log(data);
       res.render('profiles/profile-public',  { data });
       return;
     }
@@ -53,6 +58,11 @@ router.get('/profile/:userId/edit', (req, res, next) => {
     };
     res.render('profiles/profile-private', { data });
   });
+});
+
+router.get('/users/:userId/posts/new', (req, res, next) => {
+  const data = { _id: req.params.userId }
+  res.render('posts/new', {data});
 });
 
 router.post('/profile/:userId', authCheck, (req, res, next) => {
@@ -76,6 +86,24 @@ router.post('/profile/:userId', authCheck, (req, res, next) => {
   User.update({ _id: req.params.userId}, profileInfo, (err) => {
     if (err) {
       next(err);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
+
+router.post('/users/:userId/posts', (req, res, next) => {
+  const content = req.body.content;
+  const _creator = req.params.userId;
+
+  const NewPost = Post({
+    content,
+    _creator
+  });
+
+  NewPost.save((err) => {
+    if (err) {
+      return next(err);
     } else {
       res.redirect('/');
     }
