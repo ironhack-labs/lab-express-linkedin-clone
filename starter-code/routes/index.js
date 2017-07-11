@@ -13,7 +13,7 @@ function authCheck(req, res, next) {
 
 router.get('/', authCheck, (req, res, next) => {
 
-  Post.find({ _creator: req.session.currentUser._id }, (err, posts) => {
+  Post.find({ }, (err, posts) => {
     if (err) { return next(err) }
 
     res.render('index', { posts, user: req.session.currentUser, });

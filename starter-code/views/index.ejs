@@ -2,7 +2,7 @@
 <a href="/profile/<%= user._id %>/edit">Edit your profile</a>
 <a href="/users/<%= user._id %>/posts/new">Create a new post</a>
 <br></br>
-<h2>Your posts:</h2>
+<h2>All user posts:</h2>
 <ul>
   <% posts.forEach( (post) => { %>
     <li> <%= post.content %> </li>
