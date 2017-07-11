@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h1>Welcome <%= user.username %>!</h1>
+<a href="/profile/<%= user._id %>/edit">Edit your profile</a>
+<a href="/users/<%= user._id %>/posts/new">Create a new post</a>
+<br></br>
+<h2>All user posts:</h2>
+<ul>
+  <% posts.forEach( (post) => { %>
+    <li> <%= post.content %> </li>
+  <% }) %>
+</ul>

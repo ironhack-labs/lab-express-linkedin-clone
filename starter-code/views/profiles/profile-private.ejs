@@ -1,0 +1,38 @@
+<form id="form" class="userprofile" action="/profile/<%= data._id %>" method="post">
+
+  <h2>Private profile</h2>
+
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="User name" value="<%= data.username%>" required>
+  <br></br>
+
+  <label for="fullname">Full name</label>
+  <input type="text" name="fullname"placeholder="Full name" value="<%= data.fullname%>" required>
+  <br></br>
+
+  <label for="email">Email</label>
+  <input type="text" name="email"placeholder="Email" value="<%= data.email%>">
+  <br></br>
+
+  <label for="summary">Summary</label>
+  <input type="text" name="summary"placeholder="Summary" value="<%= data.summary%>">
+  <br></br>
+
+  <label for="picture">Profile picture</label>
+  <input type="text" name="picture" value="<%= data.imageUrl%>" placeholder="Paste image url here.">
+  <% if(data.imageUrl !== undefined) {%>
+    <img src="<%= data.imageUrl%>" alt="Profile picture"></img>
+  <%} else { %>
+    <p> No photo uploaded.</p>
+  <% } %>
+
+  <label for="company">Company</label>
+  <input type="text" name="company"placeholder="Company" value="<%= data.company%>">
+  <br></br>
+
+  <label for="jobtitle">Job title</label>
+  <input type="text" name="jobtitle"placeholder="Job title" value="<%= data.jobTitle%>">
+  <br></br>
+
+  <button>Save profile info</button>
+</form>
