@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
+const Post = require('../models/post');
 
 const userSchema = new Schema({
   username: String,
@@ -8,7 +9,8 @@ const userSchema = new Schema({
   summary: String,
   imageUrl: String,
   company: String,
-  jobTitle: String
+  jobTitle: String,
+  posts: [Post.schema]
 
 }, {
   timestamps: {

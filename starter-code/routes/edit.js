@@ -27,7 +27,11 @@ router.get('/:id/edit', (req, res, next) => {
         if (err) {
             next(err);
         } else {
-            res.render('profiles/edit', { user });
+            if (req.session.currentUser.username !== user.username) {
+                res.redirect('/logout');
+            } else {
+                res.render('profiles/edit', { user });
+            }
         }
     });    
 });

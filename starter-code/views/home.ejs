@@ -1,5 +1,17 @@
 <h1><%= title %></h1>
-<p>Welcome to <%= title %> <%= userName %></p>
+<p>Welcome to <%= title %> <%= user.userName %></p>
+<h2>Posts</h2>
+<% users.forEach((user) => { %>
+    <% user.posts.forEach((post) => { %>
+        <div><%= post.content %></div> 
+        <b>by: </b><%=post._creator %>
+        <b>date: </b><%=post.created_at %>
+        <br><br>
+    <% }) %>    
+<% }) %>
+<div>
+<a href="/<%= user._id %>/posts/new">Create new post</a>
+</div>
 <div>
 <a href="/logout">Logout</a>
 </div>

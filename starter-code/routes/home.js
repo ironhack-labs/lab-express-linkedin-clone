@@ -11,9 +11,15 @@ function auth(req, res, next) {
   }
 }
 
-/* GET home page. */
 router.get('/', auth, function(req, res, next) {
-  res.render('home', { title: 'LinkedIn', userName: req.session.currentUser.username });
+  User.find({ posts: { $exists: true, $ne: [] } }, function(err, users){
+        if(err){
+          next(err);
+        } else{
+            console.log('user-list', users);
+            res.render('home', { title: 'LinkedIn', user: req.session.currentUser, users });
+        }
+   });
 });
 
 module.exports = router;

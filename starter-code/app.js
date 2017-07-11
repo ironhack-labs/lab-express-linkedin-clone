@@ -15,6 +15,7 @@ var home = require('./routes/home');
 var list = require('./routes/list');
 var show = require('./routes/show');
 var edit = require('./routes/edit');
+var posts = require('./routes/posts');
 
 var authentication = require('./routes/authentication');
 
@@ -48,6 +49,7 @@ app.use('/', list);
 app.use('/', authentication);
 app.use('/', show);
 app.use('/', edit);
+app.use('/', posts);
 
 
 // catch 404 and forward to error handler
