@@ -1,0 +1,38 @@
+    <form id="form" action="/signup" method="POST">
+    <label for="username">Username</label><br>
+    <input type="text" name="username" 
+      placeholder="AnakinSkywalker">
+    <br><br>
+
+    <label for="fullname">Full Name</label><br>
+    <input type="text" name="name" 
+      placeholder="">
+    <br><br>
+
+    <label for="summary">Summary</label><br>
+    <textarea type="text" name="summary" cols="60" rows="5"
+      placeholder=""></textarea>
+    <br><br>
+
+    <label for="summary">Image Url</label><br>
+    <input type="text" name="imageUrl" placeholder="">
+    <br><br>
+
+    <label for="summary">Company</label><br>
+    <input type="text" name="company" placeholder="">
+    <br><br>
+
+    <label for="summary">Job Title</label><br>
+    <input type="text" name="jobTitle" placeholder="">
+    <br><br>
+
+    <label for="password">Password</label><br>
+    <input type="password" name="password" 
+      placeholder="DeathStar">
+    <br><br>
+
+    <button>Create account</button>
+     <% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+  </form>

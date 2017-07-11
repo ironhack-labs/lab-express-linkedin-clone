@@ -1,0 +1,8 @@
+<h2>New Post from <%=user.username %></h2>
+<form action="/<%= user._id %>/posts" method="POST">
+    <label for="post">Post</label><br>
+    <textarea type="text" name="content" cols="60" rows="5"
+      placeholder=""></textarea>
+    <br><br> 
+    <button type="submit">Create Post</button>
+</form>

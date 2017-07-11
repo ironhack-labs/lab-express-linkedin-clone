@@ -1,0 +1,26 @@
+<h2>Edit My Profile</h2>
+<form action="/<%= user._id %>" method="POST">
+  <label for="fullname">Full Name</label><br>
+    <input type="text" name="name" 
+      placeholder="" value="<%= user.name %>">
+    <br><br>
+
+    <label for="summary">Summary</label><br>
+    <textarea type="text" name="summary" cols="60" rows="5"
+      placeholder=""><%= user.summary %></textarea>
+    <br><br>
+
+    <label for="summary">Image Url</label><br>
+    <input type="text" name="imageUrl" placeholder="" value="<%= user.imageUrl %>">
+    <br><br>
+
+    <label for="summary">Company</label><br>
+    <input type="text" name="company" placeholder="" value="<%= user.company %>">
+    <br><br>
+
+    <label for="summary">Job Title</label><br>
+    <input type="text" name="jobTitle" placeholder="" value="<%= user.jobTitle %>">
+    <br><br>
+
+  <button type="submit">Update User</button>
+</form>
