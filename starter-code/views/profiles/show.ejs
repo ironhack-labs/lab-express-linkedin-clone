@@ -1,0 +1,17 @@
+<div class="col-sm-6 col-sm-offset-3">
+    <% if(typeof user.imageUrl != 'undefined') { %>
+        <img src="<%= user.imageUrl %>" alt="" class="img-circle" width="200px">
+    <% } else { %>
+        <img src="/img/user.png" alt="" class="img-circle" width="200px">
+    <% } %>
+    <h1><%= user.name %></h1>
+    <pre><%= user.username %></pre>
+    <pre><%= user.jobTitle %> | <%= user.company %></pre>
+    <% if(typeof user.email != 'undefined') { %>
+        <label for="">Email:</label><br>
+        <span><%= user.email %></span><br>
+        <br>
+        <a href="/profile/<%= user._id %>/edit" class="btn btn-primary">Edit Profile</a>
+    <% } %>
+    
+</div>

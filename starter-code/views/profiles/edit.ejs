@@ -1,0 +1,54 @@
+<div class="col-sm-6 col-sm-offset-3">
+
+    <h3>Edit Profile</h3>
+
+    <form action="/profile/<%= user._id %>" method="POST" >
+        
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" value="<%= user.username %>" disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Current Password:</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <label for="repeatP">New password:</label>
+            <input type="password" id="repeatP" name="repeatP" class="form-control" placeholder="Password">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" class="form-control" placeholder="Name" value="<%= user.name %>">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email" class="form-control" placeholder="your@Email.com" value="<%= user.email %>">
+        </div>
+
+        <div class="form-group">
+            <label for="avatar">Avatar url:</label>
+            <input type="text" id="avatar" name="avatar" class="form-control" placeholder="http://www.yourphoto.com" value="<%= user.imageUrl %>">
+        </div>
+
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea id="summary" name="summary" class="form-control"><%= user.summary %></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="company">Company:</label>
+            <input type="text" id="company" name="company" class="form-control" placeholder="KingeClient" value="<%= user.company %>">
+        </div>
+        
+        <div class="form-group">
+            <label for="jobTitle">Job Title:</label>
+            <input type="text" id="jobTitle" name="jobTitle" class="form-control" placeholder="Font-End Developer" value="<%= user.jobTitle %>">
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-primary">Edit</button>
+    </form>
+</div>

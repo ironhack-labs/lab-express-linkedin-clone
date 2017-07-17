@@ -1,0 +1,35 @@
+<div class="col-sm-6 col-sm-offset-3">
+
+    <img src="https://camo.githubusercontent.com/21c3d4a8f7495c3a811b2be8f1216cc6cbef59ac/68747470733a2f2f73332d65752d776573742d312e616d617a6f6e6177732e636f6d2f69682d6d6174657269616c732f75706c6f6164732f75706c6f61645f62356261393162313663343032396464356566613034376531613132343665622e706e67" alt="" width="100%">
+
+    <h3>Log In</h3>
+
+    <form action="/login" method="POST" >
+        
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="User">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password">
+        </div>
+
+        <% if (typeof message != "undefined") { %>
+            <div class="error-message"><%= message %></div>
+        <% } %>
+
+        <button type="submit" class="btn btn-lg btn-primary">Log In</button>
+
+        <a href="/auth/facebook" class="btn btn-lg btn-facebook">
+            <i class="fa fa-facebook" aria-hidden="true"></i>
+            <span>Facebook</span>
+        </a>
+
+        <a href="/auth/google" class="btn btn-lg btn-google">
+            <i class="fa fa-google-plus" aria-hidden="true"></i>
+            <span>Google</span>
+        </a>
+    </form>
+</div>
