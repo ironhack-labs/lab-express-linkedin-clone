@@ -8,9 +8,9 @@ module.exports = {
     const username = req.body.username
     const password = req.body.password
     const email    = req.body.email
-    const imageUrl = req.body.imageUrl
+    const img      = req.body.img
     const company  = req.body.company
-    const job      = req.body.jobTitle
+    const job      = req.body.job
     const sumary   = req.body.sumary
 
     if (username === "" || password === "") {
@@ -35,7 +35,7 @@ module.exports = {
           username: username,
           password: hashPass,
           email: email,
-          imageUrl: imageUrl,
+          imageUrl: img,
           company: company,
           jobTitle: job,
           sumary: sumary
@@ -71,6 +71,10 @@ module.exports = {
           // Save the login in the session!
           req.session.currentUser = user
           res.redirect('/user/profile')
+         // res.render('user/profile', {
+         //   title: 'User page',
+         //   username: username
+         // })
         } else {
           res.render('auth/login', {
             title: "Log in",
