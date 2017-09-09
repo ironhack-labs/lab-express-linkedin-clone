@@ -1,0 +1,29 @@
+<a href="/">Back to home</a>
+
+<form id="form" action="/signup" method="POST">
+  <label for="username">Username</label><br>
+  <input type="text" name="username"
+    placeholder="AnakinSkywalker">
+
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password"
+    placeholder="DeathStar">
+  <br><br>
+
+  <label for="name">Name</label><br>
+  <input type="text" name="name"
+    placeholder="ODORRRR">
+  <br><br>
+
+  <label for="email">Name</label><br>
+  <input type="text" name="email"
+    placeholder="odor@odor.com">
+  <br><br>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+
+  <button>Create account</button>
+</form>
