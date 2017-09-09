@@ -1,0 +1,40 @@
+<a href="/">Back to home</a>
+
+<form id="form" action="/auth/signup" method="POST">
+  <label for="username">Username</label><br>
+  <input type="text" name="username"
+    placeholder="AnakinSkywalker">
+
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password"
+    placeholder="DeathStar">
+  <br><br>
+
+  <label for="email">Email</label><br>
+  <input type="email" name="email"
+    placeholder="example@example.com">
+
+  <br><br>
+  <label for="img">Image</label><br>
+  <input type="url" name="img">
+  <br><br>
+  
+  <label for="company">Company</label><br>
+  <input type="text" name="company">
+
+  <br><br>
+  <label for="job">Current Job</label><br>
+  <input type="text" name="job">
+  <br><br>
+
+  <label for="sumary">Sumary</label><br>
+  <textarea name="sumary" rows="5" cols="50"></textarea>
+  <br><br>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+
+  <button>Create account</button>
+</form>
