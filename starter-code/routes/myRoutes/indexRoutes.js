@@ -82,7 +82,7 @@ profiles : (req, res, next)=>{
       next(err)
     }
     else{
-      res.render("profileList", {users : users})
+      res.render("profileList", {users : users,  type: "public"})
     }
   })
 },
@@ -92,7 +92,8 @@ publicView : (req, res, next)=>{
     if(err){
       next(err)
     }else{
-      res.render("public", {user: user})
+
+      res.render("public", {user: user, title: "Profile"})
     }
   });
 }

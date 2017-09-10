@@ -55,5 +55,25 @@ siteRoutes.post("/edit/:id", (req,res,next) =>{
     return res.redirect("/")
   })
 })
+siteRoutes.get('/privateList',(req, res, next) =>{
+  User.find({},(err, user)=>{
+    if(err){
+      next(err);
+    }else{
+      res.render("profileList", {users: user, type: "private"})
+    }
+  })
 
+})
+siteRoutes.get('/privateprofile/:id',(req, res, next) =>{
+  const userId = req.params.id
+  User.find({"_id" : userId},(err, user) =>{
+    if(err){
+      next(err)
+    }else{
+
+      res.render("private", {user: user, title: "Profile"})
+    }
+  });
+})
 module.exports = siteRoutes
