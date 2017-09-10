@@ -1,0 +1,8 @@
+
+<% users.forEach((u)=>{%>
+  <div>
+    <h3><%= u.name %></h3>
+    <img src="<%= u.imageUrl%>">
+    <a href="publicprofile/<%=u._id%>">See profile</a>
+  </div>
+<%})%>

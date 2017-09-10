@@ -1,0 +1,27 @@
+<form action ="/edit/<%=user._id%>" method="post">
+  <label for="user">User Name</label>
+  <input type="text" name="user" placeholder="Pick user name" value="<%=user.name%>">
+
+  <label for="name">Name</label>
+  <input type="text" name="name" placeholder="Your name" value="<%=user.user%>">
+
+  <label for="password">Password</label>
+  <input type="text" name="pass" placeholder="Your password" value="<%=user.password%>">
+
+  <label for="email">Email</label>
+  <input type="text" name="email" placeholder="Your email" value="<%=user.email%>">
+
+  <label for="jobTitle">Job</label>
+  <input type="text" name="jobTitle" placeholder="Job" value="<%=user.jobTitle%>">
+
+  <label for="company">Company</label>
+  <input type="text" name="company" placeholder="Your Company" value="<%=user.company%>">
+
+  <label for="image">Image</label>
+  <input type="text" name="image" placeholder="paste an url" value="<%=user.imageUrl%>">
+
+  <label for="summary">Summary</label>
+  <input type="textarea" name="summary" placeholder="tell us about you" value="<%=user.summary%>">
+
+  <input type="submit" name="submit" value="Sign up">
+</form>
