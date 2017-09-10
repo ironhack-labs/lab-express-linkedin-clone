@@ -78,5 +78,14 @@ module.exports = {
         }
       }
     })
+  },
+
+  logoutGet: (req, res, next) => {
+    if (!req.session.currentUser) res.redirect("/")
+
+    req.session.destroy(err => {
+      if(err) next(err)
+      else res.redirect("/login")
+    })
   }
 }
