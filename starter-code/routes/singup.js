@@ -40,7 +40,10 @@ router.post('/singup', (req, res, next) => {
     username: userName,
     password: hashPass,
     name:req.body.name,
-    email: req.body.name,
+    email: req.body.email,
+    summary: req.body.summary,
+    company: req.body.company,
+    jobTitle: req.body.jobTitle,
   });
   console.log(newUser);
 

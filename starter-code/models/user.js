@@ -6,6 +6,10 @@ const userSchema = new Schema({
   password: String,
   name: String,
   email: String,
+  summary: String,
+  imageUrl: String,
+  company: String,
+  jobTitle: String,
 }, {
   timestamps: {
     createdAt: "created_at",
