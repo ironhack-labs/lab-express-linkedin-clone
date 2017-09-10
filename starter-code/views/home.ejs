@@ -13,5 +13,11 @@
         <li><a href="/profile/<%= e.id %>"> <%= e.username %> </a></li>
       <% })%>
     </ul>
+    <h3>Posts</h3>
+    <ul>
+      <% posts.forEach( e => { %>
+        <li> <%= e.content %>  from  <%= e.user_name %> </li>
+      <% })%>
+    </ul>
   </body>
 </html>

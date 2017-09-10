@@ -1,0 +1,13 @@
+<div id="container">
+  <h2>New post from <%= personInfo.username %>!</h2>
+
+  <form action="/profile/<%= personInfo.id %>/posts" method="POST" id="new-post">
+    <label for="postText">Post</label>
+    <input type="text" name="postText" maxlength="140" placeholder="What's going on?" >
+    <button class="button blue fright">Post!</button>
+  </form>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+</div>

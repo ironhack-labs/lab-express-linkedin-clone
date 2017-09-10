@@ -1,6 +1,7 @@
 const express        = require("express");
 const profController = express.Router();
 const User           = require("../models/user");
+const Post           = require("../models/Post");
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
 const isLoggedIn = require('../middlewares/isLoggedIn');
@@ -61,6 +62,41 @@ profController.post('/:id/edit', (req, res, next) => {
   });
 });
 
+//POST
+profController.get('/:id/posts/new', (req, res, next) => {
+  const profileId = req.params.id;
+  User.findById(profileId)
+  .then( (response) => {
+    res.render('./posts/new',{title: 'Details', personInfo: response});
+  }).catch( err => next(err) )
+});
+
+
+profController.post("/:id/posts", (req, res, next) => {
+  const user  = req.session.currentUser;
+
+  User.findOne({ username: user.username }).exec((err, user) => {
+    if (err) { return; }
+
+    const newPost = Post({
+      _creator: user._id,
+      user_name: user.username,
+      content: req.body.postText
+    });
+
+    newPost.save((err) => {
+      if (err) {
+        res.render("./posts/new",
+          {
+            username: user.username,
+            errorMessage: err.errors.post.message
+          });
+      } else {
+        res.redirect("/");
+      }
+    });
+  });
+});
 
 
 
