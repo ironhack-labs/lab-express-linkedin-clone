@@ -44,7 +44,12 @@ router.post('/signup', (req, res) => {
 
     new User({
         name: username,
-        password: hashPass
+        password: hashPass,
+        email:"@",
+        summary:"",
+        imgUrl:"img",
+        company:"--",
+        jobTitle:"--",
       })
       .save()
       .then(() => res.redirect('/'))
@@ -93,9 +98,17 @@ router.post("/login", (req, res, next) => {
 
 
 router.get("/profile",(req,res,next)=>{
-  res.render('auth/profile', {
-    title: 'Hola'
-  });
+  if(req.session.currentUser){
+    res.render('auth/profile', {
+      user: req.session.currentUser.name,
+      jobTitle:req.session.currentUser.jobTitle,
+      img: req.session.currentUser.imgUrl,
+      company: req.session.currentUser.company
+
+    });
+  }else{
+  res.redirect('/');
+  }
 });
 
 router.get("/logout", (req, res, next) => {
