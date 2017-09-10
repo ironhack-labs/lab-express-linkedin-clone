@@ -2,3 +2,11 @@
 <img src ="<%= user[0].imageUrl %>">
 <h4><%= user[0].jobTitle %> at <%= user[0].company %></h4>
 <p> <%= user[0].summary %></p>
+
+  <% if(reviews != ""){%>
+    <ul>
+  <% reviews.forEach((r)=>{ %>
+    <li><%= r.review%></li>
+<%  })%>
+</ul>
+<% }%>

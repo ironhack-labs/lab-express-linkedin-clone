@@ -1,4 +1,5 @@
 const User = require('../../models/User')
+const Review = require('../../models/Reviews')
 const bcrypt = require('bcrypt')
 const bcryptSalt = 10
 
@@ -51,12 +52,21 @@ login : (req,res,next)=>{
   res.render("login", {errMessage: "", title: "Log in"})
 },
 postLogin : (req,res,next)=>{
+  const reviews = ""
   const myUser = req.body.user
   const myPass = req.body.pass
   if(myUser == "" || myPass == ""){
     res.render('login',{errMessage: "Indicate username and password", title: "Log in"})
     return
   }
+  Review.find({}, (err, reviews)=>{
+    if(err){
+      next(err)
+    }
+    else {
+      myReviews = reviews
+    }
+  })
   User.findOne({"name" : myUser}, (err, user)=>{
     if(err || !user){
       res.render("login",{errMessage: "The user name doesn't exist", title: "Log in"})
@@ -64,8 +74,9 @@ postLogin : (req,res,next)=>{
     }
     if(bcrypt.compareSync(myPass, user.password)){
       req.session.currentUser = user;
-      console.log(req.body.name)
-      res.render('index',{id: user._id})
+
+
+      res.render('index',{id: user._id, revi : myReviews})
     }else{
       res.render('login',{errMessage: "Incorrect password", title: "Log in"})
     }
