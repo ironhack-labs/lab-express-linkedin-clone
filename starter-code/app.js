@@ -1,14 +1,33 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+const express      = require('express');
+const path         = require('path');
+const favicon      = require('serve-favicon');
+const logger       = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
+const mongoose = require('mongoose');
+const config = require('./config/database');
+
+// Connect To Database
+mongoose.connect(config.database);
+
+// On Connection
+mongoose.connection.on('connected', () => {
+  console.log('Connected to database ' + config.database);
+});
+
+// On Error
+mongoose.connection.on('error', (err) => {
+  console.log('Database error: ' + err);
+});
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+// Port Number
+const port = 3000;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
