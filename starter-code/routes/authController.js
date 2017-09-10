@@ -16,6 +16,8 @@ authController.get("/signup", (req, res, next) => {
 
 //Router to post the sign up data
 authController.post("/signup", (req, res, next) => {
+  var name = req.body.name;
+  var email = req.body.email;
   var username = req.body.username;
   var password = req.body.password;
 
@@ -38,6 +40,8 @@ authController.post("/signup", (req, res, next) => {
     var hashPass = bcrypt.hashSync(password, salt);
 
     var newUser = User({
+      name,
+      email,
       username,
       password: hashPass
     });
@@ -82,7 +86,7 @@ authController.post("/login", (req, res, next) => {
       } else {
         if (bcrypt.compareSync(password, user.password)) {
           req.session.currentUser = user;
-          res.redirect("/tweets")
+          res.redirect("/")
         } else {
           res.render("auth/login", {
             errorMessage: "Incorrect password"
