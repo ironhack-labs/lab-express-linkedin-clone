@@ -7,4 +7,7 @@ router.get('/profile/:id', UserController.profileGet)
 router.get('/:id/edit', isLoggedIn('/'), UserController.editGet)
 router.post('/:id/edit', isLoggedIn('/'), UserController.editPost)
 
+router.get('/:id/post', isLoggedIn('/'), UserController.postGet)
+router.post('/:id/post', isLoggedIn('/'), UserController.postPost)
+
 module.exports = router

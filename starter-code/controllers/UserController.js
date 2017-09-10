@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const Post = require('../models/Post')
 
 module.exports = {
   profileGet: (req, res, next) => {
@@ -25,17 +26,35 @@ module.exports = {
   editPost: (req, res, next) => {
     const userId = req.params.id
     const updates = {
-      name    : req.body.name,
-      email   : req.body.email,
-      imageUrl: req.body.image,
-      company : req.body.company,
-      jobTitle: req.body.job,
-      sumary  : req.body.sumary
+      name     : req.body.name,
+      email    : req.body.email,
+      imageUrl : req.body.image,
+      company  : req.body.company,
+      jobTitle : req.body.job,
+      sumary   : req.body.sumary
     }
 
     User.findByIdAndUpdate(userId, updates, (err, user) => {
       if (err) { return next(err) }
       res.redirect('/user/profile/' + userId)
     })
+  },
+
+  postGet: (req, res) => {
+    const userId = req.params.id
+    res.render('post/new', { title: 'New Post', userId: userId })
+  },
+
+  postPost: (req, res, next) => {
+    const userId = req.params.id
+    const post   = req.body.post
+
+    new Post({
+      _creator : userId,
+      content  : post
+    })
+    .save()
+    .then(() => res.redirect('/'))
+    .catch(e => next(e))
   }
 }

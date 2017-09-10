@@ -1,3 +1,21 @@
 <h3>Welcome to <%= title %></h3>
-<a href="/auth/signup">Sign up</a> or 
-<a href="/auth/login">Log in</a>
+<ul>
+  <% posts.forEach((post) => { %>
+    <% users.forEach((user) => { %>
+      <% if(post._creator == user._id) { %>
+        <li>
+          <%= post.content %> 
+          <a href="/user/profile/<%= user._id %>"><%= user.username %></a>
+        </li>
+      <%  } %>
+    <%  }) %>
+  <%  }) %>
+</ul>
+
+<% if(userSession) { %>
+  <a href="/auth/logout">Log out</a>
+  <br><br><a href="/user/<%= userSession._id %>/post">New post</a>
+<% } else { %>
+  <a href="/auth/signup">Sign up</a> or 
+  <a href="/auth/login">Log in</a>
+<% } %>

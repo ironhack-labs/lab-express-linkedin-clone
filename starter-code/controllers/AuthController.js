@@ -29,20 +29,20 @@ module.exports = {
         })
         return
       }
-      const salt = bcrypt.genSaltSync(bcryptSalt)
+      const salt     = bcrypt.genSaltSync(bcryptSalt)
       const hashPass = bcrypt.hashSync(password, salt)
       new User({
-          username: username,
-          password: hashPass,
-          email: email,
-          imageUrl: img,
-          company: company,
-          jobTitle: job,
-          sumary: sumary
+          username : username,
+          password : hashPass,
+          email    : email,
+          imageUrl : img,
+          company  : company,
+          jobTitle : job,
+          sumary   : sumary
         })
         .save()
         .then(() => res.redirect('/auth/login'))
-        .catch(e => next(e));
+        .catch(e => next(e))
     })
   },
 
@@ -61,8 +61,8 @@ module.exports = {
   
     User.findOne({ 'username': username }, (err, user) => {
         if (err || !user) {
-          res.render("auth/login", {
-            title: "Log in",
+          res.render('auth/login', {
+            title: 'Log in',
             errorMessage: "The username doesn't exist"
           })
           return
@@ -73,7 +73,7 @@ module.exports = {
           res.redirect('/user/profile/' + user._id)
         } else {
           res.render('auth/login', {
-            title: "Log in",
+            title: 'Log in',
             errorMessage: 'Incorrect password'
           })
         }
