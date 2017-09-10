@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div class="container">
+         <h2>Profile</h2>
+
+         <p>Name: <%= user.name %></p>
+         <p>Job: <%= user.jobTitle %></p>
+         <img src="<%= user.imageUrl %>">
+         <p>Company: <%= user.company %></p>
+
+         <% if (req && user.username === req.username) { %>
+           <p>Username: <%= user.username %></p>
+           <p>Summary: <%= user.summary %></p>
+           <p>Email: <%= user.email %></p>
+         <% } %>
+
+         <a href='../welcome'><div class="post"><p>Return to dashboard</p></div></a>
+    </div>
+  </body>
+</html>

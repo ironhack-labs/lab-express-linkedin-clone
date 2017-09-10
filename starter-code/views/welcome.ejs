@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+  <body>
+    <div class="container">
+         <h2> Welcome <%= user.username %></h2>
+
+          <a href="/profile/<%= user._id %>/edit"><p>Edit Profile</p></a>
+
+          <a href="/profile/<%= user._id %>"><p>View Profile</p></a>
+
+          <a href="/users/<%= user._id %>/posts/new"><p>Create Post</p></a>
+
+          <a href="/users/<%= user._id %>/posts"><p>View/Edit Posts</p></a>
+
+          <a href="/logout"><p>Log-out</p></a>
+    </div>
+  </body>
+</html>

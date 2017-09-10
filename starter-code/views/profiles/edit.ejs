@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+      <div class="container">
+
+         <h2>Edit Profile</h2>
+
+         <form action="/profile/<%= user._id %>" method="POST">
+           <label for="username">Edit Username</label>
+           <input type="text" id="username" name="username" value="<%= user.username %>">
+
+           <label for="name">Edit Name</label>
+           <input type="text" id="name" name="name" value="<%= user.name %>">
+
+           <label for="email">Edit Email</label>
+           <input type="email" id="email" name="email" value="<%= user.email %>">
+
+           <label for="password">Edit Password</label>
+           <input type="password" name="password" id="password">
+
+           <label for="image-url">Edit Image URL</label>
+           <input type="text" name="imageUrl" id="imageUrl" value="<%= user.imageUrl %>">
+
+           <label for="description">Edit Summary</label>
+           <input type="text" name="description" id="description"><%= user.description %></textarea>
+
+           <label for="company">Edit Company</label>
+           <input type="text" name="company" id="company" value="<%= user.company %>">
+
+           <label for="jobTitle">Edit Job Title</label>
+           <input type="text" name="jobTitle" id="jobTitle" value="<%= user.jobTitle %>">
+
+           <button type="submit">Update Profile</button>
+         </form>
+
+         <% if (typeof(error) !== "undefined") { %>
+
+           <div class="error-message"><%= error %></div>
+
+         <% } %>
+
+    </div>
+
+  </body>
+</html>

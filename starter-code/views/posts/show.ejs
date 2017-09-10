@@ -1,0 +1,27 @@
+
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<div class="container">
+
+  <h2>Your Posts</h2>
+
+<% posts.forEach((post) => { %>
+  <div class="post">
+    <p>Post content: <%= post.content %></p>
+    <p>Created by: <%= post.creator %></p>
+    <a href="/users/<%= userId %>/posts/<%= post._id %>/edit"><p>Edit Post</p></a>
+    <a href="/users/<%= userId %>/posts/<%= post._id %>/delete"><p>Delete Post</p></a>
+  </div>
+<% }) %>
+
+<div class="post">
+  <a href="/welcome"><p>Return to dashboard</p></a>
+</div>
+
+</div>

@@ -1,8 +1,142 @@
+* {
+  box-sizing: border-box;
+  color: #1B5E20;
+  transition: all 200ms ease
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #efefef;
+  overflow-y: scroll;
+}
+
+*:focus {
+  outline: none;
+}
+
+h1, h4 {
+  font-family: 'Arvo', serif;
+}
+
+h2, h5 {
+  font-family: 'Lato', sans-serif;
+}
+
+h3, h6 {
+  font-family: 'Raleway', sans-serif;
+}
+
+p {
+  font-family: 'Arvo', sans-serif;
+}
+
+.post {
+  border: 1px solid black;
+  margin: 20px auto;
+  width: 70%
+}
+
+img {
+  margin-top: 30px;
+  width: 200px;
+  height: 200px;
 }
 
 a {
-  color: #00B7FF;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+ul {
+  list-style: none;
+}
+
+.container, input, label, textarea {
+  margin: 0 auto;
+  text-align: center;
+  width: 50%;
+}
+
+.container {
+  background-color: white;
+  padding: 40px 0 80px 0;
+  margin-top: 50px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 20px #b5b5b5
+}
+
+.items-box-horizontal {
+  display: flex;
+  justify-content: space-around;
+}
+
+.items-box-vertical {
+  display: flex;
+  flex-direction: column;
+}
+
+.items {
+  width: 33.4%;
+  border: 2px solid #1B5E20;
+  height: 60px;
+}
+
+.items:hover {
+  background-color: rgba(17, 88, 17, 0.10);
+  font-size: 1.05em;
+}
+
+input, textarea {
+  line-height: 20px;
+  width: 300px;
+  height: 30px;
+  margin-bottom: 20px;
+  border: 1px solid #1B5E20;
+  padding: 2px 5px;
+  font-family: 'Raleway', sans-serif;
+  color: #1B5E20;
+  display: block;
+  text-align: left;
+  box-shadow: 2px 2px 10px #b5b5b5;
+  resize: vertical;
+}
+
+
+
+input:focus {
+  border: none;
+  border-bottom: 3px solid #1B5E20;
+}
+
+button {
+  margin: 20px 0;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  padding: 1em 2em;
+  letter-spacing: .1em;
+  border-radius: 3px;
+  /*+transition(all 100ms);*/
+  background: #3D9970;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  box-shadow: 0px 0px 0px 1px white, 0px 0px 0px 3px #3D9970;
+  background: white;
+  color: #3D9970;
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+}
+
+label {
+  width: 300px;
+  text-align:center;
+  font-family: "Lato", sans-serif;
+  display: block;
+  margin-bottom: 5px;
 }
