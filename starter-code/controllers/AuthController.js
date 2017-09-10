@@ -70,11 +70,7 @@ module.exports = {
         if (bcrypt.compareSync(password, user.password)) {
           // Save the login in the session!
           req.session.currentUser = user
-          res.redirect('/user/profile')
-         // res.render('user/profile', {
-         //   title: 'User page',
-         //   username: username
-         // })
+          res.redirect('/user/profile/' + user._id)
         } else {
           res.render('auth/login', {
             title: "Log in",

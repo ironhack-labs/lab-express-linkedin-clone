@@ -1,11 +1,16 @@
 const User = require('../models/User')
 
 module.exports = {
-  profileGet: (req, res) => {
-    const user = req.session.currentUser
-    res.render('user/profile', {
-      title: 'User page', 
-      user: user
+  profileGet: (req, res, next) => {
+    const userSession = req.session.currentUser
+    const userId = req.params.id
+    User.findById(userId, (err, user) => {
+      if (err) { return next(err) }
+      res.render('user/profile', { 
+        title:'User page', 
+        user:user,
+        userSession: userSession
+      })
     })
   },
 
@@ -18,6 +23,19 @@ module.exports = {
   },
 
   editPost: (req, res, next) => {
-    
+    const userId = req.params.id
+    const updates = {
+      name    : req.body.name,
+      email   : req.body.email,
+      imageUrl: req.body.image,
+      company : req.body.company,
+      jobTitle: req.body.job,
+      sumary  : req.body.sumary
+    }
+
+    User.findByIdAndUpdate(userId, updates, (err, user) => {
+      if (err) { return next(err) }
+      res.redirect('/user/profile/' + userId)
+    })
   }
 }
