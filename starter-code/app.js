@@ -1,21 +1,36 @@
 const app = require('express')();
 const globals = require('./config/globals');
 const mongoose = require('mongoose');
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
-//conexion
-mongoose.connect(globals.dbUrl);
+//conexion a bd
+mongoose.connect(globals.dbUrl).then( () => console.log("Connected to db!"));
+
 //config express
 require('./config/express')(app);
+
+//gestionar sesiones
+app.use(session({
+secret: "basic-auth-secret",
+cookie: { maxAge: 60000 },
+store: new MongoStore({
+  mongooseConnection: mongoose.connection,
+  ttl: 24 * 60 * 60 // 1 day
+})
+}));
+
 //Requerir Rutas
-const index = require('./routes/index');
-const users = require('./routes/users');
+const homeRouter = require('./routes/home');
+const authRouter = require('./routes/auth');
 
 // default value for title local
 app.locals.title = 'Express -DE-Linkedin-Clone';
 
 //usar rutas
-app.use('/', index);
-app.use('/users', users);
+app.use('/', homeRouter);
+app.use('/', authRouter);
+
 //gestion errores
 require('./config/error-handler')(app);
 
