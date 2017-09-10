@@ -25,19 +25,18 @@ router.get('/signup', (req, res) => {
 
 //POST SignUp - Creates a user in db
 router.post('/signup', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
   const name = req.body.name;
+  const password = req.body.password;
   const email = req.body.email;
 
-  if (username === "" || password === "" || name ==="" | email ==="") {
+  if (name === "" || password === "" || name ==="" | email ==="") {
     res.render("signup", {
       errorMessage: "Fill all the fields to sign up"
     });
     return;
   }
 
-  User.findOne({ "username": username }).then(user =>{
+  User.findOne({ "name": name }).then(user =>{
     if(user){
       res.render("signup", {
         errorMessage: "User already exists"
@@ -47,10 +46,13 @@ router.post('/signup', (req, res) => {
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
     new User({
-        username: username,
-        password: hashPass,
         name: name,
-        email: email
+        password: hashPass,
+        email: email,
+        summary: "",
+        imageUrl: "",
+        company: "",
+        jobTite: ""
       })
       .save()
       .then(() => res.redirect('/'))
@@ -71,20 +73,20 @@ router.get('/login', (req, res) => {
 
 //POST Login
 router.post("/login", (req, res, next) => {
-  var username = req.body.username;
+  var name = req.body.name;
   var password = req.body.password;
 
-  if (username === "" || password === "") {
+  if (name === "" || password === "") {
     res.render("login", {
-      errorMessage: "Indicate a username and a password to sign up"
+      errorMessage: "Indicate a name and a password to sign up"
     });
     return;
   }
 
-  User.findOne({ "username": username }, (err, user) => {
+  User.findOne({ "name": name }, (err, user) => {
       if (err || !user) {
         res.render("login", {
-          errorMessage: "The username doesn't exist"
+          errorMessage: "The name doesn't exist"
         });
         return;
       }
