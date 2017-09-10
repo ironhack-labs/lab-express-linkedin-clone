@@ -56,5 +56,24 @@ module.exports = {
     .save()
     .then(() => res.redirect('/'))
     .catch(e => next(e))
+  },
+
+  postEditGet: (req, res, next) => {
+    const postId = req.params.postId
+    Post.findById(postId, (err, post) => {
+      res.render('post/edit', { title: 'Edit post', post: post })    
+    })
+  },
+
+  postEditPost: (req, res, next) => {
+    const postId  = req.params.postId
+    const content = req.body.post 
+    const updates = {
+      content : content
+    }
+    Post.findByIdAndUpdate(postId, updates, (err, post) => {
+      if (err) { return next(err) }
+      res.redirect('/')
+    })
   }
 }

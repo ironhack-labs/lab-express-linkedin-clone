@@ -4,8 +4,12 @@
     <% users.forEach((user) => { %>
       <% if(post._creator == user._id) { %>
         <li>
-          <%= post.content %> 
-          <a href="/user/profile/<%= user._id %>"><%= user.username %></a>
+          <%= post.content %>
+          <% if(userSession && post._creator == userSession._id) { %>
+            <br><a href="/user/post/<%= post._id %>">Edit</a>
+          <% } %><br>
+          Posted by
+          <a href="/user/profile/<%= user._id %>"><%= user.username %></a><br><br>
         </li>
       <%  } %>
     <%  }) %>
@@ -13,8 +17,8 @@
 </ul>
 
 <% if(userSession) { %>
-  <a href="/auth/logout">Log out</a>
-  <br><br><a href="/user/<%= userSession._id %>/post">New post</a>
+  <a href="/user/<%= userSession._id %>/post">New post</a>
+  <br><br><a href="/auth/logout">Log out</a>
 <% } else { %>
   <a href="/auth/signup">Sign up</a> or 
   <a href="/auth/login">Log in</a>
