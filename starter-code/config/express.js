@@ -5,7 +5,9 @@ const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const path         = require('path');
 const favicon      = require('serve-favicon');
-
+const mongoose = require('mongoose');
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
 module.exports = (app) => {
   // view engine setup
@@ -22,4 +24,14 @@ module.exports = (app) => {
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(layouts);
+
+  //gestionar sesiones
+  app.use(session({
+  private: "basic-auth-Linkedin",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+  }));
 };
