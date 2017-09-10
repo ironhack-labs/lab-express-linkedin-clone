@@ -6,7 +6,7 @@ const path = require('path')
 
 const index = require('./routes/index')
 const authController = require('./routes/authController')
-// const tweetsController = require("./routes/tweetsController")
+const profController = require("./routes/profController")
 
 mongoose.connect(globals.dbURL).then(() => console.log('Connected to DB'))
 
@@ -16,7 +16,7 @@ require('./config/express')(app)
 
 app.use('/', index)
 app.use('/', authController)
-// app.use("/tweets", tweetsController)
+app.use("/profile", profController)
 
 require('./config/handle-errors')(app)
 

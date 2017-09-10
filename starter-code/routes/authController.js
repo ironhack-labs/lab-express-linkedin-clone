@@ -7,7 +7,6 @@ const session        = require("express-session");
 const MongoStore     = require("connect-mongo")(session);
 
 
-
 // SIGN UP
 authController.get('/signup', function(req, res, next) {
   if(req.session.currentUser){
@@ -91,7 +90,8 @@ authController.post("/login", (req, res, next) => {
       } else {
         if (bcrypt.compareSync(password, user.password)) {
           req.session.currentUser = user;
-          res.redirect("/");
+          console.log(user.id)
+          res.redirect("/profile/"+user.id);
         } else {
           res.render("authentication/login", {
             errorMessage: "Incorrect password"

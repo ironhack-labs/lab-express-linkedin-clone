@@ -7,5 +7,11 @@
   <body>
     <h1>Welcome to <%= title %></h1>
     <p><a href="/signup">Sign up</a> | <a href="/login">Log in</a> | <a href="/logout">Log out</a></p>
+    <h3>Profiles</h3>
+    <ul>
+      <% users.forEach( e => { %>
+        <li><a href="/profile/<%= e.id %>"> <%= e.username %> </a></li>
+      <% })%>
+    </ul>
   </body>
 </html>
