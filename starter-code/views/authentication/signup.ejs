@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <h2>Sign Up</h2>
+
+    <form action="/signup" method="POST">
+
+      <label for="username">Choose A Username</label>
+      <input type="text" name="username" id="username" placeholder="Enter username here...">
+
+      <label for="password">Choose A Password</label>
+      <input type="password" name="password" id="password" placeholder="Enter password here...">
+
+      <label for="name">Enter Your Name</label>
+      <input type="text" name="name" id="name" placeholder="Enter your name here...">
+
+      <label for="email">Enter Your Email Address</label>
+      <input type="email" name="email" id="email" placeholder="Enter email here...">
+
+      <button type="submit">Submit</button>
+
+    </form>
+
+    <% if (typeof(errorMessage) !== "undefined") { %>
+
+      <div class="error-message"><%= errorMessage %></div>
+
+    <% } %>
+
+    <div>
+      <p>Already have an account? <a href="/login">Log in here</a></p>
+    </div>
+
+  </div>

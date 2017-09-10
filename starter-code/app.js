@@ -1,14 +1,26 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+/*jshint esversion: 6 */
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const express      = require('express');
+const path         = require('path');
+const favicon      = require('serve-favicon');
+const logger       = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
+const session      = require("express-session");
+const MongoStore   = require("connect-mongo")(session);
+const mongoose     = require('mongoose');
 
-var app = express();
+mongoose.connect('mongodb://localhost/linkedIn', {useMongoClient: true});
+
+const index        = require('./routes/index');
+const signup       = require('./routes/signup');
+const login        = require('./routes/login');
+const logout       = require('./routes/logout');
+const welcome      = require('./routes/welcome');
+const profile      = require('./routes/profile');
+const users        = require('./routes/users');
+
+const app          = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,7 +34,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Cookies
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  resave: true,
+  saveUninitialized: true,
+  rolling: true
+}));
+
+
+// routes
 app.use('/', index);
+app.use('/welcome', welcome);
+app.use('/signup', signup);
+app.use('/login', login);
+app.use('/logout', logout);
+app.use('/profile', profile);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
