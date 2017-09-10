@@ -1,0 +1,26 @@
+<form action="/user/<%= user._id %>/edit" method="post">
+  <label for="name">Name</label><br>
+  <input type="text" id="name" name="name" value="<%= user.username %>">
+  <br><br>
+  
+  <label for="email">Email</label><br>
+  <input type="email" name="email" id="email" value="<%= user.email %>">
+  <br><br>
+
+  <label for="image">Profile image</label><br>
+  <input type="url" name="image" id="image" value="<%= user.imageUrl %>">
+  <br><br>
+  
+  <label for="company">Company</label><br>
+  <input type="text" name="company" id="company" value="<%= user.company %>">
+  <br><br>
+
+  <label for="job">Job</label><br>
+  <input type="text" name="job" id="job" value="<%= user.jobTitle %>">
+  <br><br>
+
+  <label for="sumary">Sumary</label><br>
+  <textarea name="sumary" id="sumary" cols="50" rows="5"><%= user.sumary %></textarea>   
+  <br>
+  <button type="submit">Update profile</button>
+</form>
