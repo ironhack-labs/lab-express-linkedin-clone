@@ -7,6 +7,8 @@ const bodyParser     = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const mongoose       = require('mongoose')
 const {dbURL}        = require('./db')
+const session        = require("express-session")
+const MongoStore     = require("connect-mongo")(session)
 
 module.exports = app => {
   mongoose.connect(dbURL, {useMongoClient: true})
@@ -25,4 +27,13 @@ module.exports = app => {
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(cookieParser())
   app.use(express.static(path.join(__dirname, '../public')))
+
+  app.use(session({
+    secret: "basic-auth-secret",
+    cookie: { maxAge: 60000 },
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60 // 1 day
+    })
+  }))
 }

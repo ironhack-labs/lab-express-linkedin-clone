@@ -1,5 +1,5 @@
 module.exports = {
   homeGet: (req, res) => {
-    res.render('home', {title: `LinkedIn Home Page`})
+    res.render('authentication/signup', {title: `Sign up`})
   }
 }
