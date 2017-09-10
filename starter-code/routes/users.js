@@ -8,19 +8,26 @@ const bcryptSalt = 10;
 router.get('/', (req, res) => {
   if (req.session.currentUser) {
     res.render('index', {
-      user: req.session.currentUser.name
+      user: req.session.currentUser.name,
     });
   }
   else {
     res.render('index', {
-      user: 'not logged in'
+      user: 'not logged in',
+      id: ''
     });
   }
 });
 
 //GET SignUp
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  if (req.session.currentUser) {
+    console.log("ya estas conectado");
+    res.redirect ('/');
+  }
+  else {
+    res.render('signup');
+  }
 });
 
 //POST SignUp - Creates a user in db
@@ -72,7 +79,7 @@ router.get('/login', (req, res) => {
 });
 
 //POST Login
-router.post("/login", (req, res, next) => {
+router.post("/login", (req, res) => {
   var name = req.body.name;
   var password = req.body.password;
 
@@ -102,8 +109,28 @@ router.post("/login", (req, res, next) => {
   });
 });
 
+//GET profile
+router.get ('/show/:username', (req, res) => {
+  User.findOne({"name": req.params.username}, name);
+  console.log(name);
+});
+
+//POST profile
+router.post ('/profile/:userId', (req, res) => {
+
+});
+
+//GET edit
+router.get ('/profile/:userId/edit', (req, res) => {
+
+});
+
+
+
+
+
 // LOGOUT
-router.get("/logout", (req, res, next) => {
+router.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     // cannot access session here
     res.redirect("/");
