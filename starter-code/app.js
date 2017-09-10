@@ -10,6 +10,9 @@ const { dbURL }      = require("./config/db");
 const session        = require("express-session");
 const MongoStore     = require("connect-mongo")(session);
 
+//const authController     = require("./routes/authController");
+//const profileController  = require("./routes/profileController");
+
 const users    = require("./routes/users");
 const index    = require("./routes/index");
 const app = express();
@@ -43,6 +46,8 @@ app.locals.title = "Linkedin";
 
 app.use('/', index);
 app.use('/', users);
+//app.use("/", authController);
+//app.use("/profile", profileController);
 
 
 // catch 404 and forward to error handler
