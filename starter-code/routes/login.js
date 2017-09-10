@@ -11,7 +11,7 @@ router.get('/login', (req, res, next) => {
   });
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/login/profile", (req, res, next) => {
   var username = req.body.username;
   var password = req.body.password;
   if (username === "" || password === "") {
@@ -48,6 +48,25 @@ router.get("/logout", (req, res, next) => {
     // cannot access session here
     res.redirect("/login");
   });
+});
+
+router.get('/login/:id', (req,res, next) => {
+  User.findById(req.params.id)
+    .then(result => res.render('editProfile', {user:result}))
+    .reject (err => console.log(err));
+});
+
+router.post('/login/:id', (req, res, next) => {
+  const update = {
+    name:req.body.name,
+    email: req.body.email,
+    summary: req.body.summary,
+    company: req.body.company,
+    jobTitle: req.body.jobTitle,
+  };
+  User.findByIdAndUpdate(req.params.id , update)
+    .then(result => res.redirect('basichome', {user:user}))
+    .catch(err => console.log ("Error al actualizar"));
 });
 
 module.exports = router;
