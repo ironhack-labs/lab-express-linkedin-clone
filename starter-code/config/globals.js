@@ -1,3 +1,3 @@
 module.exports = {
-  dbUrl: 'mongodb://localhost/db'
+  dbUrl: 'mongodb://localhost/linkedin'
 };

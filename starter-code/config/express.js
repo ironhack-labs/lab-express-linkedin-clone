@@ -4,6 +4,11 @@ const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 const layouts      = require('express-ejs-layouts');
 const path         = require('path');
+const session = require('express-session');
+const MongoStore = require("connect-mongo")(session);
+const mongoose     = require('mongoose');
+
+
 
 module.exports = (app) => {
   // view engine setup
@@ -16,4 +21,13 @@ module.exports = (app) => {
   app.use(cookieParser());
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(layouts);
+
+  app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 };
