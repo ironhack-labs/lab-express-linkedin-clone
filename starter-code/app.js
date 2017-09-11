@@ -1,29 +1,59 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+const express      = require('express');
+const path         = require('path');
+const favicon      = require('serve-favicon');
+const logger       = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose     = require("mongoose");
+const session = require("express-session")
+const MongoStore = require("connect-mongo")(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
 
-var app = express();
+const index = require('./routes/index');
+const users = require('./routes/users');
+const login = require('./routes/login');
+const signup = require('./routes/signup');
+const logout = require('./routes/logout');
+
+
+const app = express();
+
+mongoose.connect("mongodb://localhost/basic-auth")
+        .then( () => console.log("Connected to db!"));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('layout','layout/main-layout');
+app.use(expressLayouts);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.locals.title = "Linkedin Express";
+
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/login', login);
+app.use('/signup', signup);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
