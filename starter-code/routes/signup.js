@@ -31,7 +31,13 @@ router.post('/signup', function(req, res, next) {
     const hashPass = bcrypt.hashSync(password, salt);
     new User({
       username: username,
-      password: hashPass
+      password: hashPass,
+      email: email,
+      name: name,
+      summary: summary,
+      imageUrl: imageUrl,
+      company: company,
+      jobTitle: jobTitle
     })
     .save()
     .then(() => res.redirect('/signup'))
