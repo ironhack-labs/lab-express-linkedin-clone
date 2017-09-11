@@ -1,0 +1,10 @@
+    
+<form action="/authentication/login" method="post">
+    <input type="text" name="username" placeholder="Your Username"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <button type="submit">Log In</button>
+</form>
+    <h5>Not registered? <a href="/authentication/signup">Sign up here</a></h5>
+    <% if (typeof(errorMessage) !== "undefined") { %>
+        <div class="error-message"><%= errorMessage %></div>
+      <% } %>

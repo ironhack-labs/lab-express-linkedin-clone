@@ -1,0 +1,16 @@
+<h2>Write New Post</h2>
+
+<form action="/user/<%= user._id %>/posts" method="post">
+    <input type="text" name="content" placeholder="What do I want to say?">
+    <button type="submit">Post</button>
+</form>
+
+<% if (typeof(errorMessage) !== "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+
+<!-- <h6>Post Author:</h6><p></p>
+<h6>Date:</h6><p></p>
+<h6>Post Time:</h6><p></p>
+<h6>Post Content:</h6><p></p> -->

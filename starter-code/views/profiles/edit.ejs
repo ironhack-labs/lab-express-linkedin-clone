@@ -1,0 +1,13 @@
+<h2>Edit Your Profile</h2>
+<ul>
+<form action="/profiles/<%= user._id %>" method="post">
+    <li><label>Username </label for="username"><input type="text" name="username" placeholder=<%= user.username %> value=<%= user.username %>></li>
+    <li><label>Name </label for="name"><input type="text" name="name" placeholder=<%= user.name %> value=<%= user.name %>></li>
+    <li><label>Email </label><input type="email" name="email" placeholder=<%= user.email %> value=<%= user.email %>></li>
+    <li><label>Summary </label><input type="text" name="summary" placeholder=<%= user.summary %>  value=<%= user.summary%>></li>
+    <li><label>ImageURL </label><input type="text" name="imageURL" placeholder=<%= user.imageURL %> value=<%= user.imageURL%>></li>
+    <li><label>Company </label><input type="text" name="company" placeholder=<%= user.company %> value=<%= user.company%>></li>
+    <li><label>JobTitle </label><input type="text" name="jobTitle" placeholder=<%= user.jobTitle %> value=<%= user.jobTitle%>></li>
+    <button type="submit">Confirm Changes</button>
+</form>
+</ul>
