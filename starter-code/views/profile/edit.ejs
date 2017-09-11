@@ -1,0 +1,27 @@
+
+<form action="/<%= User._id %>/edit" method="POST">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" value="<%= User.name %>">
+
+  <label for="email">Email</label>
+  <input type="text" name="email" id="email" value="<%= User.email %>">
+
+  <label for="password">Password</label>
+  <input type="text" name="password" id="password" value="<%= User.password%>">
+
+  <label for="description">Description</label>
+  <input type="text" name="description" id="summary">
+
+  <label for="imageUrl">Image URL</label>
+  <input type="text" name="imageUrl" id="imageUrl" value="<%= User.imageUrl %>">
+
+  <label for="company">Company</label>
+  <input type="text" name="company" id="company" value="<%= User.company %>">
+
+  <label for="jobTitle">Image URL</label>
+  <input type="text" name="jobTitle" id="jobTitle" value="<%= User.jobTitle %>">
+
+  <button type="submit">Update User</button>
+
+  <a href="/">Go back</a>
+</form>
