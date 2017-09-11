@@ -1,0 +1,16 @@
+<a href="/profile/<%= personInfo.id %>/edit">Edit your profile</a>
+<div id="container">
+  <img src="<%= personInfo.imageUrl %>" alt="">
+  <h2><%= personInfo.name %></h2>
+  <h3><%= personInfo.jobTitle %> at <%= personInfo.company %></h3>
+  <p>Contact:</p>
+  <ul>
+    <li>Email: <%= personInfo.email %></li>
+  </ul>
+  <p>Summary: </p>
+  <ul>
+    <li><%= personInfo.summary %></li>
+  </ul>
+</div>
+
+<a href="/">Go back</a>
