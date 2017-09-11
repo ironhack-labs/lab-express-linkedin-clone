@@ -76,7 +76,7 @@ postLogin : (req,res,next)=>{
       req.session.currentUser = user;
 
 
-      res.render('index',{id: user._id, revi : myReviews})
+      res.render('index',{id: user._id, revi :reviews})
     }else{
       res.render('login',{errMessage: "Incorrect password", title: "Log in"})
     }

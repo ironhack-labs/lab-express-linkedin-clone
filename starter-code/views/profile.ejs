@@ -8,5 +8,12 @@
   <input type="submit" value="Send">
 </form>
 
+<% if(reviews != ""){%>
+  <ul>
+<% reviews.forEach((r)=>{ %>
+  <li><%= r.review%></li>
+  <a href="/post/edit/<%=r._id%>">Edit this post</a>
+</ul>
+<% }) }%>
 
 <a href="edit/<%=user.id%>">Edit your Profile </a>

@@ -7,6 +7,6 @@
     <ul>
   <% reviews.forEach((r)=>{ %>
     <li><%= r.review%></li>
-<%  })%>
+    <a href="/post/edit/<%=r._id%>">Edit this post</a>
 </ul>
 <% }%>
