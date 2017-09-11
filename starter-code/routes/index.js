@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   })
 })
 
-router.get('/home', isLoggedIn('/'), (req, res) => {
+router.get('/home', isLoggedIn('/home'), (req, res) => {
   res.render('home', {
     user: req.session.currentUser
   })

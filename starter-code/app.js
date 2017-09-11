@@ -12,10 +12,11 @@ const MongoStore = require('connect-mongo')(session)
 
 const indexRouter = require('./routes/index')
 const authRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
 
 const app = express()
 
-mongoose.connect('mongodb://localhost/basic-auth')
+mongoose.connect('mongodb://localhost/linkedin-auth')
 		.then( () => console.log('Connected to DB!'))
 
 // view engine setup
@@ -25,7 +26,7 @@ app.set('layout', 'layout/main-layout.ejs')
 app.use(expressLayout)
 
 app.use(session({
-  secret: "basic-auth-secret",
+  secret: "linkedin-auth-secret",
   cookie: { maxAge: 60000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
@@ -49,6 +50,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter)
 app.use('/', authRouter)
+app.use('/', userRouter)
 
 
 // catch 404 and forward to error handler
