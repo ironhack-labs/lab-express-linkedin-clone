@@ -1,6 +1,6 @@
 <a href="/login/profile">Back to home</a>
 
-<form id="form" action="<%= user._id%>" method="POST">
+<form id="form" action="/login/profile/<%= user._id%>" method="POST">
   <label for="username">Username</label><br>
   <input type="text" name="username"
     placeholder="AnakinSkywalker" value="<%= user.username %>">

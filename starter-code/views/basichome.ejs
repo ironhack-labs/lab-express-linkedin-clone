@@ -1,4 +1,3 @@
-
 <h1>Welcome <%= user.username %> </h1>
 
 <ul>
@@ -9,5 +8,5 @@
   <li><%= user.jobTitle %></li>
 </ul>
 
-<a href="<%= user._id%>">Edit Profile</a>
+<a href="/profile/<%= user._id%>">Edit Profile</a>
 <a href="/logout">Cerrar sesion</a>

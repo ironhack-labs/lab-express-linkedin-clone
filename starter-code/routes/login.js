@@ -31,7 +31,6 @@ router.post("/login/profile", (req, res, next) => {
         // Save the login in the session!
         console.log("estoy log");
         req.session.currentUser = user;
-        console.log(user);
         res.render("basichome" , {user:user});
       } else {
         res.render("login", {
@@ -50,13 +49,15 @@ router.get("/logout", (req, res, next) => {
   });
 });
 
-router.get('/login/:id', (req,res, next) => {
+router.get('/profile/:id', (req,res, next) => {
+  console.log("hola");
   User.findById(req.params.id)
     .then(result => res.render('editProfile', {user:result}))
     .reject (err => console.log(err));
 });
 
-router.post('/login/:id', (req, res, next) => {
+router.post('/login/profile/:id', (req, res, next) => {
+  console.log("adios");
   const update = {
     name:req.body.name,
     email: req.body.email,
@@ -65,7 +66,7 @@ router.post('/login/:id', (req, res, next) => {
     jobTitle: req.body.jobTitle,
   };
   User.findByIdAndUpdate(req.params.id , update)
-    .then(result => res.redirect('basichome', {user:user}))
+    .then(result => res.render('basichome', {user:result}))
     .catch(err => console.log ("Error al actualizar"));
 });
 
