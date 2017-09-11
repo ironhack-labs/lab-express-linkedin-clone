@@ -1,0 +1,19 @@
+<h3> Hello <%= user.user %></h3>
+<img src ="<%= user.imageUrl %>">
+<h4><%= user.jobTitle %> at <%= user.company %></h4>
+<p> <%= user.summary %></p>
+<form action="/profile/id:/post" method="post">
+  <label for="review">Add a post</label>
+  <textarea cols="50" rows="10" name="review"></textarea>
+  <input type="submit" value="Send">
+</form>
+
+<% if(reviews != ""){%>
+  <ul>
+<% reviews.forEach((r)=>{ %>
+  <li><%= r.review%></li>
+  <a href="/post/edit/<%=r._id%>">Edit this post</a>
+</ul>
+<% }) }%>
+
+<a href="edit/<%=user.id%>">Edit your Profile </a>

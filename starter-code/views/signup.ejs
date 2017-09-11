@@ -1,0 +1,27 @@
+
+<form action ="/signup" method ="post">
+  <label for="user">User Name*</label>
+  <input type="text" name="user" placeholder="Pick user name">
+  <label for="pass">Password*</label>
+  <input type="password" name="pass" placeholder="Pick password">
+  <label for="name">Name*</label>
+  <input type="text" name="name" placeholder="Your name">
+  <label for="email">Email*</label>
+  <input type="text" name="email" placeholder="Email">
+
+  <label for="jobTitle">Job</label>
+  <input type="text" name="jobTitle" placeholder="Job">
+
+  <label for="company">Company</label>
+  <input type="text" name="company" placeholder="Your Company">
+
+  <label for="image">Image</label>
+  <input type="text" name="image" placeholder="paste an url">
+
+  <label for="summary">Summary</label>
+  <input type="textarea" name="summary" placeholder="tell us about you">
+
+  <input type="submit" name="submit" value="Sign up">
+  <p><%= errMessage%></p>
+  <p> Do you already have an account?<a href="/login">Log in </a></p>
+</form>

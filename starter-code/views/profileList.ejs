@@ -1,0 +1,12 @@
+
+<% users.forEach((u)=>{%>
+  <div>
+    <h3><%= u.name %></h3>
+    <img src="<%= u.imageUrl%>">
+    <%if(type == "private"){%>
+      <a href="privateprofile/<%=u._id%>">See profile</a>
+    <%}else{%>
+    <a href="publicprofile/<%=u._id%>">See profile</a>
+    <%}%>
+  </div>
+<%})%>

@@ -1,0 +1,12 @@
+<form action ="/login" method ="post">
+  <label for="user">Your User Name</label>
+  <input type="text" name="user" placeholder="Write your user name">
+
+  <label for="pass">Password</label>
+  <input type="password" name="pass" placeholder="Write your password">
+
+  <input type="submit" name="submit" value="Log in">
+  <p><%= errMessage%></p>
+  <p>Don't have an account?<a href="/signup">Sign up</a></p>
+  <p><a href="/profilesList"> See list of profiles </a></p>
+</form>
