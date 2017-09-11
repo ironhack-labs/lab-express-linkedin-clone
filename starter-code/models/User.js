@@ -10,7 +10,6 @@ const userSchema = new Schema({
   imageUrl: String,
   company: String,
   jobTitle: String
-}
 });
 
 const User = mongoose.model("User", userSchema);
