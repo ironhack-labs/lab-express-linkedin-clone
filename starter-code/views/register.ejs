@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Log in</title>
+  </head>
+  <body>
+    <h1>Sign up for LinkedIn</h1>
+    <p>Create an account for your professional career</p>
+
+    <form action="/register" method="post">
+
+      <ul>
+        <li>
+          <label for="firstname">First name:</label>
+          <input id="firstname" type="text" name="firstName">
+        </li>
+        <li>
+          <label for="lastNameInput">Last name:</label>
+          <input id="lastNameInput" type="text" name="lastName">
+        </li>
+        <li>
+          <label for="usernameInput">Username:</label>
+          <input id="userameInput" type="text" name="username">
+        </li>
+        <li>
+          <label for="eMailInput">Enter your e-mail adress:</label>
+          <input id="eMailInput" type="text" name="email">
+        </li>
+        <li>
+          <label for="passwordInput">Select a password:</label>
+          <input id="passwordInput" type="password" name="password">
+        </li>
+        <li>
+          <label for="summaryInput">Please provide a short summary about your professional experience:</label>
+          <input id="summaryInput" type="text" name="summary">
+        </li>
+        <li>
+          <label for="imageUrlInput">Please enter a URL-adress linking to your profile-picture:</label>
+          <input id="imageUrlInput" type="text" name="imageUrl">
+        </li>
+        <li>
+          <label for="companyInput">Name of last employer:</label>
+          <input id="companyInput" type="text" name="company">
+        </li>
+        <li>
+          <label for="jobTitleInput">Recent job-title</label>
+          <input id="jobTitleInput" type="text" name="jobTitle">
+        </li>
+      </ul>
+
+      <button type="submit">Create account</button>
+    </form>
+
+    <% if (typeof(errorMessage) != "undefined") { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+
+  </body>
+</html>
