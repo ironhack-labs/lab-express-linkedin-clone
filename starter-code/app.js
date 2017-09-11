@@ -1,46 +1,23 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+const app = require('express')();
+const mongoose     = require('mongoose');
+const globals = require('./config/globals');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+mongoose.connect(globals.dbUrl);
 
-var app = express();
+// default value for title local
+app.locals.title = 'Express - Generated with IronGenerator';
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+require('./config/express')(app);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const index = require('./routes/index');
+const singup = require('./routes/singup');
+const login = require('./routes/login');
+
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/', singup);
+app.use('/', login);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+require('./config/error-handler')(app);
 
 module.exports = app;

@@ -1,0 +1,44 @@
+<a href="/login/profile">Back to home</a>
+
+<form id="form" action="/login/profile/<%= user._id%>" method="POST">
+  <label for="username">Username</label><br>
+  <input type="text" name="username"
+    placeholder="AnakinSkywalker" value="<%= user.username %>">
+
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password"
+    placeholder="DeathStar" value="<%= user.password %>">
+  <br><br>
+
+  <label for="name">Name</label><br>
+  <input type="text" name="name"
+    placeholder="ODORRRR" value="<%= user.name %>">
+  <br><br>
+
+  <label for="email">Email</label><br>
+  <input type="text" name="email"
+    placeholder="odor@odor.com" value="<%= user.email %>">
+  <br><br>
+
+  <label for="summary">Summary</label><br>
+  <input type="text" name="summary"
+    placeholder="Hoy llueve" value="<%= user.summary %>">
+  <br><br>
+
+  <label for="company">Company</label><br>
+  <input type="text" name="company"
+    placeholder="parque jurasico" value="<%= user.company %>">
+  <br><br>
+
+  <label for="jobTitle">Jobs</label><br>
+  <input type="text" name="jobTitle"
+    placeholder="cazador de moscas" value="<%= user.jobTitle %>">
+  <br><br>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+
+  <button type="submit">Create account</button>
+</form>
