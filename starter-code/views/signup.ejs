@@ -12,5 +12,12 @@
 
   <label for="password">Password</label>
   <input type="password" name="password" placeholder="your password">
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
   <button>Sign up</button>
 </form>
+
+<a href="/">Back</a>

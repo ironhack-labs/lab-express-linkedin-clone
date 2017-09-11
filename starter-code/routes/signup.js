@@ -5,17 +5,16 @@ const User = require('../models/User');
 
 
 router.get('/', function(req, res, next) {
-  res.render('signup');
+  res.render('signup', {title: 'Sign up now!'});
 });
 
-router.post('/', function(req, res, next) {
+router.post('/signup', function(req, res, next) {
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
   const name = req.body.name;
-
   if(username === "" || password === "") {
-    res.render('/', {
+    res.render('/signup', {
       erorMessage: "Indicate a username and a password to sign up"
     });
     return;
@@ -23,7 +22,7 @@ router.post('/', function(req, res, next) {
 
   User.findOne({ "username": username }).then(user => {
     if(user) {
-      res.render('/', {
+      res.render('/signup', {
         errorMessage: "User already exist"
       })
       return
@@ -35,7 +34,7 @@ router.post('/', function(req, res, next) {
       password: hashPass
     })
     .save()
-    .then(() => res.redirect('/'))
+    .then(() => res.redirect('/signup'))
     .catch(e => next(e));
   })
   console.log(req.body)
