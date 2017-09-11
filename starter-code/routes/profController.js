@@ -4,7 +4,10 @@ const User           = require("../models/user");
 const Post           = require("../models/Post");
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
-const isLoggedIn = require('../middlewares/isLoggedIn');
+const isLoggedIn    = require('../middlewares/isLoggedIn');
+const session        = require("express-session");
+const MongoStore     = require("connect-mongo")(session);
+
 
 
 // SHOW
@@ -62,13 +65,19 @@ profController.post('/:id/edit', (req, res, next) => {
   });
 });
 
-//POST
+//POSTS
 profController.get('/:id/posts/new', (req, res, next) => {
   const profileId = req.params.id;
-  User.findById(profileId)
-  .then( (response) => {
-    res.render('./posts/new',{title: 'Details', personInfo: response});
-  }).catch( err => next(err) )
+  const profileSessionId = req.session.currentUser._id;
+
+  if( profileSessionId == profileId){
+    User.findById(profileId)
+    .then( (response) => {
+      res.render('./posts/new',{title: 'Details', personInfo: response });
+    }).catch( err => next(err) )
+  }else{
+      console.log('No es tu sesion')
+    }
 });
 
 

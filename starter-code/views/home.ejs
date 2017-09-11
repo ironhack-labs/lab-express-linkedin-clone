@@ -16,7 +16,12 @@
     <h3>Posts</h3>
     <ul>
       <% posts.forEach( e => { %>
-        <li> <%= e.content %>  from  <%= e.user_name %> </li>
+        <li> <%= e.content %>  from  <%= e.user_name %> created at <%= moment(e.created_at).format("LL, LTS") %></li>
+          <% if( profileSession ) { %>
+            <% if( profileSession._id == e._creator) {%>
+              <a href="/profile/<%= e._creator %>/posts/new">Edit</a>
+            <% }%>
+          <% }%>
       <% })%>
     </ul>
   </body>
