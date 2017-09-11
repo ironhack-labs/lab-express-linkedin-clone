@@ -1,0 +1,12 @@
+<h3>Sign Up for DrinkedIn</h3>
+<form action="/authentication/signup" method="post">
+    <input type="text" name="username" placeholder="Your Username"><br>
+    <input type="password" name="password" placeholder="Password"><br>
+    <input type="text" name="name" placeholder="Your Name"><br>
+    <input type="email" name="email" placeholder="Your Email"><br>
+    <button type="submit">Sign Up</button>
+</form>
+    <h5>Already Registered? <a href="/">Log in here</a></h5>
+    <% if (typeof(errorMessage) !== "undefined") { %>
+        <div class="error-message"><%= errorMessage %></div>
+      <% } %>
