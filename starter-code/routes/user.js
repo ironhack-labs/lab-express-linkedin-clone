@@ -144,7 +144,7 @@ router.post('/editprofile/:id', (req, res, next) => {
 
 
   User.findByIdAndUpdate(nuestroIdquerido, update)
-    .then(result => res.redirect('/itsme/:id'))
+    .then(result => res.redirect('/profile'))
     .catch(err => console.log ("Error al crear Celebrity"));
 });
 
