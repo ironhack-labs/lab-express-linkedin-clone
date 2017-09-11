@@ -1,0 +1,10 @@
+<h1><%= title %></h1>
+<form action="edit/<%= user._id%>" method="POST">
+  <input type="text" name="name"
+    placeholder="name"
+    value="<%= user.name %>">
+  |
+
+  <button>Edit</button>
+</form>
+<a href="/profile">Back to profile</a>
