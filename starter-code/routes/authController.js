@@ -39,7 +39,7 @@ authController.post('/signup', (req, res, next) => {
         username: username,
         password: hashPass,
         name: name,
-        mail: mail
+        email: email
 
     })
 

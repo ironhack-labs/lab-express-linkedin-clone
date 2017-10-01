@@ -1,3 +1,13 @@
-<h2>Welcome <%= currentUser.username %></h2>
+<h2>Welcome <%= currentUser.username %> </h2>
 
-    <a href="/logout">Logout</a>
+<h3>Profiles</h3>
+<ul>
+    <% users.forEach((el) => { %>
+        <li><a href="/profile/<%= el._id %>"> <%= el.username %></a></li><br>
+        
+        <button><a href="/profile/<%= el._id %>/edit/">Edit profile</a></button>
+        <br><br>
+    <% }) %>
+</ul>
+
+   <button> <a href="/logout">Logout</a></button>

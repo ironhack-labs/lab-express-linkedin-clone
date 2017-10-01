@@ -1,5 +1,6 @@
 const express = require('express');
 const siteController = express.Router();
+const User = require('../models/user');
 
 siteController.use((req, res, next) => {
     if (req.session.currentUser) {
@@ -10,8 +11,11 @@ siteController.use((req, res, next) => {
 })
 
 siteController.get('/home', (req, res, next) => {
-    res.render('home', {
-        currentUser: req.session.currentUser
+    User.find({}, (err, users) => {
+        if (err) { return next(err) }
+        res.render('home', {
+            currentUser: req.session.currentUser, users
+        })
     });
 })
 
