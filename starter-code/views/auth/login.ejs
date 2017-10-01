@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Auth</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+<h2>Sign In To Your LinkedIn Account</h2>
+
+<form action="/login" method="POST" id="form-container">
+  <label for="username">Username</label>
+  <input type="text" name="username"
+    placeholder="Enter your username">
+  <br><br>
+  <label for="password">Password</label>
+  <input type="password" name="password"
+    placeholder="Make sure nobody's looking!">
+  <br><br>
+  <% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+  <button>Log in</button>
+
+  <p class="account-message">
+    Don't have an account? <a href="/signup">Sign up</a>
+  </p>
+</form>
+
+</body>
+</html>

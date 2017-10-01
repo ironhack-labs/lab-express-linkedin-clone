@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Auth</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+<h2>Welcome to LinkedIn, <%=name %>. You are logged in.</h2>
+
+<a href="/logout">Click to logout</a>
+
+<h4>The information we have for you is:</h4>
+<ul>
+  <li>Name: <%= name.toUpperCase() %> </li>
+
+  <% if( summary === undefined || summary === null) { %>
+    <li>Summary: you haven't filled this out yet </li>
+<%  } else { %>
+    <li>Summary: <%= summary %> </li>
+<% } %>
+
+  <% if( job === undefined || job === null) { %>
+    <li>Job Title: you haven't filled this out yet </li>
+  <%  } else { %>
+    <li>Job Title: <%= job %> </li>
+  <% } %>
+
+  <% if( company === undefined || company === null) { %>
+    <li>Company: you haven't filled this out yet </li>
+  <%  } else { %>
+    <li>Company: <%= company %> </li>
+  <% } %>
+
+  <% if( image === undefined || image === null) { %>
+    <li>Image: you haven't uploaded one yet </li>
+    <% } else { %>
+    <li>Image: <%= image %> </li>
+  <% } %>
+
+</ul>
+
+<a href="/<%=id%>/edit">Click here to edit this information</a>
+
+</body>
+</head>

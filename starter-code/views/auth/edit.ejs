@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Auth</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+<h2>Lets update your LinkedIn profile, <%=name %>.</h2>
+<h3>Edit Your Profile</h3>
+
+
+<form action="/<%=id %>" method="POST" id="form-container" accept="image/gif, image/jpeg">
+  <label for="summary">About You</label>
+  <textarea name="summary" rows='10' cols='30'
+    placeholder="Tell us about yourself" value="<%=summary %>"><%=summary %></textarea>
+  <!-- <input type="text" name="summary"
+    placeholder="Tell us about yourself" value="<%=summary %>"> -->
+  <br><br>
+  <label for="company">Current Company</label>
+  <input type="text" name="company"
+    placeholder="Where do you work?" value="<%=company %>">
+  <br><br>
+  <label for="job">Job Title</label>
+  <input type="text" name="job"
+    placeholder="What do you do?" value="<%=job %>">
+  <br><br>
+  <label for="photo">Profile Photo</label>
+  <input type="file" name="photo" value="<%=image %>">
+  <br><br>
+  <button>Update your profile</button>
+
+  <h4>This information will be available for everyone to see at <a href="/profile/<%=username%>">linkedin.com/profile/<%=username%></a></h4>
+</body>
+</html>
