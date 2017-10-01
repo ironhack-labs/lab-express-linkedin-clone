@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Auth</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+<h1>You are viewing <%= name.toUpperCase() %>'s Full profile</h1>
+<ul>
+  <li>Name: <%= name.toUpperCase() %> </li>
+
+  <% if( image === undefined || image === null) { %>
+    <li>Image: <%= name.toUpperCase() %> hasn't uploaded one yet </li>
+<%  } else { %>
+    <li>Image: <%= image %> </li>
+<% } %>
+
+  <% if( job === undefined || job === null) { %>
+    <li>Job: <%= name.toUpperCase() %> hasn't filled this out yet </li>
+  <%  } else { %>
+    <li>Job: <%= job %> </li>
+  <% } %>
+
+  <% if( company === undefined || company === null) { %>
+    <li>Company: <%= name.toUpperCase() %> hasn't filled this out yet </li>
+  <%  } else { %>
+    <li>Company: <%= company %> </li>
+  <% } %>
+
+  <% if( summary === undefined || summary === null) { %>
+    <li>Summary: <%= name.toUpperCase() %> hasn't filled this out yet </li>
+  <%  } else { %>
+    <li>Summary: <%= summary %> </li>
+  <% } %>
+
+  <% if( email === undefined || email === null) { %>
+    <li>email: <%= name.toUpperCase() %> hasn't filled this out yet </li>
+  <%  } else { %>
+    <li>email: <%= email %> </li>
+  <% } %>
+
+  <% if( username === undefined || username === null) { %>
+    <li>username: <%= name.toUpperCase() %> hasn't filled this out yet </li>
+  <%  } else { %>
+    <li>username: <%= username %> </li>
+  <% } %>
+
+
+</ul>
+
+<h4>Are you inspired by <%= name.toUpperCase() %>'s profile? If so, click here to edit your own! <a href="../auth/edit">Edit my profile</a></h4>
+</body>
+</html>
