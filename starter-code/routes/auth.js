@@ -2,13 +2,13 @@ const express = require('express');
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 const User = require('../models/user')
-const session = require('session')
+const session = require('express-session')
 const salt = 15
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-	if (req.session.currentUser) return res.render('auth/home')
-	res.render('index')
+	if (session.currentUser) return res.render('auth/home')
+	res.render('auth/login')
 })
 
 router.get('/signup', (req, res, next) => {
@@ -77,7 +77,7 @@ router.post('/login', (req, res, next) => {
 	const hashPass = bcrypt.hashSync(password, salt);
 
 	User.findOne({ "email": email }, "email", (err, email) => {
-		if (email !== null || !bcrypt.compareSync(password, user.password)) {
+		if (!email || !bcrypt.compareSync(password, user.password)) {
 			return res.render("auth/signup", {
 				errorMessage: "Invalid email/password combination"
 			});
