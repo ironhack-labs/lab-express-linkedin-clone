@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+<div class="">
+<div class="container-fluid title-page">
+<h2>Welcome <%= currentUser.username %> </h2>
+<hr>
+    <h3>Profiles to see</h3>
+</div>
+<div class="d-flex justify-content-around">
+    <% users.forEach((el) => { %>
+    <a href="/profile/<%= el._id %>"> <%= el.username %></a><br>
+        <br><br>
+    <% }) %>
+</div>
+    <div>
+        <a href="/posts/new">New post</a>
+
+        <% users.forEach((post) => { %>
+            <div>
+                <p><%= post.content %></p>
+                <p><%= moment(post.created_at).format('LL, LTS') %></p>
+            </div>
+        <% }) %>
+    </div>
+</div>
+   <button> <a href="/logout">Logout</a></button>

@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+    crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+<!DOCTYPE html>
+
+    <form id="form" action="/signup" method="POST">
+        
+        <label>Username <br> <input type="text" name="username" placeholder="AnakinSkywalker"></label>
+        <br><br>
+
+        
+        <label>Password <br> <input type="password" name="password" placeholder="DeathStar"></label>
+        <br><br>
+
+        
+        <label>Name <br> <input type="text" name="name" placeholder="Your name please !"></label>
+        <br><br>
+
+        
+        <label>Email <br> <input type="text" name="email" placeholder="SPAM !!!"></label>
+        <br><br>
+
+        <% if (typeof(errorMessage) !== "undefined") { %>
+            <div class="error-message"><%= errorMessage %></div>
+        <% } %>
+
+        <button>Create account</button>
+    </form>

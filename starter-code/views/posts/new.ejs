@@ -1,0 +1,14 @@
+<div>
+    <h2>Hi <%= username %> !</h2>
+
+    <form action="/posts" method="POST">
+        <label> <br> Post <input type="text" name="postText"
+            placeholder="What's going on ?"></label>
+            <br> <br>
+            <button>Post !</button>
+
+            <% if (typeof(errorMessage) !== 'undefined') { %>
+                <div class="error-message"><%= errorMessage %></div>
+            <% } %>-
+    </form>
+</div>

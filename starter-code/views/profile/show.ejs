@@ -1,0 +1,20 @@
+<button><a href="/profile/<%= profile._id %>/edit">Edit your profile</a></button>
+
+<div>
+    <img src="<%= profile.imageUrl %>" alt="">
+    <br><br>
+
+    <h2><%= profile.name %></h2>
+    <h2><%= profile.jobTitle %> at <%= profile.company %></h2>
+
+    <p>Contact:</p>
+    <ul>
+        <li>Email: <%= profile.email %></li>
+    </ul>
+    <p>Summary:</p>
+    <ul>
+        <li><%= profile.summary %></li>
+    </ul>
+</div>
+
+<a href="/home">Go back</a>
