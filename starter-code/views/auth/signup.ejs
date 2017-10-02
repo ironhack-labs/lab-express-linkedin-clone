@@ -1,0 +1,16 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<h2>Hello, please sign in to Linkedin</h2>
+
+<form id="form" method="post" action="/signup">
+  <label>Name: <input type="text" name="name"></label>
+  <label>Password: <input type="password" name="password"></label>
+  <label>Email: <input type="email" name="email"></label>
+
+  <input type="submit" value="Sign up">
+
+</form>
+
+<% if (typeof(errorMessage) !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
