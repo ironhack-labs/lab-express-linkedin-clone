@@ -16,6 +16,7 @@ mongoose.connect("mongodb://localhost/ironLink")
 const profileController = require('./routes/profilecontroller')
 const authController = require('./routes/authController');
 const siteController = require('./routes/siteController');
+const postController = require('./routes/postController')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,6 +42,7 @@ app.use(session({
 app.use('/', authController);
 app.use('/', siteController);
 app.use('/profile', profileController);
+app.use('/posts', postController)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

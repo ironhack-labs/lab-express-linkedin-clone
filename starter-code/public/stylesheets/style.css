@@ -1,10 +1,10 @@
 body {
-  padding: 50px;
+  background: #ECE8E8;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+hr {
+  height: 10px;
 }
 
 #form {
@@ -57,4 +57,11 @@ a {
   margin: 20px auto;
   padding: 20px;
   width: 100%;
+}
+
+.title-page {
+  width: 100%;
+  background: #666;
+  color: #fff;
+  text-align: center;
 }
