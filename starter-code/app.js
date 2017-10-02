@@ -32,10 +32,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+// Authentication
+app.use(cookieParser());
+app.use(session({
+	secret: 'yolo',
+	cookie: { maxAge: 60000 },
+	store: new MongoStore({
+		mongooseConnection: mongoose.connection,
+		ttl: 24 * 60 * 60 // 1 day
+	})
+}));
+
 //app.use('/', home);
 app.use('/', auth);
 
-// catch 404 and forward to error handler
+// catchch 404 and forward to error handler
 app.use(function(req, res, next) {
 	const err = new Error('Not Found');
 	err.status = 404;

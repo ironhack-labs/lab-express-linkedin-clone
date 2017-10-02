@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="main-login main-center">
-                <form class="form-horizontal" method="post" action="#">
+                <form class="form-horizontal" method="post" action="/signup">
                     <div class="form-group">
                         <label for="firstName" class="cols-sm-2 control-label">First Name</label>
                         <div class="cols-sm-10">
@@ -81,12 +81,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group ">
-                        <button type="button" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                    </div>
-                    <div class="login-register">
-                        <a href="index.html">Login</a>
-                    </div>
+                    <% if (typeof(errorMessage) != "undefined") { %>
+                        <div class="error-message">
+                            <%= errorMessage %>
+                        </div>
+                        <% } %>
+                            <div class="form-group ">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                            </div>
+                            <div class="login-register">
+                                <a href="/login">Login</a>
+                            </div>
                 </form>
             </div>
         </div>
