@@ -1,0 +1,20 @@
+<h2>Login</h2>
+<% if(typeof(session) == "undefined"){%>
+<form action="/auth/login" method="POST" class="form-container">
+  <label for="userName">Username</label>
+  <input type="text" name="userName" >
+  <br><br>
+  <label for="password">Password</label>
+  <input type="password" name="password" >
+  <br><br>
+  <button>Sign in</button>
+  <p class="account-message">
+    Don't have an account? <a href="/auth/signup">Sign up</a>
+  </p>
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } }else{%>
+    <div class="error-message"> You are logged in!!</div>
+    <a href="/home">Back to home</a>
+  <%}%>
+</form>
