@@ -7,9 +7,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
 const debug = require('debug')('linkedIn:'+ path.basename(__filename));
-const authRoutes = require('./routes/auth')
+const authRoutes = require('./routes/auth');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
+const profileRoutes = require('./routes/profile');
 
 const app = express();
 
@@ -29,8 +30,27 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60*60*24*2 }, // 2 days
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.use((req,res,next) =>{
+  res.locals.title = "TITULO POR DEFECTO";
+  res.locals.user = req.session.currentUser;
+  next();
+});
+
 //Routes
 app.use('/', authRoutes);
+app.use('/profile', profileRoutes);
 // app.use(expressLayouts);
 // app.use("layout", "./views/layout/main-layout");
 

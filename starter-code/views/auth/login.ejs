@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ironhack LinkedIn Sign-in by Cami</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <h2>Login</h2>
+
+  <form action="/login" method="POST" id="form-container" class="login">
+    <label for="email">e-mail</label>
+    <input type="text" name="email" placeholder="anewhope@thealliance.es">
+    <br><br>
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Your password">
+    <br><br>
+    <% if (typeof(errorMessage) !== "undefined") { %>
+      <div class="error-message">
+        <%= errorMessage %>
+      </div>
+      <% } %>
+        <button>Sign in</button>
+
+        <p class="account-message">
+          Don't have an account? <a href="/signup">Sign up</a>
+        </p>
+  </form>
+
+</body>
+
+</html>

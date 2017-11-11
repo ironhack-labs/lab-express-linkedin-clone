@@ -54,10 +54,62 @@ router.post("/signup", (req, res, next) => {
         });
       }
       else {
-        // User has been created...now what?
-        res.redirect("/")
+        res.redirect("/login");
       }
     });
+  });
+});
+
+router.get("/login", (req, res, next) => {
+  res.render("auth/login");
+});
+
+router.post("/login", (req, res, next) => {
+  var email = req.body.email;
+  var password = req.body.password;
+
+  if (email === "" || password === "") {
+    res.render("auth/login", {
+      errorMessage: "Indicate a email and a password to log in"
+    });
+    return;
+  }
+
+  User.findOne({ "email": email },
+    "_id email password following",
+    (err, user) => {
+      if (err || !user) {
+        res.render("auth/login", {
+          errorMessage: "The email doesn't exist"
+        });
+        return;
+      } else {
+        if (bcrypt.compareSync(password, user.password)) {
+          req.session.currentUser = user;
+          console.log(req.session.currentUser);
+          res.redirect("/profile");
+        } else {
+          res.render("auth/login", {
+            errorMessage: "Incorrect password"
+          });
+        }
+      }
+  });
+});
+
+router.get("/", (req, res) => {
+  res.redirect("/login");
+});
+
+router.get("/logout", (req, res, next) => {
+  if (!req.session.currentUser) { res.redirect("/"); return; }
+
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");
+    }
   });
 });
 
