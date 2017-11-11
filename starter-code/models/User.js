@@ -7,7 +7,7 @@ const userSchema = new Schema({
   password: String,
   summary: String,
   imageURL: String,
-  comapny: String,
+  company: String,
   jobtittle: String
 }, 
 {timestamps: {

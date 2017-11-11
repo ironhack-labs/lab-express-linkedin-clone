@@ -16,7 +16,7 @@ router.post('/signup', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const summary = req.body.summary;
-  const img = req.body.img;
+  const imageURL = req.body.imageURL;
   const company = req.body.company;
   const jobtittle = req.body.jobtittle;
 
@@ -43,7 +43,7 @@ router.post('/signup', (req, res) => {
         password: hashPass,
         email,
         summary,
-        img,
+        imageURL,
         company,
         jobtittle
       });
