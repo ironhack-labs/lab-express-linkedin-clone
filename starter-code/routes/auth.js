@@ -18,6 +18,22 @@ router.post("/signup", (req, res, next) => {
   let company = req.body.company;
   let jobTitle = req.body.jobTitle;
   let imageUrl = req.body.imageUrl;
+
+  if (email === "" || password === "") {
+      res.render("auth/signup", {
+        errorMessage: "Indicate email and a password to sign up"
+      });
+      return;
+    }
+
+    User.findOne({ "email": email }, "email", (err, user) => {
+      if (user !== null) {
+        res.render("auth/signup", {
+          errorMessage: "Someone is already register with this email"
+        });
+        return;
+      }
+
   let salt = bcrypt.genSaltSync(bcryptSalt);
   let hashPass = bcrypt.hashSync(password, salt);
 
@@ -26,11 +42,22 @@ router.post("/signup", (req, res, next) => {
     email,
     password: hashPass,
     summary,
-
+    company,
+    jobTitle,
+    imageUrl
   });
 
   newUser.save((err) => {
-    res.redirect("/");
+      if (err) {
+        res.render("auth/signup", {
+          errorMessage: "Something went wrong when signing up"
+        });
+      }
+      else {
+        // User has been created...now what?
+        res.redirect("/")
+      }
+    });
   });
 });
 
