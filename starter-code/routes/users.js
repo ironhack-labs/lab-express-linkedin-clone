@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const canGo = require('../middlewares/canGo');
+const User = require("../models/User");
 
-/* GET users listing. */
+/* GET  */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  res.redirect('/auth/login');
+});
+
+router.get('/home',canGo,(req, res, next)=> {
+  res.render('user/home');
 });
 
 module.exports = router;

@@ -1,0 +1,45 @@
+body {
+  margin: 5% 0 0 5%;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.header {
+  height: 10%;
+}
+
+.logo {
+  width: 5%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h2 {
+  display: inline-block;
+  width: 50%;
+  vertical-align: middle;
+}
+
+.form-container {
+  border: 1px solid #000;
+  border-radius: 10px;
+  width: 40%;
+  padding: 5%;
+}
+
+.error-message {
+  background: #F02B63;
+  box-sizing: border-box;
+  color: #fff;
+  padding: 20px;
+  width: 60%;
+  margin-top: 5%;
+}
+.profile{
+  float:left;
+  margin-left: 5%;
+  width: 45%;
+}
