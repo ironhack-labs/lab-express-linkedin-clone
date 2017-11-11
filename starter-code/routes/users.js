@@ -1,16 +1,15 @@
 const express = require('express');
 const router = express.Router();
-// User model
+const canGo = require('../middlewares/canGo');
 const User = require("../models/User");
 
-/* GET home page. */
+/* GET  */
 router.get('/', function(req, res, next) {
   res.redirect('/auth/login');
 });
 
-router.get('/home', function(req, res, next) {
-  res.render('user/home',{session:req.session.currentUser});
-  //res.send("HOLAAAA");
+router.get('/home',canGo,(req, res, next)=> {
+  res.render('user/home');
 });
 
 module.exports = router;

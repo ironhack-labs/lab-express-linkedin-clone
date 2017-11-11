@@ -13,6 +13,7 @@ const app = express();
 // Controllers
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const profiles = require('./routes/profiles');
 
 // Mongoose configuration
 const databaseName = 'mongodb://localhost/Linkedin';
@@ -30,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -47,13 +48,14 @@ app.use(session({
 
 app.use((req,res,next) =>{
   res.locals.title = "Linkedin";
-  res.locals.user = req.session.currentUser;
+  res.locals.session = req.session.currentUser;
   next();
 });
 
 // Routes
 app.use('/', users);
 app.use('/auth', auth);
+app.use('/profile', profiles);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

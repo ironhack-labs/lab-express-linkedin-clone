@@ -1,5 +1,4 @@
 <h2>Signup</h2>
-<%if (typeof(session)== "undefined"){%>
 <form action="/auth/signup" method="POST" class="form-container">
   <label for="name">name</label>
   <input type="text" name="name">
@@ -11,7 +10,7 @@
   <input type="password" name="password">
   <br><br>
   <label for="email">email</label>
-  <input type="emain" name="email">
+  <input type="email" name="email">
   <br><br>
   <button>Create account</button>
   <p class="account-message">
@@ -19,8 +18,5 @@
 </p>
 <% if (typeof(errorMessage) != "undefined") { %>
   <div class="error-message"><%= errorMessage %></div>
-  <% } }else{%>
-    <div class="error-message"> You are logged in!!</div>
-    <a href="/home">Back to home</a>
-  <%}%>
+  <% }%>
 </form>

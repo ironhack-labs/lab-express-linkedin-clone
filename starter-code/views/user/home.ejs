@@ -1,7 +1,11 @@
-<%if (typeof(session)!== "undefined"){%>
 <h2> Welcome <%=session.userName%></h2>
-<a href="/auth/logout"> Log Out</a>
-<% }else{ %>
-  <div class="error-message"> Access Refused, Sign in first !</div>
-    <a href="/auth/login">Back...</a>
+  <a href="/auth/logout"> Log Out</a>
+<div>
+  <form action="/profile/<%=session._id%>" method="get">
+  <button type="submit"> Go to profile</button>
+  </form>
+</div>
+
+<% if (typeof(errorMessage) !== "undefined"){%>
+  <div class="error-message"> <%=errorMessage%></div>
 <%}%>

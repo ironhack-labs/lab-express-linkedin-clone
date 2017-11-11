@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const isLogged = require('../middlewares/isLogged');
 // User model
 const User = require("../models/User");
 
@@ -9,8 +9,8 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
-router.get("/login", (req, res, next) => {
-  res.render("auth/login",{session:req.session.currentUser});
+router.get("/login",isLogged, (req, res, next) => {
+  res.render("auth/login");
 });
 
 
@@ -36,7 +36,7 @@ router.post("/login", (req, res, next) => {
       } else {
         if (bcrypt.compareSync(password, user.password)) {
           req.session.currentUser = user;
-          res.render('user/home',{session:req.session.currentUser});
+          res.redirect('/home');
         } else {
           res.render("auth/login", {
             errorMessage: "Incorrect password"
@@ -46,8 +46,8 @@ router.post("/login", (req, res, next) => {
   });
 });
 
-router.get("/signup", (req, res, next) => {
-  res.render("auth/signup",{session:req.session.currentUser});
+router.get("/signup", isLogged,(req, res, next) => {
+  res.render("auth/signup");
 });
 
 router.post("/signup", (req, res, next) => {
@@ -99,7 +99,8 @@ router.get("/logout", (req, res, next) => {
     if (err) {
       console.log(err);
     } else {
-      res.render("auth/login");
+      res.redirect("/auth/login");
+
     }
   });
 });
