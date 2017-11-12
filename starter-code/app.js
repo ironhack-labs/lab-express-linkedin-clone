@@ -9,9 +9,10 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
-
+//Controllers
 const index = require('./routes/index');
 const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
