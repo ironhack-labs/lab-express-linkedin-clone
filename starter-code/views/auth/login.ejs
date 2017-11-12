@@ -1,0 +1,24 @@
+<div class="holder">
+  <h2>Login</h2>
+  <% if (typeof(errorMessage) !== "undefined") { %>
+    <div class="error-message">
+      <%= errorMessage %>
+    </div>
+    <% } %>
+
+      <form action="/login" method="POST" id="form-container" class="login">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" placeholder="JonSnow" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" placeholder="Your password" class="form-control">
+        </div>
+        <button class="btn btn-primary">Sign in</button>
+
+        <p class="account-message">
+          Don't have an account? <a href="/signup">Sign up</a>
+        </p>
+      </form>
+</div>
