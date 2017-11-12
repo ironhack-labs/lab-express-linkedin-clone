@@ -1,0 +1,20 @@
+<h1>Welcome <%= user.name %></h1>
+<a href="/profile/<%=user._id%>">My profile</a>
+<a href="/users/<%=user._id%>/posts/new">New Post</a>
+<a href="/logout">Logout</a>
+
+<div id="container">
+  <h2><%= user.name %> Posts</h2>
+  <% if (posts.length > 0) { %>
+    <% posts.forEach(function(e) { %>
+      <div >
+        <p><%= e.content %></p>
+        <p class="date"><%= moment(e.created_at).format("LL, LTS") %></p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div>
+      <p>@<%= user.name %> hasn't posted yet.</p>
+    </div>
+  <% } %>
+</div>
