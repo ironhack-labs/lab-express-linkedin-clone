@@ -1,0 +1,10 @@
+<form id="form" action="/users/<%= userId %>/posts/<%= post._id %>" method="POST">
+  <label for="content">Post content</label><br>
+  <textarea name="content" form="form">
+    <% if (typeof(post.content) !== "undefined") { %>
+      <%= post.content %>
+    <% } %>
+  </textarea>
+  <br><br>
+  <button type="submit" name="post">Update post</button>
+</form>

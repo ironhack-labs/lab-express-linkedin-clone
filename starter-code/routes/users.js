@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const Post = require('../models/Post');
 const bcrypt = require('bcrypt');
 
 const router = express.Router();
@@ -87,6 +88,53 @@ router.post("/login", (req, res, next) => {
 router.get('/logout', (req, res, next) => {
   req.session.destroy(err => {
     res.redirect('/users/login');
+  });
+});
+
+router.get('/:userId/posts/new', (req, res, next) => {
+  let userId = req.params.userId;
+  let currentUser = req.session.currentUser;
+  if (currentUser._id === userId) {
+    res.render('posts/new', {userId});
+  }
+});
+
+router.post('/:userId/posts', (req, res, next) => {
+  let userId = req.params.userId;
+  let content = req.body.content;
+  let postInfo = {
+    content: content,
+    _creator: userId
+  };
+
+  const newPost = new Post(postInfo);
+
+  newPost.save(err => {
+    if (err) { return res.render('posts/new'); }
+    return res.redirect('/home');
+  });
+});
+
+router.get('/:postId/edit', (req, res, next) => {
+  let postId = req.params.postId;
+  let userId = req.session.currentUser._id;
+
+  Post.findById(postId, (err, post) => {
+    if (err) { return next(err); }
+    res.render('posts/edit', {userId, post});
+  });
+});
+
+router.post('/:userId/posts/:postId', (req, res, next) => {
+  let postId = req.params.postId;
+
+  let postInfo = {
+    content: req.body.content,
+  }
+
+  Post.findByIdAndUpdate(postId, postInfo, (err, post) => {
+    if (err) { return next(err); }
+    return res.redirect('/home');
   });
 });
 

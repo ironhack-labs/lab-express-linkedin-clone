@@ -1,4 +1,12 @@
 <body>
-  <h3>Welcome <%= username %></h3>
+  <h3>Welcome <%= user.username %></h3>
+  <ul>
+    <% docs.forEach(post => { %>
+      <li>
+        <%= post.content %>
+        <a href="/users/<%= post._id %>/edit">Edit</a>
+      </li>
+    <% }); %>
+  </ul>
   <a href="/users/logout">Logout</a>
 </body>
