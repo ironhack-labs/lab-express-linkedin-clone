@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Post = require('../models/Post');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
@@ -14,9 +15,12 @@ router.get('/', function(req, res, next) {
         if (err) { 
           return next(err);
         };
-        res.render('home', {
-          name: req.session.currentUser.name,
-          id: user.id
+        Post.find({}, (err, allPosts) => {
+          res.render('home', {
+            name: req.session.currentUser.name,
+            id: user.id,
+            allPosts
+          });
         });
       });
   } else {

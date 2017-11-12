@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 
 router.get('/:userId/posts', function(req, res, next) {
   if (req.session.currentUser) {
@@ -20,8 +21,6 @@ router.get('/:userId/posts', function(req, res, next) {
 router.post('/:userId/posts', function(req, res, next) {
   if (req.session.currentUser) {
     const content = req.body.content;
-    const _creator = req.body.password;
-
     if (content === "") {
       res.render("posts/new", {
         errorMessage: "Please, fill all fields"

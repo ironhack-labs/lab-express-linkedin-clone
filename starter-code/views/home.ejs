@@ -11,4 +11,10 @@
     <a href="/profile/<%-id%>"<button>Look my profile</button></a>
   </body>
   <a href="/logout"><button>Logout</button></a>
+  <div>
+    <br><% allPosts.forEach((post) =>{ %>
+      <%= post._creator %><br>
+      <%= post.content %><br><br>
+    <% }) %>
+  </div>
 </html>
