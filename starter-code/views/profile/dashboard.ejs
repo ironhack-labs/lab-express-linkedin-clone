@@ -1,0 +1,21 @@
+<% if (user === undefined) { %>
+  <h1p>
+    Sorry - you are not logged in
+    </h1>
+
+
+    <% } else{ %>
+      <h1>Welcome to your Dashboard
+        <%= user.username %>
+      </h1>
+
+      <p>Your username:
+        <%= user.username %>
+      </p>
+      <p>Your email:
+        <%= user.email %>
+      </p>
+
+      <a href="/auth/logout"> Logout </a>
+
+      <% } %>
