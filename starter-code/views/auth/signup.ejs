@@ -1,0 +1,24 @@
+<% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+<h2>Sign Up!</h2>
+<form id="form" action="/signup" method="POST">
+
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="Your user name">
+
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Your password">
+  <br><br>
+
+  <label for="name">name</label>
+  <input type="text" name="name" placeholder="Your name">
+
+  <label for="email">email</label>
+  <input type="text" name="email" placeholder="Your email">
+  <br><br>
+
+  <button>Create account</button>
+</form>
+<br>
+<a href="/">Back to home</a>
