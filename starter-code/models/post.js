@@ -2,15 +2,8 @@ const mongoose = require("mongoose");
 const Schema   = mongoose.Schema;
 
 const postSchema = new Schema({
-  post: {
-    type: String,
-    required: [true, "Post can't be empty"]
-  },
-  user_id: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  user_name: String,
+  content: {type: String, required: true},
+  _creator: {type: String, required: true,}
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });

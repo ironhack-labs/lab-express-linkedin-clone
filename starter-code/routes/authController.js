@@ -1,38 +1,58 @@
 const express = require("express");
 const authController = express.Router();
-
-// User model
 const User = require("../models/user");
-
-// Bcrypt to encrypt passwords
+const Post = require("../models/post")
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
+const moment = require("moment");
 
 authController.get("/", (req, res, next) => {
-  res.redirect("login")
+  if (!req.session.currentUser) {
+    res.redirect("login");
+    return;
+  }
+  var user = req.session.currentUser;
+  // Show posts in homepage.
+  Post.find({
+      "_creator": user._id
+    }, "")
+    .sort({
+      created_at: -1
+    })
+    .exec((err, posts) => {
+      res.render("home", {
+        user: user,
+        posts : posts,
+        moment,
+      });
+    });
 })
-
 
 // SIGNUP GET & POST
 authController.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  if (!req.session.currentUser) {
+    res.render("auth/signup");
+    return;
+  }
+  res.redirect("/");
 });
 
 authController.post("/signup", (req, res, next) => {
-  var username = req.body.username;
+  var name = req.body.name;
   var password = req.body.password;
+  var email = req.body.email;
 
-  if (username === "" || password === "") {
+  if (name === "" || password === "" || email === "") {
     res.render("auth/signup", {
-      errorMessage: "Indicate a username and a password to sign up"
+      errorMessage: "Indicate a name, an email and a password to sign up"
     });
     return;
   }
 
-  User.findOne({ "username": username }, "username", (err, user) => {
+  User.findOne({ "email": email }, "email", (err, user) => {
     if (user !== null) {
       res.render("auth/signup", {
-        errorMessage: "The username already exists"
+        errorMessage: "The email already exists"
       });
       return;
     }
@@ -41,8 +61,9 @@ authController.post("/signup", (req, res, next) => {
     var hashPass = bcrypt.hashSync(password, salt);
 
     var newUser = User({
-      username,
+      name,
       password: hashPass,
+      email,
     });
 
     newUser.save((err) => {
@@ -59,32 +80,36 @@ authController.post("/signup", (req, res, next) => {
 
 // LOGIN GET & POST
 authController.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  if (!req.session.currentUser) {
+    res.render("auth/login");
+    return;
+  }
+  res.redirect("/");
 });
 
 authController.post("/login", (req, res, next) => {
-  var username = req.body.username;
   var password = req.body.password;
+  var email = req.body.email;
 
-  if (username === "" || password === "") {
+  if (email === "" || password === "") {
     res.render("auth/login", {
-      errorMessage: "Indicate a username and a password to log in"
+      errorMessage: "Indicate an email and a password to log in"
     });
     return;
   }
 
-  User.findOne({ "username": username },
-    "_id username password following",
+  User.findOne({ "email": email },
+    "_id name password email",
     (err, user) => {
       if (err || !user) {
         res.render("auth/login", {
-          errorMessage: "The username doesn't exist"
+          errorMessage: "The email doesn't exist"
         });
         return;
       } else {
         if (bcrypt.compareSync(password, user.password)) {
           req.session.currentUser = user;
-          res.redirect("/post");
+          res.redirect("/");
         } else {
           res.render("auth/login", {
             errorMessage: "Incorrect password"
