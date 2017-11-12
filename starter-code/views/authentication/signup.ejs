@@ -1,0 +1,23 @@
+<% if(user){ %>
+  <h2 style="color: red">Sorry <%= user.username %> you are already logged in.</h2>
+  <p>To sign up another account, please logout</p>
+  <a href="/logout">Logout</a>
+<% } else { %>
+  <form id="linkedin-signup" action="/signup" method="POST">
+    <input type="text" name="name" placeholder="Name"></input>
+    <input type="text" name="email" placeholder="Email"></input>
+    <input type="password" name="password" placeholder="Password"></input>
+    <textarea rows="4" cols="50" type="text" name="summary" placeholder="Please enter a summary"></textarea>
+    <input type="text" name="imageUrl" placeholder="Imgur url"></input>
+    <input type="text" name="company" placeholder="Company"></input>
+    <input type="text" name="jobTitle" placeholder="Job title"></input>
+
+    <input type="submit" class="btn-submit"></input>
+  </form>
+<% } %>
+
+<% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error"><%= errorMessage %></div>
+<% } %>
+
+<a href="/">Back to home</a>

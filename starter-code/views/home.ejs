@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- If user is logged in -->
+    <% if (user){ %>
+    <p>Welcome to linkedin, <%= user.name %><p>
+    <a href="/profile/show/<%= user._id %>"><button>View profile</button></a> - <a href="/logout"><button>Logout</button></a>
+    </div>
+
+    <!-- Otherwise -->
+    <% } else { %>
+      <a href="/login"><button>Login</button></a> - <a href="/signup"><button>Sign up</button></a>
+    <% } %>
+  </body>
+</html>
