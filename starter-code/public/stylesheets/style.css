@@ -1,8 +1,50 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 2em;
+  font-family: 'Open Sans', sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+form {
+  width: 70%;
+  margin: 0 auto;
+}
+
+form input, textarea {
+  display: block;
+  width: 400px;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.error {
+  display: block;
+  width: 400px;
+  margin: 0 auto;
+  color: white;
+  background-color: #007bb6;
+  padding: 10px;
+}
+
+.info {
+  text-align: center;
+  margin: 30px auto;
+  width: 400px;
+}
+
+.profile {
+  text-align: center;
+}
+
+.profile img {
+  width: 120px;
+}
+
+.summary {
+  width: 50%;
+  color: #e3e3e3;
+  margin: 0 auto;
 }

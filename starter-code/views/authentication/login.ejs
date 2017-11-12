@@ -1,0 +1,12 @@
+<form action="/login" method="POST" id="form">
+  <input type="text" name="email" placeholder="Email">
+  <input type="password" name="password" placeholder="Password">
+
+  <% if (typeof errorMessage !== "undefined") { %>
+    <div class="error"><%= errorMessage %></div>
+  <% } %>
+
+  <input type="submit" class="btn-submit" value="Login"></input>
+</form>
+
+<p class="info">Need to register an account? <a href="/signup">Sign up</a> here.</p>

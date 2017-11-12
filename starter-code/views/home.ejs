@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <!-- If user is logged in -->
+    <% if (user){ %>
+    <div class="timeline">
+    Timeline
+    <a href="./profile">View profile</a>
+    </div>
+
+    <!-- Otherwise -->
+    <% } else { %>
+      <a href="/login">Login</a> - <a href="/signup">Sign up</a>
+    <% } %>
+  </body>
+</html>
