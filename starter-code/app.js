@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-// const favicon = require('serve-favicon');
+const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const auth = require('./routes/auth');
@@ -16,15 +16,14 @@ const app = express();
 const dbName = "mongodb://localhost/basic-auth";
 mongoose.connect(dbName, {useMongoClient:true})
         .then(() => debug(`Connected to db: ${dbName}`));
-
+app.use(expressLayouts);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+app.set('layout', 'layout/main-layout');
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-// app.use(expressLayouts);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -38,12 +37,6 @@ app.use(session({
     ttl: 24 * 60 * 60* 2 // 1 day
   })
 }));
-
-// app.use((req,res,next) =>{
-//   res.locals.title = "Setted session";
-//   res.locals.user = req.session.currentUser;
-//   next();
-// });
 
 app.use('/', auth);
 app.use('/users/', users);

@@ -1,14 +1,37 @@
-
 <div>
   <% if(public) { %>
-    MODO PUBLICO
+    <div class="container">
+      <div class="login">
+        <div class="iconNav inline-block">
+          <img class ="logoNav" src="/images/linkedin.png">
+        </div>
+        <div class="menuNav inline-block">
+          <% if (typeof errorMessage !== "undefined") { %>
+          <div class="error-message"><%= errorMessage %></div>
+          <% } %>
+            <a href="/"><button class="btnsignin">Go to menu</button></a>
+         </div>
+      </div>
+    </div>
   <%} else {%>
-    MODO PRIVADO
+    <div class="container">
+      <div class="login">
+        <div class="iconNav inline-block">
+          <img class ="logoNav" src="/images/linkedin.png">
+        </div>
+        <div class="menuNav inline-block menuSelectable">
+          <a href="/"><button class="btnsignin">Go to menu</button></a>
+          <a href="/users/<%-id%>/posts">Add new post</a>
+          <a href="/profile/<%-id%>/edit">Edit my profile</a>
+          <a href="/profile/<%-id%>">Look my profile</a>
+          <a href="/logout">Logout</a>
+        </div>
+      </div>
+    </div>
     <% } %>
-<h2> <%= name %> </h2>
-  <%= jobTitle %>
-  <%= company %>
-    <img src="<%= imageUrl %>"
-
-</div>
-<a href="/"><button>BACK TO MENU</button></a>
+    <div class="showProfile">
+      <img class="profile" src="<%= imageUrl %>">
+      <h2><span class="myName"><%= name %></span></h2>
+      <div class="jobTitleDiv"><span class="jobTitle"><%= jobTitle %></span></div>
+      <div class="companyDiv"><span class="company"><%= company %></span></div>
+    </div>

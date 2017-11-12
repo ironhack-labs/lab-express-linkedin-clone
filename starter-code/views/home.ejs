@@ -1,20 +1,22 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Welcome!</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Welcome <%= name %></h1>
-    <a href="/users/<%-id%>/posts"<button>Add new post</a><br>
-    <a href="/profile/<%-id%>/edit"<button>Edit my profile</button></a><br>
-    <a href="/profile/<%-id%>"<button>Look my profile</button></a>
-  </body>
-  <a href="/logout"><button>Logout</button></a>
+<div class="container">
+  <div class="login">
+    <div class="iconNav inline-block">
+      <img class ="logoNav" src="/images/linkedin.png">
+    </div>
+    <div class="menuNav inline-block menuSelectable">
+      <span class="welcomeMenuTitle">Welcome <%= name %></span>
+      <a href="/users/<%-id%>/posts">Add new post</a>
+      <a href="/profile/<%-id%>/edit">Edit my profile</a>
+      <a href="/profile/<%-id%>">Look my profile</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
   <div>
-    <br><% allPosts.forEach((post) =>{ %>
-      <%= post._creator %><br>
-      <%= post.content %><br><br>
+    <% allPosts.forEach((post) =>{ %>
+      <div class="post">
+        <span class="message"><%= post._creator %></span><br>
+        <span class="content"><%= post.content %></span>
+      </div>
     <% }) %>
   </div>
-</html>

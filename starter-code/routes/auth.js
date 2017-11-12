@@ -38,14 +38,13 @@ router.get('/signup', function(req, res, next) {
 
 router.post('/signup', function(req, res, next) {
   // SAVE data username, password, name, email
-
   const username = req.body.username;
   const password = req.body.password;
   const email = req.body.email;
   const name = req.body.name;
 
   if (username === "" || password === "" || email === "" || name === "") {
-    res.render("auth/signup", {
+    res.render("authentication/signup", {
       errorMessage: "Please, fill all fields"
     });
     return;
@@ -57,7 +56,7 @@ router.post('/signup', function(req, res, next) {
     "username",
     (err, user) => {
       if (user !== null) {
-        res.render("auth/signup", {
+        res.render("authentication/signup", {
           errorMessage: "The username already exists"
         });
         return;
@@ -95,7 +94,7 @@ router.post('/login', function(req, res, next) {
   const password = req.body.password;
 
   if (username === "" || password === "") {
-    res.render('auth/login', {
+    res.render('authentication/login', {
       errorMessage: "Please, fill user and pass to sign up"
     });
     return;
@@ -104,7 +103,7 @@ router.post('/login', function(req, res, next) {
     "username": username
   }, (err, user) => {
     if (err || !user) {
-      res.render("auth/login", {
+      res.render("authentication/login", {
         errorMessage: "The username doesn't exist"
       });
       return;
@@ -114,7 +113,7 @@ router.post('/login', function(req, res, next) {
       req.session.currentUser = user;
       res.redirect("/");
     } else {
-      res.render("auth/login", {
+      res.render("authentication/login", {
         errorMessage: "Incorrect password"
       });
     }
