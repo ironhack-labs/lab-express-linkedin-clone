@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+  <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+
+  <h1><%= title %></h1>
+
+  <form class="" action="/login" method="post">
+    <p>
+      <label for="">Username</label>
+      <input type="text" name="username" value="">
+    </p>
+    <p>
+      <label for="">Password</label>
+      <input type="password" name="password" value="">
+    </p>
+    <button type="submit" name="button">login</button>
+  </form>
+  <p>
+    <% if (typeof(errorMessage) !== "undefined") { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+</p>
+    <a href="/signup">signup</a>
+</body>
+
+</html>

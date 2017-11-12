@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <% if (typeof(title) !== "undefined") { %>
+      <%= title %>
+    <% }%>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>  <% if (typeof(title) !== "undefined") { %>
+      <%= title %>
+    <% }%>
+  </h1>
+
+
+  <form class="" action="/signup" method="POST">
+    <p>
+      <label for="">Username</label>
+      <input type="text" name="username" value="">
+    </p>
+    <p>
+      <label for="">Password</label>
+      <input type="password" name="password" value="">
+    </p>
+    <p>
+      <label for="">Name</label>
+      <input type="text" name="name" value="">
+    </p>
+    <p>
+      <label for="">Email</label>
+      <input type="text" name="email" value="">
+    </p>
+    <p>
+      <button type="submit" name="button">signup</button>
+    </p>
+        <a href="/login">signup</a>
+  </form>
+  <% if (typeof(errorMessage) !== "undefined") { %>
+     <%=   errorMessage %>
+   <% }%>
+
+</body>
+
+</html>
