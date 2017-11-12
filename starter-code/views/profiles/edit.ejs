@@ -1,0 +1,37 @@
+<form id="form" action="/profile/<%= _id %>" method="POST">
+  <label for="username">Name</label><br>
+  <input type="text" name="name" placeholder="<%= name %>">
+  <br><br>
+  <label for="username">Username</label><br>
+  <input type="text" name="username" placeholder="<%= username %>">
+  <br><br>
+  <label for="email">Email</label><br>
+  <input type="email" name="email" placeholder="<%= email %>">
+  <br><br>
+  <label for="summary">Summary</label><br>
+  <textarea name="summary" form="form">
+    <% if (typeof(summary) !== "undefined") { %>
+      <%= summary %>
+    <% } %>
+  </textarea>
+  <br><br>
+  <label for="image">Image</label><br>
+  <input type="url" name="imageUrl"
+    <% if (typeof(imageUrl) !== "undefined") { %>
+      placeholder="<%= imageUrl %>"
+    <% } %> />
+  <br><br>
+  <label for="company">Company</label><br>
+  <input type="text" name="company"
+    <% if (typeof(company) !== "undefined") { %>
+      placeholder="<%= company %>"
+    <% } %> />
+  <br><br>
+  <label for="jobTitle">Job Title</label><br>
+  <input type="text" name="jobTitle"
+    <% if (typeof(jobTitle) !== "undefined") { %>
+      placeholder="<%= jobTitle %>"
+    <% } %> />
+  <br><br>
+  <button type="submit" name="signup">Update profile</button>
+</form>
