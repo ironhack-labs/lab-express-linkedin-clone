@@ -11,3 +11,7 @@ a {
   max-width: 600px;
   margin: auto;
 }
+
+.btn {
+  margin-bottom: 20px;
+}

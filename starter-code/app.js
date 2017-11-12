@@ -24,6 +24,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+//Para usar los layouts
 app.use(expressLayouts);
 app.set('layout', __dirname + '/views/layout/main-layout');
 

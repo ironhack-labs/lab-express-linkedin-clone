@@ -18,7 +18,11 @@ auth.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-auth.post("/signup", (req, res, next) => {
+// auth.get("/logout", (req, res, next) => {
+//   res.render("auth/signup");
+// });
+
+auth.get("/signup", (req, res, next) => {
   var username = req.body.username;
   var password = req.body.password;
   var name = req.body.name;
@@ -106,6 +110,18 @@ auth.post("/login", (req, res, next) => {
       }
   });
 });
+
+auth.use((req, res, next) => {
+  if (req.session.currentUser) {
+    next();
+  } else {
+    res.redirect("/login");
+  }
+});
+
+// auth.get("/secret", (req, res, next) => {
+//   res.render("secret");
+// });
 
 auth.get("/logout", (req, res, next) => {
   if (!req.session.currentUser) { res.redirect("/"); return; }
