@@ -1,0 +1,21 @@
+<div id="timeline">
+  <% if (timeline.length > 0) { %>
+    <% timeline.forEach(function(e) { %>
+      <div class="tweet-container">
+        <p><%= e.tweet %></p>
+        <p class="date">
+          <span>
+            <a href="/profile/<%= e.user_name %>">
+              @<%= e.user_name %>
+            </a>
+          </span><br>
+          <%= moment(e.created_at).format("LL, LTS") %>
+        </p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="tweet-container no-tweets">
+      <p>The timeline is empty</p>
+    </div>
+  <% } %>
+</div>
