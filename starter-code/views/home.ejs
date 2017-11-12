@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Welcome user</title>
+    <title>Welcome!</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Welcome user</h1>
+    <h1>Welcome <%= name %></h1>
+    <a href="/users/<%-id%>/posts"<button>Add new post</a><br>
+    <a href="/profile/<%-id%>/edit"<button>Edit my profile</button></a><br>
+    <a href="/profile/<%-id%>"<button>Look my profile</button></a>
   </body>
+  <a href="/logout"><button>Logout</button></a>
 </html>
