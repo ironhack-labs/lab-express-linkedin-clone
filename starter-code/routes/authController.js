@@ -26,8 +26,7 @@ authController.post("/login", (req, res, next) => {
     return;
   }
 
-  User.findOne({ "username": username }, "_id username password name email",
-    (err, user) => {
+  User.findOne({ "username": username }, (err, user) => {
       if (err || !user) {
         res.render("auth/login", {
           errorMessage: "The username doesn't exist"
