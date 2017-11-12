@@ -3,7 +3,18 @@
 <a href="/users/<%=user._id%>/posts/new"><button class="nicebtn">New Post</button></a>
 <a href="/logout"><button class="dngrbtn">Logout</button></a>
 
-<div id="container">
+<div class="connect">
+  <h2>Connections</h2>
+  <% if (follows.length > 0) { %>
+    <% follows.forEach(function(e) { %>
+        <a href="/profile/<%=e._id%>"><p><%= e.name %></p></a>
+    <% }) %>
+  <% } else { %>
+      <p><%= user.name %> has no connections yet.</p>
+  <% } %>
+</div>
+
+<div>
   <h2><%= user.name %> posts</h2>
   <% if (posts.length > 0) { %>
     <% posts.forEach(function(e) { %>

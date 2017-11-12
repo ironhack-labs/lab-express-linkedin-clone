@@ -12,6 +12,18 @@ authController.get("/", (req, res, next) => {
     return;
   }
   var user = req.session.currentUser;
+  var follows = [];
+  // Show Connections and their Posts
+  user.following.forEach(e => {
+    User.findOne({
+      _id: e
+    }).exec((err, newUser) => {
+      if (newUser) {
+        follows.push(newUser)
+        }
+    });
+  });
+
   // Show posts in homepage.
   Post.find({
       "_creator": user._id
@@ -22,7 +34,8 @@ authController.get("/", (req, res, next) => {
     .exec((err, posts) => {
       res.render("home", {
         user: user,
-        posts : posts,
+        follows: follows,
+        posts: posts,
         moment,
       });
     });
@@ -49,7 +62,9 @@ authController.post("/signup", (req, res, next) => {
     return;
   }
 
-  User.findOne({ "email": email }, "email", (err, user) => {
+  User.findOne({
+    "email": email
+  }, "email", (err, user) => {
     if (user !== null) {
       res.render("auth/signup", {
         errorMessage: "The email already exists"
@@ -57,7 +72,7 @@ authController.post("/signup", (req, res, next) => {
       return;
     }
 
-    var salt     = bcrypt.genSaltSync(bcryptSalt);
+    var salt = bcrypt.genSaltSync(bcryptSalt);
     var hashPass = bcrypt.hashSync(password, salt);
 
     var newUser = User({
@@ -98,8 +113,10 @@ authController.post("/login", (req, res, next) => {
     return;
   }
 
-  User.findOne({ "email": email },
-    "_id name password email",
+  User.findOne({
+      "email": email
+    },
+    "",
     (err, user) => {
       if (err || !user) {
         res.render("auth/login", {
@@ -116,12 +133,15 @@ authController.post("/login", (req, res, next) => {
           });
         }
       }
-  });
+    });
 });
 
 // LOGOUT
 authController.get("/logout", (req, res, next) => {
-  if (!req.session.currentUser) { res.redirect("/"); return; }
+  if (!req.session.currentUser) {
+    res.redirect("/");
+    return;
+  }
 
   req.session.destroy((err) => {
     if (err) {

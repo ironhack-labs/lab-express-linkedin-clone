@@ -22,7 +22,13 @@
     </form>
   <% } %>
 
+  <% if (session !== undefined && user._id != session._id) { %>
+    <form action="/profile/<%= user._id %>/follow" method="POST">
+      <button class="nicebtn"><%= button_text %></%%></button>
+    </form>
+  <% } %>
+
   <form action="/" method="GET">
-    <button class="nicebtn"> Back home!</button>
+    <button class="dngrbtn"> Back home!</button>
   </form>
 </div>

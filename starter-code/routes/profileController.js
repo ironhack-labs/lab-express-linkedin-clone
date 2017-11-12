@@ -9,9 +9,16 @@ profileController.get("/:id", (req, res, next) => {
     if (!user) {
       return next(err);
     }
+
+    // ADDS UNFOLLOW BUTTON
+    if (req.session.currentUser) {
+      var isFollowing = req.session.currentUser.following.indexOf(user._id.toString()) > -1
+    }
+
     res.render("profiles/show", {
       user: user,
       session: req.session.currentUser,
+      button_text: isFollowing ? "Unfollow" : "Follow"
     });
   });
 });
@@ -46,38 +53,36 @@ profileController.get("/:id/edit", (req, res, next) => {
   }
 });
 
-// // FOLLOW & UNFOLLOW.
-// profileController.use((req, res, next) => {
-//   if (req.session.currentUser) { next(); }
-//   else { res.redirect("/login"); }
-// });
-//
-// profileController.post("/:username/follow", (req, res) => {
-//   User.findOne({ "username": req.params.username }, "_id").exec((err, follow) => {
-//     if (err) {
-//       res.redirect("/profile/" + req.params.username);
-//       return;
-//     }
-//
-//     User
-//       .findOne({ "username": req.session.currentUser.username })
-//       .exec((err, currentUser) => {
-//         var followingIndex = currentUser.following.indexOf(follow._id);
-//
-//         if (followingIndex > -1) {
-//           currentUser.following.splice(followingIndex, 1)
-//         } else {
-//           currentUser.following.push(follow._id);
-//         }
-//
-//         currentUser.save((err) => {
-//           req.session.currentUser = currentUser;
-//           res.redirect("/profile/" + req.params.username);
-//         });
-//       });
-//   });
-// });
-//
+// FOLLOW & UNFOLLOW.
+profileController.use((req, res, next) => {
+  if (req.session.currentUser) { next(); }
+  else { res.redirect("/login"); }
+});
+
+profileController.post("/:id/follow", (req, res) => {
+  User.findOne({ _id: req.params.id }, "").exec((err, follow) => {
+    if (err) {
+      res.redirect("/profile/" + req.params.id);
+      return;
+    }
+
+    User.findOne({ _id : req.session.currentUser._id }).exec((err, currentUser) => {
+        var followingIndex = currentUser.following.indexOf(follow._id);
+
+        if (followingIndex > -1) {
+          currentUser.following.splice(followingIndex, 1)
+        } else {
+          currentUser.following.push(follow._id);
+        }
+
+        currentUser.save((err) => {
+          req.session.currentUser = currentUser;
+          res.redirect("/profile/" + req.params.id);
+        });
+      });
+  });
+});
+
 // // TIMELINE
 // profileController.get("/:username/timeline", (req, res) => {
 //   const currentUser = req.session.currentUser;

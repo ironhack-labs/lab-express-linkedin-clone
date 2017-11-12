@@ -9,6 +9,7 @@ const userSchema = new Schema({
   imageUrl: { type: String},
   company: { type: String},
   jobTitle: { type: String},
+  following: [{ type: Schema.Types.ObjectId, ref: "User" }],
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
