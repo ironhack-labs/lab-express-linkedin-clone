@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Edit profile</title>
+</head>
+
+<body>
+    <h2>Edit your profile</h2>
+
+    <form action="/profile/<%= user.id %>" method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username" value="<%= user.username %>" />
+
+        <label for="password">Password</label>
+        <input type="password" name="password" value="" />
+
+        <label for="name">Name</label>
+        <input type="text" name="name" value="<%= user.name %>" />
+
+        <label for="email">Email</label>
+        <input type="text" name="email" value="<%= user.email %>" />
+
+        <label for="summary">Summary</label>
+        <input type="text" name="summary" value="<%= user.summary %>" />
+
+        <label for="imageUrl">imageUrl</label>
+        <input type="text" name="imageUrl" value="<%= user.imageUrl %>" />
+
+        <label for="company">Company</label>
+        <input type="text" name="company" value="<%= user.company %>" />
+
+        <label for="jobTitle">Job title</label>
+        <input type="text" name="jobTitle" value="<%= user.jobTitle %>" />
+
+        <button type="submit">Edit</button>
+    </form>
+
+</body>
+
+</html>
