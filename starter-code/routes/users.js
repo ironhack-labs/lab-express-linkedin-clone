@@ -1,12 +1,10 @@
 const express = require('express');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
-const path = require('path');
 
 const router = express.Router();
 const bcryptSalt = 10;
 
-/* GET users listing. */
 router.get("/signup", (req, res) => {
   res.render("authentication/signup");
 });
@@ -87,8 +85,9 @@ router.post("/login", (req, res, next) => {
 });
 
 router.get('/logout', (req, res, next) => {
-  req.session.destroy();
-  res.redirect('/users/login');
+  req.session.destroy(err => {
+    res.redirect('/users/login');
+  });
 });
 
 module.exports = router;

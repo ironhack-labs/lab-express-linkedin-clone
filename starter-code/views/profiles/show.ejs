@@ -1,0 +1,31 @@
+<ul>
+  <li>Name: <%= name || "" %></li>
+  <% if (isLogged) { %>
+    <li>Username: <%= username %></li>
+    <li>Email: <%= email %></li>
+    <li>Summary:
+      <% if (typeof(summary) !== "undefined") { %>
+        <%= summary %>
+      <% } %>
+    </li>
+  <% } %>
+  <li>Image:
+    <% if (typeof(imageUrl) !== "undefined") { %>
+      <%= imageUrl %>
+    <% } %>
+  </li>
+  <li>Company:
+    <% if (typeof(company) !== "undefined") { %>
+      <%= company %>
+    <% } %>
+  </li>
+  <li>Job title:
+    <% if (typeof(jobTitle) !== "undefined") { %>
+      <%= jobTitle %>
+    <% } %>
+  </li>
+</ul>
+
+<% if (ownProfile) { %>
+  <a href="/profile/<%= id %>/edit">Edit</a>
+<% } %>

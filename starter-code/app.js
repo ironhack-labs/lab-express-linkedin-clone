@@ -13,6 +13,7 @@ const app = express();
 // Controllers
 const home = require('./routes/home');
 const users = require('./routes/users');
+const profile = require('./routes/profile');
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/linkedin-clone");
@@ -45,6 +46,7 @@ app.use(session({
 // Routes
 app.use('/home', home);
 app.use('/users', users);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
