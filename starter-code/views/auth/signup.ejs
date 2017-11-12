@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Sign up</title>
+</head>
+
+<body>
+    <h2>Sign up in Linkedin</h2>
+
+    <form action="/auth/signup" method="POST">
+        <label for="username">Username</label>
+        <input type="text" name="username" />
+
+        <label for="password">Password</label>
+        <input type="password" name="password" />
+
+        <label for="name">Name</label>
+        <input type="text" name="name" />
+
+        <label for="email">Email</label>
+        <input type="text" name="email" />
+
+        <button type="submit">Sign up</button>
+    </form>
+
+    <% if(typeof errorMessage !== 'undefined') { %>
+        <strong><%= errorMessage %></strong>
+        <% } %>
+</body>
+
+</html>

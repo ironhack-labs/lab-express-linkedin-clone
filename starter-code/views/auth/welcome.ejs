@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+    <h2>Welcome <%= user.username %></h2>
+
+    <a href="/profile/<%= user.id %>/edit">Edit profile</a>
+    <a href="/profile/<%= user.id %>">Show profile</a>
+    <a href="/auth/logout">Log out</a>
+</body>
+
+</html>
