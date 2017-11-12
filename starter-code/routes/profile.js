@@ -1,53 +1,44 @@
 const express = require('express');
+const isLoggedIn = require('../middlewares/isLoggedIn');
 const User = require('../models/User');
 
 const router  = express.Router();
 
-router.get('/', (req, res, next) => {
-  User.find({}, (err, User) => {
-    if (err) { return next(err) }
-    res.render('profile/index', {
-      User: User
-    });
+router.get('/home', isLoggedIn, (req, res) => {
+  res.render('home');
+});
+
+router.post('/profile/:id', (req, res, next) => {
+  const userId = req.params.id;
+  const updates = {
+     username : req.body.username,
+     email : req.body.email,
+     password : req.body.password,
+     summary : req.body.summary,
+     imageURL : req.body.imageURL,
+     company : req.body.company,
+     jobTitle : req.body.jobTitle
+  };
+
+  User.findByIdAndUpdate(userId, updates, (err, user) => {
+    if (err){ return next(err); }
+    res.render('home', { user: user });
   });
 });
 
-router.get('/:id', (req, res, next) => {
-  let id = req.params.id
-
-  User.findById(id, (err, User) => {
-    res.render('profile/index', {
-      User: User
-    })
-  })
+router.get('/profile/show/:id', (req, res, next) => {
+  const userId = req.params.id;
+  User.findById(userId, (err, user) => {
+    if (err) { return next(err); }
+    res.render('profile/show', { user: user });
+  });
 });
 
-router.get('/:id/edit', (req, res, next) => {
-  let id = req.params.id
-
-  User.findById(id, (err, User) => {
-    res.render('profile/edit', {
-      User: User
-    })
-  })
-});
-
-router.post('/:id', (req, res, next) => {
-  let id = req.params.id
-
-  const updates = {
-    name: req.body.name,
-    email: req.body.email,
-    imageUrl: req.body.imageUrl,
-    summary: req.body.summary,
-    company: req.body.company,
-    jobTitle: req.body.jobTitle
-  };
-
-  User.findByIdAndUpdate(id, updates, (err, User) => {
-    if (err){ return next(err); }
-
-    return res.redirect(`/profile/${User._id}`);
+router.get('/profile/:id/edit', (req, res, next) => {
+  const userId = req.params.id;
+  User.findById(userId, (err, user) => {
+    if (err) { return next(err); }
+    res.render('profile/edit', { user: user });
   });
 });
 

@@ -42,11 +42,11 @@ router.post('/signup', (req, res) => {
       }
 
       // Password encryption
-      var salt = bcrypt.genSaltSync(bcryptSalt);
-      var hashPass = bcrypt.hashSync(password, salt);
+      let salt = bcrypt.genSaltSync(bcryptSalt);
+      let hashPass = bcrypt.hashSync(password, salt);
 
       // User creation
-      var newUser = User({
+      let newUser = User({
         name,
         email,
         password: hashPass,
@@ -57,7 +57,7 @@ router.post('/signup', (req, res) => {
       });
 
       newUser.save((err) => {
-        res.redirect("/");
+        res.redirect("/login");
       });
     });
 });
@@ -86,7 +86,7 @@ router.post("/login", (req, res, next) => {
       if (bcrypt.compareSync(password, user.password)) {
         // Save the login in the session!
         req.session.currentUser = user;
-        res.redirect("/profile/");
+        res.render("./home", { user: user });
       } else {
         res.render("authentication/login", {
           errorMessage: "Incorrect password"
@@ -97,7 +97,7 @@ router.post("/login", (req, res, next) => {
 
 router.get('/logout', (req,res) => {
   req.session.destroy((err) => {
-    res.redirect("/");
+    res.redirect("/login");
   });
 });
 

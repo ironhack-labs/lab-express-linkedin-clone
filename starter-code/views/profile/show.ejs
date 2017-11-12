@@ -5,10 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <!-- If user is logged in -->
-    <% if (user){ %>
     <div class="profile">
-      <a href="./edit">Edit</a>
+      <a href="../<%= user._id %>/edit">Edit</a>
       <h4 style="color: #007bb6">Welcome to LinkedIn, <%= user.email %></h4>
       <p class="name"><%= user.name %></p>
       <img class="imageUrl" src="<%= user.imageUrl %>" />
@@ -18,9 +16,5 @@
       <a href="/logout">Logout</a>
     </div>
 
-    <!-- Otherwise -->
-    <% } else { %>
-      <a href="/login">Login</a> - <a href="/signup">Sign up</a>
-    <% } %>
   </body>
 </html>

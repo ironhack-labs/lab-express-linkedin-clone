@@ -1,9 +1,21 @@
-<form action="/profile/<%= User._id %>" method="POST">
-    <input type="text" name="name" value="<%= User.name %>" placeholder="Name.."></input>
-    <input type="text" name="email" value="<%= User.email %>" placeholder="Email.."></input>
-    <input type="text" name="imageUrl" value="<%= User.imageUrl %>" placeholder="Image URL"></input>
-    <textarea type="text" name="summary" value="<%= User.summary %>"  placeholder="Summary"><%= User.summary %></textarea>
-    <input type="text" name="jobTitle" value="<%= User.jobTitle %>" placeholder="Job title"></input>
-    <input type="text" name="company" value="<%= User.company %>" placeholder="Company"></input>
-    <button type="submit">Edit</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/../stylesheets/style.css">
+  <title>Edit</title>
+</head>
+
+<body>
+  <form action="/profile/<%= user._id %>" method="POST">
+      <input type="text" name="name" value="<%= user.name %>" placeholder="Name.."></input>
+      <input type="text" name="email" value="<%= user.email %>" placeholder="Email.."></input>
+      <input type="text" name="imageUrl" value="<%= user.imageUrl %>" placeholder="Image URL"></input>
+      <textarea type="text" name="summary" value="<%= user.summary %>"  placeholder="Summary"><%= user.summary %></textarea>
+      <input type="text" name="jobTitle" value="<%= user.jobTitle %>" placeholder="Job title"></input>
+      <input type="text" name="company" value="<%= user.company %>" placeholder="Company"></input>
+      <input type="submit"></input>
+  </form>
+</body>

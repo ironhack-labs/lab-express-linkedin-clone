@@ -7,9 +7,8 @@
   <body>
     <!-- If user is logged in -->
     <% if (user){ %>
-    <div class="timeline">
-    Timeline
-    <a href="./profile">View profile</a>
+    <p>Welcome to linkedin, <%= user.name %><p>
+    <a href="/profile/show/<%= user._id %>">View profile</a> - <a href="/logout">Logout</a>
     </div>
 
     <!-- Otherwise -->
