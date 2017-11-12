@@ -33,7 +33,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
 
-app.use('/', index);
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60*60*24*2 }, // 2 days
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+
 app.use('/users', users);
 app.use("/", authController);
 

@@ -8,9 +8,13 @@ const User           = require("../models/user");
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
 
-//redirect the users from root to the login page
-authController.get("/", (req, res) => {
-  res.redirect("/login");
+//redirections to login page or home depending of logged state
+authController.get("/", (req, res, next) => {
+  if (!req.session.currentUser) {
+    res.redirect("login");
+    return;
+  }
+    res.render("home", {user: req.session.currentUser});
 });
 
 // renders the view we created in the /views/auth folder
@@ -85,13 +89,27 @@ authController.post("/login", (req, res, next) => {
       } else {
         if (bcrypt.compareSync(password, user.password)) {
           req.session.currentUser = user;
-          // res.redirect("/posts");
+        //  res.redirect("/posts");
+      
         } else {
           res.render("auth/login", {
             errorMessage: "Incorrect password"
           });
         }
       }
+  });
+});
+
+//Logout
+authController.get("/logout", (req, res, next) => {
+  if (!req.session.currentUser) { res.redirect("/"); return; }
+
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");
+    }
   });
 });
 

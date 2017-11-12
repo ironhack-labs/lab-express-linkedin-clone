@@ -1,0 +1,23 @@
+<div id="profile">
+  <h2>@<%= username %></h2>
+</div>
+
+<div id="container">
+  <% if (posts.length > 0) { %>
+    <% posts.forEach(function(e) { %>
+      <div class="post-container">
+        <p><%= e.post %></p>
+        <p class="date"><%= moment(e.created_at).format("LL, LTS") %></p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="post-container no-posts">
+      <p>@<%= username %> hasn't posted yet.</p>
+    </div>
+  <% } %>
+</div>
+<% if (session !== undefined && username !== session.username) { %>
+  <form action="/profile/<%= username %>/follow" method="POST">
+    <button class="button blue"><%= button_text %></%%></button>
+  </form>
+<% } %>
