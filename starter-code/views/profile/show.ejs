@@ -1,0 +1,12 @@
+<h2>HOME PAGE</h2>
+<p><%= user.username %></p>
+
+<ul>
+  <li><%= user.email %></li>
+  <li><%= user.summary %></li>
+  <li><%= user.company %></li>
+  <li><%= user.jobTitle %></li>
+  <li><%= user.imageUrl %></li>
+</ul>
+<a href="/profile/<%= user.id %>">Edit profile</a>
+<a href="/logout">Log out</a>
