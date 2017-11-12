@@ -29,7 +29,7 @@ postsController.post("/:id/posts", (req, res, next) => {
         res.render("posts/new",
           {
             user : user,
-            errorMessage: "Couldn't save the data!" + err,
+            errorMessage: "Couldn't save the data!",
           });
       } else {
         res.redirect("/profile/" + user._id);

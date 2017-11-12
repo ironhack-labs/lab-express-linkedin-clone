@@ -37,9 +37,13 @@ profileController.post("/:id", (req, res, next) => {
 
 profileController.get("/:id/edit", (req, res, next) => {
   const session = req.session.currentUser;
-  res.render("profiles/edit", {
-    session: session,
-  });
+  if(session) {
+    res.render("profiles/edit", {
+      session: session,
+    });
+  } else {
+    res.redirect("/")
+  }
 });
 
 // // FOLLOW & UNFOLLOW.

@@ -1,26 +1,28 @@
 <div id="profile">
-  <h2><%= user.name %></h2>
+  <h1><%= user.name %></h1>
 </div>
 
-<div id="container">
-  <ul>
-    <li>Name: <%= user.name %></li>
-    <li>JobTitle: <%= user.jobTitle %></li>
-    <li>Image: <img src="<%= user.imageUrl %>"></li>
-    <li>Company: <%= user.company %></li>
+<div>
+  <ul class="proflist">
+    <li><b>Name:</b><br> <%= user.name %></li>
+    <li><b>JobTitle:</b><br> <%= user.jobTitle %></li>
+    <li><b>Image:</b><br> <img src="<%= user.imageUrl %>" width="200" height="<200></200>"></li>
+    <li><b>Company:</b><br> <%= user.company %></li>
   <% if(session !== undefined) {%>
-    <li>Email: <%= user.email %></li>
-    <li>Summary: <%= user.summary %></li>
+    <li><b>Email:</b><br> <%= user.email %></li>
+    <li><b>Summary:</b><br> <%= user.summary %></li>
   <%}%>
   </ul>
 </div>
 
-<% if (session !== undefined && user._id == session._id) { %>
-  <form action="/profile/<%= user._id %>/edit" method="GET">
-    <button class="button blue"> Edit Your Profile</%%></button>
-  </form>
-<% } %>
+<div class="buttons">
+  <% if (session !== undefined && user._id == session._id) { %>
+    <form action="/profile/<%= user._id %>/edit" method="GET">
+      <button class="nicebtn"> Edit Your Profile</%%></button>
+    </form>
+  <% } %>
 
-<form action="/" method="GET">
-  <button class="button blue"> Back home!</button>
-</form>
+  <form action="/" method="GET">
+    <button class="nicebtn"> Back home!</button>
+  </form>
+</div>

@@ -1,13 +1,13 @@
-<h1>Welcome <%= user.name %></h1>
-<a href="/profile/<%=user._id%>">My profile</a>
-<a href="/users/<%=user._id%>/posts/new">New Post</a>
-<a href="/logout">Logout</a>
+<h1>Welcome <%= user.name %>!</h1>
+<a href="/profile/<%=user._id%>"><button class="nicebtn">My profile</button></a>
+<a href="/users/<%=user._id%>/posts/new"><button class="nicebtn">New Post</button></a>
+<a href="/logout"><button class="dngrbtn">Logout</button></a>
 
 <div id="container">
-  <h2><%= user.name %> Posts</h2>
+  <h2><%= user.name %> posts</h2>
   <% if (posts.length > 0) { %>
     <% posts.forEach(function(e) { %>
-      <div >
+      <div class="newpost">
         <p><%= e.content %></p>
         <p class="date"><%= moment(e.created_at).format("LL, LTS") %></p>
       </div>

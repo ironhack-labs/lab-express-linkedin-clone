@@ -1,8 +1,104 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #317589;
+  text-align: center;
 }
 
-a {
-  color: #00B7FF;
+#logomain {
+  margin-bottom: 40px;
+}
+
+.mainbody {
+  width: 80%;
+  margin: 0 auto;
+  background-color:white;
+  border-radius: 25px;
+  text-align: center;
+  height: 100%;
+  padding: 10px;
+}
+
+.mainbody h1 {
+  font-size: 40px;
+  margin: 10px;
+}
+
+.error-message {
+  color: red;
+}
+
+.form {
+  width: 50%;
+  margin: 0 auto;
+  padding: 25px;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+.form input {
+  margin: 10px;
+}
+
+.form textarea {
+  margin: 10px;
+}
+
+.coolbtn {
+  background-color: #26A65B;
+  color: white;
+  font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.nicebtn {
+  background-color: #317589;
+  color: white;
+  font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.dngrbtn {
+  background-color: #CF3A24;
+  color: white;
+  font-weight: bold;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+
+.newpost {
+  background-color: #ECF0F1;
+  padding: 10px;
+  width: 70%;
+  border-radius: 25px;
+  margin: 10px auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.proflist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.proflist li {
+  margin: 10px;
+}
+
+.proflist img {
+  margin: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons button {
+  margin: 10px;
 }
