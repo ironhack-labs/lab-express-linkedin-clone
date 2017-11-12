@@ -7,6 +7,12 @@ a {
   color: #00B7FF;
 }
 
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .holder {
   max-width: 600px;
   margin: auto;
@@ -14,4 +20,8 @@ a {
 
 .btn {
   margin-bottom: 20px;
+}
+
+.label-image {
+  display: block;
 }

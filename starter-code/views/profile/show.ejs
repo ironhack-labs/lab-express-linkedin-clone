@@ -1,0 +1,20 @@
+<% if(public) { %>
+  MODO PUBLICO
+  <%} else {%>
+    MODO PRIVADO
+    <% } %>
+      <ul>
+        <li>Name:
+          <%= name %>
+        </li>
+        <li>Job Title:
+          <%= jobTitle %>
+        </li>
+        <li>
+          <img src="<%= imageUrl %>" alt="">
+        </li>
+        <li>
+          Company:
+          <%= company %>
+        </li>
+      </ul>

@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const debug = require('debug')('basic-auth:'+ path.basename(__filename));
 const expressLayouts = require('express-ejs-layouts');
 const auth = require('./routes/auth');
+const profile = require('./routes/profile');
+// const postController = require('./routes/post');
 
 //Lógica para saber si estamos logados
 const session = require("express-session");
@@ -59,9 +61,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 
 
-
 // app.use('/', index);
+
 app.use("/", auth);
+app.use("/profile/", profile);
+
+// app.use("/post", postController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -69,7 +74,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 
 // error handler

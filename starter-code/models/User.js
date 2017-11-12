@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose");//Es necesario para los esquemas.
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({

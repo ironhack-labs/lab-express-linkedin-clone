@@ -2,8 +2,6 @@ const express = require('express');
 
 // User model
 const User = require('../models/User');
-//const path = require('path');
-//const debug = require('debug')('basic-auth:'+ path.basename(__filename));
 const auth = express.Router();
 
 // Bcrypt to encrypt passwords
@@ -11,22 +9,22 @@ const bcrypt = require('bcrypt');
 const bcryptSalt = 10;
 
 auth.get('/', function(req, res, next) {
-  res.redirect('/login');
+  if(req.session.currentUser) {
+    res.render("home");
+  } else {
+    res.render("auth/login");
+  }
 });
 
 auth.get("/signup", (req, res, next) => {
   res.render("auth/signup");
 });
 
-// auth.get("/logout", (req, res, next) => {
-//   res.render("auth/signup");
-// });
-
-auth.get("/signup", (req, res, next) => {
+auth.post("/signup", (req, res, next) => {
   var username = req.body.username;
   var password = req.body.password;
   var name = req.body.name;
-  var mail = req.body.mail;
+  var email = req.body.email;
 
   if (username === "" || password === "") {
     res.render("auth/signup", {
@@ -50,7 +48,7 @@ auth.get("/signup", (req, res, next) => {
       username,
       password: hashPass,
       name,
-      mail,
+      email,
     });
 
     newUser.save((err) => {
@@ -67,11 +65,14 @@ auth.get("/signup", (req, res, next) => {
 
 
 auth.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  if(req.session.currentUser) {
+    res.redirect("/");
+  } else {
+    res.render("auth/login");
+  }
 });
 
 auth.get("/home", (req, res, next) => {
-
   if(req.session.currentUser) {
     res.render("home");
   } else {
@@ -111,18 +112,6 @@ auth.post("/login", (req, res, next) => {
   });
 });
 
-auth.use((req, res, next) => {
-  if (req.session.currentUser) {
-    next();
-  } else {
-    res.redirect("/login");
-  }
-});
-
-// auth.get("/secret", (req, res, next) => {
-//   res.render("secret");
-// });
-
 auth.get("/logout", (req, res, next) => {
   if (!req.session.currentUser) { res.redirect("/"); return; }
 
@@ -133,6 +122,15 @@ auth.get("/logout", (req, res, next) => {
       res.redirect("/login");
     }
   });
+});
+
+auth.get("/home", (req, res, next) => {
+
+  if(req.session.currentUser) {
+    res.render("home");
+  } else {
+    res.redirect("/login");
+  }
 });
 
 module.exports = auth;
