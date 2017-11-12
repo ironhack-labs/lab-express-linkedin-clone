@@ -7,10 +7,11 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const debug = require('debug')('basic-auth:'+ path.basename(__filename));
 const expressLayouts = require('express-ejs-layouts');
-const authRoutes = require('./routes/auth');
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-const secretoRoutes = require('./routes/secreto');
+
+const authRoutes = require('./routes/auth');
+const profileRoutes = require('./routes/profile');
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 const dbName = "mongodb://localhost/linkedin";
-mongoose.connect(dbName, {useMongoClient:true})
+mongoose.connect(dbName, { useMongoClient:true} )
         .then(() => debug(`Connected to database: ${dbName}`));
 
 // uncomment after placing your favicon in /public
@@ -48,7 +49,7 @@ app.use((req,res,next) =>{
 })
 
 app.use('/', authRoutes);
-app.use('/rutasecreta', secretoRoutes);
+app.use('/profile', profileRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

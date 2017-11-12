@@ -10,10 +10,6 @@ router.get('/', (req, res) => {
   res.render('home', { title: 'LinkedIn' });
 });
 
-router.get('/profile', (req, res) => {
-  res.render('profile', { title: 'LinkedIn' });
-});
-
 router.get('/signup', (req, res) => {
   res.render('authentication/signup', { title: 'Signup' });
 });
@@ -90,7 +86,7 @@ router.post("/login", (req, res, next) => {
       if (bcrypt.compareSync(password, user.password)) {
         // Save the login in the session!
         req.session.currentUser = user;
-        res.redirect("/profile");
+        res.redirect("/profile/");
       } else {
         res.render("authentication/login", {
           errorMessage: "Incorrect password"
@@ -99,51 +95,9 @@ router.post("/login", (req, res, next) => {
   });
 });
 
-// Edit user profile
-
-router.get('/:id', (req, res, next) => {
-  let id = req.params.id
-
-  User.findById(id, (err, user) => {
-    res.render('/profile', {
-      user: user
-    })
-  })
-});
-
-router.get('/:id/edit', (req, res, next) => {
-  let id = req.params.id
-
-  User.findById(id, (err, user) => {
-    res.render('profile/:id', {
-      user: user
-    })
-  })
-});
-
-router.post('/:id', (req, res, next) => {
-  let id = req.params.id
-
-  const updates = {
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    summary: req.body.password,
-    imageUrl: req.body.imageUrl,
-    company: req.body.company,
-    password: req.body.password,
-  };
-
-  User.findByIdAndUpdate(id, updates, (err, user) => {
-    if (err){ return next(err); }
-
-    return res.redirect(`/profile/${user._id}`);
-  });
-});
-
 router.get('/logout', (req,res) => {
   req.session.destroy((err) => {
-    res.redirect("/login");
+    res.redirect("/");
   });
 });
 

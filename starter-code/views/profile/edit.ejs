@@ -1,0 +1,9 @@
+<form action="/profile/<%= User._id %>" method="POST">
+    <input type="text" name="name" value="<%= User.name %>" placeholder="Name.."></input>
+    <input type="text" name="email" value="<%= User.email %>" placeholder="Email.."></input>
+    <input type="text" name="imageUrl" value="<%= User.imageUrl %>" placeholder="Image URL"></input>
+    <textarea type="text" name="summary" value="<%= User.summary %>"  placeholder="Summary"><%= User.summary %></textarea>
+    <input type="text" name="jobTitle" value="<%= User.jobTitle %>" placeholder="Job title"></input>
+    <input type="text" name="company" value="<%= User.company %>" placeholder="Company"></input>
+    <button type="submit">Edit</button>
+</form>
