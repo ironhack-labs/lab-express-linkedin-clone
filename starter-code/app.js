@@ -1,18 +1,38 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+const express      = require('express');
+const path         = require('path');
+const favicon      = require('serve-favicon');
+const logger       = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser   = require('body-parser');
+const expressLayout = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+//Controllers
+const index = require('./routes/index');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 
-var app = express();
+const app = express();
+
+mongoose.connect('mongodb://localhost/linkedin-clone')
+		.then( () => console.log('Connected to DB!'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('layout', 'layout/main-layout.ejs');
+app.use(expressLayout);
+
+app.use(session({
+  secret: "linkedin-auth-secret",
+  cookie: { maxAge: 60000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +42,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+	res.locals.title = 'Linkedin Clone';
+	next();
+});
+
 app.use('/', index);
 app.use('/users', users);
+app.use('/', auth);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
