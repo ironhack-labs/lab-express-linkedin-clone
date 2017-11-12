@@ -24,8 +24,8 @@ authController.get("/signup", (req, res, next) => {
 
 // conditions before we save the user
 authController.post("/signup", (req, res, next) => {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (username === "" || password === "") {
     res.render("auth/signup", {
@@ -42,10 +42,10 @@ authController.post("/signup", (req, res, next) => {
       return;
     }
 
-    var salt     = bcrypt.genSaltSync(bcryptSalt);
-    var hashPass = bcrypt.hashSync(password, salt);
+    const salt     = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
 
-    var newUser = User({
+    const newUser = User({
       username,
       password: hashPass
     });
@@ -68,8 +68,8 @@ authController.get("/login", (req, res, next) => {
 });
 
 authController.post("/login", (req, res, next) => {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (username === "" || password === "") {
     res.render("auth/login", {
@@ -90,7 +90,7 @@ authController.post("/login", (req, res, next) => {
         if (bcrypt.compareSync(password, user.password)) {
           req.session.currentUser = user;
         //  res.redirect("/posts");
-      
+          res.redirect("/");
         } else {
           res.render("auth/login", {
             errorMessage: "Incorrect password"
