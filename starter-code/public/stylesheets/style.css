@@ -4,9 +4,7 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-a {
-  color: #00B7FF;
-}
+a { color: #00B7FF; }
 
 form {
   width: 70%;
