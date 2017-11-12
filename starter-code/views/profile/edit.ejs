@@ -1,0 +1,23 @@
+<h2>EDIT PAGE</h2>
+
+<form action="profile/<%= user.id %>" method="POST">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" value="<%= user.username %>">
+
+  <label for="name">eMail</label>
+  <input type="text" id="email" name="email" value="<%= user.email %>">
+
+  <label for="name">Summary</label>
+  <input type="text" id="summary" name="summary" value="<%= user.summary %>">
+
+  <label for="name">image URL</label>
+  <input type="text" id="imageUrl" name="imageUrl" value="<%= user.imageUrl %>">
+
+  <label for="name">Company</label>
+  <input type="text" id="company" name="company" value="<%= user.company %>">
+
+  <label for="name">Job Title</label>
+  <input type="jobtitle" id="jobtitle" name="jobtitle" value="<%= user.jobTitle %>">
+
+  <button type="submit">Edit Celebrity!</button>
+</form>
