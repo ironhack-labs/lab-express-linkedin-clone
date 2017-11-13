@@ -1,0 +1,18 @@
+<h1>Login</h1>
+<% if (typeof(errorMessage) !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<form action="/login" method="POST" id="form-container" class="login form">
+  <label for="email">Email</label><br>
+  <input type="text" name="email" placeholder="John@smith.com">
+  <br><br>
+  <label for="password">Password</label><br>
+  <input type="password" name="password" placeholder="Password">
+  <br><br>
+  <button class="coolbtn">Sign in</button>
+
+  <p class="account-message">
+    Don't have an account? <a href="/signup">Sign up</a>
+  </p>
+</form>
