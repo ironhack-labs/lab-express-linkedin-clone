@@ -1,0 +1,20 @@
+<% if(user === undefined) { %>
+  <h1>Sorry, youre not logged in</h1>
+  <% } else { %>
+    <h1>Welcome to your homepage,
+      <%= user.username %>
+    </h1>
+    <div class="user-info">
+      <p>Username:
+        <%= user.username %>
+      </p>
+      <label for="email">E-mail</label>
+      <input type="email" name="email" placeholder="E-mail" value="<%=user.email%>">
+      <label for="company">Company</label>
+      <input type="text" name="company" placeholder="Company" value="<%=user.company%>">
+      <label for="jobTitle">Job Title</label>
+      <input type="text" name="jobTitle" placeholder="Job Title" value="<%=user.jobTitle%>">
+      <a href="/profile/update">Update</a>
+      <a href="/auth/logout">Log out</a>
+    </div>
+    <% } %>
