@@ -5,9 +5,9 @@ const logger       = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser   = require('body-parser');
 
-const index = require('./routes/index');
 const authController = require('./routes/authController');
 const profileController = require('./routes/profileController');
+const postController = require('./routes/postController');
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -39,6 +39,7 @@ app.use(session({
 
 app.use('/', authController);
 app.use('/', profileController);
+app.use('/post', postController);
 // app.use('/', index);
 
 // catch 404 and forward to error handler

@@ -1,5 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
+const Post = require("../models/post");
+const moment = require("moment");
 
 const profileController = express.Router();
 
@@ -29,12 +31,19 @@ profileController.use((req, res, next) => {
   else { res.redirect("/login"); }
 });
 
+//REFACTOR
 profileController.get("/home", (req, res) => {
-  res.render('home' , { user:
-    { username: req.session.currentUser.username,
-      password: req.session.currentUser.password,
-      name: req.session.currentUser.name,
-      email: req.session.currentUser.email } } );
+  Post
+    .find({}, "content creator created_at")
+    .sort({ created_at: -1 })
+    .exec((err, posts) => {
+      res.render("home", { posts, moment,  user:
+        { username: req.session.currentUser.username,
+          password: req.session.currentUser.password,
+          name: req.session.currentUser.name,
+          email: req.session.currentUser.email } });
+  });
+
 });
 
 profileController.get("/profile/:userId/edit" , (req, res) => {

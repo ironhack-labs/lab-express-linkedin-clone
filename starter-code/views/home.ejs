@@ -2,3 +2,28 @@
 
 <a href="/logout">Logout</a>
 <a href="/profile/<%= user.username  %>/edit">Edit Profile</a>
+
+
+<!-- views/timeline/index.ejs -->
+
+<div id="posts">
+  <% if (posts.length > 0) { %>
+    <% posts.forEach(function(post) { %>
+      <div class="tweet-container">
+        <p><%= post.content %></p>
+        <p class="date">
+          <span>
+            <a href="/profile/<%= post.creator %>">
+              @<%= post.creator %>
+            </a>
+          </span><br>
+          <%= moment(post.created_at).format("LL, LTS") %>
+        </p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="tweet-container no-tweets">
+      <p>No hay posts</p>
+    </div>
+  <% } %>
+</div>
