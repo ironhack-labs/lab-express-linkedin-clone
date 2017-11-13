@@ -1,0 +1,14 @@
+<div id="container">
+  <h1>New Post!</h1>
+
+  <form action="/users/<%= user._id %>/posts" method="POST" class="form">
+    <label for="post">Post</label><br>
+    <textarea type="text" name="content" maxlength="250"
+      placeholder="Post your thoughts!" ></textarea><br><br>
+    <button class="coolbtn">Post!</button>
+  </form>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+</div>
