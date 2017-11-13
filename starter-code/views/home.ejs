@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="login">
+    <div class="iconNav inline-block">
+      <img class ="logoNav" src="/images/linkedin.png">
+    </div>
+    <div class="menuNav inline-block menuSelectable">
+      <span class="welcomeMenuTitle">Welcome <%= name %></span>
+      <a href="/users/<%-id%>/posts">Add new post</a>
+      <a href="/profile/<%-id%>/edit">Edit my profile</a>
+      <a href="/profile/<%-id%>">Look my profile</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
+  <div>
+    <% allPosts.forEach((post) =>{ %>
+      <div class="post">
+        <span class="message"><a href="/profile/<%= post._creator %>"><%= post._creator %></a></span><br>
+        <span class="content"><%= post.content %></span>
+      </div>
+    <% }) %>
+  </div>

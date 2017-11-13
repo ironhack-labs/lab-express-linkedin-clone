@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="login">
+    <div class="iconNav inline-block">
+      <img class ="logoNav" src="/images/linkedin.png">
+    </div>
+    <div class="menuNav inline-block menuSelectable">
+      <a href="/"><button class="btnsignin">Go to menu</button></a>
+      <a href="/users/<%-id%>/posts">Add new post</a>
+      <a href="/profile/<%-id%>/edit">Edit my profile</a>
+      <a href="/profile/<%-id%>">Look my profile</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
+<div class="containersignUp">
+  <div class="signup">
+    <form action="/profile/<%=id %>" method="post" class="formSignUp">
+      <label for="username">Username</label><br>
+      <input type="text" id="username" name="username" value="<%=username %>" disabled><br>
+
+      <label for="name">Name</label><br>
+      <input type="text" id="name" name="name" value="<%=name %>"><br>
+      <label for="email">Email</label><br>
+      <input type="email" id="email" name="email" value="<%=email %>"><br>
+      <label for="jobTitle">jobTitle</label><br>
+      <input type="text" id="jobTitle" name="jobTitle" value="<%=jobTitle %>"><br>
+
+      <label for="imageUrl">image</label><br>
+      <input type="text" id="imageUrl" name="imageUrl" value="<%=imageUrl %>"><br>
+
+      <label for="company">company</label><br>
+      <input type="text" id="company" name="company" value="<%=company %>"><br>
+
+
+      <br>
+      <button> Modify user</button>
+    </form>
+  </div>
+</div>

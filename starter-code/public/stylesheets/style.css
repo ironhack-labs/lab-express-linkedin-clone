@@ -1,8 +1,185 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   color: #00B7FF;
+}
+.logoNav {
+    width: 40px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.inline-block{
+  display: inline-block;
+}
+
+.menuNav {
+    text-align: right;
+    width: 90%;
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.menuNav label{
+  color: white;
+}
+
+.menuNav a{
+  font-size: 10px;
+  color: white;
+}
+.iconNav {
+    margin-left: 20px;
+}
+
+.login{
+  background-color: #285f8a;
+}
+
+.btnsignin {
+    border: 1px solid #285f89;
+    background-color: #1c88d0;
+    color: white;
+}
+
+.menuNav form label {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-family: sans-serif;
+    font-weight: 100;
+    margin-left: 15px;
+}
+
+.error-message {
+    display: inline-block;
+    color: #ffffff;
+    background-color: #1c88d0;
+    border-radius: 5px;
+    padding: 0 5px 0 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.containersignUp {
+    background-color: #285f8a;
+    height: 100vh;
+}
+
+.signup {
+    text-align: center;
+    width: 35%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.formSignUp {
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  background-color: #0288d1;
+}
+
+.formSignUp input{
+  border: 1px solid #95a0bd;
+  border-radius: 3px;
+  height: 20px;
+  margin-bottom: 5px;
+}
+.formSignUp button{
+  padding: 10px;
+  background: #0288d1;
+  border: 0;
+  border-top: 2px solid white;
+  width: 100%;
+  color: white;
+  font-size: 15px;
+}
+
+.menuSelectable a{
+  text-decoration: none;
+  border-left: 1px solid white;
+  padding-left: 10px;
+  font-size: 11px;
+  padding-right: 7px;
+}
+
+.menuSelectable a:first-of-type{
+  border-left: none;
+}
+.welcomeMenuTitle{
+  color: white;
+  font-size: 9px;
+  background: #0288d1;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.post {
+  text-align: right;
+  height: 7vh;
+  border-bottom: 1px solid #0288d1;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  background: rgba(40, 95, 138, 0.08);
+}
+
+.message{
+  color: #828282;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.post:first-of-type{
+  padding-top: 10px;
+}
+
+.content {
+    margin-right: 30px;
+}
+
+.postContainer {
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.inserPosts button{
+  border: 1px solid #038ad2;
+  background-color: #0288d1;
+  color: white;
+  padding: 7px;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.profile {
+    width: 100px;
+    border-radius: 50%;
+    padding: 15px;
+}
+
+.showProfile {
+    margin: 0 auto;
+    text-align: center;
+    width: 60%;
+    border-radius: 2px;
+    border: 1px solid gainsboro;
+    margin-top: 20px;
+}
+
+.jobTitleDiv {
+    width: 80%;
+    margin: 0 auto;
+    line-height: 25px;
+}
+
+.companyDiv {
+    width: 50%;
+    margin: 0 auto;
+    border-top: 1px solid;
+    margin-top: 5px;
+    padding: 8px;
 }

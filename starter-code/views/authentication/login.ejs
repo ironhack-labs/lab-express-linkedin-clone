@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="login">
+    <div class="iconNav inline-block">
+      <img class ="logoNav" src="/images/linkedin.png">
+    </div>
+    <div class="menuNav inline-block">
+      <form input="/login" method="post">
+        <% if (typeof errorMessage !== "undefined") { %>
+        <div class="error-message"><%= errorMessage %></div>
+        <% } %>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required>
+        <label for="password">Password</label>
+        <input type="text" name="password" id="password" required>
+
+        <button class="btnsignin">Sign in</button>
+        <a href="/signup">Sign up now!</a>
+      </form>
+    </div>
+  </div>
+</div>

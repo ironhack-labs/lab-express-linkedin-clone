@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="login">
+    <div class="iconNav inline-block">
+      <img class ="logoNav" src="/images/linkedin.png">
+    </div>
+    <div class="menuNav inline-block menuSelectable">
+      <a href="/"><button class="btnsignin">Go to menu</button></a>
+      <a href="/users/<%-id%>/posts">Add new post</a>
+      <a href="/profile/<%-id%>/edit">Edit my profile</a>
+      <a href="/profile/<%-id%>">Look my profile</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+</div>
+<div class="postContainer">
+  <form class="inserPosts" action="/users/<%= id %>/posts" method="post">
+    <textarea type="text" name="content" id="post" placeholder="Insert your post here"></textarea>
+    <br>
+    <button>Add post</button>
+  </form>
+</div>
