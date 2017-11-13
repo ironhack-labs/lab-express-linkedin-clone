@@ -1,0 +1,13 @@
+<h2>show profile of <%=item.name%></h2>
+<a href="/home">Go Back</a>
+<div class="profile">
+<p>Name: <%=item.name%></p>
+<p>Email: <%=item.email%></p>
+<p>Summary: <%=item.summary%></p>
+<p>Company: <%=item.company%></p>
+<p>jobTitle: <%=item.jobTitle%></p>
+<a href="/profile/<%=item._id%>/edit"> Edit profile</a>
+</div>
+<div class="profile">
+<img src="<%=item.imageUrl%>"/>
+</div>

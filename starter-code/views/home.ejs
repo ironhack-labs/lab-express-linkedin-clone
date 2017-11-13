@@ -1,0 +1,11 @@
+<h2> Welcome <%=session.userName%></h2>
+  <a href="/auth/logout"> Log Out</a>
+<div>
+  <form action="/profile/<%=session._id%>" method="get">
+  <button type="submit"> Go to profile</button>
+  </form>
+</div>
+
+<% if (typeof(errorMessage) !== "undefined"){%>
+  <div class="error-message"> <%=errorMessage%></div>
+<%}%>
