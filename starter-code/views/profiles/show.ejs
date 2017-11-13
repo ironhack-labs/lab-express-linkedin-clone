@@ -1,0 +1,26 @@
+<div id="profile">
+  <h2><%= user.name %></h2>
+</div>
+
+<div id="container">
+  <ul>
+    <li>Name: <%= user.name %></li>
+    <li>JobTitle: <%= user.jobTitle %></li>
+    <li>Image: <img src="<%= user.imageUrl %>"></li>
+    <li>Company: <%= user.company %></li>
+  <% if(session !== undefined) {%>
+    <li>Email: <%= user.email %></li>
+    <li>Summary: <%= user.summary %></li>
+  <%}%>
+  </ul>
+</div>
+
+<% if (session !== undefined && user._id == session._id) { %>
+  <form action="/profile/<%= user._id %>/edit" method="GET">
+    <button class="button blue"> Edit Your Profile</%%></button>
+  </form>
+<% } %>
+
+<form action="/" method="GET">
+  <button class="button blue"> Back home!</button>
+</form>
