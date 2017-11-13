@@ -34,7 +34,7 @@ profileController.use((req, res, next) => {
 //REFACTOR
 profileController.get("/home", (req, res) => {
   Post
-    .find({}, "content creator created_at")
+    .find({}, "content creator creatorName created_at")
     .sort({ created_at: -1 })
     .exec((err, posts) => {
       res.render("home", { posts, moment,  user:

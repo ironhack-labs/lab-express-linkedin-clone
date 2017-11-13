@@ -19,7 +19,8 @@ postController.post("/", (req, res, next) => {
 
     const post = new Post({
       content: req.body.content,
-      creator: user._id
+      creator: user._id,
+      creatorName: user.username
     });
 
     post.save((err) => {

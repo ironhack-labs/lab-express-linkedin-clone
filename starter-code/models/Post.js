@@ -9,7 +9,8 @@ const postSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  creatorName : String
 }, {
   timestamps: { createdAt: "created_at", updatedAt: "updated_at" }
 });
