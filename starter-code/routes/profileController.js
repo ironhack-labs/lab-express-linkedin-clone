@@ -83,21 +83,4 @@ profileController.post("/:id/follow", (req, res) => {
   });
 });
 
-// // TIMELINE
-// profileController.get("/:username/timeline", (req, res) => {
-//   const currentUser = req.session.currentUser;
-//   // Includes yourself in the timeline.
-//   currentUser.following.push(currentUser._id);
-//
-//   Tweet.find({ user_id: { $in: currentUser.following } })
-//     .sort({ created_at: -1 })
-//     .exec((err, timeline) => {
-//       res.render("profile/timeline", {
-//         username: currentUser.username,
-//         timeline,
-//         moment
-//       });
-//   });
-// });
-
 module.exports = profileController;
