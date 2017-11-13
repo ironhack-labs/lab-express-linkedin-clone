@@ -12,6 +12,7 @@ const MongoStore = require("connect-mongo")(session);
 const authController = require('./routes/authController');
 const homeController = require('./routes/homeController');
 const profileController = require('./routes/profileController');
+const postsController = require('./routes/postsController');
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(session({
 app.use('/', authController);
 app.use('/profile', profileController);
 app.use('/', homeController);
+app.use('/users/:userId/posts', postsController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
