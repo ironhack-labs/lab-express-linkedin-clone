@@ -15,7 +15,7 @@
   <div>
     <% allPosts.forEach((post) =>{ %>
       <div class="post">
-        <span class="message"><%= post._creator %></span><br>
+        <span class="message"><a href="/profile/<%= post._creator %>"><%= post._creator %></a></span><br>
         <span class="content"><%= post.content %></span>
       </div>
     <% }) %>

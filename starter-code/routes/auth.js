@@ -1,7 +1,9 @@
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Friend = require('../models/Friendship');
 const express = require('express');
 const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
 const router = express.Router();
 const bcryptSalt = 10;
 
@@ -128,6 +130,9 @@ router.get('/logout', function(req, res, next) {
   });
 });
 
+router.get('/profile', (req, res, next) => {
+  res.redirect('/');
+});
 router.get('/profile/:userId/edit', (req, res, next) => {
   User.findById(req.params.userId,
     (err, user) => {
@@ -146,25 +151,54 @@ router.get('/profile/:userId/edit', (req, res, next) => {
 
 });
 
+router.post('/addfriend/:userId', (req, res, next) => {
+  let idFriend = req.params.userId;
+  User.findOne({
+      "username": req.session.currentUser.username
+    },
+    "id", (err, user) => {
+      if (err) {
+        res.redirect('/login');
+      }
+      var newFriends = Friend([{
+          idA: mongoose.Types.ObjectId(idFriend)
+        },
+        {
+          idB: mongoose.Types.ObjectId(user.id)
+        }
+      ]);
+      console.log(newFriends);
+      newFriends.save((err) => {
+        res.redirect("/profile/" + idFriend);
+      });
+    });
+});
+
 router.get('/profile/:userId', (req, res, next) => {
   User.findById(req.params.userId, (err, user) => {
     if (err) { 
       return next(err);
     };
-    if ((typeof(req.session.currentUser)) !== 'undefined'
-    && req.session.currentUser.username == user.username) {
+    if ((typeof(req.session.currentUser)) !== 'undefined' &&
+      req.session.currentUser.username == user.username) {
       // if its same show private page
       user['public'] = 0;
+      user['friends'] = 0;
       res.render('profiles/show', user);
     } else {
-      res.render('profiles/show', {
-        name: user.name,
-        jobTitle: user.jobTitle,
-        imageUrl: user.imageUrl,
-        company: user.company,
-        public: 1
+      Friend.count([{ "idA": req.params.userId },
+          { "idB": req.session.currentUser }],
+          (err, counts) => {
+        res.render('profiles/show', {
+          name: user.name,
+          jobTitle: user.jobTitle,
+          imageUrl: user.imageUrl,
+          company: user.company,
+          public: 1,
+          id: user.id,
+          friends: counts
+        });
       });
-
     };
   });
 });

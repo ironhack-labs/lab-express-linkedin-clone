@@ -9,7 +9,12 @@
           <% if (typeof errorMessage !== "undefined") { %>
           <div class="error-message"><%= errorMessage %></div>
           <% } %>
-            <a href="/"><button class="btnsignin">Go to menu</button></a>
+          <% if (!friends) { %>
+          <form action="/addFriend/<%= id %>" method="post">
+            <a href="/"><button class="btnsignin">Mark as Friend</button></a>
+          </form>
+          <% } %>
+          <a href="/"><button class="btnsignin">Go to menu</button></a>
          </div>
       </div>
     </div>
@@ -32,6 +37,9 @@
     <div class="showProfile">
       <img class="profile" src="<%= imageUrl %>">
       <h2><span class="myName"><%= name %></span></h2>
+      <% if (friends) { %>
+        <span><%= name %> its your friend!</span>
+      <% } %>
       <div class="jobTitleDiv"><span class="jobTitle"><%= jobTitle %></span></div>
       <div class="companyDiv"><span class="company"><%= company %></span></div>
     </div>
