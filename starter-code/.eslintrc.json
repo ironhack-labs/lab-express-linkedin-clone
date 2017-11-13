@@ -1,17 +1,8 @@
 {
-  "env": {
-    "commonjs": true,
-    "es6": true,
-    "node": true
-  },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "sourceType": "module"
-  },
+  "extends": "standard",
   "rules": {
-    "indent": ["error", 4],
-    "linebreak-style": ["error", "unix"],
     "quotes": ["error", "double"],
-    "semi": ["error", "always"]
+    "semi": [2, "always"],
+    "comma-dangle": ["error", "never"]
   }
 }
