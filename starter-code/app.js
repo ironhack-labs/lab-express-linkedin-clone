@@ -11,6 +11,7 @@ const MongoStore = require("connect-mongo")(session);
 
 const authController = require('./routes/authController');
 const homeController = require('./routes/homeController');
+const profileController = require('./routes/profileController');
 
 const app = express();
 
@@ -32,7 +33,7 @@ app.use(expressLayouts);
 
 app.use(session({
   secret: "basic-auth-secret",
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: 60*60*24*2 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
@@ -40,6 +41,7 @@ app.use(session({
 }));
 
 app.use('/', authController);
+app.use('/profile', profileController);
 app.use('/', homeController);
 
 // catch 404 and forward to error handler

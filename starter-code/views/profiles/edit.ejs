@@ -1,0 +1,38 @@
+<h2>Edit Profile</h2>
+
+<% if (typeof(errorMessage) !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<form action="/profile/<%= user._id %>" method="post">
+  <label for="name">Name:</label>
+  <input type="text" name="name" placeholder="Your name" value="<%= user.name %>" required>
+  <br><br>
+
+  <label for="email">E-mail:</label>
+  <input type="email" name="email" placeholder="Your email" value ="<%= user.email %>" required>
+  <br><br>
+
+  <label for="username">Username:</label>
+  <input type="text" name="username" placeholder="Choose an username" value="<%= user.username %>" required>
+  <br><br>
+
+  <label for="summary">Summary:</label>
+  <textarea name="summary" placeholder="Write a summary"><%= user.summary %></textarea>
+  <br><br>
+
+  <label for="imageUrl">Image URL:</label>
+  <input type="text" name="imageUrl" value="<%= user.imageUrl %>">
+  <br><br>
+
+
+  <label for="company">Company</label>
+  <input type="text" name="company" value="<%= user.company %>">
+  <br><br>
+
+  <label for="jobTitle">Job Title:</label>
+  <input type="text" name="jobTitle" value="<%= user.jobTitle %>">
+  <br><br>
+
+  <input type="submit" value="Update profile">
+</form>

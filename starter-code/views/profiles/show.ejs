@@ -1,0 +1,13 @@
+<% if (editable) { %>
+  <a href="/profile/<%= user._id %>/edit">Edit your profile</a>
+<% } %>
+
+<p><%= user.name %></p>
+<img src="<%= user.imageUrl%>" alt="User profile photo" />
+<p><%= user.jobTitle %></p>
+<p><%= user.company %></p>
+
+<% if (loggedIn) { %>
+  <p><%= user.email %></p>
+  <p><%= user.summary %></p>
+<% } %>

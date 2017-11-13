@@ -6,7 +6,7 @@ homeController.use((req, res, next) => {
 });
 
 homeController.get('/', function(req, res) {
-  res.render('home', { name: req.session.currentUser.name });
+  res.render('home', { user: req.session.currentUser });
 });
 
 module.exports = homeController;
