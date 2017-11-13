@@ -1,0 +1,9 @@
+<h2>New Post</h2>
+
+<form action="/users/<%= user._id%>/posts" method="post">
+  <label for="content">Content</label>
+  <br><br>
+  <textarea type="text" name="content" placeholder="Your post content..."></textarea>
+  <br><br>
+  <input type="submit" name="" value="Create">
+</form>

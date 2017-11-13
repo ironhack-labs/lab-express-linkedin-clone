@@ -1,0 +1,22 @@
+<h1>LinkedIn</h1>
+
+<a href="/profile/<%= user._id %>">My Profile</a>
+<a href="/users/<%= user._id %>/posts/new">New Post</a>
+<a href="/logout">Log Out</a>
+
+<p>Welcome <%= user.name %></p>
+
+<% if (posts.length > 0) { %>
+  <p>These are the most recent posts on LinkedIn:</p>
+  <section class="posts">
+    <% posts.forEach((post) => { %>
+      <article class="post">
+        <%= post.content %>
+        <footer>By <a href="/profile/<%= post._creator %>"><%= post.username %></a></footer>
+      </article>
+      <br>
+    <% }) %>
+  </section>
+<% } else { %>
+  <p>There are no recent posts on LinkedIn.</p>
+<% } %>
