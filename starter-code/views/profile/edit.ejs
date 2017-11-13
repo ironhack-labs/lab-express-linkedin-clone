@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Edit Your Profile</h2>
+
+<form action="/profile/<%= session._id %>" method="POST" id="form-container">
+  <label for="name">Name</label>
+  <input type="text" name="name"
+    placeholder="nadiaCarreira" value="<%= session.name %>">
+  <br><br>
+  <label for="email">Email</label>
+  <input type="text" name="email"
+    placeholder="nadiaCarreira@gmail.com" value="<%= session.email %>">
+  <br><br>
+  <label for="imageUrl">Image Url</label>
+  <input type="text" name="imageUrl"
+    placeholder="Imgur URL of your profile image" value="<%= session.imgUrl %>">
+  <br><br>
+  <label for="jobTitle">Job Title</label>
+  <input type="text" name="jobTitle"
+    placeholder="Your job title" value="<%= session.jobTitle %>">
+  <br><br>
+  <label for="company">Company</label>
+  <input type="text" name="company"
+    placeholder="Your company" value="<%= session.company %>">
+  <br><br>
+  <label for="summary">Summary</label>
+  <input type="text" name="summary"
+    placeholder="Summary about yourself" value="<%= session.summary %>">
+  <br><br>
+  <button>Edit your Profile</button>
+</form>
+</body>
+</html>

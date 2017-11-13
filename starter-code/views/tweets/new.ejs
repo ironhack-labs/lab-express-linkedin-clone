@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+  <h2>Hi @<%= username %>!</h2>
+
+  <form action="/tweets" method="POST" id="new-tweet">
+    <label for="tweetText">Tweet</label>
+    <input type="text" name="tweetText" maxlength="140"
+      placeholder="What's going on?" >
+    <button class="button blue fright">Tweet!</button>
+  </form>
+
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+  <% } %>
+</div>
+</body>
+</html>
