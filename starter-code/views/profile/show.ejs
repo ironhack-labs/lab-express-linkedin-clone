@@ -1,0 +1,23 @@
+<% if(isLogged){ %>
+<label for="username">Username: <%= user.username %></label>
+<br><br>
+<% } %>
+<label for="name">Name: <%= user.name %></label>
+<br><br>
+<% if(isLogged){ %>
+<label for="email">Email: <%= user.email %></label>
+<br><br>
+<label for="summary">Summary: <%= user.summary %></label>
+<br><br>
+<% } %>
+<label for="imageUrl">Image: <%= user.imageUrl %></label>
+<br><br>
+<label for="company">Company: <%= user.company %></label>
+<br><br>
+<label for="jobTitle">Job Title: <%= user.jobTitle %></label>
+<br><br>
+<% if(current){ %>
+<form action="/profile/<%= user.username  %>/edit">
+    <input type="submit" value="Edit Your Profile" />
+</form>
+<% } %>

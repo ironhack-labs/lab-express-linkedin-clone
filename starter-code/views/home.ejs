@@ -1,0 +1,32 @@
+<h1>Welcome <%= user.name  %></h1>
+
+<a href="/logout">Logout</a>
+<br>
+<a href="/profile/<%= user.username  %>/edit">Edit Profile</a>
+<br>
+<a href="/post/new">Add New Post</a>
+
+
+<!-- views/timeline/index.ejs -->
+<br><br><br>
+<div id="posts">
+  <% if (posts.length > 0) { %>
+    <% posts.forEach(function(post) { %>
+      <div class="tweet-container">
+        <p><%= post.content %></p>
+        <p class="date">
+          <span>
+            <a href="/profile/<%= post.creator %>">
+              @<%= post.creatorName %>
+            </a>
+          </span><br>
+          <%= moment(post.created_at).format("LL, LTS") %>
+        </p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div class="tweet-container no-tweets">
+      <p>No hay posts</p>
+    </div>
+  <% } %>
+</div>
