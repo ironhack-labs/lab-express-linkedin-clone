@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const Post = require('../models/Post');
 const isLoggedIn = require('../middlewares/isLoggedIn');
 const router = express.Router();
 
@@ -40,10 +41,17 @@ router.get('/profile/show/:id', (req, res, next) => {
 
   User.findById(userId, (err, user) => {
     if (err) { return next(err); }
-    res.render('profile/show', {
-      user: user,
-      session: req.session.currentUser});
+    Post.find({"_owner" : userId}, (err, posts) => {
+      if (err) { return next(err); }
+      res.render('profile/show', {
+        user: user,
+        session: req.session.currentUser,
+        posts: posts
+      });
+    });
   });
+
+
 });
 
 // GET edit page
@@ -58,5 +66,38 @@ router.get('/profile/:id/edit', (req, res, next) => {
 });
 
 
+// GET new post page
+// Lets the user introduce a new post
+router.get('/users/:id/posts/new', (req, res, next) => {
+  const userId = req.params.id;
+
+  User.findById(userId, (err, user) => {
+    if (err) { return next(err); }
+    res.render('posts/new', { user: user });
+  });
+});
+
+// POST new post form
+// Save the new post in the ddbb
+router.post('/users/:id/posts', isLoggedIn, (req, res, next) => {
+  const userId = req.params.id;
+
+  let newPost = new Post({
+    content: req.body.content,
+    _owner: userId});
+
+  newPost.save((err) => {
+    if (err) {
+      res.render("posts/new",
+        {
+          user : user,
+          errorMessage: "Couldn't save the data!",
+        });
+    }
+    else {
+      res.redirect("/profile/show/" + userId);
+    }
+  });
+});
 
 module.exports = router;

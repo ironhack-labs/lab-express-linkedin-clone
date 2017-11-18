@@ -50,6 +50,10 @@ a {
   transition: .3s ease background;
 }
 
+#form textarea{
+  width: 100%;
+}
+
 .error-message {
   background: #F02B63;
   box-sizing: border-box;
