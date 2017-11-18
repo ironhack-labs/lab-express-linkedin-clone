@@ -12,10 +12,12 @@
   <img src="<%= user.imageURL %>">
   <h3>Actual job tittle: <%= user.jobtittle %></h3>
   <h4>Actual company: <%= user.company %></h4>
-  <% if(user){ %>
+  <% if(session !== undefined){ %>
     <p><b>E-mail: </b><%= user.email %></p>
     <p><b>Summary: </b><%= user.summary %></p>
-    <a href="/profile/<%= user._id %>/edit/">Edit Profile</a><br>
+    <% if(user._id == session._id){ %>
+      <a href="/profile/<%= user._id %>/edit/">Edit Profile</a><br>
+    <% } %>
   <% } %>
 </body>
 </html>

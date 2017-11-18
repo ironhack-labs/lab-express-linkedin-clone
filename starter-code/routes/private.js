@@ -6,14 +6,13 @@ const router = express.Router();
 // GET home page.
 // If you're logged in, you get into the homepage, if you don't, you're redirected to the log in page.
 router.get('/home', isLoggedIn, (req, res) => {
-  res.render('home');
+  res.render('home', {user});
 });
 
 // POST edit page
 // Send to the ddbb the changes
 router.post('/profile/:id', (req, res, next) => {
   const userId = req.params.id;
-  console.log(userId);
   /*
    * Create a new object with all of the information from the request body.
    * This correlates directly with the schema of Product
@@ -41,7 +40,9 @@ router.get('/profile/show/:id', (req, res, next) => {
 
   User.findById(userId, (err, user) => {
     if (err) { return next(err); }
-    res.render('profile/show', { user: user });
+    res.render('profile/show', {
+      user: user,
+      session: req.session.currentUser});
   });
 });
 
