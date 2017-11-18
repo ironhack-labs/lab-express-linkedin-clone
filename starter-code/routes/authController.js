@@ -1,12 +1,11 @@
 const express        = require("express");
 const authController = express.Router();
-
-// User model
 const User           = require("../models/user");
-
+const Post = require("../models/post");
 // Bcrypt to encrypt passwords
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
+const moment = require("moment");
 
 //redirections to login page or home depending of logged state
 authController.get("/", (req, res, next) => {
@@ -14,30 +13,63 @@ authController.get("/", (req, res, next) => {
     res.redirect("login");
     return;
   }
-    res.render("home", {user: req.session.currentUser});
+  const user = req.session.currentUser;
+  const follows = [];
+// Show Connections and their Posts
+user.following.forEach(e => {
+  User.findOne({
+    _id: e
+  }).exec((err, newUser) => {
+    if (newUser) {
+      follows.push(newUser);
+      }
+  });
 });
 
-// renders the view we created in the /views/auth folder
+  // Show posts in homepage.
+  Post.find({
+      "_creator": user._id
+    }, "")
+    .sort({
+      created_at: -1
+    })
+    .exec((err, posts) => {
+      res.render("home", {
+        user: user,
+        follows: follows,
+        posts: posts,
+        moment,
+      });
+    });
+});
+
+// Signup get and post
 authController.get("/signup", (req, res, next) => {
-  res.render("auth/signup");
+  if (!req.session.currentUser) {
+    res.render("auth/signup");
+    return;
+  }
+  res.redirect("/");
 });
 
 // conditions before we save the user
 authController.post("/signup", (req, res, next) => {
   const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
+
 
   if (username === "" || password === "") {
     res.render("auth/signup", {
-      errorMessage: "Indicate a username and a password to sign up"
+      errorMessage: "Indicate an username, an email, and a password to sign up"
     });
     return;
   }
 
-  User.findOne({ "username": username }, "username", (err, user) => {
+  User.findOne({ "email": email }, "email", (err, user) => {
     if (user !== null) {
       res.render("auth/signup", {
-        errorMessage: "The username already exists"
+        errorMessage: "The email already exists"
       });
       return;
     }
@@ -47,6 +79,7 @@ authController.post("/signup", (req, res, next) => {
 
     const newUser = User({
       username,
+      email,
       password: hashPass
     });
 
@@ -62,28 +95,32 @@ authController.post("/signup", (req, res, next) => {
   });
 });
 
-//Login functionality
+//Login get and post
 authController.get("/login", (req, res, next) => {
-  res.render("auth/login");
+  if (!req.session.currentUser) {
+    res.render("auth/login");
+    return;
+  }
+  res.redirect("/");
 });
 
 authController.post("/login", (req, res, next) => {
-  const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
 
-  if (username === "" || password === "") {
+  if (email === "" || password === "") {
     res.render("auth/login", {
       errorMessage: "Indicate a username and a password to log in"
     });
     return;
   }
 
-  User.findOne({ "username": username },
-    "_id username password following",
+  User.findOne({ "email": email },
+    "",
     (err, user) => {
       if (err || !user) {
         res.render("auth/login", {
-          errorMessage: "The username doesn't exist"
+          errorMessage: "This email doesn't exist as user"
         });
         return;
       } else {

@@ -1,0 +1,29 @@
+<h2>Edit Your Profile</h2>
+
+<form action="/profile/<%= session._id %>" method="POST" class="form">
+  <label for="username">Name</label><br>
+  <input type="text" name="username"
+    placeholder="JonSnow" value="<%= session.name %>">
+  <br><br>
+  <label for="email">Email</label><br>
+  <input type="text" name="email"
+    placeholder="JonSnow@email.com" value="<%= session.email %>">
+  <br><br>
+  <label for="imageUrl">Image Url</label><br>
+  <input type="url" name="imageUrl"
+    placeholder="Imgur URL of your profile image" value="<%= session.imgUrl %>">
+  <br><br>
+  <label for="jobTitle">Job Title</label><br>
+  <input type="text" name="jobTitle"
+    placeholder="Your job title" value="<%= session.jobTitle %>">
+  <br><br>
+  <label for="company">Company</label><br>
+  <input type="text" name="company"
+    placeholder="Your company" value="<%= session.company %>">
+  <br><br>
+  <label for="summary">Summary</label><br>
+  <textarea type="text" name="summary"
+    placeholder="Summary about yourself" value="<%= session.summary %>"></textarea>
+  <br><br>
+  <button class="coolbtn">Edit your Profile</button>
+</form>

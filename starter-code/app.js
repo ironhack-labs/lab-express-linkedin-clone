@@ -12,10 +12,9 @@ mongoose.connect('mongodb://localhost/linkedin-lab');
 
 const expressLayouts = require('express-ejs-layouts');
 
-const authController = require('./routes/authController');
-
-const index = require('./routes/index');
-const users = require('./routes/users');
+const authController = require("./routes/authController");
+const postsController = require("./routes/postsController");
+const profileController = require("./routes/profileController");
 
 const app = express();
 
@@ -32,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
+app.set("layout", "layouts/main-layout");
 
 app.use(session({
   secret: "basic-auth-secret",
@@ -42,9 +42,9 @@ app.use(session({
   })
 }));
 
-
-app.use('/users', users);
 app.use("/", authController);
+app.use("/profile", profileController);
+app.use("/users", postsController);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
