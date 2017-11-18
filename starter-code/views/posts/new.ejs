@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../../css/style.css">
+  <title>Ironhack Linkedin - Posts</title>
+</head>
+
+<body>
+
+<form action="/users/<%=user._id%>/posts" method="POST" id="form" >
+  <h2>Create a new Post!</h2>
+    <br>
+    <textarea type="text" name="content" maxlength="250"
+      placeholder="Post your thoughts!" ></textarea><br><br>
+  <button>Submit</button>
+</form>
+
+<% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+</body>
+</html>
