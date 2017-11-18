@@ -1,15 +1,18 @@
 <h2>Login</h2>
-<form action="/login" method="POST" class="form-container">
-  <label for="name">name</label>
-  <input type="text" name="name" >
+<% if (typeof(errorMessage) !== "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<form action="/login" method="POST" id="form-container" class="login">
+  <label for="email">Email</label>
+  <input type="text" name="email" placeholder="pacojones@gmail.com">
   <br><br>
   <label for="password">Password</label>
-  <input type="password" name="password" >
+  <input type="password" name="password" placeholder="Your password">
   <br><br>
   <button>Log in</button>
+
   <p class="account-message">
-    Don't have an account? <a href="/signup">Sign up</a></p>
-  <% if (typeof(errorMessage) != "undefined") { %>
-    <div class="error-message"><%= errorMessage %></div>
-  <% }%>
+    Don't have an account? <a href="/signup">Sign up</a>
+  </p>
 </form>
