@@ -1,0 +1,12 @@
+<h1>Welcome <%= user.name %>!</h1>
+
+<div>
+    <h3>Posts</h3>
+    <% posts.forEach((post) => { %>
+      <div>
+        <p><%= post._creator.username %></p>
+        <p><%= post.content %>"</p>
+
+      </div>
+      </div>
+    <%  }) %>

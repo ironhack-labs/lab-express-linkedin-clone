@@ -1,14 +1,26 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const expressLayouts = require('express-ejs-layouts');
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const debug = require('debug')('basic-auth:'+ path.basename(__filename));
+// const expressLayouts = require('express-ejs-layouts');
+const authController = require("./routes/authController");
+const postsController = require("./routes/postsController");
+const profileController = require("./routes/profileController");
+const miruti = require("./routes/miruti");
 
-var app = express();
+const app = express();
+
+const dbName = "mongodb://localhost/basic-auth-linkedin";
+mongoose.connect(dbName, {useMongoClient:true})
+        .then(() => debug(`Connected to db: ${dbName}`));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -16,14 +28,34 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(expressLayouts);
+app.set("layout", "layouts/main-layout");
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60*60*24*2 }, // 2 days
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
+
+app.use("/", authController);
+app.use("/profile", profileController);
+app.use("/users", postsController);
+app.use("/posts", miruti);
+
+app.use((req,res,next) =>{
+  res.locals.title = "TITULO POR DEFECTO";
+  res.locals.user = req.session.currentUser;
+  next();
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
