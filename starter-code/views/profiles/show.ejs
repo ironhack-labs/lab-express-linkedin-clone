@@ -1,0 +1,34 @@
+
+<div id="profile">
+  <h1><%= user.name %></h1>
+</div>
+
+<div>
+  <img src="<%= user.imageUrl %>" width="200" height="<200></200>">
+  <ul class="proflist">
+  <li><b>Job Title: </b> <%= user.jobTitle %></li>
+    <li><b>Company: </b><%= user.company %></li>
+  <% if(session !== undefined) {%>
+    <li><b>Email: </b> <%= user.email %></li>
+    <li><b>Summary: </b> <%= user.summary %></li>
+  <%}%>
+  </ul>
+</div>
+
+<div class="buttons">
+  <% if (session !== undefined && user._id == session._id) { %>
+    <form action="/profile/<%= user._id %>/edit" method="GET">
+      <button> Edit Your Profile</%%></button>
+    </form>
+  <% } %>
+
+  <% if (session !== undefined && user._id != session._id) { %>
+    <form action="/profile/<%= user._id %>/follow" method="POST">
+      <button><%= button_text %></%%></button>
+    </form>
+  <% } %>
+
+  <form action="/" method="GET">
+    <button> Back home!</button>
+  </form>
+</div>

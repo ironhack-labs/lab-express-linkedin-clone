@@ -7,11 +7,9 @@ const userSchema = new Schema({
   name: String,
   email: String,
   summary: String,
-  // imageUrl: "https://i.imgur.com/3R3iYvP.jpg",
+  imageUrl: String,
   company: String,
   jobTitle: String,
-
-
 });
 
 const User = mongoose.model('User', userSchema);
