@@ -1,0 +1,46 @@
+<h1>Edit your profile</h1>
+
+<form action="/signup" method="POST">
+  <div>
+    <label for="name-input" > Name </label>
+    <input type="text" name="name" id="name-input"
+      value= <%%>>
+  </div>
+
+  <div>
+    <label for="email-input"> Email </label>
+    <input type="email" name="email" id="email-input"
+      value= <%%> >
+  </div>
+
+  <div>
+    <label for="password-input"> Password </label>
+    <input type="password" name="password" id="password-input"
+      value= <%%>>
+  </div>
+
+  <div>
+    <label for="summary-input"> Summary </label>
+    <input type="text" name="summary" id="summary-input"
+      value= <%%>>
+  </div>
+
+  <div>
+    <label for="company-input"> Company Title </label>
+    <input type="text" name="company" id="company-input"
+      value= <%%>>
+  </div>
+
+  <div>
+    <label for="jobTitle-input"> Job Title </label>
+    <input type="text" name="jobTitle" id="jobTitle-input"
+      value= <%%>>
+  </div>
+
+  <div>
+    <h3>Upload your photo</h3>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="photo">
+      <input type="submit" value="Save">
+    </form>
+  </div>
