@@ -1,4 +1,5 @@
 <h1>Welcome <%= user.username %>!</h1>
+<img class="mainImage" src="<%= user.imageUrl %>" width="200" height="200">
 <a href="/profile/<%=user._id%>"><button class="nicebtn">My profile</button></a>
 <a href="/users/<%=user._id%>/posts/new"><button class="nicebtn">New Post</button></a>
 <a href="/logout"><button class="dngrbtn">Logout</button></a>
