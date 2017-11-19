@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+ <html lang="en">
+
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel='stylesheet' href="stylesheets/style.css">
+   <title>Ironhack Linkedin - <%= user.username %> profile</title>
+ </head>
+
+
+ <body>
+   <h1><%= user.username %></h1>
+   <h3>Actual job tittle: <%= user.jobtittle %></h3>
+   <h4>Actual company: <%= user.company %></h4>
+   <% if(session !== undefined){ %>
+     <p><b>E-mail: </b><%= user.email %></p>
+     <p><b>Summary: </b><%= user.summary %></p>
+     <% if(user._id == session._id){ %>
+       <a href="/profile/<%= user._id %>/edit/">Edit Profile</a><br>
+     <% } %>
+   <% } %>
+   <div>
+     <h2><%= user.username %> posts</h2>
+         <div class="newpost">
+           <p><%= post.content %></p>
+         </div>
+       <div>
+         <p>You don't have posts.</p>
+       </div>
+ </div>
+ </body>
+ </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="stylesheets/style.css">
+   <title>Ironhack Linkedin - Edit Profile</title>
+ </head>
+
+ <body>
+ <form action="/profile/<%= user._id %>" method="POST" id="form">
+   <h2>Edit your profile:</h2>
+   <label for="username">Name</label><br>
+   <input type="text" name="username" value="<%= user.username %>">
+   <br><br>
+   <label for="email">E-mail</label><br>
+   <input type="text" name="email" value="<%= user.email %>">
+   <br><br>
+   <label for="password">Password</label><br>
+   <input type="password" name="password" value="<%= user.password %>">
+   <br><br>
+   <label for="summary">Summary</label><br>
+   <input type="text" name="summary" value="<%= user.summary %>">
+   <br><br>
+   <label for="image">Image</label><br>
+   <input type="text" name="imageURL" value="<%= user.imageURL %>">
+   <br><br>
+   <label for="company">Company</label><br>
+   <input type="text" name="company" value="<%= user.company %>">
+   <br><br>
+   <label for="jobtittle">Job tittle</label><br>
+   <input type="text" name="jobtittle" value="<%= user.jobtittle %>">
+   <br><br>
+   <button>Edit your profile</button>
+ </form>
+ </body>
+ </html>

@@ -1,0 +1,13 @@
+<div id="container">
+     <h2><%= user.username %>, add a post and let your friends know what you are thinking!</h2>
+
+     <form action="/users/<%= user._id %>/posts" method="POST">
+       <label for="post">Post:</label>
+       <input type="text" name="content" maxlength="250" placeholder="Post your thoughts!" >
+       <button class="button blue">Submit</button>
+     </form>
+
+     <% if (typeof(errorMessage) != "undefined") { %>
+       <div class="error-message"><%= errorMessage %></div>
+     <% } %>
+   </div>
