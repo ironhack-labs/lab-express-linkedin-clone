@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const router = express.Router();
 const bcryptSalt = 10;
+const multer  = require('multer');
+const uploader = multer({dest:'./public/uploads'});
+const Picture = require('../models/Image')
 
 router.get('/signup', (req, res, next) => {
   res.render('auth/signup', {
@@ -15,9 +18,18 @@ router.post('/signup', (req, res, next) => {
   const emailInput = req.body.email;
   const passwordInput = req.body.password;
   const summaryInput = req.body.summary;
-  const imageUrlInput = req.body.imageUrl;
   const companyInput = req.body.company;
   const jobTitleInput = req.body.jobTitle;
+
+router.post('/upload', upload.single('photo'), function(req, res){
+  const image = new Image({
+    image: `/uploads/${req.file.filename}`,
+    image_name: req.file.originalname
+  });
+  image.save((err) => {
+      res.redirect('/');
+  });
+});
 
   if (emailInput === '' || passwordInput === '') {
     res.render('auth/signup', {
@@ -41,7 +53,6 @@ router.post('/signup', (req, res, next) => {
 
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashedPass = bcrypt.hashSync(passwordInput, salt);
-
     const userSubmission = {
       name: nameInput,
       email: emailInput,
@@ -49,15 +60,14 @@ router.post('/signup', (req, res, next) => {
     };
 
     const theUser = new User(userSubmission);
-
     theUser.save((err) => {
       if (err) {
         res.render('auth/signup', {
-          errorMessage: 'Something went wrong. Try again later.'
+          errorMessage: 'Something went wrong.'
         });
         return;
       }
-      res.redirect('/profile');
+      res.redirect('/show');
     });
   });
 });

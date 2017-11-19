@@ -44,9 +44,11 @@
   </div>
 
   <div>
-    <label for="imageUrl-input"> Upload Image </label>
-    <input type="image" name="imageUrl" id="imageUrl-input"
-      placeholder="Upload your image here!">
+    <h3>Upload your photo</h3>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="photo">
+      <input type="submit" value="Save">
+    </form>
   </div>
 
   <button> Create New Account </button>

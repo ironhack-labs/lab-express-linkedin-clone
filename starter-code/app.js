@@ -6,13 +6,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const authRoute = require('./routes/auth');
 const index = require('./routes/index');
-const users = require('./routes/users');
+const postRoute = require('./routes/post')
 const app = express();
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const debug = require('debug')('linkedin:server');
-
+const multer  = require('multer');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,8 +56,9 @@ app.use((req, res, next) => {
 
 //Routes
 app.use('/', index);
-app.use('/users', users);
 app.use('/', authRoute);
+app.use('/', postRoute);
+
 
 
 
