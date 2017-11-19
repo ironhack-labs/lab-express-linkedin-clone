@@ -1,0 +1,60 @@
+<h2> Sign Up </h2>
+
+<% if (errorMessage) { %>
+  <p class="error-message">
+    <%= errorMessage %>
+  </p>
+<% } %>
+
+<form action="/signup" method="POST">
+  <div>
+    <label for="name-input"> Name </label>
+    <input type="text" name="name" id="name-input"
+      placeholder="Jon Snow">
+  </div>
+
+  <div>
+    <label for="email-input"> Email </label>
+    <input type="email" name="email" id="email-input"
+      placeholder="jon@wannabeastark.com">
+  </div>
+
+  <div>
+    <label for="password-input"> Password </label>
+    <input type="password" name="password" id="password-input"
+      placeholder="••••••••••••">
+  </div>
+
+  <div>
+    <label for="summary-input"> Summary </label>
+    <input type="text" name="summary" id="summary-input"
+      placeholder="Tell us something about yourself!">
+  </div>
+
+  <div>
+    <label for="company-input"> Company Title </label>
+    <input type="text" name="company" id="company-input"
+      placeholder="Black Castle">
+  </div>
+
+  <div>
+    <label for="jobTitle-input"> Job Title </label>
+    <input type="text" name="jobTitle" id="jobTitle-input"
+      placeholder="Guardian of the Night">
+  </div>
+
+  <div>
+    <label for="imageUrl-input"> Upload Image </label>
+    <input type="image" name="imageUrl" id="imageUrl-input"
+      placeholder="Upload your image here!">
+  </div>
+
+  <button> Create New Account </button>
+</form>
+
+<p>
+  Already have an account?
+  <a href="/login">
+    Log in.
+  </a>
+</p>
