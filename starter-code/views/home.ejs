@@ -1,0 +1,32 @@
+<h1>Welcome <%= user.username %>!</h1>
+<img class="mainImage" src="<%= user.imageUrl %>" width="200" height="200">
+<a href="/profile/<%=user._id%>"><button class="nicebtn">My profile</button></a>
+<a href="/users/<%=user._id%>/posts/new"><button class="nicebtn">New Post</button></a>
+<a href="/logout"><button class="dngrbtn">Logout</button></a>
+
+<div class="connect">
+  <h2>Connections</h2>
+  <% if (follows.length > 0) { %>
+    <% follows.forEach(function(e) { %>
+        <a href="/profile/<%=e._id%>"><p><%= e.username %></p></a>
+    <% }) %>
+  <% } else { %>
+      <p><%= user.username %> has no connections yet.</p>
+  <% } %>
+</div>
+
+<div>
+  <h2><%= user.username %> posts</h2>
+  <% if (posts.length > 0) { %>
+    <% posts.forEach(function(e) { %>
+      <div class="newpost">
+        <p><%= e.content %></p>
+        <p class="date"><%= moment(e.created_at).format("LL, LTS") %></p>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <div>
+      <p>@<%= user.username %> hasn't posted yet.</p>
+    </div>
+  <% } %>
+</div>
