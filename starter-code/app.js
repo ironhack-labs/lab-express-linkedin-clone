@@ -6,11 +6,16 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
-const authRoutes = require('./routes/index');
-const session = require("express-session");
-const MongoStore = require("connect-mongo")(session);
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
-// const home = require('./routes/index');
+const authController = require('./routes/authController');
+const postController = require('./routes/postController');
+const profileController = require('./routes/profileController');
+const index = require('./routes/index');
+
+
+mongoose.connect('mongodb://localhost/linkedin-lab-development');
 
 const app = express();
 
@@ -20,18 +25,31 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(expressLayouts)
+// app.use(expressLayouts);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authRoutes);
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 60*60*24 }, //cuando tiempo lo guarda tu ordenador
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day tiempo que dura en la base de datos
+  })
+}));
+
+app.use('/', index);
+app.use('/', authController);
+app.use('/profile', profileController);
+app.use('/users', postController);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  let err = new Error('Not Found');
+  var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

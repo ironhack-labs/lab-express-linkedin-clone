@@ -1,24 +1,44 @@
-<% if (typeof(errorMessage) != "undefined") { %>
-  <div class="error-message"><%= errorMessage %></div>
-<% } %>
-<h2>Sign Up!</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Ironhack Linkedin - Sign Up</title>
+</head>
+
+<body>
+
 <form id="form" action="/signup" method="POST">
-
-  <label for="username">Username</label>
-  <input type="text" name="username" placeholder="Your user name">
-
-  <label for="password">Password</label>
-  <input type="password" name="password" placeholder="Your password">
+  <h2>Create a new account!</h2>
+  <label for="username">Name</label><br>
+  <input type="text" name="username" placeholder="Enter your name here">
   <br><br>
-
-  <label for="name">name</label>
-  <input type="text" name="name" placeholder="Your name">
-
-  <label for="email">email</label>
-  <input type="text" name="email" placeholder="Your email">
+  <label for="email">E-mail</label><br>
+  <input type="text" name="email" placeholder="Enter your email here">
   <br><br>
-
+  <label for="password">Password</label><br>
+  <input type="password" name="password" placeholder="Enter your password here">
+  <br><br>
+  <label for="summary">Summary</label><br>
+  <input type="text" name="summary" placeholder="Tell us a little bit about you">
+  <br><br>
+  <label for="image">Image</label><br>
+  <input type="text" name="imageURL" placeholder="Your image URL">
+  <br><br>
+  <label for="company">Company</label><br>
+  <input type="text" name="company" placeholder="Where are you working rigth now">
+  <br><br>
+  <label for="jobtittle">Job tittle</label><br>
+  <input type="text" name="jobtittle" placeholder="You actual job tittle">
+  <br><br>
   <button>Create account</button>
 </form>
 <br>
-<a href="/">Back to home</a>
+<a href="/">Back to principal page</a>
+<% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+</body>
+</html>
