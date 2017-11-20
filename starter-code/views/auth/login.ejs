@@ -1,0 +1,30 @@
+<h2> Log In </h2>
+
+<% if (errorMessage) { %>
+  <p class="error-message">
+    <%= errorMessage %>
+  </p>
+<% } %>
+
+<form action="/login" method="post">
+  <div>
+    <label for="email-input"> Email </label>
+    <input type="email" name="email" id="email-input"
+      placeholder="jon@wannabeastark.com">
+  </div>
+
+  <div>
+    <label for="password-input"> Password </label>
+    <input type="password" name="password" id="password-input"
+      placeholder="••••••••••••">
+  </div>
+
+  <button> Log In </button>
+</form>
+
+<p>
+  Don't have an account?
+  <a href="/signup">
+    Create an account.
+  </a>
+</p>
