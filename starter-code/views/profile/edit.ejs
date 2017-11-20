@@ -1,38 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/../css/style.css">
-  <title>Ironhack Linkedin - Edit Profile</title>
-</head>
+<h2>Edit Your Profile</h2>
 
-<body>
-<form action="/profile/<%= user._id %>" method="POST" id="form">
-  <h2>Edit your profile:</h2>
-  <label for="username">Name</label><br>
-  <input type="text" name="username" value="<%= user.username %>">
+<form action="/profile/<%= user._id %>/edit" method="POST" id="form-container">
+  <label for="name">Name</label>
+  <input type="text" name="name"
+    placeholder="Paco Jones" value="<%= user.username %>">
   <br><br>
-  <label for="email">E-mail</label><br>
-  <input type="text" name="email" value="<%= user.email %>">
+  <label for="email">Email</label>
+  <input type="text" name="email"
+    placeholder="pacojones@gmail.com" value="<%= user.email %>">
   <br><br>
-  <label for="password">Password</label><br>
-  <input type="password" name="password" value="<%= user.password %>">
+  <label for="imageUrl">Image Url</label>
+  <input type="text" name="imageUrl"
+    placeholder="Imgur URL of your profile image" value="<%= user.imgUrl %>">
   <br><br>
-  <label for="summary">Summary</label><br>
-  <input type="text" name="summary" value="<%= user.summary %>">
+  <label for="jobTitle">Job Title</label>
+  <input type="text" name="jobTitle"
+    placeholder="Your job title" value="<%= user.jobTitle %>">
   <br><br>
-  <label for="image">Image</label><br>
-  <input type="text" name="imageURL" value="<%= user.imageURL %>">
+  <label for="company">Company</label>
+  <input type="text" name="company"
+    placeholder="Your company" value="<%= user.company %>">
   <br><br>
-  <label for="company">Company</label><br>
-  <input type="text" name="company" value="<%= user.company %>">
+  <label for="summary">Summary</label>
+  <input type="text" name="summary"
+    placeholder="Summary about yourself" value="<%= user.summary %>">
   <br><br>
-  <label for="jobtittle">Job tittle</label><br>
-  <input type="text" name="jobtittle" value="<%= user.jobtittle %>">
-  <br><br>
-  <button>Edit your profile</button>
+  <button>Edit your Profile</button>
 </form>
-</body>
-</html>

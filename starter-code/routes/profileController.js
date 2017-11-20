@@ -3,20 +3,26 @@ const profileController = express.Router();
 const User = require('../models/user');
 
 profileController.get('/:id', (req, res, next) => {
+  
+    res.render('profile/show', {
+      user: user,
+      session: req.session.currentUser,
+    });
+  });
+
+profileController.get('/:id/edit', (req, res, next) => {
   User.findOne({
     _id: req.params.id
   }, '').exec((err, user) => {
     if (!user) {
       return next(err);
     }
-    res.render('profile/show', {
-      user: user,
-      session: req.session.currentUser,
-    });
-  });
+  res.render('profile/edit', { user: user });
 });
 
-profileController.post('/:id', (req, res, next) => {
+})
+
+profileController.post('/:id/edit', (req, res, next) => {
   const userId = req.params.id;
   const updates = {
     name: req.body.name,
@@ -31,13 +37,8 @@ profileController.post('/:id', (req, res, next) => {
     if (err) {
       return next(err)
     }
-    res.render('home', { user: user });
+    res.redirect('/', { user: user });
   });
-});
-
-profileController.get('/:id/edit', (req, res, next) => {
-  const session = req.session.currentUser;
-  res.render('profile/edit', { session: session });
 });
 
 module.exports = profileController;

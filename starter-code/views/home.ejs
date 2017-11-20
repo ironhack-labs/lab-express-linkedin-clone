@@ -9,7 +9,7 @@
 </head>
 <body>
     <h2>Welcome <%= user.username %></h2>
-    <a href="/profile/show/<%= user._id %>">View your profile</a><br>
+    <a href="/profile/<%= user._id %>">View your profile</a><br>
     <a href="/users/<%= user._id %>/posts/new">Add a Post!</a><br>
     <a href="/logout">Logout</a>
     
