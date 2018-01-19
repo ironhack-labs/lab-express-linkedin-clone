@@ -29,7 +29,8 @@ module.exports.doSignup = (req, res, next) => {
                   user = new User(req.body);
                   user.save()
                   .then(() => {
-                      console.log("User created");                      
+                      console.log("User created");  
+                      req.session.currentUser = user;                    
                         res.redirect('/auth/signok');
                       //   res.send('/signok');
                   }).catch(error => {
@@ -95,3 +96,13 @@ module.exports.doLogin = (req, res, next) => {
             }).catch(error => next(error));
     }
 };
+
+module.exports.logout = (req, res, next) => {
+    req.session.destroy(error => {
+        if (error) {
+            next(error);
+        } else {
+            res.redirect("/");
+        }
+    });
+}
