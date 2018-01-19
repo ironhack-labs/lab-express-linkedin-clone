@@ -6,3 +6,8 @@ body {
 a {
   color: #00B7FF;
 }
+
+.logo {
+  max-width: 100px;
+  width: 100%;
+}
