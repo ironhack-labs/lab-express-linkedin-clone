@@ -22,13 +22,22 @@
         <%}%>
       </ul>
     </div>
+    <% if (typeof(sessionUser) != 'undefined' && sessionUser.email == user.email ) { %>
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
-      <div class="panel panel-default">
-        <div class="panel-heading text-center">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
             <a href="/profile/<%=user.email%>/edit" class="btn btn-success">Edit profile</a>
+          </div>
         </div>
       </div>
-    </div>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <a href="/users/<%=user._id%>/posts/new" class="btn btn-success">Create a post</a>
+          </div>
+        </div>
+      </div>
+      <%}%>
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
       <div class="panel panel-default">
         <div class="panel-heading text-center">

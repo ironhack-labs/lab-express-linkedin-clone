@@ -5,13 +5,13 @@ module.exports.edit = (req, res, next) => {
   if (req.params.email != req.session.currentUser.email) {
     res.redirect("/");
   } else {
-    console.log("Email = " + req.params.email);
+    // console.log("Email = " + req.params.email);
     const email = req.params.email;
     User.findOne({
         email: req.params.email
       })
       .then(user => {
-        console.log(user);
+        // console.log(user);
         if (!user) {
           next();
         } else {
@@ -46,18 +46,18 @@ module.exports.update = (req, res, next) => {
 };
 
 module.exports.show = (req, res, next) => {
-  console.log("ID = " + req.params.userId);
+  // console.log("ID = " + req.params.userId);
   const _id = req.params.userId;
   User.findOne({
       _id: _id
     })
     .then(user => {
-      console.log(user);
+      // console.log(user);
       if (!user) {
         next();
       } else {
-        console.log(req.session.currentUser);
-        console.log(user);
+        // console.log(req.session.currentUser);
+        // console.log(user);
         res.render(`profile/show`, {
           user: user,
           sessionUser: req.session.currentUser

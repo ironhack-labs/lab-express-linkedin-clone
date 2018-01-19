@@ -14,6 +14,7 @@ require('./configs/db.config');
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
 const profile = require('./routes/profile.routes');
+const user = require('./routes/user.routes');
 
 const app = express();
 
@@ -49,6 +50,7 @@ app.use(session({
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/profile', profile);
+app.use('/users', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
