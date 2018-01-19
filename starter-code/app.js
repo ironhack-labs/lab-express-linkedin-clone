@@ -9,6 +9,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require("connect-mongo")(session);
 
+require('./configs/db.config'); 
+
 const index = require('./routes/index.routes');
 const auth = require('./routes/auth.routes');
 
