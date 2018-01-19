@@ -2,27 +2,38 @@ const User = require('../models/user.model');
 const moment = require('moment');
 
 module.exports.edit = (req, res, next) => {
-  res.send("Estas en profile");
-    // const username = req.params.username;
-    // User.findOne({ username: req.params.username})
-    //     .then(user => {
-    //         if (!user) {
-    //             next();
-    //         } else {
-    //             Tweet.find({username: user.username})
-    //                 .sort({ createdAt: -1})
-    //                 .then(tweets => {
-    //                     res.render('profile/show', {
-    //                         tweets: tweets,
-    //                         user: user,
-    //                         moment: moment,
-    //                         session: req.session.currentUser,
-    //                         following: req.session.currentUser && 
-    //                             req.session.currentUser.following.some(f => f == user._id)
-    //                     });
-    //                 })
-    //                 .catch(error => next(error));
-    //         }
-    //     })
-    //     .catch(error => next(error));
+  console.log("Email = " + req.params.email);
+  const email = req.params.email;
+  User.findOne({
+      email: req.params.email
+    })
+    .then(user => {
+      console.log(user);
+      if (!user) {
+        next();
+      } else {
+        res.render("profile/edit", user);
+      }
+    })
+    .catch(error => next(error));
+};
+module.exports.update = (req, res, next) => {
+  const user = new User({
+    _id: req.session.currentUser._id,
+    name: req.body.name,
+    email: req.body.email,
+    summary: req.body.summary,
+    imageUrl: req.body.imageUrl,
+    company: req.body.company,
+    jobTitle: req.body.jobTitle
+  });
+  User.findByIdAndUpdate(user._id, user, {
+      new: true
+    })
+    .then(currentUser => {
+      // req.session.currentUser = currentUser;
+      res.send("ADIOS");
+      // res.redirect(`/profile/${username}`);
+    })
+    .catch(error => next(error));
 };
