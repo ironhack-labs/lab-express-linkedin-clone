@@ -17,14 +17,11 @@ module.exports.doSignup = (req, res, next) => {
           }
       });
   }else{   
-      console.log("que");
       User.findOne({ email: email })
           .then(user => {
               errorData = {
                   error: { email: 'email already exists' }
               };
-              console.log("hola");
-              
               if (user != null) {
                   console.log("email already exists");            
                   res.render('auth/signup', errorData);
@@ -33,11 +30,12 @@ module.exports.doSignup = (req, res, next) => {
                   user.save()
                   .then(() => {
                       console.log("User created");                      
-                      res.send('/signok');
-                      res.redirect('/signok');
+                        res.redirect('/auth/signok');
+                      //   res.send('/signok');
                   }).catch(error => {
                       if (error instanceof mongoose.Error.ValidationError) {
-                      res.render('auth/signup', { user: user, error: error.errors });                      } else {
+                      res.render('auth/signup', { user: user, error: error.errors });                      
+                    } else {
                       next(error);
                       }
                   });
@@ -45,4 +43,55 @@ module.exports.doSignup = (req, res, next) => {
               })
           .catch(error => next(error));
   }
+};
+
+module.exports.signok = (req, res, next) => {
+    res.render('auth/signok');
+};
+
+module.exports.login = (req, res, next) => {
+    res.render('auth/login');
+};
+
+module.exports.doLogin = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    if (!email || !password) {
+        res.render('auth/login', { 
+            user: { email: email }, 
+            error: {
+                email: email ? '' : 'Username is required',
+                password: password ? '' : 'Password is required'
+            }
+        });
+    } else {
+        console.log("1");
+        
+        User.findOne({ email: email})
+        .then(user => {
+            console.log("2");
+            errorData = {
+                user: { email: email },
+                error: { password: 'Invalid email or password' }
+            };
+            if (user) {
+                console.log("3");
+                console.log(user);
+                user.checkPassword(password)
+                .then(match => {
+                    console.log("4");
+                            if (!match) {
+                                res.render('auth/login', errorData);
+                            } else {
+                                req.session.currentUser = user;
+                                // res.send('/tweets');
+                                res.redirect('/auth/signok');
+                            }
+                        })
+                        .catch(error => next(error));
+                } else {
+                    res.render('auth/login', errorData);
+                }
+            }).catch(error => next(error));
+    }
 };
