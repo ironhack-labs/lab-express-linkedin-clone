@@ -30,8 +30,9 @@ module.exports.doSignup = (req, res, next) => {
                   user.save()
                   .then(() => {
                       console.log("User created");  
+                      console.log(user);  
                       req.session.currentUser = user;                    
-                        res.redirect('/auth/signok');
+                        res.render('auth/signok',user);
                       //   res.send('/signok');
                   }).catch(error => {
                       if (error instanceof mongoose.Error.ValidationError) {
@@ -66,30 +67,26 @@ module.exports.doLogin = (req, res, next) => {
             }
         });
     } else {
-        console.log("1");
-        
         User.findOne({ email: email})
         .then(user => {
-            console.log("2");
             errorData = {
                 user: { email: email },
                 error: { password: 'Invalid email or password' }
             };
             if (user) {
-                console.log("3");
-                console.log(user);
                 user.checkPassword(password)
                 .then(match => {
-                    console.log("4");
-                            if (!match) {
-                                res.render('auth/login', errorData);
-                            } else {
-                                req.session.currentUser = user;
-                                // res.send('/tweets');
-                                res.redirect('/auth/signok');
-                            }
-                        })
-                        .catch(error => next(error));
+                    if (!match) {
+                        res.render('auth/login', errorData);
+                    } else {
+                        console.log("User log");  
+                        console.log(user);  
+                        req.session.currentUser = user;
+                        // res.send('/tweets');
+                        res.render('auth/signok',user);
+                    }
+                })
+                .catch(error => next(error));
                 } else {
                     res.render('auth/login', errorData);
                 }
