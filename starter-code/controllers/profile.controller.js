@@ -47,22 +47,26 @@ module.exports.update = (req, res, next) => {
 
 module.exports.show = (req, res, next) => {
   // console.log("ID = " + req.params.userId);
-  const _id = req.params.userId;
-  User.findOne({
-      _id: _id
-    })
-    .then(user => {
-      // console.log(user);
-      if (!user) {
-        next();
-      } else {
-        // console.log(req.session.currentUser);
+  if (!req.session.currentUser) {
+    res.redirect("/");
+  } else {
+    const _id = req.params.userId;
+    User.findOne({
+        _id: _id
+      })
+      .then(user => {
         // console.log(user);
-        res.render(`profile/show`, {
-          user: user,
-          sessionUser: req.session.currentUser
-        });
-      }
-    })
-    .catch(error => next(error));
+        if (!user) {
+          next();
+        } else {
+          // console.log(req.session.currentUser);
+          // console.log(user);
+          res.render(`profile/show`, {
+            user: user,
+            sessionUser: req.session.currentUser
+          });
+        }
+      })
+      .catch(error => next(error));
+  }
 };

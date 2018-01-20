@@ -11,18 +11,27 @@
       <form action="/users/:userId/posts" method="POST">
         <div class="form-group">
           <div class="input-group">
-            <input type="email" value="<%=email%>" name="email" class="form-control" >
+            <input type="email" value="<%=session.email%>" name="email" class="form-control" readonly="readonly">
           </div>
         </div>
         <div class="form-group">
           <div class="input-group">
-            <textarea name="post" cols="30" rows="10" class="form-control" placeholder="Write your post" required></textarea>
+              <% if (typeof(post) !== 'undefined') { %>
+                <textarea name="post"cols="30" rows="10" class="form-control" placeholder="Write your post" required><%=post.content%></textarea>
+              <%} else{%>
+                <textarea name="post" cols="30" rows="10" class="form-control" placeholder="Write your post" required></textarea>
+              <%}%>
           </div>
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-block btn-primary">Publish!</button>
         </div>
       </form>
+    </div>
+    <div class="pull-righ">
+        <% if (typeof(posts) !== 'undefined') { %>
+      <%- include('partials/list', { posts: posts }); %>
+      <%}%>
     </div>
     <div class="col-xs-12 col-sm-4 col-sm-offset-4">
       <hr>

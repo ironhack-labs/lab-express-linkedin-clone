@@ -4,44 +4,53 @@ const moment = require('moment');
 
 
 module.exports.new = (req, res, next) => {
-  console.log(req.session);
+  // console.log(req.session);
 
   if (req.params.userId != req.session.currentUser._id) {
     res.redirect("/");
   } else {
-    res.render('posts/new', {
-      email: req.session.currentUser.email
-      // post: req.session.currentUser.post
-    });
+    Post.find({_creator:req.params.userId})
+      .sort({
+        createdAt: -1
+      })
+      .then((posts) => {
+        res.render('posts/new', {
+          session: req.session.currentUser,
+          posts: posts
+        });
+      })
+      .catch(error => next(error));
   }
 };
 
 module.exports.create = (req, res, next) => {
-  // console.log("Email " + req.body.email);
-  // console.log("Post " + req.body.post);
-  // console.log("ID " + req.session.currentUser._id);
   if (!req.body.email || !req.body.post) {
     //si post esta vacio
-    console.log("1");
-    
     res.redirect('/users/' + req.session.currentUser._id + '/posts/new');
   } else {
-    console.log("2");
     const post = new Post({
       content: req.body.post,
       _creator: req.session.currentUser._id
     });
     post.save()
-    .then(() => {
-      console.log("SAVE");
-      res.redirect('/users/' + req.session.currentUser._id + '/posts/new');
-    })
-    .catch(error => {
-      console.log("4");
-        console.error(error);
+      .then(() => {
+        res.redirect('/users/' + req.session.currentUser._id + '/posts/new');
+      })
+      .catch(error => {
         if (error instanceof mongoose.Error.ValidationError) {
-          res.redirect('/users/' + req.session.currentUser._id + '/posts/new')
+          res.redirect('/users/' + req.session.currentUser._id + '/posts/new');
         }
       });
   }
+};
+module.exports.modify = (req, res, next) => {
+  // res.send(req.params.postId);
+    Post.findById(req.params.postId)
+      .then((post) => {
+        res.render('posts/new', {
+          session: req.session.currentUser,
+          post: post
+        });
+      })
+      .catch(error => next(error));
 };
