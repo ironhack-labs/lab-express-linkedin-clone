@@ -4,38 +4,44 @@ const moment = require('moment');
 
 
 module.exports.new = (req, res, next) => {
-  console.log(req.params.userId);
-  console.log(req.session.currentUser._id);
-  
+  console.log(req.session);
+
   if (req.params.userId != req.session.currentUser._id) {
     res.redirect("/");
-  } else{
-    res.render('posts/new',{email:req.session.currentUser.email});
+  } else {
+    res.render('posts/new', {
+      email: req.session.currentUser.email
+      // post: req.session.currentUser.post
+    });
   }
 };
 
-// module.exports.create = (req, res, next) => {
-//   if (req.params.userId != req.session.currentUser._id) {
-//     res.redirect("/");
-//   } else {
-//     user = new User(req.body);
-//     user.save()
-//       .then(() => {
-//         console.log("User created");
-//         console.log(user);
-//         req.session.currentUser = user;
-//         res.render('auth/signok', user);
-//         //   res.send('/signok');
-//       }).catch(error => {
-//         if (error instanceof mongoose.Error.ValidationError) {
-//           res.render('posts/new',{
-//             user: user,
-//             error: error.errors
-//           });
-//         } else {
-//           next(error);
-//         }
-//       });
-
-//   }
-// };
+module.exports.create = (req, res, next) => {
+  // console.log("Email " + req.body.email);
+  // console.log("Post " + req.body.post);
+  // console.log("ID " + req.session.currentUser._id);
+  if (!req.body.email || !req.body.post) {
+    //si post esta vacio
+    console.log("1");
+    
+    res.redirect('/users/' + req.session.currentUser._id + '/posts/new');
+  } else {
+    console.log("2");
+    const post = new Post({
+      content: req.body.post,
+      _creator: req.session.currentUser._id
+    });
+    post.save()
+    .then(() => {
+      console.log("SAVE");
+      res.redirect('/users/' + req.session.currentUser._id + '/posts/new');
+    })
+    .catch(error => {
+      console.log("4");
+        console.error(error);
+        if (error instanceof mongoose.Error.ValidationError) {
+          res.redirect('/users/' + req.session.currentUser._id + '/posts/new')
+        }
+      });
+  }
+};
