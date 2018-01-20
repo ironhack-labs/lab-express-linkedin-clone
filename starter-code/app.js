@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('Super Secret'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'Super Secret',
@@ -42,7 +42,6 @@ app.use(session({
     ttl: 24 * 60 * 60
   })
 }))
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', auth);
 app.use('/profile', profile);

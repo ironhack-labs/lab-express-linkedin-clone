@@ -82,13 +82,13 @@ module.exports.doLogin = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
     console.log(req.session);
-    if (req.session.authenticated) {
-    req.session.destroy(function(err) {
-        // cannot access session here
-    console.log(err);
-    
+
+    req.session.destroy((error) => {
+        if(error){
+            next(error);
+        } else {
+            res.redirect('/');
+        }
+         
     });
-    }else{
-        console.log("ASDF");
-    }
 }

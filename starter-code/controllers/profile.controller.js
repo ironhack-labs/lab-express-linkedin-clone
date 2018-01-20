@@ -15,12 +15,14 @@ module.exports.show = (req,res,next) =>{
 
 module.exports.update = (req,res,next) =>{
     console.log(req.params);
-    User.findByIdAndUpdate( req.params.userId,{$set: {
+    User.findByIdAndUpdate( req.params.userId,
+        {$set: {
         company: req.body.company,
         imageUrl: req.body.imageUrl,
         jobTitle: req.body.jobTitle,
         summary: req.body.summary
-    }}, { 'new': true} ).then((user) => {
+         }},
+     { 'new': true} ).then((user) => {
       console.log(user);
       res.redirect('profile/edit');
     });
