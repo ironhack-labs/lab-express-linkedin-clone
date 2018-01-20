@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+
+    <h3>Welcome <%= user.username %></h3>
+    <div>
+      <a href="/profile/<%= user._id %>/edit">Show</a>
+      <a href="/logout">Log out</a>
+    </div>

@@ -12,7 +12,7 @@ const MongoStore = require("connect-mongo")(session);
 require('./configs/db.config');
 
 var auth = require('./routes/auth.routes');
-
+var profile = require('./routes/profile.routes');
 var app = express();
 
 // view engine setup
@@ -27,6 +27,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'Super Secret',
   resave: false,
@@ -44,6 +45,7 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', auth);
+app.use('/profile', profile);
 
 
 // catch 404 and forward to error handler

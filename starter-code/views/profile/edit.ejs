@@ -1,0 +1,21 @@
+<h2>Profile</h2>
+<% if (typeof(session) !== 'undefined' && session.username == user.username ) { %>
+<form action="/profile/<%= user._id %>" method="post">
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" value="<%= user.username %>">
+    <label for="email">Email</label>
+    <input type="email" name="email" id="email" value="<%= user.email %>">
+    <label for="summary">Summary</label>
+    <textarea name="summary" id="summary" placeholder="<%= user.summary %>"></textarea>
+    <label for="company">Company</label>
+    <input type="text" name="company" id="company" value="<%= user.company %>">
+    <label for="jobTitle">Job Title</label>
+    <input type="text" name="jobTitle" id="jobTitle" value="<%= user.jobTitle %>">
+    <label for="imageUrl">Image URL</label>
+    <input type="text" name="imageUrl" id="imageUrl" value="<%= user.imageUrl %>">
+    <button>SEND</button>
+</form>
+<br>
+<% } else { %>
+<h3>No info</h3>
+<% } %>

@@ -1,6 +1,15 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
 
+module.exports.index = (req, res, next) => {
+    if(req.session.currentUser){
+        res.render('index', {user: req.session.currentUser});
+    }else{
+        res.render('auth/login');
+    }
+    
+}
+
 module.exports.signup = (req, res, next) => {
     res.render('auth/signup');
 }
@@ -14,7 +23,8 @@ module.exports.doSignup = (req, res, next) => {
                 user = new User(req.body);
                 user.save()
                     .then(() => {
-                        res.redirect('/login');
+                        req.session.currentUser = user;
+                        res.redirect('/');
                     }).catch(error => {
                         if (error instanceof mongoose.Error.ValidationError) {
                             res.render('auth/signup', { user: user, error: error.errors })
@@ -27,7 +37,7 @@ module.exports.doSignup = (req, res, next) => {
 }
 
 module.exports.login = (req, res, next) => {
-    console.log(req.session);
+    console.log(req.session.currentUser);
     res.render('auth/login');
 }
 
@@ -39,7 +49,8 @@ module.exports.doLogin = (req, res, next) => {
             user: { username: username }, 
             error: {
                 username: username ? '' : 'Username is required',
-                password: password ? '' : 'Password is required'
+                password: password ? '' : 'Password is required',
+                email: email ? '' : 'Email is required'
             }
         });
     } else {
@@ -55,9 +66,9 @@ module.exports.doLogin = (req, res, next) => {
                             if (!match) {
                                 res.render('auth/login', errorData);
                             } else {
-                               // console.log(req.session);
+                                req.session.authenticated = true;
                                 req.session.currentUser = user;
-                                res.redirect('/tweets/index');
+                                res.redirect('/');
                             }
                         })
                         .catch(error => next(error));
@@ -70,11 +81,14 @@ module.exports.doLogin = (req, res, next) => {
 }
 
 module.exports.logout = (req, res, next) => {
-    req.session.destroy(error => {
-        if (error) {
-            next(error);
-        } else {
-            res.redirect("/login");
-        }
+    console.log(req.session);
+    if (req.session.authenticated) {
+    req.session.destroy(function(err) {
+        // cannot access session here
+    console.log(err);
+    
     });
+    }else{
+        console.log("ASDF");
+    }
 }
