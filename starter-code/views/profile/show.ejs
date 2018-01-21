@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 profile">
+        <h3 class="pull-left"><strong>@<%= user.name %></strong></h3>
+        <% if (typeof(session) != 'undefined' && session.name !== user.name ) { %>
+        <% } %>
+        <div class="clearfix"></div>
+        <hr>
+    </div>
+</div>
