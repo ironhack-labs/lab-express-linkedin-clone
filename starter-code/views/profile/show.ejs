@@ -1,0 +1,49 @@
+<h1>My public profile</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <div class="page-header">
+        <h1>My Public Profile:
+          <small>Here you can see your profile</small>
+        </h1>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <ul class="list-group">
+        <li class="list-group-item"><strong>Name: </strong><%=user.name%></li>
+        <li class="list-group-item"><strong>eMail: </strong><%=user.email%></li>
+        <li class="list-group-item"><strong>sessionUser.email: </strong><%=sessionUser.email%></li>
+        <% if (typeof(sessionUser) != 'undefined' && sessionUser.email == user.email ) { %>
+        <li class="list-group-item"><strong>Summary: </strong><%=user.summary%></li>
+        <li class="list-group-item"><strong>URL:</strong><%=user.imageUrl%></li>
+        <li class="list-group-item"><strong>Company:</strong><%=user.company%></li>
+        <li class="list-group-item"><strong>Job: </strong><%=user.jobTitle%></li>
+        <%}%>
+      </ul>
+    </div>
+    <% if (typeof(sessionUser) != 'undefined' && sessionUser.email == user.email ) { %>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <a href="/profile/<%=user.email%>/edit" class="btn btn-success">Edit profile</a>
+          </div>
+        </div>
+      </div>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <div class="panel panel-default">
+          <div class="panel-heading text-center">
+            <a href="/users/<%=user._id%>/posts/new" class="btn btn-success">Create a post</a>
+          </div>
+        </div>
+      </div>
+      <%}%>
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">
+          <a href="/auth/logout" class="btn btn-danger">log out</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

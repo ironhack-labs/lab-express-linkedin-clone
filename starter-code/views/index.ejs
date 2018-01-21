@@ -1,11 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <h1>Index</h1>
+        <h2>Welcome to home page</h2>            
+        <a class="btn btn-primary" href="/auth/signup">Sign up</a>
+        <a class="btn btn-success" href="/auth/login">Log in</a>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h3>Posts of linkedin users:</h3>
+        <% if (typeof(posts) !== 'undefined') { %>
+            <% posts.forEach((post) => { %>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p><a href="/profile/<%= post._creator %>"><strong>@<%= post._creator %></strong></a> 
+                        <p><%= post.content %></p>
+                    </div>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</div>
