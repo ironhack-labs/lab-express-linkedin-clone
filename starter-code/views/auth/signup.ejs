@@ -1,0 +1,82 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+    <form action="/signup" method="POST">
+
+      <div class="form-group <%= typeof error != 'undefined' && error.name ? 'has-error' : '' %>">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user"></i>
+          </span>
+          <input type="text" name="name" class="form-control" placeholder="Name" >
+        </div>
+        <% if (typeof(error) != 'undefined' && error.name) { %>
+          <label class="control-label"> <%= error.name %> </label>
+        <% } %>
+      </div>
+
+      <div class="form-group <%= typeof error != 'undefined' && error.email ? 'has-error' : '' %>">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope"></i>
+          </span>
+          <input type="text" name="email" class="form-control" placeholder="E-mail">
+        </div>
+        <% if (typeof(error) != 'undefined' && error.email) { %>
+          <label class="control-label"><%= error.email %></label>
+        <% } %>
+      </div>
+
+      <div class="form-group <%= typeof error != 'undefined' && error.password ? 'has-error' : '' %>">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-lock"></i>
+          </span>
+          <input type="password" name="password" class="form-control" placeholder="Password">
+        </div>
+        <% if (typeof(error) != 'undefined' && error.password) { %>
+          <label class="control-label"><%= error.password %></label>
+        <% } %>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-file-word-o"></i>
+          </span>
+          <textarea name="name" rows="6" cols="43" placeholder="Summary"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-file-photo-o"></i>
+          </span>
+          <input type="text" name="imageUrl" class="form-control" placeholder="Image">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-building"></i>
+          </span>
+          <input type="text" name="company" class="form-control" placeholder="Company" >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-address-card-o"></i>
+          </span>
+          <input type="text" name="jobTitle" class="form-control" placeholder="Job Title" >
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-block btn-primary">Signup</button>
+      </div>
+    </form>
+  </div>
+</div>
