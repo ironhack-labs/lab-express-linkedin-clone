@@ -10,7 +10,7 @@ module.exports.doSignup = (req, res, next) => {
   User.findOne({ email: req.body.email })
       .then(user => {
           if (user != null) {
-              res.render('auth/signup', { user: user, error: { email: 'Username already exists'} })
+              res.render('auth/signup', { user: user, error: { email: 'Username already exists'} });
           } else {
               user = new User(req.body);
               user.save()
@@ -19,7 +19,7 @@ module.exports.doSignup = (req, res, next) => {
                       res.redirect('/profile/show');
                   }).catch(error => {
                       if (error instanceof mongoose.Error.ValidationError) {
-                          res.render('auth/signup', { user: user, error: error.errors })
+                          res.render('auth/signup', { user: user, error: error.errors });
                       } else {
                           next(error);
                       }
@@ -34,21 +34,21 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.doLogin = (req, res, next) => {
-  const username = req.body.email;
+  const email = req.body.email;
   const password = req.body.password;
-  if (!username || !password) {
+  if (!email || !password) {
       res.render('auth/login', {
-          user: { username: email }, 
+          user: { email: email },
           error: {
-              username: username ? '' : 'Username is required',
+              email: email ? '' : 'Username is required',
               password: password ? '' : 'Password is required'
           }
       });
   } else {
-      User.findOne({ username: username})
+      User.findOne({ email: email})
           .then(user => {
               errorData = {
-                  user: { username: username },
+                  user: { email: email },
                   error: { password: 'Invalid username or password' }
               }
               if (user) {
@@ -58,14 +58,16 @@ module.exports.doLogin = (req, res, next) => {
                               res.render('auth/login', errorData);
                           } else {
                               req.session.currentUser = user;
-                              res.redirect('/tweets');
+                              res.redirect('profile/show');
                           }
                       })
-                      .catch(error => next(error));
+                      .catch(error => { console.log("Error 1");
+                      next(error);});
               } else {
                   res.render('auth/login', errorData);
               }
-          }).catch(error => next(error));
+          }).catch(error => { console.log("Error 2");
+          next(error);});
   }
 };
 
