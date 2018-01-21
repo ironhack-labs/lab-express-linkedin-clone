@@ -15,3 +15,8 @@ a {
 .profile h3 {
   margin: 7px 0 0 0;
 }
+
+.profilepic{
+  max-width: 100px;
+  width: 100%;
+}

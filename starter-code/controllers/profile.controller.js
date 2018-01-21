@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
 
-module.exports.show = (req,res,next) =>{
+module.exports.edit = (req,res,next) =>{
     const session = req.session.currentUser;
     console.log(req.params.userId);
     User.findById(req.params.userId).then((user) => {
@@ -10,10 +10,23 @@ module.exports.show = (req,res,next) =>{
         user: user,
         session: session
       });
-    });
+    }).catch(error => next(error));
+  } 
+
+  module.exports.show = (req,res,next) =>{
+    const session = req.session.currentUser;
+    console.log(req.params.userId);
+    User.findById(req.params.userId).then((user) => {
+      console.log(session);
+      res.render('profile/show', {
+        user: user,
+        session: session
+      });
+    }).catch(error => next(error));
   } 
 
 module.exports.update = (req,res,next) =>{
+    const session = req.session.currentUser;
     console.log(req.params);
     User.findByIdAndUpdate( req.params.userId,
         {$set: {
@@ -24,6 +37,9 @@ module.exports.update = (req,res,next) =>{
          }},
      { 'new': true} ).then((user) => {
       console.log(user);
-      res.redirect('profile/edit');
-    });
+      res.render('profile/show', {
+        user: user,
+        session: session
+      });
+    }).catch(error => next(error));
 }
