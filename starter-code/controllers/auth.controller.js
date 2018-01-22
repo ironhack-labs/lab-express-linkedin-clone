@@ -29,7 +29,6 @@ module.exports.doSignup = (req, res, next) => {
 };
 
 module.exports.login = (req, res, next) => {
-  console.log(req.session.currentUser);
   res.render('auth/login');
 };
 
@@ -50,13 +49,14 @@ module.exports.doLogin = (req, res, next) => {
               errorData = {
                   user: { email: email },
                   error: { password: 'Invalid username or password' }
-              }
+              };
               if (user) {
                   user.checkPassword(password)
                       .then(match => {
                           if (!match) {
                               res.render('auth/login', errorData);
                           } else {
+                            console.log ("What up amelia");
                               req.session.currentUser = user;
                               res.redirect('profile/show');
                           }
