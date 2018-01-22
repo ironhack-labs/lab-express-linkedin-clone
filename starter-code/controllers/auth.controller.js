@@ -19,11 +19,14 @@ module.exports.signup = (req, res, next) => {
 }
 
 module.exports.login = (req, res, next) => {
-    res.render('auth/login');
+    res.render('auth/login', {
+        flash: req.flash()
+    });
 }
 
 module.exports.logout = (req, res, next) => {
-    res.send("logout");
+    req.logout();
+    res.redirect("/login");
 }
 
 module.exports.doSignup = (req, res, next) => {
