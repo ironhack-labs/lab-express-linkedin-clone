@@ -13,6 +13,7 @@ require('./configs/db.config');
 
 var auth = require('./routes/auth.routes');
 var profile = require('./routes/profile.routes');
+var posts = require('./routes/posts.routes');
 var app = express();
 
 // view engine setup
@@ -44,7 +45,9 @@ app.use(session({
 }))
 
 app.use('/', auth);
+app.use('/users', posts);
 app.use('/profile', profile);
+app.use('/users', posts);
 
 
 // catch 404 and forward to error handler

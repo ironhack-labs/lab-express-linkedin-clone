@@ -1,12 +1,21 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
+const Post = require('../models/post.model');
 
 module.exports.index = (req, res, next) => {
-    if(req.session.currentUser){
-        res.render('index', {user: req.session.currentUser});
-    }else{
-        res.render('auth/login');
-    }
+var allposts = null;
+    Post.find()
+        .then(posts => {
+            allposts = posts;
+            console.log(posts);
+            if(req.session.currentUser){
+                res.render('index', {user: req.session.currentUser, posts: allposts});
+            }else{
+                res.render('auth/login');
+            }
+        })
+        .catch(error => next(error));
+
     
 }
 

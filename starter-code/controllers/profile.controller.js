@@ -5,7 +5,7 @@ module.exports.edit = (req,res,next) =>{
     const session = req.session.currentUser;
     console.log(req.params.userId);
     User.findById(req.params.userId).then((user) => {
-      console.log(session);
+   //   console.log(session);
       res.render('profile/edit', {
         user: user,
         session: session
@@ -17,7 +17,7 @@ module.exports.edit = (req,res,next) =>{
     const session = req.session.currentUser;
     console.log(req.params.userId);
     User.findById(req.params.userId).then((user) => {
-      console.log(session);
+    //  console.log(session);
       res.render('profile/show', {
         user: user,
         session: session
@@ -27,7 +27,7 @@ module.exports.edit = (req,res,next) =>{
 
 module.exports.update = (req,res,next) =>{
     const session = req.session.currentUser;
-    console.log(req.params);
+  //  console.log(req.params);
     User.findByIdAndUpdate( req.params.userId,
         {$set: {
         company: req.body.company,
@@ -36,7 +36,7 @@ module.exports.update = (req,res,next) =>{
         summary: req.body.summary
          }},
      { 'new': true} ).then((user) => {
-      console.log(user);
+    //  console.log(user);
       res.render('profile/show', {
         user: user,
         session: session
