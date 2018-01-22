@@ -1,0 +1,48 @@
+<h2>Profile</h2>
+<% if (typeof(session) !== 'undefined') { %>
+<div>
+    <img src="<%= user.imageUrl %>" alt="Pic" class="profilepic"/>
+    <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Username</h3>
+            </div>
+            <div class="panel-body">
+                <%= user.username %>
+            </div>
+    </div>
+    <div class="panel panel-default">
+            <div class="panel-heading">Company
+            </div>
+            <div class="panel-body">
+                <%= user.company %>
+            </div>
+    </div>
+    <div class="panel panel-default">
+            <div class="panel-heading">Job Title</div>
+            <div class="panel-body">
+                <%= user.jobTitle %>
+            </div>
+    </div>
+    <div class="panel panel-default">
+            <div class="panel-heading">Summary</div>
+            <div class="panel-body">
+                <%= user.summary %>
+            </div>
+    </div>
+</div>
+<% if ( session.username == user.username ) {%>
+<div class="row">
+        <div class="col-xs-12 text-center">
+            <a href="/profile/<%= user._id %>/edit" class="btn btn-primary">Edit</a>
+        </div>
+</div>
+<div class="row">
+        <div class="col-xs-12 text-center">
+            <a href="/users/<%= user._id%>/posts/new" class="btn btn-primary">Post</a>
+        </div>
+</div>
+<% } %>
+<br>
+<% } else { %>
+<h3>No info</h3>
+<% } %>

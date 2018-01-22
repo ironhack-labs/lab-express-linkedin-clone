@@ -1,0 +1,12 @@
+<h2>New Post</h2>
+<% if (typeof(session) !== 'undefined') { %>
+<form action="/users/<%= session %>/posts" method="post">
+    <br>
+    <textarea name="content" id="content" rows="4" cols="50" placeholder="Escribe tu post"></textarea>
+    <br>
+    <button>POST</button>
+</form>
+<br>
+<% } else { %>
+<h3>No info</h3>
+<% } %>

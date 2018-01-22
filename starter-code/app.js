@@ -4,13 +4,21 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require("connect-mongo")(session);
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+require('./configs/db.config');
 
+var auth = require('./routes/auth.routes');
+var profile = require('./routes/profile.routes');
+var posts = require('./routes/posts.routes');
 var app = express();
 
 // view engine setup
+app.use(expressLayouts);
+app.set('layout', 'layouts/main');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -19,11 +27,28 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('Super Secret'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'Super Secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false,
+    httpOnly: true,
+    maxAge: 60 * 60 * 24 * 1000
+  },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60
+  })
+}))
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', auth);
+app.use('/users', posts);
+app.use('/profile', profile);
+app.use('/users', posts);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

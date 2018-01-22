@@ -6,3 +6,17 @@ body {
 a {
   color: #00B7FF;
 }
+
+.logo {
+  max-width: 100px;
+  width: 100%;
+}
+
+.profile h3 {
+  margin: 7px 0 0 0;
+}
+
+.profilepic{
+  max-width: 100px;
+  width: 100%;
+}
