@@ -1,8 +1,9 @@
 <h2>New Post</h2>
 <% if (typeof(session) !== 'undefined') { %>
 <form action="/users/<%= session %>/posts" method="post">
-    <label for="contet">Post</label>
-    <input type="text" name="content" id="content">
+    <br>
+    <textarea name="content" id="content" rows="4" cols="50" placeholder="Escribe tu post"></textarea>
+    <br>
     <button>POST</button>
 </form>
 <br>

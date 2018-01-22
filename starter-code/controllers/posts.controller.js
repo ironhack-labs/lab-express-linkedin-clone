@@ -17,24 +17,28 @@ module.exports.new = (req,res,next) =>{
 
   module.exports.create = (req,res,next) =>{
     const session = req.session.currentUser;
-    console.log(req.params.userId);
-    User.findOne({ userId: req.params.userId })
+    console.log(req.session.currentUser);
+    User.findOne({ _id: req.params.userId })
         .then(user => {
-            if (user != null) {
+            console.log(user);
+            if (user == null) {
                 res.render('auth/signup', { user: user, error: { username: 'Username already exists'} })
             } else {
-                user = new User(req.body);
+                console.log(user);
                 post = new Post({
                     content: req.body.content,
-                    _creator: user
-                })
+                    _creator: user,
+                    username: session.username
+                });
+                console.log(post);
                 post.save()
                     .then(() => {
                         req.session.currentUser = user;
                         res.redirect('/');
                     }).catch(error => {
+                        console.log(error);
                         if (error instanceof mongoose.Error.ValidationError) {
-                            res.render('/index', { user: user, error: error.errors })
+                            res.render('./', { user: user, error: error.errors })
                         } else {
                             next(error);
                         }
