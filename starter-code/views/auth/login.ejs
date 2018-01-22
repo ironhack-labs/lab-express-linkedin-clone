@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row text-center">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <form class="form-signin" action="/login" method="post">
+                <h2 class="form-signin-heading">Sign in</h2>
+                <small class="text-muted">Connect [your service] with your favorite social network</small>
+                <br>
+                <br>
+    
+                <p>
+                    <a class="btn btn-primary social-login-btn social-facebook" href="/auth/facebook">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-primary social-login-btn social-twitter" href="/auth/twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </p>
+                <p>
+                    <a class="btn btn-primary social-login-btn social-linkedin" href="/auth/linkedin">
+                        <i class="fa fa-linkedin"></i>
+                    </a>
+                    <a class="btn btn-primary social-login-btn social-google" href="/auth/google">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                </p>
+    
+                <br>
+    
+                <small class="text-muted">Or sign in with [your service]</small>
+                <br>
+                <br>
+    
+                <input class="form-control login-input" placeholder="Email Address" type="text" name="email">
+                <input class="form-control login-input-pass" placeholder="Password" type="password" name="password">
+    
+                <button class="btn btn-primary btn-block btn-center" type="submit">Sign in</button>
+            </form>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <small class="text-muted">Dont have a [your service] or social network account?
+                <p><a href="/signup"><button class="btn btn-sm btn-default"> Sign Up </button></a></p>
+            </small>
+        </div>
+    </div>
+    <% if(typeof(user) != 'undefined' && user.email) { %>
+    <div class="row text-center">
+        <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+            <div class="text-success">Account for username <%= user.email %> created</div>
+        </div> 
+    </div>
+    <% } %>
+</div>
