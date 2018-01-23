@@ -42,9 +42,11 @@ module.exports.setup = (passport) => {
 
  module.exports.isAuthenticated = (req, res, next) => {
      if (req.isAuthenticated()) {
-         next()
+        console.log("YES AUTHENTICATED");
+         next();
      } else {
          res.status(401);
+         console.log("NO AUTHENTICATED");
          res.redirect('/login');
      }
  }

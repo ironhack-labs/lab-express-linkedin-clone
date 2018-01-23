@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const User = require('../models/user.model');
 const passport = require('passport');
+const ensureLogin = require("connect-ensure-login");
 
 module.exports.index = (req, res, next) => {
+    console.log("SESSION " + req.session.currentUser);
     if(req.session.currentUser) {
         console.log('index_logged');
         res.send(req.session);
@@ -15,13 +17,23 @@ module.exports.index = (req, res, next) => {
 }
 
 module.exports.signup = (req, res, next) => {
-    res.render("auth/signup");
+    if(req.user) {
+        res.render('auth/logout', { message: 'You must log out to access to login page'})
+    }
+    else {
+        res.render("auth/signup");
+    }
 }
 
 module.exports.login = (req, res, next) => {
-    res.render('auth/login', {
-        flash: req.flash()
-    });
+    if(req.user) {
+        res.render('auth/logout', { message: 'You must log out to access to login page'})
+    }
+    else {
+        res.render('auth/login', {
+            flash: req.flash()
+        });
+    }
 }
 
 module.exports.logout = (req, res, next) => {
@@ -95,10 +107,30 @@ module.exports.doLogin = (req, res, next) => {
                     }
                     else {
                         console.log('redirect');
-                        res.render('auth/home', {user: user});
+                        res.redirect('/home');
                     }
                 })
             }
         })(req, res, next);
     }
 }
+
+module.exports.home = (req, res, next) => {
+    // console.log(req);
+    res.render("auth/home", { user: req.user });
+}
+
+// module.exports.doLogin2 = passport.authenticate('local-auth', {
+//     successRedirect: "/private",
+//     failureRedirect: "/login",
+//     failureFlash: true,
+//     passReqToCallback: true
+//   });
+
+// module.exports.private = (req, res, next) => {
+//     res.render("auth/private", {data: req});
+// }
+
+//   module.exports.private = ensureLogin.ensureLoggedIn(), (req, res) => {
+//     res.render("auth/private", { user: req.user });
+//   }

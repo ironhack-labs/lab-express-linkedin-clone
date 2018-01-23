@@ -1,6 +1,18 @@
-<h2>Welcome username: [ <%= user.email %> ]</h2>
+<% if(typeof user != 'undefined' && user.email) { %>
+<h2>Welcome username: [ <%= typeof user != 'undefined' && user.email ? user.email : '' %> ]</h2>
 <a href="/logout">
     <button type="button" class="btn btn-default btn-sm">
         <span class="glyphicon glyphicon-log-out"></span> Log out
     </button>
 </a>
+<hr>
+<p> <%= user %></p>
+
+<% } else { %>
+    <p>You must login to access this page</p>
+    <a href="/login">
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-log-in"></span> Log in
+        </button>
+    </a>
+<% } %>
