@@ -57,7 +57,7 @@ module.exports.signup = (req, res, next) => {
                              } else {
                                 // console.log(req.session);
                                  req.session.currentUser = user;
-                                 res.redirect('/tweets/index');
+                                 res.redirect('/');
                              }
                          })
                          .catch(error => next(error));
@@ -66,7 +66,7 @@ module.exports.signup = (req, res, next) => {
                  }
              }).catch(error => next(error));
      }
-};
+}
 
 module.exports.logout = (req, res, next) => {
      req.session.destroy(error => {
@@ -76,3 +76,15 @@ module.exports.logout = (req, res, next) => {
              res.redirect("/login");
          }
      });
+}
+
+module.exports.index = (req, res, next) => {
+
+  if (req.session.currentUser){
+    res.render('index', {user: req.session.currentUser});
+  }
+  else {
+    res.redirect("/login");
+  }
+
+}
