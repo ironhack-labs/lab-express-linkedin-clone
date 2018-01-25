@@ -40,9 +40,9 @@ module.exports.profile = (req, res, next) => {
 }
 
 module.exports.doEditProfile = (req, res, next) => {
+    modifiedUser = new User(req.body);
     User.findByIdAndUpdate(req.params.userId, 
         {
-            email:  req.body.email,
             name: req.body.name,
             summary: req.body.summary,
             imageUrl: req.body.imageUrl,
