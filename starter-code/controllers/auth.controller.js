@@ -2,7 +2,12 @@ const mongoose = require('mongoose');
 const User = require('../models/user.model');
 
 module.exports.signup = (req, res, next) => {
-     res.render('auth/signup');
+    if (req.session.currentUser) {
+    res.redirect('/');
+    }
+    else {
+    res.render('auth/signup');
+  }
  }
 
  module.exports.doSignup = (req, res, next) => {
@@ -27,8 +32,14 @@ module.exports.signup = (req, res, next) => {
  }
 
  module.exports.login = (req, res, next) => {
-     console.log(req.session);
-     res.render('auth/login');
+     //console.log(req.session);
+     if (req.session.currentUser) {
+       res.redirect('/');
+     }
+     else {
+       res.render('auth/login');
+     }
+
  }
 
  module.exports.doLogin = (req, res, next) => {
@@ -69,14 +80,16 @@ module.exports.signup = (req, res, next) => {
 }
 
 module.exports.logout = (req, res, next) => {
-     req.session.destroy(error => {
-         if (error) {
-             next(error);
-         } else {
-             res.redirect("/login");
-         }
-     });
-}
+      req.session.destroy(error => {
+          if (error) {
+              next(error);
+          } else {
+              res.redirect("/login");
+          }
+      });
+     /*req.session.currentUser = undefined;
+     res.redirect("/login");
+}*/
 
 module.exports.index = (req, res, next) => {
 

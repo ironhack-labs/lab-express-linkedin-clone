@@ -18,6 +18,7 @@
     "express-session": "^1.15.6",
     "mongo-connect": "0.0.6",
     "mongoose": "^5.0.0",
+    "mongoose-type-email": "^1.0.5",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
   }
