@@ -1,0 +1,29 @@
+<h2>Edit Your Profile</h2>
+
+<form action="/profile/<%= user._id %>/edit" method="POST" id="form-container">
+  <label for="name">Name</label>
+  <input type="text" name="name"
+    placeholder="Paco Jones" value="<%= user.username %>">
+  <br><br>
+  <label for="email">Email</label>
+  <input type="text" name="email"
+    placeholder="pacojones@gmail.com" value="<%= user.email %>">
+  <br><br>
+  <label for="imageUrl">Image Url</label>
+  <input type="text" name="imageUrl"
+    placeholder="Imgur URL of your profile image" value="<%= user.imgUrl %>">
+  <br><br>
+  <label for="jobTitle">Job Title</label>
+  <input type="text" name="jobTitle"
+    placeholder="Your job title" value="<%= user.jobTitle %>">
+  <br><br>
+  <label for="company">Company</label>
+  <input type="text" name="company"
+    placeholder="Your company" value="<%= user.company %>">
+  <br><br>
+  <label for="summary">Summary</label>
+  <input type="text" name="summary"
+    placeholder="Summary about yourself" value="<%= user.summary %>">
+  <br><br>
+  <button>Edit your Profile</button>
+</form>
