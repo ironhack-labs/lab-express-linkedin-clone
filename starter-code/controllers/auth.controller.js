@@ -80,16 +80,16 @@ module.exports.signup = (req, res, next) => {
 }
 
 module.exports.logout = (req, res, next) => {
-      req.session.destroy(error => {
+      /*req.session.destroy(error => {
           if (error) {
               next(error);
           } else {
               res.redirect("/login");
           }
-      });
-     /*req.session.currentUser = undefined;
+      });*/
+     req.session.currentUser = undefined;
      res.redirect("/login");
-}*/
+}
 
 module.exports.index = (req, res, next) => {
 
