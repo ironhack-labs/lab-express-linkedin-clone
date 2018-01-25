@@ -4,13 +4,24 @@
                 <form class="form-signin" action="/signup" method="post">
                     <h2 class="form-signin-heading">Sign up</h2>
                     <div class="form-group">
-                        <input class="form-control login-input" placeholder="Email Address" type="text" name="email">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input class="form-control login-input" placeholder="Email Address" type="text" name="email">
+                        </div>
+    
                         <div>
                             <% if(typeof(error) != 'undefined' && error.email) { %>
                             <small class="text-danger"> <%= error.email %> </small>
                             <% } %>
                         </div>
-                        <input class="form-control login-input-pass" placeholder="Password" type="password" name="password">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <input class="form-control login-input-pass" placeholder="Password" type="password" name="password">
+                        </div>
                         <div>
                             <% if(typeof(error) != 'undefined' && error.password) { %>
                             <small class="text-danger"> <%= error.password %> </small>

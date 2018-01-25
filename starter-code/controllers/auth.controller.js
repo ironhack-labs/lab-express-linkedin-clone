@@ -18,7 +18,7 @@ module.exports.index = (req, res, next) => {
 
 module.exports.signup = (req, res, next) => {
     if(req.user) {
-        res.render('auth/logout', { message: 'You must log out to access to login page'})
+        res.render('auth/logout', { message: 'You must log out to access to signup page'})
     }
     else {
         res.render("auth/signup");

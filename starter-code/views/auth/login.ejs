@@ -30,14 +30,25 @@
                 <br>
                 <br>
                 <div class="form-group">
-                    <input class="form-control login-input" placeholder="Email Address" type="text" name="email">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user"></i>
+                        </span>
+                        <input class="form-control login-input" placeholder="Email Address" type="text" name="email">
+                    </div>
+                    
                     <% if(typeof error != 'undefined' && error.email) { %>
                     <small class="text-danger"> <%= error.email %> </small>
                     <% } %>
                 </div>
                 
                 <div class="form-group">
-                    <input class="form-control login-input-pass" placeholder="Password" type="password" name="password">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                        <input class="form-control login-input-pass" placeholder="Password" type="password" name="password">
+                    </div>
                     <% if(typeof error != 'undefined' && error.password) { %>
                     <small class="text-danger"> <%= error.password %> </small>   
                     <% } %>

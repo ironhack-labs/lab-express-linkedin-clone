@@ -15,6 +15,7 @@ require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 const auth = require('./routes/auth.routes');
+const user = require('./routes/user.routes');
 
 const app = express();
 
@@ -50,6 +51,7 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', auth);
+app.use('/', user);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

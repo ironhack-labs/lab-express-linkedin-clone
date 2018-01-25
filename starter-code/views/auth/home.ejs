@@ -1,12 +1,21 @@
 <% if(typeof user != 'undefined' && user.email) { %>
 <h2>Welcome username: [ <%= typeof user != 'undefined' && user.email ? user.email : '' %> ]</h2>
+<hr>
+<a href="/profile/<%= user._id %>">
+    <button type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-view"></span> View profile
+    </button>
+</a>
+<a href="/profile/<%= user._id %>/edit">
+    <button type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-edit"></span> Edit profile
+    </button>
+</a>
 <a href="/logout">
     <button type="button" class="btn btn-default btn-sm">
         <span class="glyphicon glyphicon-log-out"></span> Log out
     </button>
 </a>
-<hr>
-<p> <%= user %></p>
 
 <% } else { %>
     <p>You must login to access this page</p>
