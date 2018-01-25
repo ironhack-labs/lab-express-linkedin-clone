@@ -1,0 +1,44 @@
+<div class="container">
+        <div class="row text-center">
+            <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+                <form class="form-signin" action="/signup" method="post">
+                    <h2 class="form-signin-heading">Sign up</h2>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <input class="form-control login-input" placeholder="Email Address" type="text" name="email">
+                        </div>
+    
+                        <div>
+                            <% if(typeof(error) != 'undefined' && error.email) { %>
+                            <small class="text-danger"> <%= error.email %> </small>
+                            <% } %>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock"></i>
+                            </span>
+                            <input class="form-control login-input-pass" placeholder="Password" type="password" name="password">
+                        </div>
+                        <div>
+                            <% if(typeof(error) != 'undefined' && error.password) { %>
+                            <small class="text-danger"> <%= error.password %> </small>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Name" type="text" name="name">
+                        <input class="form-control" placeholder="Summary" type="textarea" name="summary">
+                        <input class="form-control" placeholder="Image URL" type="text" name="imageUrl">
+                        <input class="form-control" placeholder="Company" type="text" name="company">
+                        <input class="form-control" placeholder="Job title" type="text" name="jobTitle">
+                    </div>
+        
+                    <button class="btn btn-primary btn-block btn-center" type="submit">Sign up</button>
+                </form>
+            </div>
+        </div>   
+    </div>

@@ -1,0 +1,14 @@
+Private page
+<% if (data) { %>
+  <div>
+    <a href="/">Index</a>
+  </div>
+  
+  <p> <%= data.user %></p>
+<% } %>
+
+<a href="/logout">
+    <button type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-log-out"></span> Log out
+    </button>
+</a>

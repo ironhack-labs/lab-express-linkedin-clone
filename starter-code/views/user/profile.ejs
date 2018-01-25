@@ -1,0 +1,28 @@
+<h2><%= user.email != undefined ? `Private profile: ${user.email}` : `Public profile ${user.name}` %></h2>
+
+<hr>
+<ul>
+    <li>Name: <%= user.name %></li>
+    <li>Summary: <%= user.summary %></li>
+    <li>Company: <%= user.company %></li>
+    <li>Job Title: <%= user.jobTitle %></li>
+<% if(user._id != undefined) { %>
+    <br>
+    <p>PRIVATED ITEMS</p>
+    <li>ID: <%= user._id %></li>
+    <li>email: <%= user.email %></li>
+<% } %>
+</ul>
+<% if(user._id != undefined) { %>
+<hr>
+<a href="/profile/<%= user._id %>/edit">
+    <button type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-edit"></span> Edit profile
+    </button>
+</a>
+<a href="/logout">
+    <button type="button" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-log-out"></span> Log out
+    </button>
+</a>
+<% } %>
