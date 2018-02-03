@@ -15,7 +15,7 @@ const expressLayouts = require("express-ejs-layouts");
 const index = require("./routes/index");
 const authRoutes = require("./routes/auth-routes");
 // Mongoose configuration
-mongoose.connect("mongodb://localhost/basic-auth");
+mongoose.connect("mongodb://localhost/express-linkedin");
 
 
 // view engine setup
