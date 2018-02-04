@@ -14,6 +14,7 @@ const expressLayouts = require("express-ejs-layouts");
 // Controllers
 const index = require("./routes/index");
 const authRoutes = require("./routes/auth-routes");
+
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/express-linkedin");
 
@@ -31,6 +32,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use(
+  session({
+    secret: "basic-auth-secret",
+    cookie: { maxAge: 5 * 60 * 1000 },
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 21 * 60 * 60
+    })
+  })
+);
 
 app.use("/", index);
 app.use("/", authRoutes);

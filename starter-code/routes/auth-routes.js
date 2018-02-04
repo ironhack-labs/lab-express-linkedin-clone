@@ -8,11 +8,17 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 2;
 
-/* GET INDEX - SIGNUP */
+// GET SIGNUP
 router.get("/signup", function(req, res) {
-  res.render("authentication/signup");
+ let user = req.session.currentUser;
+  if(user){
+    res.redirect("/")
+  } else {
+    res.render("authentication/login");
+  }
 });
 
+// POST SIGN UP
 router.post("/signup", function(req,res){
   let username = req.body.username;
   let password = req.body.password;
@@ -43,8 +49,48 @@ router.post("/signup", function(req,res){
     });
 
     newUser.save(err => {
-      res.redirect("/signup");
+      res.redirect("/login");
     });
+  });
+});
+
+// GET LOGIN 
+router.get("/login", function(req, res) {
+  let user = req.session.currentUser;
+  if(user){
+    res.redirect("/")
+  } else {
+    res.render("authentication/login");
+  }
+});
+
+//POST LOGIN
+router.post("/login", (req, res, next) => {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  if (username == "" || password == "") {
+    res.render("authentication/login", {
+      errorMessage: "Username or password can't be empty"
+    });
+    return;
+  }
+
+  User.findOne({ username: username }, (err, user) => {
+    if (err || !user) {
+      res.render("authentication/login", {
+        errorMessage: "The username or password are wrong"
+      });
+      return;
+    }
+    if (bcrypt.compareSync(password, user.password)) {
+      req.session.currentUser = user;
+      res.redirect("/");
+    } else {
+      res.render("authentication/login", {
+        errorMessage: "The username or password are wrong"
+      });
+    }
   });
 });
 
