@@ -1,4 +1,12 @@
 <h1>IronLinked HackIn</h1>
 <br>
-<a href="/profile/<%=id%>/edit">Edit</a>
+<h2>Welcome <%=cU.username%>!</h2>
+<p>name: <%= cU.name %></p>
+<p>email: <%= cU.email %></p>
+<p>imageUrl: <%= cU.imageUrl %></p>
+<p>company: <%= cU.company %></p>
+<p>jobtitle: <%= cU.jobtitle %></p>
+<br>
+<a href="/profile/<%= cU._id %>/edit">Edit</a>
 <a href="/logout">Logout</a>
+

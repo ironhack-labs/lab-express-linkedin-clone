@@ -1,34 +1,30 @@
-<form action="/signup" method="POST" id="form-container">
+<form action="/profile/<%= user._id%>/edit" method="POST" id="form-container">
     <label for="username">Username</label>
-    <input type="text" name="username" placeholder="<%= user.username%>">
-    <br>
-    <br>
-    <label for="password">Password</label>
-    <input type="password" name="password" placeholder="<%= user.password%>">
+    <input type="text" name="username" value="<%= user.username%>">
     <br>
     <br>
     <label for="name">Name</label>
-    <input type="text" name="name" placeholder="<%= user.name%>">
+    <input type="text" name="name" value="<%= user.name%>">
     <br>
     <br>
     <label for="email">Email</label>
-    <input type="email" name="email" placeholder="<%= user.email%>">
+    <input type="email" name="email" value="<%= user.email%>">
     <br>
     <br>
     <label for="summary">Summary</label>
-    <input type="text" name="summary" placeholder="<%= user.summary%>">
+    <textarea type="text" name="summary" value="<%= user.summary%>"></textarea>
     <br>
     <br>
     <label for="image">imageUrl</label>
-    <input type="text" name="imageUrl" placeholder="<%= user.imageUrl%>">
+    <input type="text" name="imageUrl" value="<%= user.imageUrl%>">
     <br>
     <br>
     <label for="company">Company</label>
-    <input type="text" name="company" placeholder="<%= user.company%>">
+    <input type="text" name="company" value="<%= user.company%>">
     <br>
     <br>
     <label for="company">JobTitle</label>
-    <input type="text" name="jobTitle" placeholder="<%= user.jobTittle%>">
+    <input type="text" name="jobTitle" value="<%= user.jobTitle%>">
     <br>
     <br>
     <button>Update</button>

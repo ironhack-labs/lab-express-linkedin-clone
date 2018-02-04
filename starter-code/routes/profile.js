@@ -9,24 +9,31 @@ const bcryptSalt = 10;
 
 //GET /profile/:userId/edit - This will allow the user to edit their own profile. 
 //The user should be redirected to the homepage if they're trying to edit a profile that isn't theirs.
-router.get('/profile/:userId/edit', (req,res) => {
-    const userId = req.params.id;
+
+router.get('/:userId/edit', (req,res) => {
+    const userId = req.params.userId;
     User.findById(userId, (err, user) => {
       if (err) { return next(err); }
-      res.render('profile/edit', { user: user });
+      console.log(user);
+      res.render('profile/edit', { user });
     });
   })
 
-/* CRUD -> UPDATE DATABASE */
-router.post('/profile/:userId/edit', (req,res) => {
+router.post('/:userId/edit', (req,res) => {
   const userId = req.params.id;
-  const {username,name,email,password,imageUrl,company,jobTittle} = req.body;
-  const updates = {username,name,email,password,imageUrl,company,jobTittle};
+  const {username,name,email,summary,imageUrl,company,jobTitle} = req.body;
+  const updates = {username,name,email,summary,imageUrl,company,jobTitle};
+  console.log(updates);
 
-  Product.findByIdAndUpdate(userId, updates, (err, product) => {
+  User.findByIdAndUpdate(userId, updates, (err, user) => {
     if (err){ return next(err); }
-    return res.redirect('/');
+    
+    return res.redirect(`/profile/${userId}`);
   });
+})
+
+router.get('/:userId', (req,res) => {
+    res.render('profile/show');
 })
 
 

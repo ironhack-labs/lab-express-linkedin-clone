@@ -12,9 +12,8 @@ once the user is logged in. If the user hasn't started a session, he should be
 redirected to /login page.*/
 router.get('/', function (req, res, next) {
   if (req.session.currentUser) { 
-    let id = req.session.currentUser;
-    console.log(id)
-    res.render('home'); }
+    let cU = req.session.currentUser;
+    res.render('home', {cU}); }
   else { res.redirect("/login"); }
   
 });
@@ -51,7 +50,6 @@ router.post("/signup", (req, res, next) => {
 
     let salt = bcrypt.genSaltSync(bcryptSalt);
     let hashPass = bcrypt.hashSync(password, salt);
-    console.log(`pre asignacion ${username}`)
     let newUser = User({
       username,
       name,
