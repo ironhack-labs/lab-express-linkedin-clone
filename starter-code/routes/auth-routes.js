@@ -48,7 +48,6 @@ router.post("/signup", function(req,res){
       name,
       email
     });
-    console.log(name)
 
     newUser.save(err => {
       res.redirect("/login");

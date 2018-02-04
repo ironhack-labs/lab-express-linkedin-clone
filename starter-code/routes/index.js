@@ -9,11 +9,9 @@ router.get("/", (req,res,next) => {
   
   if(user){ 
     Post.find().exec((err, posts) => {
-      console.log(posts)
       res.render('index', { user, posts});
     }); 
   } else{
-    console.log("NOT LOGGED")
     res.redirect("/login");
   }
 });

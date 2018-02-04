@@ -11,7 +11,6 @@ const bcryptSalt = 2;
 router.get("/profile/:id/edit",(req,res,next) => {
   const userId = req.params.id;
   User.findById(userId).exec().then( user => {
-    console.log({user})
     res.render("profiles/edit", {user});
   }).catch(e => next(e))
 });
@@ -53,7 +52,6 @@ router.get("/profile/:id", (req,res,next) => {
 
   User.findById(userId).exec().then( user => {
     Post.find({_creator:userId}).exec().then(posts =>{
-      console.log(posts)
       res.render("profiles/show", {user: user, currentUser : currentUser, posts});
     })
   }).catch(e => next(e))

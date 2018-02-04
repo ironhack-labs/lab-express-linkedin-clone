@@ -4,7 +4,6 @@ const User = require("../models/user");
 const Post = require("../models/post");
 
 router.get("/profile/:id/posts/new", function(req, res) {
-  console.log("GET NEW POST!");
   const userId = req.params.id;
   res.render("posts/new",{userId, errorMessage : undefined});
 });
