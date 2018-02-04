@@ -1,0 +1,28 @@
+<form action="/profile/<%= user._id %>" method="post">
+    <div>
+      <label for="username">Username</label><br>
+      <input type="text" id="username" name="username" value="<%= user.username %>">
+    </div>
+  
+    <div>
+      <label for="summary">Summary</label><br>
+      <textarea type="text" id="summary" name="summary" value="<%= user.summary %>"></textarea>
+    </div>
+  
+    <div>
+      <label for="image-url">Image URL</label><br>
+      <input type="text" id="image-url" name="imageUrl" value="<%= user.imageUrl %>">
+    </div>
+  
+    <div>
+      <label for="company">Company</label><br>
+      <input type="text" id="company" name="company" value="<%= user.company %>">
+    </div>
+  
+    <div>
+      <label for="job-title">Job Title</label><br>
+      <input type="text" id="job-title" name="jobTitle" value="<%= user.jobTitle %>">
+    </div>
+  
+    <button type="submit">Update account</button>
+  </form>

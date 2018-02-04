@@ -1,11 +1,29 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h2>
+  LinkedIn home</h2>
+
+<% if(user){ %>
+  <img src="<%=  user.imageUrl %>" alt="No profile picture">
+ <br>
+  <h2>Welcome home
+    <%=  user.username %> :)
+  </h2>
+  <a href="/logout">Logout</a>
+  <a href="/private">PRIVATE PAGE</a>
+
+  <br>
+  <a href="/update/:id/edit">Edit Profile</a>
+  <a href=""> Other users </a>
+  <br>
+
+  <p>
+    <%= user.email %>
+  </p>
+
+  <% } else {%>
+    <a href="/signup">SignUp</a>
+    <br>
+    <a href="/login">Login</a>
+    <br>
+    <a href="/private">PRIVATE PAGE (Only logged in users)</a>
+
+    <% } %>
