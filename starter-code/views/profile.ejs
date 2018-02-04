@@ -1,0 +1,65 @@
+<div class="container text-center" id="profile">
+    <h1 class="text-center"> Hi
+        <%= u.username%>
+    </h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <small>Name</small>
+            <p class="capitalize">
+                <%= u.username %>
+            </p>
+        </div>
+        <div class="col-sm-6">
+            <small>Job title</small>
+            <p class="capitalize">
+                <%= u.jobTitle %>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <small>Profile image</small>
+            <div>
+                <img class="profile-pic" src="<%= u.imageUrl %>" alt="profile pic"> </div>
+        </div>
+        <div class="col-sm-6">
+            <small>Company</small>
+            <p>
+                <%= u.company%>
+            </p>
+            <% if(user){ %>
+                <small>Email</small>
+                <p>
+                    <%= u.email%>
+                </p>
+            <% } %>
+        </div>
+    </div>
+    <% if(user){ %>
+        <div class="row">
+            <div class="col-sm-12">
+                <small>Summary</small>
+                <p class="summary">
+                    <%= u.summary%>
+                </p>
+            </div>
+        </div>
+        <% } %>
+        <% if( actualUser != undefined ) { %>
+            <% if( user && u._id == actualUser ) { %>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>
+                            <a class="btn btn-success" href="./<%= u._id %>/edit">Update profile</a>
+                            <a class="btn btn-danger" href="./<%= u._id %>/delete">Delete profile</a>
+                        </p>
+                    </div>
+                </div>
+            <% } %>
+        <% } %>
+        <div class="row">
+            <div class="col-sm-12">
+                <a class="btn btn-warning go-back" href="/">Go back</a>
+            </div>
+        </div>
+</div>  

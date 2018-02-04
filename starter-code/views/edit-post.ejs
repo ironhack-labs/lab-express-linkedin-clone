@@ -1,0 +1,20 @@
+<div class="container text-center">
+    <h1 class="page-title">Edit post</h1>
+    <div class="row justify-content-center">
+        <div class="col-sm-8">
+            <form id="form" action="/post/edit/<%= post._id %>" method="POST">
+                <div class="form-group">
+                    <label for="content">Post content</label>
+                    <textarea class="form-control" type="text" name="content">
+                        <%= post.content %>
+                    </textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" value="<%= post.creatorId %>" hidden name="creatorId">
+                    <input type="text" value="<%= post.creatorName %>" hidden name="creatorName"> </div>
+                <button class="btn btn-success">Update post</button>
+            </form>
+            <a class="btn btn-warning go-back" href="/">Back to homepage</a>
+        </div>
+    </div>
+</div>

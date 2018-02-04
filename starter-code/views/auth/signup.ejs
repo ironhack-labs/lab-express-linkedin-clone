@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <h1 class="page-title">Create account</h1>
+        <div class="col-sm-8 text-center">
+            <% if (typeof(errorMessage) != "undefined") { %>
+                <div class="error-message alert alert-danger">
+                    <%= errorMessage %>
+                </div>
+                <% } %>
+                    <form id="form" action="/auth/signup" method="POST">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input class="form-control" type="text" name="username" placeholder="AnakinSkywalker"> </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" type="password" name="password" placeholder="DeathStar"> </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" type="text" name="email" placeholder="email@email.com"> </div>
+                        <div class="form-group">
+                            <label for="username">Summary</label>
+                            <textarea class="form-control" type="text" name="summary" placeholder="Summary"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Image</label>
+                            <input class="form-control" type="text" name="imageUrl" placeholder="http://your-image-url"> </div>
+                        <div class="form-group">
+                            <label for="username">Company</label>
+                            <input class="form-control" type="text" name="company" placeholder="Company"> </div>
+                        <div class="form-group">
+                            <label for="username">Job title</label>
+                            <input class="form-control" type="text" name="jobTitle" placeholder="Job title"> </div>
+                        <button class="btn btn-success">Create account</button>
+                    </form>
+                    <a class="btn btn-warning go-back" href="/">Back home</a>
+        </div>
+    </div>
+</div>

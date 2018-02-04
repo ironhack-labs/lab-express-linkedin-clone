@@ -1,8 +1,149 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+/*base tags*/
 
 a {
-  color: #00B7FF;
+  color: #1b7ab5;
 }
+
+/*header */
+
+header {
+  padding: 5px 0;
+  background: #f0f0f0;
+}
+
+header h1 {
+  margin-bottom: 0;
+}
+
+.logo {
+  width: 40px;
+  max-width: 100%;
+}
+
+.header-user-links {
+  text-align: right;
+  padding-top: 5px;
+}
+
+.header-user-links svg {
+  font-size: 30px;
+  vertical-align: bottom;
+}
+
+.header-user-links a span {
+  font-size: 11px;
+  display: block;
+}
+
+.list-inline {
+  margin-bottom: 0;
+}
+
+.list-inline .list-inline-item:not(:last-child) {
+  margin-right: 25px;
+}
+
+#home-feed h3,
+#profile h1,
+.page-title {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  letter-spacing: 15px;
+  font-weight: 100;
+  font-size: 40px;
+  color: #c9c9c9;
+}
+
+.post-meta {
+  font-size: 10px;
+  color: grey;
+  border-right: 1px dotted #97c3de;
+}
+
+.post-meta p {
+  width: 120px;
+  margin: 0 0 0 auto;
+  max-width: 100%;
+  padding-top: 5px;
+}
+
+.post-meta a {
+  text-decoration: underline;
+}
+
+
+.edit-post-link {
+  margin-top: 20px;
+}
+
+hr.dotted {
+  border-style: dotted;
+  width: 300px;
+  margin: 40px 0 40px 25%;
+  border-color: #97c3de;
+}
+
+#profile h1 {
+  text-transform: capitalize;
+}
+
+#profile p {
+  color: grey;
+  font-weight: 100;
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+#profile small {
+  letter-spacing: 10px;
+  color: #cecece;
+  display: inline-block;
+  font-weight: 900;
+  margin-bottom: 5px;
+  margin-top: 70px;
+}
+
+.profile-pic {
+  border: 1px solid #cecece;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+#profile .summary {
+  font-size: 20px;
+  letter-spacing: 1px;
+  width: 720px;
+  margin: 0 auto;
+  text-align: justify;
+  max-width: 100%;
+}
+
+.go-back {
+  margin-top: 30px;
+}
+
+.container {
+  padding-bottom: 50px;
+}
+
+textarea {
+  height: 150px;
+}
+
+.account-message {
+  margin-top: 20px;
+}
+
+.account-message small {
+  display: block;
+  color: grey;
+  font-size: 10px;
+}
+
+.error-message
