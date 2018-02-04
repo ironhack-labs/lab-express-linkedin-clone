@@ -2,11 +2,12 @@
 <img src="<%=user.imageUrl %>" alt="<%= user.username %> Pic">
 <h2><%= user.jobTitle %> @ <%= user.company %></h2>
 
-<% if (currentUser !== undefined) { %>
+<% if (currentUser) { %>
   <p><%= user.summary %></p>
   <a href="mailto:<%= user.email %>"><%= user.email %></a>
   <% if (currentUser._id == user.id) { %>
     <a href="<%= user.id %>/edit" class="btn">Edit your profile</a>
+    <a href="/logout" class="btn">Log out</a>
   <% }%>
 <% }%>
 

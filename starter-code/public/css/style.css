@@ -63,6 +63,7 @@ a {
 img{
   max-width: 300px;
 }
-a{
+a,a.btn{
   display: block;
+  margin: 24px auto;
 }
