@@ -12,7 +12,6 @@ router.get("/profile/:id/posts/new", function(req, res) {
 router.post("/profile/:id/posts", function(req, res){
   const userId = req.params.id;
   const content = req.body.content;
-  const _creator = userId;
   if (content == "") {
     res.render("posts/new", { userId,
       errorMessage: "The post can't be empty"
@@ -29,8 +28,40 @@ router.post("/profile/:id/posts", function(req, res){
       res.redirect(`/profile/${userId}`);
     });
   });
-
-  
 })
+router.get("/profile/:id/posts/:postId/edit", function(req, res) {
+  const userId = req.params.id;
+  const postId = req.params.postId;
+
+  Post.findById(postId).exec((err, post) => {
+    res.render("posts/edit",{userId, post, errorMessage : undefined});
+  });
+});
+
+router.post("/profile/:id/posts/:postId/edit", function(req, res) {
+  const userId = req.params.id;
+  const content = req.body.content;
+  const postId = req.params.postId;
+  
+  const {name,price,imageUrl,description} = req.body;
+  const updates = {name,price,imageUrl,description};
+  if (content == "") {
+    res.render("posts/new", { userId,
+      errorMessage: "The post can't be empty"
+    });
+    return;
+  }
+  User.findById(userId).exec((err, user) => {
+    let updates = {
+      content,
+      _creator: userId,
+      creator_name: user.name
+    };
+    Post.findByIdAndUpdate(postId, updates, (err, user) => {
+      if (err){ return next(err); }
+      res.redirect(`/profile/${userId}`);
+    });
+  });
+});
 
 module.exports = router;

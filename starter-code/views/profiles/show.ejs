@@ -10,5 +10,16 @@
     <a href="<%= user.id %>/posts/new" class="btn">New Post</a>
     <a href="/logout" >Log out</a>
   <% }%>
-<% }%>
+  <hr>
+  <h3>Recent Posts</h3>
 
+  <% posts.forEach((post) => { %>
+    <div>
+      <p><%= post.content %></p>
+      <% if (currentUser._id == user.id) { %>
+        <a href="<%= user.id %>/posts/<%= post._id %>/edit">Edit post</a>
+      <% }%>
+      <hr>
+    </div>
+  <%  }) %>
+<% }%>

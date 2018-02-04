@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Post = require("../models/post");
 
 // BCrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -51,7 +52,10 @@ router.get("/profile/:id", (req,res,next) => {
   const currentUser = req.session.currentUser;
 
   User.findById(userId).exec().then( user => {
-    res.render("profiles/show", {user: user, currentUser : currentUser});
+    Post.find({_creator:userId}).exec().then(posts =>{
+      console.log(posts)
+      res.render("profiles/show", {user: user, currentUser : currentUser, posts});
+    })
   }).catch(e => next(e))
 });
 

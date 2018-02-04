@@ -7,16 +7,11 @@ const User = require('../models/user');
 router.get("/", (req,res,next) => {
   let user = req.session.currentUser;
   
-  if(user){
-  
-  Post.find().exec((err, posts) => {
-    console.log(posts)
-    res.render('index', { user, posts});
-  });
- 
-
-    
-    
+  if(user){ 
+    Post.find().exec((err, posts) => {
+      console.log(posts)
+      res.render('index', { user, posts});
+    }); 
   } else{
     console.log("NOT LOGGED")
     res.redirect("/login");
