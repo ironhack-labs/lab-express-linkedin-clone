@@ -1,0 +1,12 @@
+<h1><%= user.username %>'s Profile</h1>
+<img src="<%=user.imageUrl %>" alt="<%= user.username %> Pic">
+<h2><%= user.jobTitle %> @ <%= user.company %></h2>
+
+<% if (currentUser !== undefined) { %>
+  <p><%= user.summary %></p>
+  <p><%= user.email %></p>
+<% }%>
+
+<% if (currentUser._id == user.id) { %>
+  <a href="/edit">Edit your profile</a>
+<% }%>

@@ -21,16 +21,17 @@ a {
 }
 
 #form input,
-#form button {
+#form button, a {
   box-sizing: border-box;
   font-size: 14px;
   outline: 0;
   padding: 4px;
   width: 100%;
+  max-width: 380px;
   margin-bottom: 20px;
 }
 
-#form button {
+#form button, a {
   background: #43a3e6;
   border: 1px solid #43a3e6;
   border-radius: 4px;
@@ -45,7 +46,7 @@ a {
   width: 100%;
 }
 
-#form button:hover {
+#form button:hover, a:hover {
   background: #fff;
   color: #43a3e6;
   transition: .3s ease background;

@@ -14,6 +14,7 @@ const expressLayouts = require("express-ejs-layouts");
 // Controllers
 const index = require("./routes/index");
 const authRoutes = require("./routes/auth-routes");
+const profiles = require("./routes/profiles");
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/express-linkedin");
@@ -46,6 +47,7 @@ app.use(
 
 app.use("/", index);
 app.use("/", authRoutes);
+app.use("/", profiles);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
