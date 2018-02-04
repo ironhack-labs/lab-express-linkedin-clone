@@ -4,11 +4,18 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-
+const mongoose = require("mongoose");
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+const auth = require("./routes/auth-routes")
 var app = express();
+
+
+mongoose.connect("mongodb://localhost/Linkedin").then(()=> {
+  console.log("puta")
+} )
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use("/auth",auth)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
