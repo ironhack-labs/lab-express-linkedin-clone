@@ -1,16 +1,23 @@
-<form>
-<label for=""></label>
-<input type="" name="" value="<%= user.username %>">'s Profile</inp>
+<form id="form" method="POST">
 
-<img src="<%=user.imageUrl %>" alt="<%= user.username %> Pic">
-<h2><%= user.jobTitle %> @ <%= user.company %></h2>
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" value="<%= currentUser.username %>"></input>
 
-<% if (currentUser !== undefined) { %>
-<p><%= user.summary %></p>
-<p><%= user.email %></p>
-<% }%>
+  <label for="username">Image</label>
+  <input id="imageUrl" type="text" name="imageUrl" value="<%= currentUser.imageUrl %>"></input>
 
+  <label for="jobTitle">Job Title</label>
+  <input id="jobTitle" type="text" name="jobTitle" value="<%= currentUser.jobTitle %>"></input>
 
-<button type="submit">Save changes</button>
+  <label for="summary">Summary</label>
+  <input id="summary" type="text" name="summary" value="<%= currentUser.summary %>"></input>
+
+  <label for="email">Email</label>
+  <input id="email" type="text" name="email" value="<%= currentUser.email %>"></input>
+
+  <label for="password">New Password</label>
+  <input id="password" type="password" name="password" value=""></input>
+
+  <button type="submit">Save changes</button>
 
 </form>

@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 
-// //GET EDIT
-// router.get("/profile/:id/edit",(req,res,next) => {
-//   const currentUser = req.session.currentUser;
-//   res.render("profiles/edit",{currentUser});
-// });
+//GET EDIT
+router.get("/profile/:id/edit",(req,res,next) => {
+  const currentUser = req.session.currentUser;
+  res.render("profiles/edit",{currentUser});
+});
 
 // GET PROFILE 
 router.get("/profile/:id", (req,res,next) => {

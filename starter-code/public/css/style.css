@@ -44,6 +44,7 @@ a {
   text-transform: uppercase;
   transition: .3s ease background;
   width: 100%;
+  margin-top: 20px;
 }
 
 #form button:hover, a:hover {

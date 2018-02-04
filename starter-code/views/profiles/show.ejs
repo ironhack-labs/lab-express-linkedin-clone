@@ -6,7 +6,7 @@
   <p><%= user.summary %></p>
   <p><%= user.email %></p>
   <% if (currentUser._id == user.id) { %>
-    <a href="/edit">Edit your profile</a>
+    <a href="<%= user.id %>/edit">Edit your profile</a>
   <% }%>
 <% }%>
 
