@@ -1,0 +1,31 @@
+<% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<form action="/signup" method="POST" id="form">
+  <h2>Sign Up</h2>
+
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="username">
+
+  <label for="email">Email</label>
+  <input type="text" name="email" placeholder="email">
+
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="password">
+
+  <label for="summary">Summary</label>
+  <input type="text" cols="40" rows="3" name="summary" placeholder="summary">
+
+  <label for="imgUrl">ImgUrl</label>
+  <input type="text" name="imgUrl" placeholder="image url">
+
+  <label for="company">Company</label>
+  <input type="text" name="company" placeholder="company">
+
+  <label for="jobTitle">Job Tittle</label>
+  <input type="text" name="jobTitle" placeholder="job title">
+  <br><br>
+  <button>Create account</button>
+  
+</form>
