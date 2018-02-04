@@ -5,8 +5,8 @@
 <% if (currentUser !== undefined) { %>
   <p><%= user.summary %></p>
   <p><%= user.email %></p>
+  <% if (currentUser._id == user.id) { %>
+    <a href="/edit">Edit your profile</a>
+  <% }%>
 <% }%>
 
-<% if (currentUser._id == user.id) { %>
-  <a href="/edit">Edit your profile</a>
-<% }%>

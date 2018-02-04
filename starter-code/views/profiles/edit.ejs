@@ -1,0 +1,16 @@
+<form>
+<label for=""></label>
+<input type="" name="" value="<%= user.username %>">'s Profile</inp>
+
+<img src="<%=user.imageUrl %>" alt="<%= user.username %> Pic">
+<h2><%= user.jobTitle %> @ <%= user.company %></h2>
+
+<% if (currentUser !== undefined) { %>
+<p><%= user.summary %></p>
+<p><%= user.email %></p>
+<% }%>
+
+
+<button type="submit">Save changes</button>
+
+</form>
