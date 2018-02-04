@@ -8,8 +8,6 @@ const bcryptSalt = 2;
 
 //GET EDIT
 router.get("/profile/:id/edit",(req,res,next) => {
-  //const currentUser = req.session.currentUser;
-  //res.render("profiles/edit",{currentUser});
   const userId = req.params.id;
   User.findById(userId).exec().then( user => {
     console.log({user})

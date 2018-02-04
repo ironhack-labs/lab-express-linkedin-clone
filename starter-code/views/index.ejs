@@ -1,2 +1,12 @@
 <h1>Welcome <%= user.name %>!</h1>
 <a href="/profile/<%= user._id %>">View my profile</a>
+
+<h3>Recent Posts</h3>
+
+<% posts.forEach((post) => { %>
+  <div>
+    <p><%= post.content %></p>
+    <a href="/profile/<%= post._creator  %>">View Author</a>
+  <hr>
+  </div>
+<%  }) %>

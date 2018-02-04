@@ -7,7 +7,8 @@
   <a href="mailto:<%= user.email %>"><%= user.email %></a>
   <% if (currentUser._id == user.id) { %>
     <a href="<%= user.id %>/edit" class="btn">Edit your profile</a>
-    <a href="/logout" class="btn">Log out</a>
+    <a href="<%= user.id %>/posts/new" class="btn">New Post</a>
+    <a href="/logout" >Log out</a>
   <% }%>
 <% }%>
 

@@ -21,6 +21,7 @@ a {
 }
 
 #form input,
+#form textarea,
 #form button, a.btn {
   box-sizing: border-box;
   font-size: 14px;

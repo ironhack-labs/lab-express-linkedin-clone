@@ -1,0 +1,10 @@
+<h1>New Post</h1>
+<form id="form" action="/profile/<%= userId %>/posts" method="POST">
+
+  <textarea id="content" name="content" rows="10" cols=""></textarea>
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"> <%= errorMessage %> </div>
+  <% } %>
+  <button type="submit">Save post</button>
+
+</form>
