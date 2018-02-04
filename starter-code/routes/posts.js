@@ -19,15 +19,18 @@ router.post("/profile/:id/posts", function(req, res){
     });
     return;
   }
-  let newPost = Post({
-    content,
-    _creator: userId
+  User.findById(userId).exec((err, user) => {
+    let newPost = Post({
+      content,
+      _creator: userId,
+      creator_name: user.name
+    });
+    newPost.save(err => {
+      res.redirect(`/profile/${userId}`);
+    });
   });
-  console.log(newPost)
 
-  newPost.save(err => {
-    res.redirect(`/profile/${userId}`);
-  });
+  
 })
 
 module.exports = router;
