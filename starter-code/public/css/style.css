@@ -21,7 +21,7 @@ a {
 }
 
 #form input,
-#form button, a {
+#form button, a.btn {
   box-sizing: border-box;
   font-size: 14px;
   outline: 0;
@@ -31,7 +31,7 @@ a {
   margin-bottom: 20px;
 }
 
-#form button, a {
+#form button, a.btn {
   background: #43a3e6;
   border: 1px solid #43a3e6;
   border-radius: 4px;
@@ -47,7 +47,7 @@ a {
   margin-top: 20px;
 }
 
-#form button:hover, a:hover {
+#form button:hover, a.btn:hover {
   background: #fff;
   color: #43a3e6;
   transition: .3s ease background;
@@ -59,4 +59,10 @@ a {
   margin: 20px auto;
   padding: 20px;
   width: 100%;
+}
+img{
+  max-width: 300px;
+}
+a{
+  display: block;
 }

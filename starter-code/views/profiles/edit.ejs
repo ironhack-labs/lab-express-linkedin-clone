@@ -1,19 +1,25 @@
-<form id="form" method="POST">
+<form id="form" action="/profile/<%= user._id %>/edit" method="POST">
 
-  <label for="username">Username</label>
-  <input id="username" type="text" name="username" value="<%= currentUser.username %>"></input>
+  <label for="name">Name</label>
+  <input id="name" type="text" name="name" value="<%= user.name %>"></input>
 
-  <label for="username">Image</label>
-  <input id="imageUrl" type="text" name="imageUrl" value="<%= currentUser.imageUrl %>"></input>
+  <label for="imageUrl">Image URL</label>
+  <input id="imageUrl" type="text" name="imageUrl" value="<%= user.imageUrl %>"></input>
 
   <label for="jobTitle">Job Title</label>
-  <input id="jobTitle" type="text" name="jobTitle" value="<%= currentUser.jobTitle %>"></input>
+  <input id="jobTitle" type="text" name="jobTitle" value="<%= user.jobTitle %>"></input>
+
+  <label for="company">Company</label>
+  <input id="company" type="text" name="company" value="<%= user.company %>"></input>
 
   <label for="summary">Summary</label>
-  <input id="summary" type="text" name="summary" value="<%= currentUser.summary %>"></input>
+  <input id="summary" type="text" name="summary" value="<%= user.summary %>"></input>
 
   <label for="email">Email</label>
-  <input id="email" type="text" name="email" value="<%= currentUser.email %>"></input>
+  <input id="email" type="text" name="email" value="<%= user.email %>"></input>
+
+  <label for="username">Username</label>
+  <input id="username" type="text" name="username" value="<%= user.username %>"></input>
 
   <label for="password">New Password</label>
   <input id="password" type="password" name="password" value=""></input>

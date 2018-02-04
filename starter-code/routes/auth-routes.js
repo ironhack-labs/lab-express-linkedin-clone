@@ -14,7 +14,7 @@ router.get("/signup", function(req, res) {
   if(user){
     res.redirect("/")
   } else {
-    res.render("authentication/login");
+    res.render("authentication/signup");
   }
 });
 
@@ -24,6 +24,7 @@ router.post("/signup", function(req,res){
   let password = req.body.password;
   let name = req.body.name;
   let email = req.body.email;
+  
 
   if (username == "" || password == "" || name == "" || email == "") {
     res.render("authentication/signup", {
@@ -47,6 +48,7 @@ router.post("/signup", function(req,res){
       name,
       email
     });
+    console.log(name)
 
     newUser.save(err => {
       res.redirect("/login");

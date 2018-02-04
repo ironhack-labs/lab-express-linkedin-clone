@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
     secret: "basic-auth-secret",
-    cookie: { maxAge: 5 * 60 * 1000 },
+    cookie: { maxAge: 20 * 60 * 1000 },
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 21 * 60 * 60
