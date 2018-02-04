@@ -12,8 +12,10 @@ authRoutes.get("/signup", (req, res, next) => {
 });
 
 authRoutes.post("/signup", (req, res, next) => {
-    var username = req.body.username;
-    var password = req.body.password;
+    let username = req.body.username;
+    let password = req.body.password;
+    let name = req.body.name;
+    let email = req.body.email;
     if (username === "" || password === "") {
         res.render("auth/signup", {
             errorMessage: "Indicate a username and a password to sign up"
@@ -33,9 +35,11 @@ authRoutes.post("/signup", (req, res, next) => {
             var salt = bcrypt.genSaltSync(bcryptSalt);
             var hashPass = bcrypt.hashSync(password, salt);
 
-            var newUser = User({
+            let newUser = User({
                 username,
-                password: hashPass
+                password: hashPass,
+                name,
+                email,
             });
 
             newUser.save((err) => {
@@ -50,6 +54,46 @@ authRoutes.post("/signup", (req, res, next) => {
         });
 });
 
+authRoutes.get("/login", (req, res, next) => {
+    res.render("auth/login");
+  });
+
+  authRoutes.post("/login", (req, res, next) => {
+    var username = req.body.username;
+    var password = req.body.password;
+  
+    if (username === "" || password === "") {
+      res.render("auth/login", {
+        errorMessage: "Indicate a username and a password to sign up"
+      });
+      return;
+    }
+  
+    User.findOne({ "username": username }, (err, user) => {
+        if (err || !user) {
+          res.render("auth/login", {
+            errorMessage: "The username doesn't exist"
+          });
+          return;
+        }
+        if (bcrypt.compareSync(password, user.password)) {
+          // Save the login in the session!
+          req.session.currentUser = user;
+          res.redirect("/");
+        } else {
+          res.render("auth/login", {
+            errorMessage: "Incorrect password"
+          });
+        }
+    });
+  });
+
+  authRoutes.get("/logout", (req, res, next) => {
+    req.session.destroy((err) => {
+      // cannot access session here
+      res.redirect("/login");
+    });
+  });
 
 
 module.exports = authRoutes;

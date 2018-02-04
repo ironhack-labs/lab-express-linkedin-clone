@@ -9,7 +9,11 @@ const saltRounds = 10;
 const salt  = bcrypt.genSaltSync(saltRounds);
 const mongoose = require("mongoose"); 
 const authRoutes = require('./routes/auth-routes');
+const siteRoutes = require('./routes/index');
 const app = express();
+const session    = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+
 
 // Mongoose configuration
 mongoose.connect("mongodb://localhost/linkedin-ironhack");
@@ -27,6 +31,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', authRoutes);
+app.use('/', siteRoutes);
+
+//Cookies 
+app.use(session({
+  secret: "basic-auth-secret",
+  cookie: { maxAge: 6000000 },
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  })
+}));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
