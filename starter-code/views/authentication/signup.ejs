@@ -1,0 +1,45 @@
+<h2>Signup</h2>
+<% if (typeof(errorMessage) !== "undefined") { %>
+    <div class="error-message">
+        <%= errorMessage %>
+    </div>
+<% } %>
+        <form action="/signup" method="POST" id="form-container">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="JonSnow">
+            <br>
+            <br>
+            <label for="password">Password</label>
+            <input type="password" name="password" placeholder="Your password">
+            <br>
+            <br>
+            <label for="name">Name</label>
+            <input type="text" name="name" placeholder="Juan">
+            <br>
+            <br>
+            <label for="email">Email</label>
+            <input type="email" name="email" placeholder="John@stark.com">
+            <br>
+            <br>
+            <label for="summary">Summary</label>
+            <input type="text" name="summary" placeholder="Resumen">
+            <br>
+            <br>
+            <label for="image">imageUrl</label>
+            <input type="text" name="imageUrl" placeholder="imageUrl">
+            <br>
+            <br>
+            <label for="company">Company</label>
+            <input type="text" name="company" placeholder="Ironhack">
+            <br>
+            <br>
+            <label for="company">JobTitle</label>
+            <input type="text" name="jobTitle" placeholder="Pringao">
+            <br>
+            <br>
+            <button>Create account</button>
+        </form>
+        <p class="account-message">
+            Do you already have an account?
+            <a href="/login">Login</a>
+        </p>
