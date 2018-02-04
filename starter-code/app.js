@@ -12,8 +12,6 @@ const MongoStore = require('connect-mongo')(session);
 // Controllers
 const index = require('./routes/index');
 const auth = require('./routes/auth');
-const main = require('./routes/main');
-const private = require('./routes/private');
 
 // Mongoose configuration
 mongoose.connect('mongodb://localhost/linkedin', {
@@ -53,7 +51,7 @@ app.use(
   })
 );
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   app.locals.user = req.session.currentUser;
   next();
 });
@@ -61,11 +59,9 @@ app.use(function(req, res, next) {
 // Routes
 app.use('/', index);
 app.use('/auth', auth);
-app.use('/main', main);
-app.use('/private', private);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.status(404);
   const data = {
     title: '404 Not Found'
@@ -73,7 +69,7 @@ app.use(function(req, res, next) {
   res.render('not-found', data);
 });
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   console.error('ERROR', req.method, req.path, err);
   if (!res.headersSent) {
     const data = {

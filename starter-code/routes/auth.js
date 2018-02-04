@@ -24,8 +24,13 @@ router.post('/signup', (req, res, next) => {
     return res.redirect('/');
   }
 
-  const username = req.body.username;
+  const name = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
+  const summary = req.body.summary;
+  const imageUrl = req.body.imageUrl;
+  const company = req.body.company;
+  const jobTitle = req.body.jobTitle;
 
   // validate
   if (password.length < 8 || !password.match(/[A-Z]/)) {
@@ -37,14 +42,14 @@ router.post('/signup', (req, res, next) => {
   }
 
   // check if user with this username already exists
-  User.findOne({ 'username': username }, (err, user) => {
+  User.findOne({ 'email': email }, (err, user) => {
     if (err) {
       return next(err);
     }
     if (user) {
       const data = {
         title: 'Signup',
-        message: 'The "' + username + '" username is taken'
+        message: 'The "' + email + '" email address is already in use'
       };
       return res.render('auth/signup', data);
     }
@@ -52,8 +57,13 @@ router.post('/signup', (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
-      username,
-      password: hashPass
+      name,
+      email,
+      password: hashPass,
+      summary,
+      imageUrl,
+      company,
+      jobTitle
     });
 
     newUser.save((err) => {
@@ -88,25 +98,17 @@ router.post('/login', (req, res, next) => {
     return res.redirect('/');
   }
 
-  var username = req.body.username;
+  var email = req.body.email;
   var password = req.body.password;
 
-  if (username === '' || password === '') {
-    const data = {
-      title: 'Login',
-      message: 'Indicate a username and a password to sign up'
-    };
-    return res.render('auth/login', data);
-  }
-
-  User.findOne({ 'username': username }, (err, user) => {
+  User.findOne({ 'email': email }, (err, user) => {
     if (err) {
       return next(err);
     }
     if (!user) {
       const data = {
         title: 'Login',
-        message: 'Username or password are incorrect'
+        message: 'Email or password are incorrect'
       };
       return res.render('auth/login', data);
     }
@@ -117,7 +119,7 @@ router.post('/login', (req, res, next) => {
     } else {
       const data = {
         title: 'Login',
-        message: 'Username or password are incorrect'
+        message: 'Email or password are incorrect'
       };
       res.render('auth/login', data);
     }
@@ -125,5 +127,14 @@ router.post('/login', (req, res, next) => {
 });
 
 /* ++++++++++ !Login ++++++++++ */
+
+/* ++++++++++ Logout ++++++++++ */
+
+router.post('/logout', (req, res, next) => {
+  req.session.currentUser = null;
+  res.redirect('/');
+});
+
+/* ++++++++++ !Logout ++++++++++ */
 
 module.exports = router;
