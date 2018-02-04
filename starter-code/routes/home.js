@@ -11,9 +11,12 @@ const bcryptSalt = 10;
 once the user is logged in. If the user hasn't started a session, he should be 
 redirected to /login page.*/
 router.get('/', function (req, res, next) {
-  if (req.session.currentUser) { next(); }
+  if (req.session.currentUser) { 
+    let id = req.session.currentUser;
+    console.log(id)
+    res.render('home'); }
   else { res.redirect("/login"); }
-  res.render('home');
+  
 });
 
 /*POST /signup. We save the user information in the database.*/
@@ -22,31 +25,44 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", (req, res, next) => {
-  var name = req.body.name;
-  var password = req.body.password;
+  let username = req.body.username;
+  let password = req.body.password;
+  let name = req.body.name;
+  let email = req.body.email;
+  let summary = req.body.summary;
+  let imageUrl = req.body.imageUrl;
+  let company = req.body.company;
+  let jobTitle = req.body.jobTitle;
 
-  if (name === "" || password === "") {
+  if (username === "" || password === "") {
     res.render("authentication/signup", {
-      errorMessage: "Indicate a name and a password to sign up"
+      errorMessage: "Indicate a username and a password to sign up"
     });
     return;
   }
 
-  User.findOne({ "name": name }, "name", (err, user) => {
+  User.findOne({ "username": username }, "username", (err, user) => {
     if (user !== null) {
       res.render("authentication/signup", {
-        errorMessage: "The name already exists"
+        errorMessage: "The username already exists"
       });
       return;
     }
 
-    var salt = bcrypt.genSaltSync(bcryptSalt);
-    var hashPass = bcrypt.hashSync(password, salt);
-
-    var newUser = User({
+    let salt = bcrypt.genSaltSync(bcryptSalt);
+    let hashPass = bcrypt.hashSync(password, salt);
+    console.log(`pre asignacion ${username}`)
+    let newUser = User({
+      username,
       name,
-      password: hashPass
+      email,
+      password: hashPass,
+      summary,
+      imageUrl,
+      company,
+      jobTitle
     });
+    console.log(newUser);
 
     newUser.save((err) => {
       if (err) {
@@ -54,6 +70,7 @@ router.post("/signup", (req, res, next) => {
           errorMessage: "Something went wrong when signing up"
         });
       } else {
+        console.log(newUser);
         res.redirect("/login");
         // User has been created...now what?
       }
@@ -68,17 +85,17 @@ router.get("/login", (req, res, next) => {
 
 // POST /login. We start user's session.
 router.post("/login", (req, res, next) => {
-  var name = req.body.name;
-  var password = req.body.password;
+  let username  = req.body.username;
+  let password = req.body.password;
 
-  if (name === "" || password === "") {
+  if (username === "" || password === "") {
     res.render("authentication/login", {
-      errorMessage: "Indicate a name and a password to log in"
+      errorMessage: "Indicate a username and a password to log in"
     });
     return;
   }
-  User.findOne({ "name": name },
-    "_id name password following",
+  User.findOne({ "username": username },
+    "_id username password following",
     (err, user) => {
       if (err || !user) {
         res.render("authentication/login", {
@@ -100,17 +117,11 @@ router.post("/login", (req, res, next) => {
 
 // GET /logout. We end the user's session.
 router.get("/logout", (req, res, next) => {
-  if (!req.session.currentUser) { res.redirect("/"); return; }
   req.session.destroy((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/login");
-    }
+    // cannot access session here
+    res.redirect("/login");
   });
 });
-
-
 
 
 module.exports = router;

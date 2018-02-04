@@ -11,25 +11,9 @@ const MongoStore = require("connect-mongo")(session);
 
 const index = require('./routes/home');
 const users = require('./routes/users');
+const edit = require('./routes/profile');
 
 const app = express();
-
-mongoose.connect('mongodb://localhost/linkedin-lab-development');
-// view engine setup
-app.set("layout", "layouts/main-layout");
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
-
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressLayouts);
 
 app.use(session({
   secret: "basic-auth-secret",
@@ -40,6 +24,22 @@ app.use(session({
   })
 }));
 
+mongoose.connect('mongodb://localhost/linkedin-lab-development');
+// view engine setup
+app.set("layout", "layouts/main-layout");
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressLayouts);
+
 app.use((req, res, next) => {
   res.locals = {
     user: req.session.currentUser || null
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 
 app.use('/', index);
 app.use('/users', users);
-
+app.use('/edit', edit)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -63,7 +63,6 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render('error');
