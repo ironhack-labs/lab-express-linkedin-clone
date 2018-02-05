@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h1>
+  Home Linkedin</h1>
+<p>prueba</p>
+
+
+
+<% if(user){ %>
+  <h2>
+    Hola @<%= user.username %>
+  </h2>
+  <a href="/">Logout</a>
+  <a href="/profiles/show">PRIVATE PAGE</a>
+<% } else {%>
+    <a href="/auth/signup">SignUp</a>
+    <a href="/auth/login">Login</a>
+<% } %>
