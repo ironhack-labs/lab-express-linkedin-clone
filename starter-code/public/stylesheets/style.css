@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+input:invalid {
+  border: 1px solid red;
+}
+
+input {
+  margin-bottom: 10px;
+}

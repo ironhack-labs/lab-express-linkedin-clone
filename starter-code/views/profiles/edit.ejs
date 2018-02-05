@@ -1,0 +1,46 @@
+<h3>Welcome to the edit page</h3>
+
+<form action="/profile/<%= info._id %>" method="POST">
+    <div class="field">
+        <label for="username"> Username </label>
+        <input type="text" name="username" id="username" value="<%= info.username %>">
+    </div>
+    <div class="field">
+        <label for="name"> Name </label>
+        <input type="text" name="name" id="name" value="<%= info.name %>" >
+    </div>
+
+    <div class="field">
+        <label for="email"> Email </label>
+        <input type="email" name="email" id="email" value="<%= info.email %>">
+    </div>
+
+    <div class="field">
+        <label for="summary"> Summary </label>
+        <input type="text" name="summary" id="summary" value="<%= info.summary %>">
+    </div>
+
+    <div class="field">
+        <label for="imageUrl"> Image Url </label>
+        <input type="text" name="imageUrl" id="imageUrl" value="<%= info.imageUrl %>">
+    </div>
+
+    <div class="field">
+        <label for="company"> Company </label>
+        <input type="text" name="company" id="company" value="<%= info.company %>">
+    </div>
+
+    <div class="field">
+        <label for="jobTitle"> Job Title </label>
+        <input type="text" name="jobTitle" id="jobTitle" value="<%= info.jobTitle %>">
+    </div>
+    
+    <div class="field control">
+        <button class="btn submit">Save Edits</button>
+        <% if (typeof message !== 'undefined') { %>
+            <p class="error">
+                <%= message %>
+            </p>
+            <% } %>
+    </div>
+</form>
