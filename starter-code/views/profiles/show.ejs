@@ -1,0 +1,12 @@
+
+<h2><%= user.name %></h2>
+<p><%= user.imageUrl %></p>
+<p><%= user.jobTitle %></p>
+<p><%= user.company %></p>
+
+<%= if (user) {%>
+  <%= typeof user._id.equals %>
+  <p><%= user.username %></p>
+  <p><%= user.email %></p>
+  <p><%= user.summary %></p>
+  <%= }%>
