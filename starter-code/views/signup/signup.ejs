@@ -1,0 +1,22 @@
+<% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<form id="form" action="/auth/signup" method="POST">
+    <h2>Registrarse</h2>
+    <label for="username">Nombre de usuario</label>
+    <br>
+    <input type="text" name="username" placeholder="Nombre de Usuario">
+
+    <br>
+    <br>
+    <label for="password">Contraseña</label>
+    <br>
+    <input type="password" name="password" placeholder="Contraseña">
+    <br>
+    <br>
+    <button>Crear cuenta</button>
+</form>
+
+<a href="/">Back home</a>
