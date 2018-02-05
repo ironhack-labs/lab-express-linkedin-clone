@@ -6,13 +6,19 @@
  </head>
  <body>
    
- <form action="/signup" method="POST" id="form">
+ <form action="/auth/signup" method="POST" id="form" >
  <h2>SIGN UP</h2>
    <label for="name">Name</label>
    <input type="text" id="name" name="name">
 
    <label for="password">Password</label>
-   <input type="text" id="password" name="password">
+   <input type="password" id="password" name="password">
+
+   <label for="username">Username</label>
+   <input type="text" id="username" name="username">
+
+   <label for="email">Email</label>
+   <input type="e-mail" id="email" name="email">
  
      
  <% if (typeof(errorMessage) != "undefined") { %>

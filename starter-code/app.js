@@ -1,4 +1,5 @@
 var express      = require('express');
+const session = require("express-session");
 var path         = require('path');
 var favicon      = require('serve-favicon');
 var logger       = require('morgan');
@@ -12,7 +13,7 @@ var app = express();
 
 
 mongoose.connect("mongodb://localhost/Linkedin").then(()=> {
-  console.log("puta")
+  console.log("conectado")
 } )
 
 
