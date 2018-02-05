@@ -1,0 +1,38 @@
+<h2>Signup</h2>
+
+<form action="/signup" method="POST" id="form-container">
+  <label for="name">Name</label>
+  <input type="text" name="name" placeholder="Your first name">
+  <br>
+  <br>
+  <label for="email">Email</label>
+  <input type="email" name="email" placeholder="example@domain.com">
+  <br>
+  <br>
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Your password">
+  <br>
+  <br>
+  <label for="summary">Summary</label>
+  <input type="text" name="summary" placeholder="Bio description.">
+  <br>
+  <br>
+  <label for="imageUrl">Profile photo</label>
+  <input type="text" name="imageUrl" placeholder="Paste your photo url.">
+  <br>
+  <br>
+  <label for="company">Company</label>
+  <input type="text" name="company" placeholder="Company.">
+  <br>
+  <br>
+  <label for="jobTitle">Job title</label>
+  <input type="text" name="jobTitle" placeholder="Job title">
+  <br>
+  <% if ( typeof(error) != "undefined") { %>
+    <div class="alert alert-danger" role="alert">
+      <%= error %>
+    </div>
+    <% } %>
+      <br>
+      <button>Create account</button>
+</form>
