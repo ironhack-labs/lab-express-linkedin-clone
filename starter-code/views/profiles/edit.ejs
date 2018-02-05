@@ -1,0 +1,27 @@
+<h1>Your information</h1>
+
+<form action="/profile/<%= user._id %>" method="POST" >
+    <div class="field">
+      <label for="name"> Name </label>
+      <input type="text" name="name" id="name" value="<%= user.name %>" />
+    </div>
+    <div class="field">
+      <label for="email"> E-mail </label>
+      <input type="text" name="email" id="email" value="<%= user.email %>" />
+    </div>
+    <div class="field">
+      <label for="summary"> Summary </label>
+      <input type="text" name="summary" id="summary" value="<%= user.summary %>" />
+    </div>
+    <div class="field">
+      <label for="company"> Company </label>
+      <input type="text" name="company" id="company" value="<%= user.company %>" />
+    </div>
+    <div class="field">
+      <label for="jobTitle"> Job Title </label>
+      <input type="text" name="jobTitle" id="jobTitle" value="<%= user.jobTitle %>" />
+    </div>
+    <div class="field control">
+      <button class="btn submit">Update</button>
+    </div>
+  </form>
