@@ -9,9 +9,15 @@ router.get('/', (req, res, next) => {
       if (err) {
         return next(err);
       }
+      let userList = [];
+      for (let i = 0; i < users.length; i++) {
+        if (!users[i]._id.equals(req.session.currentUser._id)) {
+          userList.push(users[i]);
+        }
+      }
       const info = {
         curUser: req.session.currentUser,
-        users
+        userList
       };
       res.render('index', info);
     });
