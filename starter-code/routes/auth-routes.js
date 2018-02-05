@@ -7,11 +7,12 @@ const bcryptSalt = 10;
 
 
 /* GET login page. */
-authRoutes.get('/login', function(req, res, next) {
-  if (!req.session.currentUser) {
-    res.render('auth/login')
+authRoutes.get('/', function(req, res, next) {
+  if (req.session.currentUser) {
+    const userInfo = { info: req.session.currentUser}
+    res.render('home', userInfo);
   } else {
-    res.redirect("/");
+    res.render("auth/login");
   }
 });
 
