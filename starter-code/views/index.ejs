@@ -2,13 +2,20 @@
     <h3>LinkedIn</h3>
     <h4>Welcome <%= curUser.name %></h4>
     <a href="/profile/<%= curUser._id %>">My profile</a>
+    <a href="/users/<%= curUser._id %>/posts/new">Create new post</a>
     <form method="post" action="/auth/logout">
         <button>Logout</button>
     </form>
 </div>
 <div>
-   
    <% userList.forEach((user) => { %>
         <a href="/profile/<%= user._id %>"><%= user.name %>'s profile</a>
    <% }) %>
+</div>
+<div class='post-list'>
+    <% postsList.forEach((post) => { %>
+        <h5><%= post.title %> </h5>
+        <p><%= post.content %> </p>
+        <p> Author: <%= post._creator %></p>
+    <% }) %>
 </div>

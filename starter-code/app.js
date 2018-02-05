@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
-const app = express();
+
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 
@@ -13,6 +13,9 @@ const MongoStore = require('connect-mongo')(session);
 const index = require('./routes/index');
 const auth = require('./routes/auth');
 const profile = require('./routes/profile');
+const posts = require('./routes/posts');
+
+const app = express();
 
 // Mongoose configuration
 mongoose.connect('mongodb://localhost/linkedin', {
@@ -61,6 +64,7 @@ app.use(function (req, res, next) {
 app.use('/', index);
 app.use('/auth', auth);
 app.use('/profile', profile);
+app.use('/users', posts);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

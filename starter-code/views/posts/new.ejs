@@ -1,0 +1,13 @@
+<form action="/users/<%= id %>/posts" method="POST">
+    <div class="field">
+        <label for="postTitle"> Post Title </label>
+        <input type="text" name="postTitle" id="postTitle">
+    </div>
+    <div class="field">
+        <label for="content"> Content </label>
+        <textarea type="text" name="content" id="content"></textarea>
+    </div>
+    <div class='submit-area'>
+        <button class="btn submit">Submit</button>
+    </div>
+</form>

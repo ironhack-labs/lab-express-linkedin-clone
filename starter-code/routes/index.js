@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const User = require('../models/user');
+const Post = require('../models/post');
 
 router.get('/', (req, res, next) => {
   if (req.session.currentUser) {
@@ -15,11 +16,17 @@ router.get('/', (req, res, next) => {
           userList.push(users[i]);
         }
       }
-      const info = {
-        curUser: req.session.currentUser,
-        userList
-      };
-      res.render('index', info);
+      Post.find({}, (err, posts) => {
+        if (err) {
+          return next(err);
+        }
+        const info = {
+          curUser: req.session.currentUser,
+          userList,
+          postsList: posts
+        };
+        res.render('index', info);
+      });
     });
   } else {
     res.render('auth/login');
