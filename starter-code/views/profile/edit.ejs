@@ -1,0 +1,43 @@
+<% layout('../layouts/main') %>
+
+
+<form id="form" action="/profile/<%= user._id %>" method="POST">
+    <label for="username">Username</label>
+    <br>
+    <input type="text" name="username" value="<%= user.name %>">
+
+    <br>
+    <br>
+    <label for="email">Email</label>
+    <br>
+    <input type="email" name="email"  value="<%= user.email %>">
+    <br>
+    <br>
+    <label for="summary">Summary</label>
+    <br>
+    <input type="text" name="summary"  value="<%= user.summary %>">
+    <br>
+    <br>
+    <label for="imageUrl">Image</label>
+    <br>
+    <input type="text" name="imageUrl"  value="<%= user.imageUrl %>">
+    <br>
+    <br>
+    <label for="company">Company</label>
+    <br>
+    <input type="text" name="company"  value="<%= user.company %>">
+    <br>
+    <br>
+    <label for="jobTitle">Job</label>
+    <br>
+    <input type="text" name="jobTitle"  value="<%= user.jobTitle %>">
+    <br>
+    <br>
+
+    <button>Edit</button>
+    <% if (typeof(errors) != "undefined") { %>
+        <p>
+            <%= errors %>
+        </p>
+    <% } %>
+</form>
