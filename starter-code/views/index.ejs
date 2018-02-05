@@ -7,5 +7,14 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+   
+   
+   <% if (typeof(user) != "undefined") { %>
+    <a href="/auth/logout">  <button>Logout</button></a>
+
+ <% } else { %>
+  <a href="/auth/login"><button>Login</button></a>
+  <a href="/auth/signup" ><button>Register in the app</button></a>
+  <% } %>
   </body>
 </html>

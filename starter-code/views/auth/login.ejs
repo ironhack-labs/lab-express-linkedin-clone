@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <title>Basic Auth</title>
+   <link rel='stylesheet' href='stylesheets/style.css' />
+ </head>
+ <body>
+   
+ <form action="/auth/login" method="POST" id="form">
+ <h2>LOGIN</h2>
+   <label for="username">Username</label>
+   <input type="text" id="name" name="username">
+
+   <label for="password">Password</label>
+   <input type="password" id="password" name="password">
+ 
+     
+ <% if (typeof(errorMessage) != "undefined") { %>
+   <div class="error-message"> <%= errorMessage %> </div>
+ <% } %>
+
+   <button type="submit">Login</button>
+ </form>
+
+ </body>
+</html>
