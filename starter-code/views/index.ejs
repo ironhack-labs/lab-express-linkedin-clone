@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Basic Auth</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="container">
+      <h1>new world</h1>
+      <% if (user) { %>
+        Logged in as <%= user.username %>
+        <form method="post" action="/logout">
+          <button>Logout</button>
+          <a href="/users">Users</a>
+        </form>
+      <% } else { %>
+        <a href="/signup">Signup</a>
+        <a href="/login">Login</a>
+        <a href="/users">Users</a>
+      <% } %>
+    </div>
   </body>
 </html>

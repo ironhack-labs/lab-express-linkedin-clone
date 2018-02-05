@@ -1,0 +1,20 @@
+<h2><%= title %></h2>
+
+
+<ul class="list users">
+  <% users.forEach( (theUser) => { %>
+    <li>
+      <p class="item">
+        <a class="name" href="/users/<%= theUser._id %>"><%= theUser.name %></a>
+        <span class="occupation"><%= theUser.occupation %></span>
+      </p>
+      <% if (user) { %>
+      <form class="actions" action="/users/<%= theUser._id %>/delete" method="POST">
+       
+        
+      </form>
+      <% } %>
+    </li>
+  <% }); %>
+</ul>
+<a href="/">Go Back</a>
