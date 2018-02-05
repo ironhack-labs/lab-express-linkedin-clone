@@ -1,0 +1,16 @@
+<form action="/login" method="post">  
+  <input type="text" placeholder="Username" name="username">
+  <input type="text" placeholder="Password" name="password">
+  <input type="submit" value="Login">
+  <p>
+    Don't have an account? <a href="/signup">Sign up</a>
+  </p>
+</form>
+
+<% if (typeof(errorMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
+
+<% if (typeof(successMessage) != "undefined") { %>
+  <div class="error-message"><%= errorMessage %></div>
+<% } %>
