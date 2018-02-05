@@ -1,9 +1,19 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Post = require("../models/post");
+const User = require('../models/user');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+/* GET INDEX */
+router.get("/", (req,res,next) => {
+  let user = req.session.currentUser;
+  
+  if(user){ 
+    Post.find().exec((err, posts) => {
+      res.render('index', { user, posts});
+    }); 
+  } else{
+    res.redirect("/login");
+  }
 });
 
 module.exports = router;
