@@ -8,7 +8,6 @@ const User           = require("../../models/user");
 const bcrypt         = require("bcrypt");
 const bcryptSalt     = 10;
 
-
 //  REQUEST SIGNUP PAGE
 router.get("/signup", (req, res, next) => {
   res.render("auth/signup");
@@ -16,8 +15,12 @@ router.get("/signup", (req, res, next) => {
 
 // USER SUBMITS INPUT
 router.post("/signup", (req, res, next) => {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
+  const email    = req.body.email;
+  const password = req.body.password;
+  const salt     = bcrypt.genSaltSync(bcryptSalt);
+  const hashPass = bcrypt.hashSync(password, salt);
 
   //
   if (username === "" || password === "") {
@@ -35,10 +38,9 @@ router.post("/signup", (req, res, next) => {
       return;
     }
 
-    var salt     = bcrypt.genSaltSync(bcryptSalt);
-    var hashPass = bcrypt.hashSync(password, salt);
-
-    var newUser = User({
+    const salt     = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
+    const newUser = User({
       username,
       password: hashPass
     });
@@ -49,7 +51,7 @@ router.post("/signup", (req, res, next) => {
           errorMessage: "Something went wrong when signing up"
         });
       } else {
-        res.redirect("/login");
+        res.redirect("../auth/login");
       }
     });
   });

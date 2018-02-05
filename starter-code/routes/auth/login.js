@@ -12,9 +12,14 @@ router.get("/login", (req, res, next) => {
   res.render("auth/login");
 });
 
+// Redirect to login
+router.get("/auth", (req, res) => {
+  res.redirect("/login");
+});
+
 router.post("/login", (req, res, next) => {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (username === "" || password === "") {
     res.render("auth/login", {
@@ -24,7 +29,7 @@ router.post("/login", (req, res, next) => {
   }
 
   User.findOne({ "username": username },
-    "_id username password following",
+    "_id username  following",
     (err, user) => {
       if (err || !user) {
         res.render("auth/login", {
@@ -33,9 +38,10 @@ router.post("/login", (req, res, next) => {
         return;
       } else {
         if (bcrypt.compareSync(password, user.password)) {
+          //saves login in the session
           req.session.currentUser = user;
           // When User logged in 
-          res.render("auth/home" , username);
+          res.redirect("/home");
         } else {
           res.render("auth/login", {
             errorMessage: "Incorrect password"
@@ -45,9 +51,18 @@ router.post("/login", (req, res, next) => {
   });
 });
 
-// Redirect to login
-router.get("/", (req, res) => {
-  res.redirect("/login");
+router.get("/login", (req, res, next) => {
+  if (!req.session.currentUser) { 
+    res.redirect("/auth/login"); 
+    return; 
+  }
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/auth/login");
+    }
+  });
 });
 
 module.exports = router;
