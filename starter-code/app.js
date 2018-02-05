@@ -33,9 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressLayouts);
 
-app.use('/', index);
-app.use('/', authController);
-app.use('/users', users);
+
 
 app.use(session({
   secret: "basic-auth-secret",
@@ -53,6 +51,10 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+app.use('/', index);
+app.use('/auth', authController);
+app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
