@@ -1,0 +1,40 @@
+<h2><%= user.name %></h2>
+
+<% if (user) { %>
+<form class="actions" action="/users/<%= user._id %>/delete" method="POST">
+  <a class="action edit" href="/users/<%= user._id %>/edit">Edit</a>
+
+</form>
+<% } %>
+
+<p class="detail">
+  <span class="label">username:</span>
+  <span class="value"><%= user.username %></span>
+</p>
+<p class="detail">
+  <span class="label">name:</span>
+  <span class="value"><%= user.name %></span>
+</p>
+<p class="detail">
+  <span class="label">email</span>
+  <span class="value highlighted"><%= user.email %></span>
+</p>
+<p class="detail">
+  <span class="label">summary:</span>
+  <span class="value"><%= user.summary %></span>
+</p>
+<p class="detail">
+  <span class="label">imageUrl:</span>
+  <span class="value"><%= user.imageUrl %></span>
+</p>
+<p class="detail">
+  <span class="label">company:</span>
+  <span class="value"><%= user.company %></span>
+</p>
+<p class="detail">
+  <span class="label">jobTitle:</span>
+  <span class="value"><%= user.jobTitle %></span>
+</p>
+
+<a href="/users">Back to user Inventory</a>
+
