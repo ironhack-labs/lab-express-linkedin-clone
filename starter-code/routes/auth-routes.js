@@ -4,6 +4,17 @@ const express = require('express');
 const authRoutes = express.Router();
 const User = require('../models/user');
 
+authRoutes.get('/login', (req, res, next) => {
+  if (req.session.currentUser) {
+    return res.redirect('/');
+  }
+
+  const data = {
+    title: 'Login'
+  };
+  res.render('auth/login', data);
+});
+
 authRoutes.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 });
@@ -16,6 +27,17 @@ authRoutes.get('/login', (req, res, next) => {
   if (req.session.currentUser) {
     return res.redirect('/');
   }
+  const data = {
+    title: 'Login'
+  };
+  res.render('auth/login', data);
+});
+
+authRoutes.get('/logout', (req, res, next) => {
+  req.session.destroy((err) => {
+    // cannot access session here
+    res.redirect('/login');
+  });
 });
 
 // BCrypt to encrypt passwords
@@ -34,7 +56,13 @@ authRoutes.post('/signup', (req, res, next) => {
   });
 
   newUser.save((err) => {
-    res.redirect('/');
+    if (err) {
+      res.render('auth/signup', {
+        message: 'Something went wrong when signing up'
+      });
+    } else {
+      res.redirect('/login');
+    }
   });
 });
 
