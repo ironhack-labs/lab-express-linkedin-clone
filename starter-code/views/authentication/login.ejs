@@ -1,0 +1,20 @@
+<h1> Login </h1>
+
+<form action="/authentication/login" method="POST"> 
+    <div>
+        <label for="username"> Username </label>
+        <input type="text" name="username" id="username">
+    </div>
+    <div>
+        <label for="password"> Password </label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div>
+        <button class="sumbit"> Login </button>
+        <% if (typeof message !== 'undefined') { %>
+            <p> <%= message %></p>
+        <% } %>
+    </div>
+</form>
+
+<a href="/authentication/signup"> Don't have an account? Signup here</a>
