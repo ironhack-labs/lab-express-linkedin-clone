@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-/* GET home page. */
+/* GET /profile/:userId/edit */
 router.get('/', (req, res, next) => {
   if (!req.session.currentUser) {
     return res.redirect('/auth/login');
@@ -10,5 +10,9 @@ router.get('/', (req, res, next) => {
 
   res.render('index');
 });
+
+/* POST /profile/:userId */
+
+/* GET /profile/:userId */
 
 module.exports = router;

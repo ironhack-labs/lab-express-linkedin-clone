@@ -1,2 +1,10 @@
-<h1>Welcome UserName</h1>
-<p></p>
+<div class="">
+  <h1>Welcome <%= user.username %></h1>
+  <form method="post" action="/auth/logout">
+    <button>Log out</button>
+  </form>
+  <p>You are in the main page. Here we will have so much fun. You should stay :)))))</p>
+  <span><a href="/profiles/edit">Edit</a></span>
+  <span><a href="/profiles/show">Show</a></span>
+</div>
+
