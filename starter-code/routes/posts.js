@@ -20,8 +20,7 @@ router.post("/profile/:id/posts", function(req, res){
   User.findById(userId).exec((err, user) => {
     let newPost = Post({
       content,
-      _creator: userId,
-      creator_name: user.name
+      _creator: {userId, name: user.name}
     });
     newPost.save(err => {
       res.redirect(`/profile/${userId}`);
@@ -53,8 +52,7 @@ router.post("/profile/:id/posts/:postId/edit", function(req, res) {
   User.findById(userId).exec((err, user) => {
     let updates = {
       content,
-      _creator: userId,
-      creator_name: user.name
+      _creator: {userId,name: user.name}
     };
     Post.findByIdAndUpdate(postId, updates, (err, user) => {
       if (err){ return next(err); }

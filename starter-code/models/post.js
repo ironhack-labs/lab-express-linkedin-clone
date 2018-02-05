@@ -3,8 +3,7 @@ const Schema   = mongoose.Schema;
 
 const postSchema = new Schema({
   content: String,
-  _creator: Schema.ObjectId,
-  creator_name: String
+  _creator: Object
 }, {
   timestamps: {
     createdAt: "created_at",

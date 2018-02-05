@@ -51,7 +51,7 @@ router.get("/profile/:id", (req,res,next) => {
   const currentUser = req.session.currentUser;
 
   User.findById(userId).exec().then( user => {
-    Post.find({_creator:userId}).exec().then(posts =>{
+    Post.find({ "_creator.userId" : userId}).exec().then(posts =>{
       res.render("profiles/show", {user: user, currentUser : currentUser, posts});
     })
   }).catch(e => next(e))

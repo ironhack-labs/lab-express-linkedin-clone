@@ -17,7 +17,7 @@
     <div>
       <p><%= post.content %></p>
       <% if (currentUser._id == user.id) { %>
-        <a href="<%= user.id %>/posts/<%= post._id %>/edit">Edit post</a>
+        <a href="<%= user.id %>/posts/<%= post._creator.userId %>/edit">Edit post</a>
       <% }%>
       <hr>
     </div>

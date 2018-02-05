@@ -6,7 +6,7 @@
 <% posts.forEach((post) => { %>
   <div>
     <p><%= post.content %></p>
-    <a href="/profile/<%= post._creator  %>"><%= post.creator_name %></a>
+    <a href="/profile/<%= post._creator.userId  %>"><%= post._creator.name %></a>
     <hr>
   </div>
 <%  }) %>
