@@ -13,9 +13,10 @@ const MongoStore = require('connect-mongo')(session);
 const authController = require('./routes/authController');
 const index = require('./routes/index');
 const users = require('./routes/users');
+
 const app = express();
 
-// connect mongoose
+// connect mongoose to mongo
 mongoose.Promise = Promise;
 mongoose.connect('mongodb://localhost/linkedIn-lab-development', {
   keepAlive: true,
@@ -30,6 +31,14 @@ app.set('view engine', 'ejs');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 // configure middelwares
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// session
 app.use(session({
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
@@ -43,16 +52,10 @@ app.use(session({
   }
 }));
 
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
 // routes
 app.use('/', authController);
 app.use('/', index);
-app.use('/profile/', users);
+app.use('/', users);
 
 // -- 404 and error handler
 

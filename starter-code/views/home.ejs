@@ -6,6 +6,8 @@
   </head>
   <body>
     <h1>Welcome <%= user.username %></h1>
+    <a href ="/profile/<%= user._id%>/edit">edit your profile</a>
+
 
     <form action="/logout" method="GET" id="form-container" class="logout">
       <button>Logout</button>

@@ -27,9 +27,9 @@ authController.post('/signup', (req, res, next) => {
     return;
   }
 
-  User.findOne({ 'username': username }, 'username', (err, user) => {
+  User.findOne({ 'username': username }, 'username', (err, user, next) => {
     if (err) {
-      return;
+      return next(err);
     }
 
     if (user !== null) {
