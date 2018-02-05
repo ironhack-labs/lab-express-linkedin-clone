@@ -62,7 +62,7 @@ router.post('/:id/', (req, res) => {
             updates = { username, password:hashPass, email, summary, imageUrl, company, jobTitle };
         } else {
             res.render('edit', {
-                errorMessage: "The passwords does not match!"
+                errorMessage: "The passwords do not match!"
             });
             return;
         }
