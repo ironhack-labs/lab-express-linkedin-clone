@@ -1,0 +1,17 @@
+<h1>LOGIN</h1>
+
+<form action="/login" method="POST" id="form">
+  <label for="username">Username</label>
+  <input type="text" id="username" name="username">
+
+  <label for="password">Password</label>
+  <input type="password" id="password" name="password">  
+    
+  <% if (typeof(errorMessage) != "undefined") { %>
+    <div class="error-message"> <%= errorMessage %> </div>
+  <% } %>
+
+  <button type="submit">Log in</button>
+
+  <p class="account-message">Don't have a Linkedin account? <a href="/signup">Sign up to Linkedin</a></p>
+</form>
