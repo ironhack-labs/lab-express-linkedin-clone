@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h2> <%= title %></h2>
+
+
+    <% if(user){ %>
+    <h2>Hola <%=  user.username %></h2>
+    <a href="/auth/login">Logout</a>
+    <a href="/profile/<%= user._id %>">PRIVATE PAGE</a>
+<% } else {%>   
+    <a href="/auth/signup">SignUp</a>
+    <a href="/auth/login">Login</a>    
+<% } %> 
+
