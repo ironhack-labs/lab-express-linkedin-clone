@@ -1,0 +1,27 @@
+<div class="container">
+    <h1 class="page-title text-center">Log in</h1>
+  <div class="row justify-content-center">
+
+    <div class="col-sm-8 text-center">
+      <% if (typeof(errorMessage) != "undefined") { %>
+        <div class="error-message alert alert-danger">
+          <%= errorMessage %>
+        </div>
+        <% } %>
+        <form action="/auth/login" method="POST" id="form">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input class="form-control" type="text" name="username" placeholder="AnakinSkywalker"> </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input class="form-control" type="password" name="password" placeholder="DeathStar"> </div>
+            <button class="btn btn-success">Login</button>
+          </form>
+          <p class="account-message"> 
+            <small>Don't have an account?</small>
+            <a class="btn btn-info" href="/auth/signup">Sign up</a>
+          </p>
+          <a class="btn btn-warning go-back" href="/">Back home</a>
+    </div>
+  </div>
+</div>

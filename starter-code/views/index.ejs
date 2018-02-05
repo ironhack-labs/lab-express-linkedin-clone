@@ -1,11 +1,33 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<div class="container" id="home-feed">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="text-center">News Feed</h3>
+            <% posts.forEach((p)=>{ %>
+                <div class="row row-feed">
+                    <div class="col-sm-3 text-right post-meta">
+                        <p>Published by <a href="profile/<%= p.creatorId %>">
+                            <% if(user && p.creatorId == user._id ){ %>
+                                me
+                            <% } else {%>
+                            <span class="capitalize"><%=p.creatorName %></span>
+                            <% } %>
+                        </a><br>
+                             on <%= p.created_at%>
+                        </p>
+                        <% if(user && p.creatorId == user._id ){ %>
+                            <div class="edit-post-link">
+                                <a href="post/edit/<%= p._id %>"><i class="fas fa-pencil-alt"></i> Edit post</a>
+                            </div>
+                            <% } %>
+                    </div>
+                    <div class="col-sm-9">
+                        <p>
+                            <%=p.content %>
+                        </p>
+                    </div>
+                </div>
+                <hr class="dotted">
+                <% }) %>
+        </div>
+    </div>
+</div>

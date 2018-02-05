@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/tether.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+  <title>
+    <%= title %> - Linkedin</title>
+</head>
+
+<body>
+  <header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1>
+            <img class="logo" src="../../img/in.png" alt="Linkedin"> </h1>
+        </div>
+        <div class="col-sm-6 header-user-links">
+          <% if(user){ %>
+            <ul class="list-inline">
+              <li class="list-inline-item text-center">
+                <a href="/profile/<%= user._id%>">
+                  <i class="far fa-hand-spock"></i>
+                  <span>Hi
+                    <%=  user.username %>!</span>
+                </a>
+              </li>
+              <li class="list-inline-item text-center">
+                <a href="/post/<%= user._id%>/new">
+                  <i class="fas fa-file-alt"></i>
+                  <span>New post</span>
+                </a>
+              </li>
+              <li class="list-inline-item text-center">
+                <a href="/profile/<%= user._id%>">
+                  <i class="far fa-user"></i>
+                  <span>View profile</span>
+                </a>
+              </li>
+              <li class="list-inline-item text-center">
+                  <a href="/auth/logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                  </a>
+                </li>
+            </ul>
+            <% } else {%>
+              <ul class="list-inline">
+                <li class="list-inline-item text-center">
+                  <a href="/auth/signup">
+                    <i class="fas fa-user-plus"></i>
+                    <span>Sign up</span>
+                  </a>
+                </li>
+                <li class="list-inline-item text-center">
+                  <a href="/auth/login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <span>Log in</span>
+                  </a>
+                </li>
+              </ul>
+              <% } %>
+        </div>
+      </div>
+    </div>
+  </header>
+  <%- body -%>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/tether.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+</html>
