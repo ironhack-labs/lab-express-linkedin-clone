@@ -1,0 +1,13 @@
+<h2><%= info.name %></h2>
+
+
+<form action="/profile/<%= info._id %>" method="post">
+    <input type="text" value="Name" name="name">
+    <input type="text" value="jobTitle" name="jobTitle">
+    <input type="text" value="company" name="company">
+    <input type="text" value="summary" name="summary">
+    <input type="email" value="email" name="email">
+    <input type="text" value="username" name="username">
+    <input type="txt" value="imageUrl" name="imageUrl">
+    <input type="submit" value="Submit">
+</form>

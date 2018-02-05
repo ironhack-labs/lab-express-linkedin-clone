@@ -1,0 +1,14 @@
+<form id="form" action="/auth/signup" method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username">
+    <label for="password">Password</label>
+    <input type="password" name="password">
+    <label for="email">email</label>
+    <input type="email" name ='email'>
+    <label for="name">name</label>
+    <input type="text" name="name">
+    <% if (typeof(errorMessage) != "undefined") { %>
+        <div class="error-message"><%= errorMessage %></div>
+      <% } %>
+    <button>SUBMIT</button>
+</form>
