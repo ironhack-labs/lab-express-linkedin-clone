@@ -1,46 +1,81 @@
-var express      = require('express');
-var path         = require('path');
-var favicon      = require('serve-favicon');
-var logger       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const session = require('express-session');// UNDERSTAND
+const MongoStore = require('connect-mongo')(session);// UNDERSTAND
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+const index = require('./routes/index');
+const users = require('./routes/users');
 
-var app = express();
+const app = express();
+
+// database connection
+mongoose.connect('mongodb://localhost/linkedin-clone', {
+  keepAlive: true,
+  reconnectTries: Number.MAX_VALUE
+});
 
 // view engine setup
+app.use(expressLayouts);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.set('layout', 'layouts/main');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// -- Session Set Up -- REMEMBER DO THE MONGO STORE/SESSION THINGY ABOVE - and understand
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: 'foobar', // WHAT IS THIS?
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
+
+app.use(function (req, res, next) {
+  app.locals.user = req.session.currentUser; // the latter at this stage is JSUT an object - none of the methods of
+  next(); // ...a mongoose schema (a mongoose schema property has special methods like .save() - look into this )
+});
+
+// -- Routes --
 app.use('/', index);
 app.use('/users', users);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+// -- Error Handlers --
+
+app.use(function (req, res, next) {
+  res.status(404);
+  const data = {
+    title: '404 Not Found'
+  };
+  res.render('not-found', data); // do a view for this!!!
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+app.use(function (err, req, res, next) {
+  console.error('ERROR', req.method, req.path, err);
+  if (!res.headersSent) {
+    const data = {
+      title: '500 Ouch'
+    };
+    res.status(500);
+    res.render('error', data);
+  }
 });
 
 module.exports = app;

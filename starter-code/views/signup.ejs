@@ -1,0 +1,28 @@
+<h2>Please fill in this little form</h2>
+
+<form action="/signup" method="POST" >
+    <div class="field">
+      <label for="name"> Name </label>
+      <input type="text" name="name" id="name">
+    </div>
+    <div class="field">
+      <label for="username"> Username </label>
+      <input type="text" name="username" id="username">
+    </div>
+    <div class="field">
+      <label for="email"> Email </label>
+      <input type="text" name="email" id="email.">
+    </div>
+    <div class="field">
+      <label for="password"> Password </label>
+      <input type="password" name="password" id="password"> <!-- Name is for js, id is for CSS-->
+    </div>
+    <div class="field control"> <!-- See sample CSS for how they use class names / do css stuff -->
+      <button class="btn submit">Signup</button>
+      <% if (typeof message !== 'undefined') { %> <!-- if there IS a message (in POST of previous SiUp) then show it-->
+        <p class="error"><%= message %></p> <!-- BE validation can be blunt: messages to be nuanced by FE val -->
+      <% } %>
+    </div>
+  </form>
+  
+  <a href="/login">Got an account already!? Login here</a>
