@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title> A Clone of LinkedIn! | <%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <header id="site-header">
+      <div class="container">
+        <h1>LinkedIn Clone</h1>
+        <% if (false/* user */) { %>
+          Welcome "<%= user.username %>"
+          <form method="post" action="/logout">
+            <button>Logout</button>
+          </form> 
+        <%}%>
+      </div>
+    </header>
+    <div id="site-main" class="container">
+      <%- body %>
+    </div>
+    <footer id="site-footer">
+      <div class="container">
+        <p>This clone of LinkedIn is provided for training purposes only, please don't sue me!</p>
+      </div>
+    </footer>
+  </body>
+</html>
