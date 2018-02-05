@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<div class="">
+  <h1>Welcome <%= user.username %></h1>
+  <form method="post" action="/auth/logout">
+    <button>Log out</button>
+  </form>
+  <p>You are in the main page. Here we will have so much fun. You should stay :)))))</p>
+  <div class="content">
+    <span><a href="/profiles">See other user profiles</a></span>
+  </div>
+  <!-- 
+  <span><a href="/profiles/edit">Edit</a></span>
+  <span><a href="/profiles/show">Show</a></span>
+  -->
+</div>
+

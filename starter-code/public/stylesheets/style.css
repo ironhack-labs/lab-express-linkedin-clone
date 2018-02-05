@@ -1,8 +1,44 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 a {
   color: #00B7FF;
+}
+.container {
+  padding: 20px;
+  background: #f2f4ff;
+}
+.login-wrapper, .signup-wrapper{
+  color: #444;
+  margin-bottom: 20px;
+}
+.form-input {
+  margin-bottom: 15px;
+}
+.form-input label{
+  display: block;
+  margin-bottom: 10px;
+}
+.form-input input{
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.form-button button{
+  width: 100%;
+  border-radius: 0px;
+  border: none;
+  background: #35b535;
+  color: #fff;
+  font-size: 14px;
+  padding: 5px 0;
+}
+.error{
+  color: red;
+  font-size: 10px;
+  text-align: center;
 }

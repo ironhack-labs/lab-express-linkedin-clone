@@ -1,0 +1,20 @@
+<div class="login-wrapper">
+  <h2>Log In</h2>
+  <form method="post" action="/auth/login">
+    <div class="form-input">
+      <label for="username">User Name:</label>
+      <input type="text" name="username" id="username"/>
+    </div>
+    <div class="form-input">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password"/>
+    </div>
+    <% if (typeof message !== 'undefined') { %>
+      <p class="error"><%= message %></p>
+    <% } %>
+    <div class="form-button">
+      <button>Log In</button>
+    </div>
+  </form>
+  <span>You don't have an account? <a href="/auth/signup">Sign Up</a></span>
+</div>
