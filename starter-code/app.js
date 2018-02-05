@@ -12,6 +12,7 @@ const MongoStore = require('connect-mongo')(session);
 // Controllers
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const profile = require('./routes/profile');
 
 // Mongoose configuration
 mongoose.connect('mongodb://localhost/linkedin', {
@@ -59,6 +60,7 @@ app.use(function (req, res, next) {
 // Routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

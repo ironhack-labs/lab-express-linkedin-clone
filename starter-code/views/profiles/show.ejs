@@ -1,0 +1,16 @@
+<h3> <%= data.name%>'s profile</h3>
+<% console.log(data.isUser) %>
+<ul>
+    <li>Name: <%= data.name %></li>
+    <li>Username: <%= data.username %></li>
+    <li>Email: <%= data.email %></li>
+    <li>Summary: <%= data.summary %></li>
+    <li>ImageUrl: <%= data.imageUrl %></li>
+    <li>Comapny: <%= data.company %></li>
+    <li>Job Title: <%= data.jobTitle %></li>
+</ul>
+<% if(data.isUser) { %>
+<form method="get" action="/profile/<%= data.id %>/edit">
+    <button>Edit profile</button>
+</form>
+<% } %>
