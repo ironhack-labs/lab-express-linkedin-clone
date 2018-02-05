@@ -1,0 +1,21 @@
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<form action="/auth/login" method="POST" id="form">
+    <h2>Login</h2>
+  
+    <label for="username">Nombre de usuario</label>
+    <input type="text" name="username" placeholder="obiwan">
+  
+    <label for="password">Contraseña</label>
+    <input type="password" name="password" placeholder="thatsnomoon">
+  
+    <% if (typeof errorMessage !== "undefined") { %>
+      <div class="error-message"><%= errorMessage %></div>
+    <% } %>
+  
+    <button>Login</button>
+  
+    <p class="account-message">
+      Don't have an account? <a href="/auth/signup">Registrarse</a>
+    </p>
+  </form>
+  <a href="/">Back home</a>
