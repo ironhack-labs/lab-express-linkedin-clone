@@ -1,4 +1,4 @@
-'use stric';
+'use strict';
 
 const express = require('express');
 const bcrypt = require('bcrypt');
@@ -62,7 +62,6 @@ router.post('/signup', (req, res, next) => {
       }
       req.session.currentUser = newUser;
       res.redirect('/');
-      console.log('worked?');
     });
   });
 });
@@ -107,10 +106,9 @@ router.post('/login', (req, res, next) => {
 
     if (bcrypt.compareSync(password, user.password)) {
       req.session.currentUser = user;
-      res.redirect('/auth');
+      res.redirect('/');
     } else {
       const data = {
-        title: 'Login',
         message: 'Username or password are incorrect'
       };
       res.render('authentication/login', data);
@@ -118,15 +116,72 @@ router.post('/login', (req, res, next) => {
   });
 });
 
-// user logged in
+// user logged in home page
 
 router.get('/', (req, res, next) => {
-  res.render('authentication/home');
+  if (req.session.currentUser) {
+    return res.render('authentication/home');
+  }
+  res.render('home');
 });
 
-router.get('/logout', (req, res, next) => {
+// handle log out
+// the POST is better than the get since it cannot be bookmarked or stays in the browser history
+router.post('/logout', (req, res, next) => {
   req.session.currentUser = null;
-  res.redirect('/auth/login');
+  res.redirect('/login');
+});
+
+// user profile
+
+router.get('/profile/:userId', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/auth/login');
+  }
+
+  const userId = req.params.id;
+
+  User.findById(userId, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    return res.render('profiles/show', user);
+  });
+});
+
+// edit profile
+
+router.get('/profile/:userId/edit', (req, res, next) => {
+  const userId = req.params.id;
+  User.findById(userId, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    return res.render('profiles/edit', user);
+  });
+});
+
+router.post('/profile/:userId', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/auth/login');
+  }
+
+  const userId = req.params.id;
+  const updates = {
+    username: req.body.username,
+    name: req.body.name,
+    email: req.body.email,
+    summary: req.body.summary,
+    company: req.body.company,
+    jobTitle: req.body.jobTitle
+  };
+
+  User.findByIdAndUpdate(userId, updates, (err, result) => {
+    if (err) {
+      return next(err);
+    }
+    return res.redirect('/');
+  });
 });
 
 module.exports = router;
