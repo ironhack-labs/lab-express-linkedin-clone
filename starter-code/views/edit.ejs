@@ -6,7 +6,7 @@
                     <div class="error-message alert alert-danger">
                         <%= errorMessage %>
                     </div>
-                <% } %>
+                <% } else { %>
             <form id="form" action="/profile/<%= u._id %>" method="POST">
                 <div class="form-group">
                     <label for="username">Username</label>
@@ -43,6 +43,7 @@
                 <button class="btn btn-success">Update account</button>
             </form>
             <a class="btn btn-warning go-back" href="/profile/<%= u._id %>">Back to profile</a>
+            <% } %>
         </div>
     </div>
 </div>
