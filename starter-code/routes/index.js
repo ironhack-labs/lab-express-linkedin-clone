@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+// Main homepage
+router.get('/', (req, res) => {
+  if (!req.session.currentUser) {
+    res.redirect('/login');
+  } else {
+    res.render('home', {user: req.session.currentUser});
+  }
 });
 
 module.exports = router;

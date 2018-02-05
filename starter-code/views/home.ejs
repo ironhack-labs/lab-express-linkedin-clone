@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= user.username %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Welcome <%= user.username %></h1>
+
+    <form action="/logout" method="GET" id="form-container" class="logout">
+      <button>Logout</button>
+    </form>
+
+  </body>
+</html>
