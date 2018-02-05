@@ -1,0 +1,20 @@
+<% layout('../layouts/main') %>
+<% if(loggedIn){ %>
+    <ul>
+        <li>User Name: <%= user.name %></li>
+        <li>Email: <%= user.email %></li>
+        <li>Summary: <%= user.summary %></li>
+        <li>imageUrl: <%= user.imageUrl %></li>
+        <li>Company: <%= user.company %></li>
+        <li>Job: <%= user.jobTitle %></li>
+    </ul>
+    <a href="/profile/<%= user._id %>/edit">Edit</a>
+<% } else { %>
+<ul>
+    <li>User Name: <%= user.name %></li>
+    <li>imageUrl: <%= user.imageUrl %></li>
+    <li>Company: <%= user.company %></li>
+    <li>Job: <%= user.jobTitle %></li>
+</ul> 
+<% }
+%>

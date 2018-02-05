@@ -1,0 +1,11 @@
+<% layout('../layouts/main') %>
+<ul>
+    <% 
+        posts.forEach((post) => { %>
+            <li>
+                <p><%= post.content %></p>
+                <a href="/users/<%= userId %>/posts/<%= post._id %>">Edit</a>
+            </li>
+        <% })
+     %>
+</ul>

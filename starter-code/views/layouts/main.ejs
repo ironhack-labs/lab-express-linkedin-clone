@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/profile">Profiles</a>
+        
+        <% if(!loggedIn) { %>
+            <a href="/users/login">Login</a>
+            <a href="/users/signup">Signup</a>
+        <% } %>
+        <% if(loggedIn) { %>
+            <a href="/users/logout">Logout</a>
+            <a href="/newpost">New post</a>
+        <% } %>
+      </nav>
+      <%- body -%>
+</body>
+</html>

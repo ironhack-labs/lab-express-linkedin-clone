@@ -1,0 +1,15 @@
+<% layout('../layouts/main') %>
+
+<form id="form" action="/users/<%= userId %>/posts" method="POST">
+    <label for="content">Content</label>
+    <br>
+    <input type="text" name="content">
+
+
+    <button>Create post</button>
+    <% if (typeof(errors) != "undefined") { %>
+        <p>
+            <%= errors %>
+        </p>
+    <% } %>
+</form>

@@ -1,0 +1,27 @@
+<% layout('../layouts/main') %>
+
+<form id="form" action="/users/signup" method="POST">
+    <label for="username">Username</label>
+    <br>
+    <input type="text" name="username">
+
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <br>
+    <input type="password" name="password">
+    <br>
+    <br>
+    <label for="email">Email</label>
+    <br>
+    <input type="email" name="email">
+    <br>
+    <br>
+
+    <button>Create account</button>
+    <% if (typeof(errors) != "undefined") { %>
+        <p>
+            <%= errors %>
+        </p>
+    <% } %>
+</form>

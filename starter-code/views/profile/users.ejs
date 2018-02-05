@@ -1,0 +1,10 @@
+<% layout('../layouts/main') %>
+<ul> 
+    <% 
+        users.forEach((user) => { %>
+            <li>
+                <a href="/profile/<%= user._id %>"><%= user.name %></a>
+            </li>
+        <% })
+     %>
+</ul>

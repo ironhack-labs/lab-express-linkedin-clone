@@ -1,0 +1,14 @@
+<% layout('../layouts/main') %>
+<form id="form" action="/users/<%= userId %>/posts/<%= post._id %>" method="POST">
+    <label for="content">Content</label>
+    <br>
+    <input type="text" name="content" value = "<%= post.content %>">
+
+
+    <button>Update post</button>
+    <% if (typeof(errors) != "undefined") { %>
+        <p>
+            <%= errors %>
+        </p>
+    <% } %>
+</form>
