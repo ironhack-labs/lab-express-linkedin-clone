@@ -2,50 +2,50 @@
         <h1 class="page-title">Edit your profile</h1>
     <div class="row justify-content-center">
         <div class="col-sm-8">
-                <% if (typeof(errorMessage) != "undefined") { %>
-                    <div class="error-message alert alert-danger">
-                        <%= errorMessage %>
-                        <p>
-                            <a class="btn btn-warning go-back" href="/">Go home</a>
-                        </p>
+            <% if (typeof(errorMessage) != "undefined") { %>
+                <div class="error-message alert alert-danger">
+                    <%= errorMessage %>
+                    <p>
+                        <a class="btn btn-warning go-back" href="/">Go home</a>
+                    </p>
+                </div>
+            <% } else { %>
+                <form id="form" action="/profile/<%= u._id %>" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" type="text" name="username" value="<%= u.username %>">
                     </div>
-                <% } else { %>
-            <form id="form" action="/profile/<%= u._id %>" method="POST">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input class="form-control" type="text" name="username" value="<%= u.username %>">
-                </div>
-                <div class="form-group">
-                    <label for="password">New password</label>
-                    <input class="form-control" type="password" name="password">
-                </div>
-                <div class="form-group">
-                        <label for="new-password">Confirm new password</label>
-                        <input class="form-control" type="password" name="confirmPassword">
+                    <div class="form-group">
+                        <label for="password">New password</label>
+                        <input class="form-control" type="password" name="password">
                     </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input class="form-control" type="text" name="email" value="<%= u.email %>">
-                </div>
-                <div class="form-group">
-                    <label for="username">Summary</label>
-                    <textarea class="form-control" name="summary"><%= u.summary %></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="username">Image</label>
-                    <input class="form-control" type="text" name="imageUrl" value="<%= u.imageUrl %>">
-                </div>
-                <div class="form-group">
-                    <label for="username">Company</label>
-                    <input class="form-control" type="text" name="company" value="<%= u.company %>">
-                </div>
-                <div class="form-group">
-                    <label for="username">Job title</label>
-                    <input class="form-control" type="text" name="jobTitle" value="<%= u.jobTitle %>">
-                </div>
-                <button class="btn btn-success">Update account</button>
-            </form>
-            <a class="btn btn-warning go-back" href="/profile/<%= u._id %>">Back to profile</a>
+                    <div class="form-group">
+                            <label for="new-password">Confirm new password</label>
+                            <input class="form-control" type="password" name="confirmPassword">
+                        </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="text" name="email" value="<%= u.email %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Summary</label>
+                        <textarea class="form-control" name="summary"><%= u.summary %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Image</label>
+                        <input class="form-control" type="text" name="imageUrl" value="<%= u.imageUrl %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Company</label>
+                        <input class="form-control" type="text" name="company" value="<%= u.company %>">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Job title</label>
+                        <input class="form-control" type="text" name="jobTitle" value="<%= u.jobTitle %>">
+                    </div>
+                    <button class="btn btn-success">Update account</button>
+                </form>
+                <a class="btn btn-warning go-back" href="/profile/<%= u._id %>">Back to profile</a>
             <% } %>
         </div>
     </div>

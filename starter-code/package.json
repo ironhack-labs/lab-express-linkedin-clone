@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "DEBUG=linkedin:* nodemon ./bin/www",
+    "start": "DEBUG=linkedin:* node ./bin/www",
     "dev": "DEBUG=linkedin:* nodemon ./bin/www"
   },
   "dependencies": {
