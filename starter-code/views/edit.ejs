@@ -5,7 +5,9 @@
                 <% if (typeof(errorMessage) != "undefined") { %>
                     <div class="error-message alert alert-danger">
                         <%= errorMessage %>
-                        <a class="btn btn-warning go-back" href="/>">Go home</a>
+                        <p>
+                            <a class="btn btn-warning go-back" href="/">Go home</a>
+                        </p>
                     </div>
                 <% } else { %>
             <form id="form" action="/profile/<%= u._id %>" method="POST">
