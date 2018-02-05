@@ -124,4 +124,9 @@ router.get('/', (req, res, next) => {
   res.render('authentication/home');
 });
 
+router.get('/logout', (req, res, next) => {
+  req.session.currentUser = null;
+  res.redirect('/auth/login');
+});
+
 module.exports = router;
