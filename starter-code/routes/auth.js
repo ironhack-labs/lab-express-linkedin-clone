@@ -21,13 +21,11 @@ router.get("/login", (req, res, next) => {
 // post after login form
 router.post("/login", (req, res, next) => {
     if (req.session.currentUser) {
-        return res.redirect("/");
+        return res.redirect("/");        // this way?
     }
 
     let username = req.body.username;
     let password = req.body.password;
-    let name = req.body.name;
-    let mail = req.body.mail;
 
   if (username === '' || password === '') {
     const data = {
@@ -82,6 +80,8 @@ router.post('/signup', (req, res, next) => {
 
   const username = req.body.username;
   const password = req.body.password;
+  const mail = req.body.mail;
+  const name = req.body.name;
 
   // validate
   if (username === '' || password === '' || password.length < 8 || !password.match(/[A-Z]/)) {
@@ -102,14 +102,16 @@ router.post('/signup', (req, res, next) => {
         title: 'Signup',
         message: 'The "' + username + '" username is taken'
       };
-      return res.render('authentication/signup', data);
+      return res.render('/signup', data);
     }
     const salt = bcrypt.genSaltSync(bcryptSalt);
     const hashPass = bcrypt.hashSync(password, salt);
 
     const newUser = new User({
       username,
-      password: hashPass
+      password: hashPass,
+      name,
+      mail
     });
 
     newUser.save((err) => {
