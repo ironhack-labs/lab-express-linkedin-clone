@@ -4,95 +4,52 @@ const express = require('express');
 const authRoutes = express.Router();
 const User = require('../models/user');
 
-authRoutes.get('/login', (req, res, next) => {
-  if (req.session.currentUser) {
-    return res.redirect('/');
-  }
-
-  const data = {
-    title: 'Login'
-  };
-  res.render('auth/login', data);
-});
+const bcrypt = require('bcrypt');
+const bcryptSalt = 10;
 
 authRoutes.get('/signup', (req, res, next) => {
   res.render('auth/signup');
 });
 
-authRoutes.get('/login', (req, res, next) => {
-  res.render('auth/login');
-});
-
-authRoutes.get('/login', (req, res, next) => {
-  if (req.session.currentUser) {
-    return res.redirect('/');
-  }
-  const data = {
-    title: 'Login'
-  };
-  res.render('auth/login', data);
-});
-
-authRoutes.get('/logout', (req, res, next) => {
-  req.session.destroy((err) => {
-    // cannot access session here
-    res.redirect('/login');
-  });
-});
-
-// BCrypt to encrypt passwords
-const bcrypt = require('bcrypt');
-const bcryptSalt = 10;
-
 authRoutes.post('/signup', (req, res, next) => {
-  var username = req.body.username;
-  var password = req.body.password;
-  var salt = bcrypt.genSaltSync(bcryptSalt);
-  var hashPass = bcrypt.hashSync(password, salt);
-
-  var newUser = User({
-    username,
-    password: hashPass
-  });
-
-  newUser.save((err) => {
-    if (err) {
-      res.render('auth/signup', {
-        message: 'Something went wrong when signing up'
-      });
-    } else {
-      res.redirect('/login');
-    }
-  });
-});
-
-authRoutes.post('/login', (req, res, next) => {
-  var username = req.body.username;
-  var password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
 
   if (username === '' || password === '') {
-    res.render('auth/login', {
-      message: 'Indicate a username and a password to sign up'
+    res.render('auth/signup', {
+      errorMessage: 'Indicate a username and a password to sign up'
     });
     return;
   }
 
-  User.findOne({ 'username': username }, (err, user) => {
-    if (err || !user) {
-      res.render('auth/login', {
-        message: "The username doesn't exist"
+  User.findOne({ 'username': username }, 'username', (err, user) => {
+    if (err) {
+      return next(err);
+    }
+    if (user !== null) {
+      res.render('auth/signup', {
+        message: 'The username already exists'
       });
       return;
     }
-    if (bcrypt.compareSync(password, user.password)) {
-      // Save the login in the session!
-      req.session.currentUser = user;
-      res.redirect('/');
-    } else {
-      res.render('auth/login', {
-        message: 'Incorrect password'
-      });
-    }
+
+    const salt = bcrypt.genSaltSync(bcryptSalt);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    const newUser = User({
+      username,
+      password: hashPass
+    });
+
+    newUser.save((err) => {
+      if (err) {
+        res.render('auth/signup', {
+          message: 'Something went wrong when signing up'
+        });
+      } else {
+        // User has been created...now what?
+      }
+    });
   });
 });
 
