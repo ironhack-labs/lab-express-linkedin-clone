@@ -7,17 +7,17 @@ siteRoutes.get("/", (req, res, next) => {
     res.render("index");
 });
 
-siteRoutes.get("/show", (req, res, next) => {
-    res.render("profiles/show");
-});
-
 siteRoutes.get("/home", (req, res, next) => {
+
+    const data = {
+        theUser: req.session.currentUser
+    }
 
     if (!req.session.currentUser) {
         return res.redirect('/');
     }
 
-    res.render("home");
+    res.render("home", data);
 });
 
 siteRoutes.use((req, res, next) => {

@@ -12,6 +12,7 @@ const MongoStore     = require("connect-mongo")(session);
 // Routes
 const authRoutes = require('./routes/auth-routes');
 const siteRoutes = require('./routes/site-routes');
+const profileRoutes = require('./routes/profiles');
 
 const app = express();
 
@@ -56,6 +57,7 @@ app.set('views', __dirname + '/views');
 
 app.use('/', authRoutes);
 app.use('/', siteRoutes);
+app.use('/', profileRoutes);
 
 // -- 404 and error handler
 
