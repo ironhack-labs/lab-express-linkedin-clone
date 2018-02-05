@@ -1,0 +1,57 @@
+
+<div class="signup-form">
+    <form id="form" action="/signup" method="POST">
+
+        <h2>Sign Up</h2>
+
+        <div class="form-username">
+            <label for="username">Username</label><br>
+            <input type="text" name="username" placeholder="Username">
+        </div>
+
+        <div class="form-password">
+            <label for="password">Password</label><br>
+            <input type="password" name="password" placeholder="Password">
+        </div>
+
+        <div class="form-name">
+            <label for="name">Name</label><br>
+            <input type="text" name="name" placeholder="First name">
+        </div>
+
+        <div class="form-email">
+            <label for="email">E-mail</label><br>
+            <input type="email" name="email" placeholder="E-mail">
+        </div>
+
+        <% if (typeof(errorMessage) != "undefined") { %>
+            <div class="error-message"><%= errorMessage %></div>
+        <% } %>
+
+        <!-- <div class="form-summary">
+            <label for="summary">Summary</label><br>
+            <textarea type="text" name="summary" placeholder="I've worked in restaurants, schools, etc...">
+            </textarea>
+        </div>
+
+        <div class="form-imgurl">
+            <label for="imageUrl">Profile Image</label><br>
+            <input type="url" name="imageUrl" placeholder="Profile image link">
+        </div>
+
+        <div class="form-company">
+            <label for="company">Company Name</label><br>
+            <input type="text" name="company" placeholder="Current company">
+        </div>
+
+        <div class="form-jobTitle">
+            <label for="jobTitle">jobTitle Name</label><br>
+            <input type="text" name="jobTitle" placeholder="Current Job">
+        </div> -->
+
+        <div class="form-button">
+        <button>Create account</button>
+        </div>
+
+  </form>
+</div>
