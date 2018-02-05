@@ -15,7 +15,7 @@ router.get('/logout', (req, res) => {
 
 
 
-router.get('/update/:id', (req, res) => {
+router.get('/user/:id', (req, res) => {
   const userId = req.params.id;
   console.log(req.params)
   User.findById(userId, (err, user) => {
@@ -26,18 +26,10 @@ router.get('/update/:id', (req, res) => {
   })
 });
 
-router.get('/update/:id', (req, res) => {
-  const userId = req.params.id;
-  console.log(req.params.id)
-  User.findById(userId, (err, user) => {
-      if (err) { return next(err); }
-      res.render('update', { user: user });
-  });
-})
 
 
 /* CRUD -> UPDATE DATABASE */
-router.post('/update/:id', (req, res) => {
+router.post('/user:id', (req, res) => {
   const userId = req.params.id;
   const {username, imageUrl} = req.body;
   const updates =  {username, imageUrl};
