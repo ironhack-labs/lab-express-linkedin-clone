@@ -1,1 +1,6 @@
 <h1>Welcome <%= info.name %></h1>
+
+<form action="/auth/logout" method="post">
+    <button>sign out</button>
+</form>
+<a href="/profile/<%= info._id %>">View your profile</a>

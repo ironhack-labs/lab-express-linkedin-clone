@@ -7,10 +7,10 @@ const bcryptSalt = 10;
 
 
 /* GET login page. */
-authRoutes.get('/', function(req, res, next) {
+authRoutes.get('/login', function(req, res, next) {
   if (req.session.currentUser) {
-    const userInfo = { info: req.session.currentUser}
-    res.render('home', userInfo);
+    let userInfo = { info: req.session.currentUser}
+    res.redirect('/');
   } else {
     res.render("auth/login");
   }
@@ -63,6 +63,7 @@ authRoutes.post("/signup", (req, res, next) => {
     });
   });
 
+
 authRoutes.post('/login', (req, res, next) => {
   const username = req.body.username
   let password = req.body.password
@@ -91,5 +92,10 @@ authRoutes.post('/login', (req, res, next) => {
     }
   })
 })
+
+authRoutes.post("/logout", (req, res, next) => {
+  req.session.currentUser = null;
+  res.redirect("/auth/login");
+});
 
 module.exports = authRoutes;

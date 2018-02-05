@@ -15,54 +15,67 @@ const app = express();
 const authRoutes = require('./routes/auth-routes');
 const siteRoutes = require('./routes/site-routes');
 
-
 //mongoose configuartion
-mongoose.connect('mongodb://localhost/linkedin')
-
+mongoose.connect('mongodb://localhost/linkedin', {
+  keepAlive: true,
+  reconnectTries: Number.MAX_VALUE
+})
 
 // view engine setup
+app.use(expressLayouts)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.set('layout', '_layout')
 
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(session({
-  secret: 'basic-auth-secret',
-  cookie: { maxAge: 60000 },
-  store: new MongoStore({
-    mongooseConnection: mongoose.connection,
-    ttl: 24 * 60 * 60
-  })
-}))
+// middlewares
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(expressLayouts)
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', authRoutes);
+// session
+app.use(session({
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 24 * 60 * 60 // 1 day
+  }),
+  secret: 'some-string',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000
+  }
+}));
+
+app.use(function (req, res, next) {
+  app.locals.user = req.session.currentUser;
+  next();
+})
+
+
+
+
 app.use('/', siteRoutes);
+app.use('/auth', authRoutes);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+  res.status(404);
+  res.render('not-found');
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// NOTE: requires a views/error.ejs template
+app.use(function (err, req, res, next) {
+  // always log the error
+  console.error('ERROR', req.method, req.path, err);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // only render if the error ocurred before sending the response
+  if (!res.headersSent) {
+    res.status(500);
+    res.render('error');
+  }
 });
 
 module.exports = app;
