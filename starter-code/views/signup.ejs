@@ -1,0 +1,45 @@
+<h2>Signup</h2>
+<form action="/signup" method="POST" id="form-container">
+    <label for="username">Username</label>
+    <input id="username" type="text" name="username" placeholder="KanyeWest">
+    <br>
+    <br>
+    <label for="password">Password</label>
+    <input id="password" type="password" name="password" placeholder="Your password">
+    <br>
+    <br>
+    <label for="name">Name</label>
+    <input id="name" type="name" name="name" placeholder="Your full name">
+    <br>
+    <br>
+    <label for="email">Email</label>
+    <input id="email" type="email" name="email" placeholder="Your email address">
+    <br>
+    <br>
+    <label for="summary">Summary</label>
+    <input id="summary" type="summary" name="summary" placeholder="Your summary here">
+    <br>
+    <br>
+    <label for="imgURL">imgURL</label>
+    <input id="imgURL" type="imgURL" name="imgURL" placeholder="Your profile picture URL here">
+    <br>
+    <br>
+    <label for="company">Company</label>
+    <input id="company" type="company" name="company" placeholder="Your company name here">
+    <br>
+    <br>
+    <label for="jobTitle">jobTitle</label>
+    <input id="jobTitle" type="jobTitle" name="jobTitle" placeholder="Your job here">
+    <% if (typeof message !== "undefined") { %>
+        <div class="error-message">
+            <%= message %>
+        </div>
+    <% } %>
+    <br>
+    <br>
+    <button>Create account</button>
+    <p class="account-message"> Do you already have an account?
+        <a href="/">Login</a>
+    </p>
+</form>
+<a href="/">Go Home</a>

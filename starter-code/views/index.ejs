@@ -5,7 +5,33 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <% if (user) { %>
+      <h1>Welcome to your Linkedin profile <%= user.username %> ! </h1>
+      <h2>This is your profile</h2>
+
+      <img width=200 src="<%= user.imgURL %>" alt="">
+      <br>
+      <p> Your username is: <h3>@<%= user.username %></h3> </p>
+      <br>
+      <p> Your name is: <h3><%= user.name %></h3> </p>
+      <br>
+      <p> About <%= user.name %>: <h2><%= user.summary %> </h2></p>
+      <br>
+      <p> Your company name is: <h3><%= user.company %></h3> </p>
+      <br>
+      <p> Your job title is: <h3><%= user.jobTitle %></h3> </p>
+      <br>
+
+      <a href="/edit">Edit Profile</a><br>
+      <a href="login/logout">Logout</a><br>
+      <!-- <a href="tweets/my-tweets">my tweets</a><br>
+      <a href="tweets/">timeline</a><br> -->
+    <% } else { %>
+      <h1><%= title %></h1>
+      <p>Welcome to the <%= title %></p>
+      <a href="/signup">Signup</a><br>
+      <a href="/login">Login</a><br>
+    <% } %>
+    
   </body>
 </html>
