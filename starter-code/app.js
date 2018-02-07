@@ -11,6 +11,7 @@ const MongoStore = require('connect-mongo')(session);
 
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const profiles = require('./routes/profiles');
 
 const app = express();
 
@@ -58,6 +59,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/profiles', profiles);
 
 // error handler
 app.use(function (req, res, next) {

@@ -1,18 +1,75 @@
-'use strict';
 const express = require('express');
+const User = require('../models/users');
 const router = express.Router();
 
-/* GET /profile/:userId/edit */
 router.get('/', (req, res, next) => {
   if (!req.session.currentUser) {
     return res.redirect('/auth/login');
   }
-
-  res.render('index');
+  User.find()
+    .then((result) => {
+      let data = {
+        currentUser: req.session.currentUser,
+        usersProfiles: result
+      };
+      res.render('profiles/index', data);
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
+/* GET /profile/:userId/edit */
+router.get('/:id/edit', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/auth/login');
+  }
+  const userID = req.params.id;
+  User.findById(userID)
+    .then((result) => {
+      let data = {
+        id: result.id,
+        username: result.name,
+        email: result.email,
+        password: result.password,
+        name: result.name,
+        summary: result.summary,
+        imageUrl: result.imageUrl,
+        company: result.company,
+        jobTitle: result.jobTitle
+      };
+      res.render('profiles/edit', data);
+    }).catch(err => {
+      return next(err);
+    });
 });
 
 /* POST /profile/:userId */
 
 /* GET /profile/:userId */
+router.get('/:id', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/auth/login');
+  }
+  const userId = req.params.id;
+  User.findById(userId)
+    .then((result) => {
+      let data = {
+        currentUser: req.session.currentUser,
+        id: result.id,
+        username: result.name,
+        email: result.email,
+        password: result.password,
+        name: result.name,
+        summary: result.summary,
+        imageUrl: result.imageUrl,
+        company: result.company,
+        jobTitle: result.jobTitle
+      };
+      res.render('profiles/show', data);
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
 
 module.exports = router;

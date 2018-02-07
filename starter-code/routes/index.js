@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     return res.redirect('/auth/login');
   }
 
-  res.render('index');
+  res.render('index', { currentUserId: req.session.currentUser._id });
 });
 
 module.exports = router;
