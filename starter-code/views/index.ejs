@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+<h3>News Feed</h3>
+<% posts.forEach((p)=>{ %>
+  <p>Published by
+    <a href="profile/<%= p.creatorId %>">
+      <% if(user && p.creatorId == user._id ){ %>
+        me
+        <% } else {%>
+          <%=p.creatorName %>
+            <% } %>
+              on
+              <%= p.created_at%>
+                <% if(user && p.creatorId == user._id ){ %>
+                  <a href="post/edit/<%= p._id %>"> Edit post</a>
+                  <% } %>
+
+                    <%=p.content %>
+                      <% }) %>
