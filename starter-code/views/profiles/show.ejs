@@ -7,7 +7,7 @@
   <p><strong>Company: </strong><%= company %></p>
   <p><strong>Job Title: </strong><%= jobTitle %></p>
 </div>
-<% if(currentUser._id === id){ %>
+<% if(user._id === id){ %>
 <div class="user-edit">
   <span><a href="/profiles/<%= id %>/edit">Edit</a></span>
   <span><a href="/">Back to main page</a></span>

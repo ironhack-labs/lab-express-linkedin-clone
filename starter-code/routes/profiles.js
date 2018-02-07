@@ -7,12 +7,8 @@ router.get('/', (req, res, next) => {
     return res.redirect('/auth/login');
   }
   User.find()
-    .then((result) => {
-      let data = {
-        currentUser: req.session.currentUser,
-        usersProfiles: result
-      };
-      res.render('profiles/index', data);
+    .then((usersProfiles) => {
+      res.render('profiles/index', {usersProfiles});
     })
     .catch(err => {
       return next(err);
@@ -54,7 +50,6 @@ router.get('/:id', (req, res, next) => {
   User.findById(userId)
     .then((result) => {
       let data = {
-        currentUser: req.session.currentUser,
         id: result.id,
         username: result.name,
         email: result.email,
