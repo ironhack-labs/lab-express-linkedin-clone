@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LinkedIn</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <div>
+        <img src="https://static-exp2.licdn.com/sc/h/95o6rrc5ws6mlw6wqzy0xgj7y" alt="logo-linkein">
+      </div>
+      <div>
+          <a class="btn" href="/login">Inicia sesión</a>
+          <a class="btn" href="/signup">Unete ahora</a>
+      </div>
+    </nav>
+    <header>
+        <div class="box-header">
+            <div>
+                <p>Destaca en lo que haces
+                <br>Comienza. ¡Es gratis!</p>
+            </div>
+            <div>
+                <form action="/signup" method="post">
+                    <p style="color:red"><%=error%></p>
+                    <p>Nombre de Usuario: </p> 
+                    <input type="text" name="userName">
+                    <p>Correo Electrónico: </p> 
+                    <input type="text" name="email">
+                    <p>Contraseña (6 o más caracteres):</p>
+                    <input type="password" name="password">
+                    <p>Sumario:</p>
+                    <input type="text" name="summary">
+                    <p>Foto de Usuario:</p>
+                    <input type="text" name="imageUrl">
+                    <p>Compañía:</p>
+                    <input type="text" name="company">
+                    <p>Puesto actual:</p>
+                    <input type="text" name="jobTitle">
+                    <p class="condiciones">Al hacer clic en Únete ahora, aceptas las Condiciones de uso, la Política de privacidad y la Política de cookies de LinkedIn.</p>
+                    <input class="btn-submit" type="submit" value="Únete ahora">
+                </form>
+            </div>
+        </div>
+    </header>
+    <footer>
+      <p>LinkedIn © | 2018</p>
+    </footer>
+  </body>
+</html>
+
+
+
+
