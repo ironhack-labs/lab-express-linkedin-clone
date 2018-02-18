@@ -6,9 +6,10 @@ const bcrypt = require("bcrypt");
 /* GET home page. */
 router.get('/home', function(req, res, next) {
   if(req.session.currentUser){
-    return res.redirect("home");
+    return res.render("home",{user:req.session.currentUser} );
+  } else {
+    return res.redirect("/login");
   }
-  res.render("authentication/login_form", {error:null})
 });
 
 //signup
@@ -17,24 +18,39 @@ router.get('/signup', function(req, res, next) {
 });
 
 router.post("/signup", (req,res)=>{
+  //variables
+  var userName = req.body.userName;
+  var email = req.body.email;
+  var password = req.body.password;
+  var summary = req.body.summary;
+  var imageUrl = req.body.imageUrl;
+  var company = req.body.company;
+  var jobTitle = req.body.jobTitle;
+  // comprovar que el usuario escribió algo
+  if (userName === "" || password === "" || email === "" || summary === "" || imageUrl === "" || company === "" || jobTitle === "") {
+    res.render("authentication/signup_form", {
+      error: "Rellena todos los campos"
+    });
+    return;
+  }
   //comprobar que el correo no este en uso
-  User.findOne({username:req.body.userName}, (err,doc)=>{
+  User.findOne({"email":email}, "email", (err,doc)=>{
     if(err) return res.send(err);
-    if(doc) return res.render("signup_form", {error:"el correo esta en uso"});
+    if(doc) return res.render("authentication/signup_form", {error:"el correo esta en uso"});
   });
 
   //hasheamos el pass
   const salt = bcrypt.genSaltSync(256);
-  const hashPass = bcrypt.hashSync(req.body.password, salt);
+  const hashPass = bcrypt.hashSync(password, salt);
   //crea un usuario nuevo
   const user = new User({
-    userName:req.body.userName,
-    email: req.body.email,
+    userName:userName,
+    email: email,
     password: hashPass,
-    summary: req.body.summary,
-    imageUrl: req.body.imageUrl,
-    company: req.body.company,
-    jobTitle: req.body.jobTitle,
+    summary: summary,
+    imageUrl: imageUrl,
+    company: company,
+    jobTitle: jobTitle,
   });
   user.save((err, result)=>{
     if(err) return res.send(err);
@@ -48,23 +64,41 @@ router.get('/login', function(req, res, next) {
   res.render('authentication/login_form', {error:null});
 });
 router.post("/login", (req,res)=>{
-  User.findOne({username:req.body.userName}, (err,doc)=>{
+  //variables
+  var email = req.body.email;
+  var password = req.body.password;
+  // comprovar que el usuario escribió algo
+  if (email === "" || password === "") {
+    res.render("authentication/login_form", {
+      error: "Escribe tu usuario y contraseña"
+    });
+    return;
+  }
+
+  User.findOne({"email":email}, (err,doc)=>{
     if(err) return res.send(err);
     if(!doc) return res.render("login_form",{error:"tu usuario no existe"});
-    if(!bcrypt.compareSync(req.body.password, doc.password)) return res.render("login_form",{error:"tu password no es correcto"});
+    if(!bcrypt.compareSync(password, doc.password)) return res.render("login_form",{error:"tu password no es correcto"});
     req.session.currentUser = doc;
+    console.log(req.session.currentUser)
     res.redirect("/home") //cambiar esto por el perfil
   });
 });
 
-router.post("/logout", (req,res)=>{
-  req.session.destroy();
-  res.redirect("/home")
+//logout
+router.get("/logout", (req,res)=>{
+  req.session.destroy((err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/login");
+    }
+  });
 });
 
 
 router.get('/', function(req, res, next) {
-  // if(req.session.currentUser) return res.render('home');
+  if(req.session.currentUser) return res.redirect("/home");
   res.render('index');
 });
 

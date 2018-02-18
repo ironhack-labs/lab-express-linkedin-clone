@@ -107,3 +107,13 @@ footer {
   height: 5vh;
 }
 
+/* home */
+
+.image-circle {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border: #D1D3D5 solid 2px;
+  border-radius: 50%;
+}
+
