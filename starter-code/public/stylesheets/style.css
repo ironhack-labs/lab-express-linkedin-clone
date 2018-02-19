@@ -34,17 +34,18 @@ nav a {
 
 header {
   width: 100vw;
+  padding: 20px;
   background: url("https://static-exp2.licdn.com/sc/h/64xk850n3a8uzse6fi11l3vmz") no-repeat center top;
   background-size: cover;
   min-height: 88vh;
   display: flex;
-  align-items:center; /*baseline*/
+  align-items: flex-start; /*baseline*/
   justify-content: center;
 }
 
 .box-header {
   display: flex;
-  margin: 20px;
+
   flex-direction:column;
   align-items:center; /*baseline*/
   justify-content: center;
@@ -115,5 +116,71 @@ footer {
   height: 200px;
   border: #D1D3D5 solid 2px;
   border-radius: 50%;
+}
+
+.profile-box {
+  width: 100vw;
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center; 
+  justify-content: center;
+}
+
+.public-profiles {
+  background: rgba(0,0,0, .6);
+  color: white;
+  text-align: center;
+  margin: 0 20px;
+}
+
+.list-users div{
+  
+  width: 20vw;
+  background-color: rgba(0,0,0, .6);
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction:row;
+  align-items:center; 
+  justify-content: center;
+  flex-wrap:wrap;
+}
+
+.image-circle-min {
+  margin: 20px;
+  width: 50px;
+  height: 50px;
+  border: #D1D3D5 solid 2px;
+  border-radius: 50%;
+}
+.muro {
+  margin: 0 20px;
+  width: 40vw;
+  background: #F6F8FA;
+  display: flex;
+  flex-direction:row;
+  align-items:center; 
+  justify-content: center;
+  flex-wrap:wrap;
+}
+
+.post-form {
+  margin: 20px;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.post-fom form input:nth-child(1) {
+  font-size: 20px;
+  width: 30vw;
+}
+
+.post-form form input:nth-child(2) {
+  padding: 7px;
+
+
 }
 

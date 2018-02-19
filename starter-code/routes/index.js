@@ -84,15 +84,15 @@ router.get("/logout", (req,res)=>{
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/login");
+      res.redirect("/profile");
     }
   });
 });
 
 
 router.get('/', function(req, res, next) {
-  if(req.session.currentUser) return res.redirect("/profile");
-  res.render('index');
+  return res.redirect("/profile");
+  
 });
 
 

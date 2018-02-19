@@ -16,7 +16,9 @@
       </div>
     </nav>
     <header class="background-home">
+        <!-- Usuario activo -->
         <div class="box-header">
+          
           <div>
               <img class="image-circle" src="<%=user.imageUrl%>" alt="<%=user.userName%>">
               <h2><%=user.userName%></h2>
@@ -26,6 +28,36 @@
             <p><%=user.summary%></p>
           </div>
         </div>
+         <!-- post -->
+         <div class="muro">
+           <div class="post-form">
+              <form action="/profile/<%=user._id%>" method="post">
+                <input fotype="text" name="body" placeholder="Comparte un artículo">
+                <input class="btn-submit" type="submit" value="publicar">
+              </form>
+           </div>
+           <div class="post">
+              <%users.forEach((user)=>{%>
+                <div>
+                    <h3><%=user.userName%></h3>
+                    <p><%=user.body%>/p>
+                </div>
+                    
+              <%})%>
+            
+           </div>
+         </div>
+        <!-- usuarios -->
+        <div class="list-users">
+          <%users.forEach((user)=>{%>
+            <div>
+                <img class="image-circle-min" src="<%=user.imageUrl%>" alt="<%=user.userName%>">
+                <span><%=user.userName%></span>
+                <h2></h2>
+            </div>
+                
+          <%})%>
+          </div>
     </header>
     <footer>
       <p>LinkedIn © | 2018</p>

@@ -1,17 +1,34 @@
 var express = require('express');
 var router = express.Router();
 const User = require("../models/User");
+const Post = require("../models/Post");
 const bcrypt = require('bcrypt');
 
 /* Profile usuario*/
 router.get('/:userId', function(req, res, next) {
     if(req.session.currentUser){
         //console.log(req.session.currentUser._id)
-        return res.render("profile", {user:req.session.currentUser})
+        User.find({}, (err, docs)=>{
+            if(err) res.status(500).send(err);
+            return res.render("profile", {user:req.session.currentUser, users:docs})
+          });
+        
     } else {
       return res.redirect("/login");
     }
   });
+  /* posts */
+  router.post('/:userId', function(req, res, next) {
+    const post = new Post({
+        body: req.body.body,
+        user_id: req.session.currentUser._id,
+        user_name: req.session.currentUser.userName,
+    });
+    post.save((err, result)=>{
+    if(err) return res.send(err);
+    res.redirect("/");
+    }); 
+  })
 
 /* edit */
 
@@ -39,14 +56,23 @@ router.post("/:userId/edit", (req,res)=>{
       });
 })
 
-/* Profile */
+
+
+/* Profile general*/
 router.get('/', function(req, res, next) {
     //console.log("----------->")
     if(req.session.currentUser){
         var userId = req.session.currentUser._id;
         return res.redirect("profile/"+userId);
     } else {
-      return res.redirect("/login");
+
+        User.find({}, (err, docs)=>{
+            console.log(docs);
+            if(err) res.status(500).send(err);
+            res.render("show", {users:docs}) 
+          });
+
+      
     }
   });
 
