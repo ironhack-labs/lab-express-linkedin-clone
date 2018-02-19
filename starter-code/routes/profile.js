@@ -52,7 +52,7 @@ router.post("/:userId/edit", (req,res)=>{
   
     User.findByIdAndUpdate(userId, updates, (err, user) => {
         if (err){ return next(err); }
-        return res.redirect("profile/"+userId);
+        return res.redirect("/");
       });
 })
 
@@ -71,7 +71,11 @@ router.get('/', function(req, res, next) {
             if(err) res.status(500).send(err);
             res.render("show", {users:docs}) 
           });
-
+        // Post.find({}, (err, docs)=>{
+        //     console.log(docs);
+        //     if(err) res.status(500).send(err);
+        //     res.render("show", {posts:docs}) 
+        //   });
       
     }
   });
