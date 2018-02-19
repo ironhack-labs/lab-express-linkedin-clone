@@ -41,6 +41,7 @@ header {
   display: flex;
   align-items: flex-start; /*baseline*/
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .box-header {
