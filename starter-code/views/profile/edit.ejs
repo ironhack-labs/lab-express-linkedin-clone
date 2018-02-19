@@ -1,0 +1,23 @@
+<h2>Edit your profile</h2>
+
+<form action="/profile/<%=user._id%>/edit" method="post">
+
+    <textarea type="text" id="name" name="name"><%=user.name%></textarea>
+    <textarea type="text" id="username" name="username" ><%=user.username%></textarea>
+
+    <textarea type="email" name="email" id="email"><%=user.email%></textarea>
+
+    <textarea type="password" name="password" id="email"><%=user.password%></textarea>
+    <textarea type="text" name="summary" id="summary"><%=user.summary%></textarea>
+    <textarea type="text" name="imageurl" id="imageurl"><%=user.imageurl%></textarea>
+    <textarea type="text" name="company" id="company"><%=user.company%></textarea>
+    <textarea type="text" name="jobtitle" id="jobtitle"><%=user.jobtitle%></textarea>
+
+
+
+
+    <button type="submit">UPDATE</button> 
+
+</form>
+
+
