@@ -37,13 +37,12 @@
               </form>
            </div>
            <div class="post">
-              <%users.forEach((user)=>{%>
+              <%posts.forEach((post)=>{%>
                 <div>
-                    <h3><%=user.userName%></h3>
-                   
+                   <p><%=post.body%></p>
+                   <h3><%=post.user_name%></h3>
                 </div>
                 <%})%>     
-             
             
            </div>
          </div>

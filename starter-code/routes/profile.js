@@ -7,11 +7,12 @@ const bcrypt = require('bcrypt');
 /* Profile usuario*/
 router.get('/:userId', function(req, res, next) {
     if(req.session.currentUser){
-        //console.log(req.session.currentUser._id)
         User.find({}, (err, docs)=>{
+            Post.find((err, docs2)=>{
             if(err) res.status(500).send(err);
-            return res.render("profile", {user:req.session.currentUser, users:docs})
+            return res.render("profile", {user:req.session.currentUser, users:docs, posts:docs2})
           });
+        });
         
     } else {
       return res.redirect("/login");
@@ -65,18 +66,11 @@ router.get('/', function(req, res, next) {
         var userId = req.session.currentUser._id;
         return res.redirect("profile/"+userId);
     } else {
-
-        User.find({}, (err, docs)=>{
-            console.log(docs);
-            if(err) res.status(500).send(err);
-            res.render("show", {users:docs}) 
-          });
-        // Post.find({}, (err, docs)=>{
-        //     console.log(docs);
-        //     if(err) res.status(500).send(err);
-        //     res.render("show", {posts:docs}) 
-        //   });
-      
+        User.find((err, docs)=>{
+            res.render("show", {
+            users:docs,
+        }) ;
+    }) ;
     }
   });
 
