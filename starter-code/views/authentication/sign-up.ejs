@@ -1,0 +1,19 @@
+
+    <h3> <%=error%></h3>
+    <form action="/authentication/signUp" method="POST">
+      
+<h2>Please Create Your User</h2>
+        <input id="username" name="username" type="text" placeholder="Username" required>
+
+        <input id="name" name="name" type="text" placeholder="Your Ful Name" required>
+
+        <input id="email" name="email" type="email" placeholder="Your email" required>
+    
+        <input id="password1" name="password1" type="password" placeholder="Your Password" required>
+    
+        <input id="password2" name="password2" type="password" placeholder="Confirm your Password" required>
+    
+        <button type="submit">Create Account</button>
+
+    <a href="/authentication/logIn">Already a member? Log in!</a>
+        </form>

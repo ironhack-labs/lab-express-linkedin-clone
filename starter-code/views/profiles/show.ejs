@@ -1,0 +1,31 @@
+<div id="profileView">
+
+    <img src= <%= showUser.imageUrl%> alt="Profile Pic">
+
+    <p><%= showUser.name %></p>
+
+    <p><%= showUser.jobTitle %> at <%= showUser.company %></p>
+
+    <% if (logged){ %>
+    <p>Username: <%= showUser.userName %></p>
+
+    <p>Contact E-mail: <%= showUser.email %></p>
+
+    <p><%= showUser.summary %></p>
+
+    <% } %>
+
+    <% if (edit){ %>
+        <a href=<%="/profile/"+showUser._id+"/edit" %> ><button>Edit Your Profile</button></a>
+    <% } else {%>
+        <a href=<%="/profile/"+showUser._id+"/connect" %> ><button>Add to your connections</button></a>
+    <% } %>
+
+</div>
+
+<div id="connections">
+        <a href="#"><p>Connections</p></a>
+                <% for (var i=0; i<showUser.connections.length; i++){ %>
+                    <a href=<%="/profile/"+showUser.connections[i].id%>><p><%=showUser.connections[i].name%></p></a>
+                <%}%>
+</div>

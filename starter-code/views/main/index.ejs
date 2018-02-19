@@ -1,0 +1,32 @@
+<div id="profile">
+    <img src=<%= user.imageUrl%>>
+    <a href=<%="/profile/"+user._id %>><p><%= user.name %></p></a>
+    <p><%= user.jobTitle %></p>
+    <p><%= user.company %></p>
+    <a href="authentication/logout"><p>Log out</p></a>
+</div>
+
+<div id="write">
+    <a href=<%="/users/"+user._id+"/posts/new"%>><p>Write a new post</p></a>
+
+    <% for (var h=0; h<connectedPosts.length; h++){ %>
+        <% if (connectArray.indexOf(connectedPosts[h]._creator)!=-1){ %>
+            <p><%=connectedPosts[h].content%></p>
+        <%} %>
+    <%}%>
+</div>
+
+<div id="connections">
+        <a href="#"><p>Your connections</p></a>
+        <% for (var i=0; i<user.connections.length; i++){ %>
+            <a href=<%="/profile/"+user.connections[i].id%>><p><%=user.connections[i].name%></p></a>
+        <%}%>
+</div>
+
+<div id="suggestions">
+        <a href="#"><p>Our users</p></a>
+        <% for (var i=0; i<suggestions.length; i++){ %>
+            <a href=<%="/profile/"+suggestions[i]._id%>><p><%=suggestions[i].name%> - <%=suggestions[i].jobTitle%> at <%=suggestions[i].company%></p></a>
+        <%}%>
+</div>
+

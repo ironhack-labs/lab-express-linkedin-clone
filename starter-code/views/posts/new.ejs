@@ -1,0 +1,58 @@
+
+<style>
+        body {
+            padding: 0;
+            margin: 0;
+            font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+            background-color: rgb(243, 242, 242);
+          }
+          
+          a {
+            color: #00B7FF;
+            margin: 5px 0;
+          }
+          
+          form{
+            width: 75%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(200, 200, 200, 0.6);
+            padding: 30px 0;
+          }
+
+          textarea{
+            width: 75%;
+            height: 100px;
+            margin: 10px auto;
+            padding: 10px;
+          }
+          
+          input{
+            margin: 10px 5%;
+            width: 90%;
+            text-align: center;
+          }
+          
+          #bar{
+            width: 100%;
+            margin: 0;
+            height: 30px;
+            background-color: #283e4a;
+            margin-bottom: 30px;
+          }
+          
+          #bar img{
+            margin-left: 10%;
+            width: 30px;
+            height: 30px;
+          }
+          </style>
+  <body>
+    <form action=<%="/users/"+user+"/posts"%> method="POST" id ="newPost">
+        <h2>Write a new post!</h2>
+        <textarea name="content" form="newPost">Start here</textarea>
+        <button type="submit">Submit</button>
+        </form>
+  </body>
