@@ -1,0 +1,72 @@
+
+<style>
+        body {
+            padding: 0;
+            margin: 0;
+            font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+            background-color: rgb(243, 242, 242);
+          }
+          
+          a {
+            color: #00B7FF;
+            margin: 5px 0;
+          }
+          
+          form{
+            width: 75%;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: rgba(200, 200, 200, 0.6);
+            padding: 30px 0;
+          }
+
+          textarea{
+            margin: 10px 25%;
+            width: 50%;
+            text-align: center;
+          }
+          
+          input{
+            margin: 10px 25%;
+            width: 50%;
+            text-align: center;
+          }
+          
+          #bar{
+            width: 100%;
+            margin: 0;
+            height: 30px;
+            background-color: #283e4a;
+            margin-bottom: 30px;
+          }
+          
+          #bar img{
+            margin-left: 10%;
+            width: 30px;
+            height: 30px;
+          }
+          </style>
+
+<form action=<%="/profile/"+user._id %> method="POST">
+      
+    <h2>Edit your information</h2>
+            <p>Your Username</p>
+            <input id="username" name="username" type="text" placeholder="Username" required value = "<%=user.userName %>">
+            <p>Your Full Name</p>
+            <input id="name" name="name" type="text" placeholder="Your Full Name" required value = "<%=user.name %>">
+            <p>Your e-mail address</p>
+            <input id="email" name="email" type="email" placeholder="Your email" required value = <%=user.email %>>
+            <p>Summary</p>
+            <textarea id="summary" name="summary" type="text" placeholder="Your summary" required value = "<%=user.summary %>"></textarea>
+            <p>Your profile pic</p>
+            <input id="imageUrl" name="imageUrl" type="text" placeholder="Link an Image" required value = <%=user.imageUrl %>>
+            <p>Current Employer</p>
+            <input id="company" name="company" type="text" placeholder="Your company" required value = "<%=user.company %>">
+            <p>Your Job Title</p>
+            <input id="jobTitle" name="jobTitle" type="text" placeholder="Your title" required value = "<%=user.jobTitle %>">
+        
+            <button type="submit">Save</button>
+</form>
+    
