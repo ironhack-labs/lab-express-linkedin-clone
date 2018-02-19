@@ -1,0 +1,17 @@
+<h2>Login</h2>
+
+<h3><%=error%></h3>
+
+<form action="/authentication/login" method="POST" id="form-container" class="login">
+  <label for="username">Username</label>
+  <input type="text" name="username" placeholder="Enter your name">
+  <br><br>
+  <label for="password">Password</label>
+  <input type="password" name="password" placeholder="Enter your password">
+  <br><br>
+  <button>Sign in</button>
+
+  <p class="account-message">
+    Don't have an account? <a href="/authentication/signup">Sign up</a>
+  </p>
+</form>

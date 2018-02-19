@@ -5,10 +5,34 @@ var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
 
+const mongoose = require("mongoose");
+//sessions
+const session = require("express-session");
+const MongoStore = require("connect-mongo")(session);
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+//conectar db
+mongoose.connect("mongodb://localhost:27017/linkedin");
+
+//configurar sessions
+app.use(session({
+  secret:"bliss",
+  cookie:{maxAge:60000},
+  resave: true,
+  saveUninitialized: true,
+  store:new MongoStore({
+    mongooseConnection:mongoose.connection,
+    ttl:24*60*60
+  })
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +47,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
