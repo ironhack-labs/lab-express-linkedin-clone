@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LinkedIn</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <div>
+        <img src="https://static-exp2.licdn.com/sc/h/95o6rrc5ws6mlw6wqzy0xgj7y" alt="logo-linkein">
+      </div>
+      <div>
+          <a class="btn" href="/profile">Perfiles</a>
+          <a class="btn" href="/login">Inicia sesión</a>
+          <a class="btn" href="/signup">Unete ahora</a>
+      </div>
+    </nav>
+    <header>
+        <div class="box-header">
+            <div>
+                <p>Inicia sesión</p>
+                
+            </div>
+            <div>
+                <form action="/login" method="post">
+                    <p style="color:red"><%=error%></p>
+                    <p>Email:</p> 
+                    <input type="text" name="email">
+                    <p>Contraseña:</p>
+                    <input type="password" name="password">
+                    <p><a class="condiciones" href="">¿Olvidates tu Contraseña?</a></p>
+                    <input class="btn-submit" 
+                    type="submit" value="Inicia sesión">
+                </form>
+            </div>
+        </div>
+    </header>
+    <footer>
+      <p>LinkedIn © | 2018</p>
+    </footer>
+  </body>
+</html>

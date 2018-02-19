@@ -4,11 +4,30 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-
+var mongoose       = require("mongoose");
+var bcrypt       = require('bcrypt');
+//sesions
+const session = require("express-session");
+const MongoStore =require("connect-mongo")(session);
+//require routes
 var index = require('./routes/index');
 var users = require('./routes/users');
+var profile = require('./routes/profile');
 
 var app = express();
+
+// Mongoose configuration
+mongoose.connect("mongodb://localhost/linkedin-auth");
+
+//configurar sessions
+app.use(session({
+  secret:"Bet",
+  cookie:{maxAge:60000},
+  store:new MongoStore({
+    mongooseConnection:mongoose.connection,
+    ttl:24*60*60
+  })
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,9 +40,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+//routes
 app.use('/', index);
 app.use('/users', users);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

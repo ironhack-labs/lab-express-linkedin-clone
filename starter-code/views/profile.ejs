@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LinkedIn</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav>
+      <div>
+        <img src="https://static-exp2.licdn.com/sc/h/95o6rrc5ws6mlw6wqzy0xgj7y" alt="logo-linkein">
+      </div>
+      <div>
+          <a class="btn" href="/profile/<%=user._id%>/edit">Editar perfil</a>
+          <a class="btn" href="/logout">Cerrar sesión</a>
+      </div>
+    </nav>
+    <header class="background-home">
+        <!-- Usuario activo -->
+        <div class="box-header">
+          
+          <div>
+              <img class="image-circle" src="<%=user.imageUrl%>" alt="<%=user.userName%>">
+              <h2><%=user.userName%></h2>
+              <h3><%=user.jobTitle%></h3>
+          </div>
+          <div>
+            <p><%=user.summary%></p>
+          </div>
+        </div>
+         <!-- post -->
+         <div class="muro">
+           <div class="post-form">
+              <form action="/profile/<%=user._id%>" method="post">
+                <input fotype="text" name="body" placeholder="Comparte un artículo">
+                <input class="btn-submit" type="submit" value="publicar">
+              </form>
+           </div>
+           <div class="post">
+              <%posts.forEach((post)=>{%>
+                <div>
+                   <p><%=post.body%></p>
+                   <h3><%=post.user_name%></h3>
+                </div>
+                <%})%>     
+            
+           </div>
+         </div>
+        <!-- usuarios -->
+        <div class="list-users">
+          <%users.forEach((user)=>{%>
+            <div>
+                <img class="image-circle-min" src="<%=user.imageUrl%>" alt="<%=user.userName%>">
+                <span><%=user.userName%></span>
+                <h2></h2>
+            </div>
+                
+          <%})%>
+          </div>
+    </header>
+    <footer>
+      <p>LinkedIn © | 2018</p>
+    </footer>
+  </body>
+</html>

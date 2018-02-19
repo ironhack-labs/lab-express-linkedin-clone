@@ -1,8 +1,187 @@
-body {
-  padding: 50px;
+html, body {
+  margin: 0;
+  padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+
+
+nav {
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center; /*baseline*/
+  justify-content: space-around;
+  background: #2D3E49;
+  height: 7vh;
+
 }
+nav img {
+  width: 7vw;
+}
+
+.btn {
+  border: white solid 1px;
+  padding: 10px;
+  color: white;
+}
+
+nav a {
+  color: #00B7FF;
+  margin: 10px;
+  text-decoration: none;
+}
+
+header {
+  width: 100vw;
+  padding: 20px;
+  background: url("https://static-exp2.licdn.com/sc/h/64xk850n3a8uzse6fi11l3vmz") no-repeat center top;
+  background-size: cover;
+  min-height: 88vh;
+  display: flex;
+  align-items: flex-start; /*baseline*/
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.box-header {
+  display: flex;
+
+  flex-direction:column;
+  align-items:center; /*baseline*/
+  justify-content: center;
+  color: #1F1F1F;
+
+  
+}
+
+.box-header div:nth-child(1){
+  background: #F6F8FA;
+  border-bottom: #D1D3D5 solid 2px;
+  width: 30vw;
+  font-size: 24px;
+  text-align: center;
+}
+
+.box-header div:nth-child(2){
+  background: #EEF0F3;
+  display: flex;
+  width: 30vw;
+  font-size: 18px;
+  padding: 20px 30px;
+  box-sizing: border-box;
+ 
+}
+
+.box-header div:nth-child(2) form{
+  width: 30vw;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+
+}
+.box-header div:nth-child(2) form p {
+  margin: 10px;
+}
+.box-header div:nth-child(2) form input {
+  font-size: 20px;
+}
+.condiciones{
+  color: #5C5D5D;
+  font-size: 10px;
+  text-align: center;
+}
+
+.btn-submit {
+  background: #3483BA;
+  color: white;
+  padding: 5px;
+}
+
+footer {
+  background: #434649;
+  color: white;
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center; /*baseline*/
+  justify-content: center;
+  height: 5vh;
+}
+
+/* home */
+
+.image-circle {
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  border: #D1D3D5 solid 2px;
+  border-radius: 50%;
+}
+
+.profile-box {
+  width: 100vw;
+  display: flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  align-items:center; 
+  justify-content: center;
+}
+
+.public-profiles {
+  background: rgba(0,0,0, .6);
+  color: white;
+  text-align: center;
+  margin: 20px;
+}
+
+.list-users div{
+  
+  width: 20vw;
+  background-color: rgba(0,0,0, .6);
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction:row;
+  align-items:center; 
+  justify-content: center;
+  flex-wrap:wrap;
+}
+
+.image-circle-min {
+  margin: 20px;
+  width: 50px;
+  height: 50px;
+  border: #D1D3D5 solid 2px;
+  border-radius: 50%;
+}
+.muro {
+  margin: 0 20px;
+  width: 40vw;
+  background: #F6F8FA;
+  display: flex;
+  flex-direction:column;
+  align-items:center; 
+  justify-content: center;
+  flex-wrap:wrap;
+}
+
+.post-form {
+  margin: 20px;
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: baseline;
+}
+
+.post-form form input:nth-child(1) {
+  font-size: 20px;
+  width: 30vw;
+}
+
+.post-form form input:nth-child(2) {
+  padding: 7px;
+
+
+}
+
