@@ -1,0 +1,25 @@
+<h2>Edit your profile</h2>
+
+<form action="/profile/<%=user._id%>" method="post">
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" value=<%=user.name%>><br>
+    <label for="name">New password:</label>
+    <input type="password" name="password" id="password" ><br>
+    <label for="username">Your username:</label>
+    <input type="text" name="username" id="username" value=<%=user.username%>><br>
+    <label for="email">Your email:</label>
+    <input type="email" name="email" id="email" value=<%=user.email%>><br>
+    <label for="summary">Your summary:</label>
+    <input type="text" name="summary" id="summary" value=<%=user.summary%>><br>
+    <label for="company">Your company:</label>
+    <input type="text" name="company" id="company" value=<%=user.company%>><br>
+    <label for="jobtitle">Your job title:</label>
+    <input type="text" name="jobTitle" id="jobtitle" value=<%=user.jobTitle%>><br>
+    <label for="imageurl">Your image link:</label>
+    <input type="text" name="imageUrl" id="imageurl" value=<%=user.imageUrl%>><br>
+    <button type="submit">UPDATE</button> 
+
+</form>
+
+

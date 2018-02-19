@@ -1,0 +1,32 @@
+
+<ul>
+  
+            <li>
+                <a href="/profile/<%=user._id%>">
+                    <h2>Titulo: <%=user.name%></h2>
+                </a>
+                <img width="100" src="<%=user.imagesUrl %>" alt="<%=user.name%>">
+                <h3>Job Title: <%=user.jobTitle%></h3>
+                <h3>Company: <%=user.company%></h3>
+
+              <%if (userSession!=undefined){%>
+                <h3>Summary: <%=user.summary%></h3>
+              
+                    <%if (user._id==userSession){%>
+                    <a href="/profile/<%=user._id%>/edit">Edit your profile</a>
+                    <%}%>
+            <%}%>
+
+            </li>
+    
+    
+    
+    
+    
+    </ul>
+
+
+
+
+
+
