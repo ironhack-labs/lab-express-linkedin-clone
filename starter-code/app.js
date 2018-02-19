@@ -12,6 +12,7 @@ const MongoStore =require("connect-mongo")(session);
 //require routes
 var index = require('./routes/index');
 var users = require('./routes/users');
+var profile = require('./routes/profile');
 
 var app = express();
 
@@ -20,7 +21,7 @@ mongoose.connect("mongodb://localhost/linkedin-auth");
 
 //configurar sessions
 app.use(session({
-  secret:"bliss",
+  secret:"Bet",
   cookie:{maxAge:60000},
   store:new MongoStore({
     mongooseConnection:mongoose.connection,
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //routes
 app.use('/', index);
 app.use('/users', users);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

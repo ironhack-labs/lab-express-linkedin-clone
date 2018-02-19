@@ -3,14 +3,7 @@ var router = express.Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 
-/* GET home page. */
-router.get('/home', function(req, res, next) {
-  if(req.session.currentUser){
-    return res.render("home",{user:req.session.currentUser} );
-  } else {
-    return res.redirect("/login");
-  }
-});
+
 
 //signup
 router.get('/signup', function(req, res, next) {
@@ -54,7 +47,7 @@ router.post("/signup", (req,res)=>{
   });
   user.save((err, result)=>{
     if(err) return res.send(err);
-    return res.redirect("/home"); //cambia esto por el perfil
+    return res.redirect("/profile"); //cambia esto por el perfil
   });
 
 });
@@ -81,7 +74,7 @@ router.post("/login", (req,res)=>{
     if(!bcrypt.compareSync(password, doc.password)) return res.render("login_form",{error:"tu password no es correcto"});
     req.session.currentUser = doc;
     console.log(req.session.currentUser)
-    res.redirect("/home") //cambiar esto por el perfil
+    res.redirect("/profile") //cambiar esto por el perfil
   });
 });
 
@@ -98,7 +91,7 @@ router.get("/logout", (req,res)=>{
 
 
 router.get('/', function(req, res, next) {
-  if(req.session.currentUser) return res.redirect("/home");
+  if(req.session.currentUser) return res.redirect("/profile");
   res.render('index');
 });
 
