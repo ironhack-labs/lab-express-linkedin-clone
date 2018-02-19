@@ -1,0 +1,28 @@
+<div class="signup-wrapper">
+  <h2>Sign Up</h2>
+  <form method="post" action="/auth/signup">
+    <div class="form-input">
+      <label for="username">User Name: </label>
+      <input type="text" name="username" id="username"/>
+    </div>
+    <div class="form-input">
+      <label for="password">Password: </label>
+      <input type="password" name="password" id="password"/>
+    </div>
+    <div class="form-input">
+      <label for="name">Name: </label>
+      <input type="text" name="name" id="name"/>
+    </div>
+    <div class="form-input">
+      <label for="email">Email: </label>
+      <input type="email" name="email" id="email"/>
+    </div>
+    <div class="form-button">
+      <button>Sign Up</button>
+      <% if (typeof message !== 'undefined') { %>
+        <p class="error"><%= message %></p>
+      <% } %>
+    </div>
+  </form>
+  <span>Already have an account? <a href="/auth/login">Log In</a></span>
+</div>

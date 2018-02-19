@@ -1,0 +1,14 @@
+
+<div class="profiles-list">
+<h1>User Profiles List</h1>
+  <% usersProfiles.forEach((users) => { %>
+    <% if(user._id !== users.id){ %>
+    <div class="profile-item">
+      <h2><a href="/profiles/<%= users.id %>"><%= users.name %></a></h2>
+    </div>
+    <% } %>
+  <% }) %>
+</div>
+<div>
+  <span><a href="/">Back to main page</a></span>
+</div>

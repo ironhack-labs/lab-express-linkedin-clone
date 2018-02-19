@@ -1,9 +1,14 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
+const express = require('express');
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', (req, res, next) => {
+  if (!req.session.currentUser) {
+    return res.redirect('/auth/login');
+  }
+
+  res.render('index', { currentUserId: req.session.currentUser._id });
 });
 
 module.exports = router;

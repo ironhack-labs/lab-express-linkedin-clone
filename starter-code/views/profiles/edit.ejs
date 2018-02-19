@@ -1,0 +1,14 @@
+<h2>Edit Profile</h2>
+<form method="post" action="/profiles/<%= id %>">
+  <div>
+    <label for="name">Name: </label>
+    <input type="text" name="name" id="drone-name" value="<%= name %>" />
+  </div>
+  <div>
+    <label for="email">Email: </label>
+    <input type="text" name="email" id="emails" value="<%= email %>"/>
+  </div>
+  <div>
+    <button>Edit</button>
+  </div>
+</form>
