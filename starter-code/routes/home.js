@@ -1,13 +1,11 @@
 var express = require('express');
 var router = express.Router();
-
-// User model
 const User           = require("../models/User");
-// Bcrypt to encrypt passwords
 const bcrypt         = require("bcrypt");
-//const bcryptSalt     = 10;
+
 
 router.get("/signup", (req,res)=>{
+  if (req.session.currentUser) { res.redirect("/"); return; }
   res.render("authentication/signup", {errorMessage:null});
  });
 
@@ -71,9 +69,8 @@ router.post("/signup", (req,res)=>{
 });
 
 // LOGIN
-
-
 router.get("/login", (req,res)=>{
+  if (req.session.currentUser) { res.redirect("/"); return; }
   res.render("authentication/login", {errorlogin:null});
  });
 
@@ -81,7 +78,6 @@ router.get("/login", (req,res)=>{
  router.post("/login", (req,res)=>{
   var username = req.body.username;
   var password = req.body.password;
-
       if (username === "" || password === "") {
         res.render("authentication/login", {
           errorlogin: "Indicate a username and a password to log in"
@@ -98,7 +94,7 @@ router.get("/login", (req,res)=>{
         } else {
           if (bcrypt.compareSync(password, doc.password)) {
             req.session.currentUser = doc;
-            res.redirect("/profile");
+            res.redirect("/");
           } else {
             res.render("authentication/login", {
               errorlogin: "Incorrect password"
@@ -106,20 +102,11 @@ router.get("/login", (req,res)=>{
           }
         }
     });
-
-  // User.findOne({username:req.body.username}, (err,doc)=>{
-  //   if(err) return res.send(err);
-  //   if(!doc) return res.render("login",{errorlogin:"tu usuario no existe"});
-  //   if(!bcrypt.compareSync(req.body.password, doc.password)) return res.render("login",{errorlogin:"tu password no es correcto"});
-  //   req.session.currentUser = doc;
-  //   res.redirect("/") //cambiar esto por el perfil
-  // });
 });
 
 //LOGOUT
 router.get("/logout", (req, res, next) => {
   if (!req.session.currentUser) { res.redirect("/"); return; }
-
   req.session.destroy((err) => {
     if (err) {
       console.log(err);
@@ -130,35 +117,12 @@ router.get("/logout", (req, res, next) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('home', { title: 'Linkedin' });
+  if (!req.session.currentUser) { res.redirect("/login"); return; }
+  console.log("8==========D");
+  console.log(req.session.currentUser)
+  res.render('home', { title: 'Linkedin', user:req.session.currentUser });
 });
 
 module.exports = router;

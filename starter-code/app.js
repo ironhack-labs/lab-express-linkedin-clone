@@ -15,6 +15,7 @@ mongoose.connect("mongodb://localhost:27017/linkedin");
 
 var home = require('./routes/home');
 var profiles = require('./routes/profile');
+var posts = require('./routes/post');
 
 var app = express();
 
@@ -48,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', home);
 app.use('/profile', profiles);
+app.use('/post', posts);
 
 
 // catch 404 and forward to error handler
