@@ -4,11 +4,21 @@ var favicon      = require('serve-favicon');
 var logger       = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser   = require('body-parser');
-
+const session = require('express-session');
+const mongoose = require("mongoose");
+const bcrypt        = require("bcrypt");
+const User           = require("./models/User");
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+//DB Connections
+
+mongoose.connect("mongodb://localhost:27017/linkedIn");
+
+//configurar sessions
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
